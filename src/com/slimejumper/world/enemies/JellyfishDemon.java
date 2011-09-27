@@ -25,8 +25,8 @@ public class JellyfishDemon extends Enemy{
 	public static final float JELLY_STANDARD_HEIGHT = 1.0375f;
 	public static final float JELLY_ATTACK_WIDTH = 0.875f;
 	public static final float JELLY_ATTACK_HEIGHT = 1.0875f;
-	public static final float JELLY_COLLISION_WIDTH = 0.875f;
-	public static final float JELLY_COLLISION_HEIGHT = 1.0875f;
+	public static final float JELLY_COLLISION_WIDTH = 0.8f;
+	public static final float JELLY_COLLISION_HEIGHT = 0.875f;
 	
 	public static final float JELLY_LIFESPAN = 50.0f;
 	
