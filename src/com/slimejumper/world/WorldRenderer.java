@@ -142,17 +142,27 @@ public class WorldRenderer {
 			return;
 		for(JellyfishDemon jellyfish_demon : JellyfishDemon.jellyfish_demons){
 			switch(jellyfish_demon.state){
+/*			
 			case JellyfishDemon.JELLY_STATE_STANDARD:
 				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_motion.getKeyFrame(jellyfish_demon.life_timer, 
 						Animation.ANIMATION_LOOPING));
 				break;
+*/				
 			case JellyfishDemon.JELLY_STATE_ATTACK:
-				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_shock_attacking.getKeyFrame(jellyfish_demon.life_timer, 
+				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_shock_attacking.getKeyFrame(jellyfish_demon.state_timer, 
 						Animation.ANIMATION_LOOPING));
 				break;
 			case JellyfishDemon.JELLY_STATE_COLLIDED:
 				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_collided.getKeyFrame(jellyfish_demon.life_timer, 
 						Animation.ANIMATION_LOOPING));
+				break;
+			case JellyfishDemon.JELLY_STATE_BOOST_UP:
+				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_boost_up.getKeyFrame(jellyfish_demon.state_timer, 
+						Animation.ANIMATION_NONLOOPING));
+				break;
+			case JellyfishDemon.JELLY_STATE_FLOAT_DOWN:
+				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_float_down.getKeyFrame(jellyfish_demon.state_timer, 
+						Animation.ANIMATION_NONLOOPING));
 				break;
 			}
 		}			

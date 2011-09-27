@@ -208,14 +208,15 @@ public class ObstacleGeneratorManager {
 	public void generateLevelOne(float deltaTime){
 		level_one_timer += deltaTime;
 		generatePlatformStream(deltaTime);
-		generateFlyingSnakeStream(deltaTime);
-//		generatePurpleGhostStream(deltaTime);
+//		generateFlyingSnakeStream(deltaTime);
+		generateJellyfishDemonStream(deltaTime);
 	}
 	
 	public void generateLevelTwo(float deltaTime){
 		level_two_timer += deltaTime;
 		generatePlatformMiniMatrix(deltaTime);
-		generateFlyingSnakeStream(deltaTime);
+//		generateFlyingSnakeStream(deltaTime);
+		generateJellyfishDemonStream(deltaTime);
 	}
 
 	public void generateTestLevel(float deltaTime) {

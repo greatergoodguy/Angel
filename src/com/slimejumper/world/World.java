@@ -94,7 +94,7 @@ public class World {
 		
 		UnitCircle.initializeUnitCircle();
 		Platform.initializePlatformGround();
-		Platform.initializePlatformMap();
+//		Platform.initializePlatformMap();
 	}
 
 	private void initializeLists() {

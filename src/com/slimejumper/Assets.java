@@ -19,7 +19,7 @@ public class Assets {
 	public final static float JELLYFISH_DEMON_SHOCK_ATTACK_FRAME_DURATION = 0.11f;
 	public final static int JELLYFISH_DEMON_MOTION_FRAME_COUNT = 12;
 	public final static int JELLYFISH_DEMON_MOTION_FRAME_COUNT_MINUS_ONE = 11;
-	public final static float JELLYFISH_DEMON_COLLIDED_FRAME_DURATION = 0.20f;
+	public final static float JELLYFISH_DEMON_COLLIDED_FRAME_DURATION = 0.1f;
 	
 	public final static float FLYING_SNAKE_STANDARD_FRAME_DURATION = 0.15f;
 	public final static float FLYING_SNAKE_ATTACK_FRAME_DURATION = 0.20f;
