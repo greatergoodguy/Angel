@@ -34,7 +34,7 @@ public class CollisionManager {
 		for(PurpleGhost purple_ghost : PurpleGhost.purple_ghosts){
 			if(OverlapTester.overlapRectangles(hero, purple_ghost)){
 				hero.changeToCollidedState();
-				world.listener.hit();
+//				world.listener.hit();
 			}
 				
 		}
@@ -42,7 +42,7 @@ public class CollisionManager {
 		for(JellyfishDemon jellyfish_demon : JellyfishDemon.jellyfish_demons){
 			if(OverlapTester.overlapRectangles(hero, jellyfish_demon)){
 				hero.changeToCollidedState();
-				world.listener.hit();
+//				world.listener.hit();
 			}
 				
 		}

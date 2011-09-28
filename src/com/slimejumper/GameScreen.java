@@ -1,5 +1,6 @@
 package com.slimejumper;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -10,10 +11,20 @@ import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.math.Vector2;
+import com.slimejumper.menu.MenuWorld;
+import com.slimejumper.tools.PoolManager;
 import com.slimejumper.world.Hero;
+import com.slimejumper.world.Platform;
 import com.slimejumper.world.World;
-import com.slimejumper.world.World.WorldListener;
 import com.slimejumper.world.WorldRenderer;
+import com.slimejumper.world.World.WorldListener;
+import com.slimejumper.world.attacks.HaloAttack;
+import com.slimejumper.world.attacks.MusicNote;
+import com.slimejumper.world.attacks.Shockball;
+import com.slimejumper.world.enemies.Enemy;
+import com.slimejumper.world.enemies.FlyingSnake;
+import com.slimejumper.world.enemies.JellyfishDemon;
+import com.slimejumper.world.enemies.PurpleGhost;
 
 
 public class GameScreen extends GLScreen {
@@ -31,13 +42,17 @@ public class GameScreen extends GLScreen {
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
+	PoolManager poolManager;
+	MenuWorld menuWorld;
 	World world;
 	WorldRenderer renderer;
 	Vector2 touchPoint;
 
 	public GameScreen(Game game) {
 		super(game);
-		// TODO Auto-generated constructor stub
+
+		initalizeUniverse();
+		
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		controller = new Controller(guiCam);
 		batcher = new SpriteBatcher(glGraphics, 500);
@@ -53,9 +68,29 @@ public class GameScreen extends GLScreen {
 			}
 		};
 		
-		world = new World(worldListener);
+		poolManager = new PoolManager();
+		
+		menuWorld = new MenuWorld(poolManager);
+		world = new World(worldListener, poolManager);
+		
 		renderer = new WorldRenderer(glGraphics, batcher, world);
 		touchPoint = new Vector2();
+	}
+
+	private void initalizeUniverse() {
+		Enemy.sample_enemies = new LinkedList<Enemy>();
+		PurpleGhost.purple_ghosts = new LinkedList<PurpleGhost>();
+		JellyfishDemon.jellyfish_demons = new LinkedList<JellyfishDemon>();
+		FlyingSnake.flying_snakes = new LinkedList<FlyingSnake>();
+		
+		Platform.static_platforms = new LinkedList<Platform>();
+		Platform.volatile_platforms = new LinkedList<Platform>();
+		Platform.ground_platforms = new LinkedList<Platform>();
+		
+		HaloAttack.halo_attacks = new LinkedList<HaloAttack>();
+		MusicNote.music_notes = new LinkedList<MusicNote>();
+		Shockball.shockballs = new LinkedList<Shockball>();	
+		
 	}
 
 	@Override

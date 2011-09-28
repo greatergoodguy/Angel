@@ -64,9 +64,8 @@ public class Hero extends DynamicGameObject{
 	
 //	public Vector2 hero_center;
 
-	public Hero(World world) {
+	public Hero() {
 		super(HERO_START_X, HERO_START_Y, HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
-//		hero_center = new Vector2(HERO_START_X+width/2, HERO_START_Y+height/2);
 		
 		state = HERO_STATE_FALL;
 		facedirection = HERO_LEFT;
