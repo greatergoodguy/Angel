@@ -12,13 +12,13 @@ public class Background{
 	
 	public Vector2 asset_position;
 		
-	World world;
+	GameWorld world;
 	float parallax_ratio;
 	
-	public Background(World world){
+	public Background(GameWorld world){
 		this.world = world;
 		parallax_ratio = (BACKGROUND_WIDTH - WorldRenderer.FRUSTUM_WIDTH) / 
-							(World.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
+							(GameWorld.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
 		
 		asset_position = new Vector2();
 	}

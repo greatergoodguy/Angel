@@ -3,7 +3,7 @@ package com.slimejumper.world.attacks;
 import com.slimejumper.tools.UnitCircle;
 import com.slimejumper.world.GameObject;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.World;
+import com.slimejumper.world.GameWorld;
 
 public class MusicNote extends Attack{
 	
@@ -96,7 +96,7 @@ public class MusicNote extends Attack{
 		
 //		for(float angle=0; angle<UnitCircle.TWO_PI; angle += PI_OVER_FOUR){
 		for(int frame_counter_starter=0; frame_counter_starter<UnitCircle.UNIT_CIRCLE_SIZE; frame_counter_starter+=3){
-			MusicNote music_note = World.poolManager.music_note_pool.newObject();
+			MusicNote music_note = GameWorld.poolManager.music_note_pool.newObject();
 			music_note.reset(frame_counter_starter);
 			
 			music_notes.add(music_note);

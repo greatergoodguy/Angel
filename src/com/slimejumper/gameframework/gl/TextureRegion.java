@@ -1,7 +1,7 @@
 package com.slimejumper.gameframework.gl;
 
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.world.World;
+import com.slimejumper.world.GameWorld;
 
 public class TextureRegion {
 	public float u1, v1;
@@ -33,7 +33,7 @@ public class TextureRegion {
 	 */
 	public void adjust(Vector2 position) {
 		//multiply 80 to convert from meters to pixels
-		adjust(position.x*World.METER, position.y*World.METER);
+		adjust(position.x*GameWorld.METER, position.y*GameWorld.METER);
 	}
 
 }

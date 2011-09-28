@@ -70,7 +70,7 @@ public class Hero extends DynamicGameObject{
 		state = HERO_STATE_FALL;
 		facedirection = HERO_LEFT;
 		moveDirection = HERO_NEUTRAL;
-		accel.set(0, World.WORLD_GRAVITY);
+		accel.set(0, GameWorld.WORLD_GRAVITY);
 		
 		attack_launched = false;
 		invincibility_timer = 0;

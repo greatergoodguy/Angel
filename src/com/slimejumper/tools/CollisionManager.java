@@ -3,16 +3,19 @@ package com.slimejumper.tools;
 import com.slimejumper.gameframework.math.OverlapTester;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
-import com.slimejumper.world.World;
+import com.slimejumper.world.GameWorld;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
 
 public class CollisionManager {
-	World world;
+	
+	public static final float COLLISION_TOLERANCE = 0.17f;
+	
+	GameWorld world;
 	Hero hero;
 	
-	public CollisionManager(World world){
+	public CollisionManager(GameWorld world){
 		this.world = world;
 		this.hero = world.hero;
 	}
@@ -54,11 +57,24 @@ public class CollisionManager {
 			return;
 	
 		for (Platform platform : Platform.volatile_platforms) 
-			world.heroPlatformRebound(platform);
+			heroPlatformRebound(platform);
 		for(Platform platform : Platform.ground_platforms)
-			world.heroPlatformRebound(platform);
+			heroPlatformRebound(platform);
 		for(Platform platform : Platform.static_platforms)
-			world.heroPlatformRebound(platform);
+			heroPlatformRebound(platform);
+	}
+	
+	public void heroPlatformRebound(Platform platform){
+		if ((OverlapTester.overlapRectangles(hero, platform))
+				&& (platform.position.y	- hero.position.y < COLLISION_TOLERANCE)) {
+			hero.reboundPlatform(platform);
+			if(hero.state == Hero.HERO_STATE_BASIC_ATTACK){
+				
+			}
+			else
+				hero.changeToLandState();
+//			world.listener.jump();
+		}
 	}
 
 	private void jellyfishDemonConcentratedCollisions() {

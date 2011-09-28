@@ -1,11 +1,11 @@
 package com.slimejumper.world;
 
-import com.slimejumper.gameframework.math.OverlapTester;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.UnitCircle;
+import com.slimejumper.tools.World;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -14,7 +14,7 @@ import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
 
-public class World {
+public class GameWorld extends World{
 	public interface WorldListener {
 		public void jump();
 
@@ -53,8 +53,6 @@ public class World {
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
-
-	public static final float COLLISION_TOLERANCE = 0.17f;
 	
 	public Background background;
 	public static PoolManager poolManager;
@@ -72,14 +70,14 @@ public class World {
 	float level_timer;
 	int level_counter;
 
-	public World(WorldListener listener, PoolManager poolManager) {
+	public GameWorld(WorldListener listener, PoolManager poolManager) {
 //		initializeLists();
 		
 		this.hero = new Hero();
 		this.listener = listener;
 		
 		background = new Background(this);
-		World.poolManager = poolManager;
+		GameWorld.poolManager = poolManager;
 		manager = new ObstacleGeneratorManager(this);
 		remover = new Remover();
 		collisionManager = new CollisionManager(this);
@@ -171,19 +169,6 @@ public class World {
 		for(Shockball shockball : Shockball.shockballs)
 			shockball.update(deltaTime);
 		
-	}
-	
-	public void heroPlatformRebound(Platform platform){
-		if ((OverlapTester.overlapRectangles(hero, platform))
-				&& (platform.position.y	- hero.position.y < COLLISION_TOLERANCE)) {
-			hero.reboundPlatform(platform);
-			if(hero.state == Hero.HERO_STATE_BASIC_ATTACK){
-				
-			}
-			else
-				hero.changeToLandState();
-			listener.jump();
-		}
 	}
 	
 	private void updateCenter() {

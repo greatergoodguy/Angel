@@ -5,7 +5,7 @@ import javax.microedition.khronos.opengles.GL10;
 import com.slimejumper.Assets;
 import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.world.GameObject;
-import com.slimejumper.world.World;
+import com.slimejumper.world.GameWorld;
 import com.slimejumper.world.WorldRenderer;
 
 public class SpriteBatcher {
@@ -51,7 +51,7 @@ public class SpriteBatcher {
 		vertices.unbind();
 	}
 	
-	public void drawBackground(World world) {
+	public void drawBackground(GameWorld world) {
 		
 		drawSpriteLowerLeft(world.position.x, world.position.y, WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundRegion);
 	}
@@ -69,10 +69,10 @@ public class SpriteBatcher {
 	public void drawSpriteLowerLeft(float lower_left_x, float lower_left_y, float width, float height, TextureRegion region){
 		// Check to make sure Sprite is within the World Bounds
 		
-		if(lower_left_x > World.WORLD_RIGHT_EDGE || 
-				lower_left_x + width < World.WORLD_LEFT_EDGE ||
-				lower_left_y > World.WORLD_TOP_EDGE ||
-				lower_left_y + height < World.WORLD_BOTTOM_EDGE)
+		if(lower_left_x > GameWorld.WORLD_RIGHT_EDGE || 
+				lower_left_x + width < GameWorld.WORLD_LEFT_EDGE ||
+				lower_left_y > GameWorld.WORLD_TOP_EDGE ||
+				lower_left_y + height < GameWorld.WORLD_BOTTOM_EDGE)
 			return;
 		
 		///////////////////////////////////////////////////////
@@ -108,10 +108,10 @@ public class SpriteBatcher {
 	public void drawSpriteCenter(float center_x, float center_y, float width, float height, TextureRegion region){
 		// Check to make sure Sprite is within the World Bounds
 		
-		if(center_x > World.WORLD_RIGHT_EDGE || 
-				center_x + 5.0 < World.WORLD_LEFT_EDGE ||
-				center_y > World.WORLD_TOP_EDGE ||
-				center_y + 5.0 < World.WORLD_BOTTOM_EDGE)
+		if(center_x > GameWorld.WORLD_RIGHT_EDGE || 
+				center_x + 5.0 < GameWorld.WORLD_LEFT_EDGE ||
+				center_y > GameWorld.WORLD_TOP_EDGE ||
+				center_y + 5.0 < GameWorld.WORLD_BOTTOM_EDGE)
 			return;
 		
 		///////////////////////////////////////////////////////

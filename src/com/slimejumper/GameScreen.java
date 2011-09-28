@@ -15,9 +15,9 @@ import com.slimejumper.menu.MenuWorld;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
-import com.slimejumper.world.World;
+import com.slimejumper.world.GameWorld;
 import com.slimejumper.world.WorldRenderer;
-import com.slimejumper.world.World.WorldListener;
+import com.slimejumper.world.GameWorld.WorldListener;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -42,9 +42,9 @@ public class GameScreen extends GLScreen {
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
-	PoolManager poolManager;
+	public static PoolManager poolManager;
 	MenuWorld menuWorld;
-	World world;
+	GameWorld world;
 	WorldRenderer renderer;
 	Vector2 touchPoint;
 
@@ -70,8 +70,8 @@ public class GameScreen extends GLScreen {
 		
 		poolManager = new PoolManager();
 		
-		menuWorld = new MenuWorld(poolManager);
-		world = new World(worldListener, poolManager);
+//		menuWorld = new MenuWorld(poolManager);
+		world = new GameWorld(worldListener, poolManager);
 		
 		renderer = new WorldRenderer(glGraphics, batcher, world);
 		touchPoint = new Vector2();

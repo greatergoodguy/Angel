@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class ObstacleGeneratorManager {
 	
-	World world;
+	GameWorld world;
 	ObstacleGenerator obstacleShooter;
 	Random random;
 	
@@ -16,7 +16,7 @@ public class ObstacleGeneratorManager {
 	float level_one_timer;
 	float level_two_timer;
 	
-	public ObstacleGeneratorManager(World world){
+	public ObstacleGeneratorManager(GameWorld world){
 		this.world = world;
 		obstacleShooter = new ObstacleGenerator(world);
 		random = new Random();

@@ -27,12 +27,12 @@ public class WorldRenderer {
 	public static final float FRUSTUM_WIDTH_OVER_TWO = FRUSTUM_WIDTH/2;
 		
 	GLGraphics glGraphics;
-	World world;			// World is used to center the background and access the Hero
+	GameWorld world;			// World is used to center the background and access the Hero
 	public Camera2D cam;
 	SpriteBatcher batcher;
 	
 	public WorldRenderer(GLGraphics glGraphics, SpriteBatcher batcher,
-			World world) {
+			GameWorld world) {
 		this.glGraphics = glGraphics;
 		this.world = world;
 		this.cam = new Camera2D(glGraphics, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
