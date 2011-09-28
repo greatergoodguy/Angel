@@ -55,11 +55,11 @@ public class GameWorld extends World{
 	public static final int WORLD_STATE_GAME_OVER = 2;
 	
 	public Background background;
-	public static PoolManager poolManager;
+//	public static PoolManager poolManager;
 	
 	ObstacleGeneratorManager manager;
 	Remover remover;
-	CollisionManager collisionManager;
+//	CollisionManager collisionManager;
 
 	public final WorldListener listener;
 
@@ -77,10 +77,10 @@ public class GameWorld extends World{
 		this.listener = listener;
 		
 		background = new Background(this);
-		GameWorld.poolManager = poolManager;
 		manager = new ObstacleGeneratorManager(this);
 		remover = new Remover();
-		collisionManager = new CollisionManager(this);
+		collisionManager.setCollidingHero(hero);
+//		collisionManager = new CollisionManager(this);
 
 		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
 		position = new Vector2();

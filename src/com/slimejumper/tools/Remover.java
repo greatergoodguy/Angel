@@ -30,7 +30,7 @@ public class Remover {
 
 		if (platform.life_timer > Platform.PLATFORM_LIFESPAN) {
 			Platform.volatile_platforms.removeFirst();
-			GameWorld.poolManager.platformPool.free(platform);			
+			World.poolManager.platformPool.free(platform);			
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class Remover {
 		PurpleGhost purple_ghost = PurpleGhost.purple_ghosts.getFirst();
 		if(purple_ghost.life_timer > PurpleGhost.PurpleGhost_LIFESPAN){
 			PurpleGhost.purple_ghosts.removeFirst();
-			GameWorld.poolManager.purple_ghost_pool.free(purple_ghost);
+			World.poolManager.purple_ghost_pool.free(purple_ghost);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class Remover {
 		JellyfishDemon jellyfish_demon = JellyfishDemon.jellyfish_demons.getFirst();
 		if(jellyfish_demon.life_timer > JellyfishDemon.JELLY_LIFESPAN){
 			JellyfishDemon.jellyfish_demons.removeFirst();
-			GameWorld.poolManager.jellyfish_demon_pool.free(jellyfish_demon);
+			World.poolManager.jellyfish_demon_pool.free(jellyfish_demon);
 		}
 		
 	}
@@ -71,7 +71,7 @@ public class Remover {
 		FlyingSnake flying_snake = FlyingSnake.flying_snakes.getFirst();
 		if(flying_snake.life_timer > FlyingSnake.FLYING_SNAKE_LIFESPAN){
 			FlyingSnake.flying_snakes.removeFirst();
-			GameWorld.poolManager.flying_snake_pool.free(flying_snake);
+			World.poolManager.flying_snake_pool.free(flying_snake);
 		}
 	}
 	private void removeHaloAttacks() {
@@ -81,7 +81,7 @@ public class Remover {
 		HaloAttack halo_attack = HaloAttack.halo_attacks.getFirst();
 		if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
 			HaloAttack.halo_attacks.removeFirst();
-			GameWorld.poolManager.halo_attack_pool.free(halo_attack);
+			World.poolManager.halo_attack_pool.free(halo_attack);
 		}
 		
 	}
@@ -93,7 +93,7 @@ public class Remover {
 		MusicNote music_note = MusicNote.music_notes.getFirst();
 		if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
 			MusicNote.music_notes.removeFirst();
-			GameWorld.poolManager.music_note_pool.free(music_note);
+			World.poolManager.music_note_pool.free(music_note);
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class Remover {
 		Shockball shockball = Shockball.shockballs.getFirst();
 		if(shockball.life_timer > Shockball.SHOCKBALL_LIFESPAN){
 			Shockball.shockballs.removeFirst();
-			GameWorld.poolManager.shockball_pool.free(shockball);
+			World.poolManager.shockball_pool.free(shockball);
 		}	
 	}
 }

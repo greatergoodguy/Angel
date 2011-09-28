@@ -11,13 +11,13 @@ import com.slimejumper.world.enemies.PurpleGhost;
 public class CollisionManager {
 	
 	public static final float COLLISION_TOLERANCE = 0.17f;
+	Hero hero = null;
 	
-	GameWorld world;
-	Hero hero;
+	public CollisionManager(){
+	}
 	
-	public CollisionManager(GameWorld world){
-		this.world = world;
-		this.hero = world.hero;
+	public void setCollidingHero(Hero hero){
+		this.hero = hero;
 	}
 	
 	public void manageCollisions(){

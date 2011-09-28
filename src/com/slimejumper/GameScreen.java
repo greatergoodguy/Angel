@@ -13,6 +13,7 @@ import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.menu.MenuWorld;
 import com.slimejumper.tools.PoolManager;
+import com.slimejumper.tools.World;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
 import com.slimejumper.world.GameWorld;
@@ -42,7 +43,7 @@ public class GameScreen extends GLScreen {
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
-	public static PoolManager poolManager;
+	PoolManager poolManager;
 	MenuWorld menuWorld;
 	GameWorld world;
 	WorldRenderer renderer;
@@ -51,7 +52,7 @@ public class GameScreen extends GLScreen {
 	public GameScreen(Game game) {
 		super(game);
 
-		initalizeUniverse();
+		World.initalizeUniverse();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		controller = new Controller(guiCam);

@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 import android.util.Log;
 
+import com.slimejumper.tools.World;
+
 public class Platform extends DynamicGameObject{
 	
 	/* 
@@ -258,7 +260,7 @@ public class Platform extends DynamicGameObject{
 		
 		while(x_coord < GameWorld.WORLD_RIGHT_EDGE){
 			// create new Platform and add to list
-			platform = GameWorld.poolManager.platformPool.newObject();
+			platform = World.poolManager.platformPool.newObject();
 			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
 			Platform.ground_platforms.add(platform);
 			
@@ -286,7 +288,7 @@ public class Platform extends DynamicGameObject{
 		
 		while(y_coord < GameWorld.WORLD_TOP_BOUND){
 			while(x_coord < GameWorld.WORLD_RIGHT_EDGE){
-				platform = GameWorld.poolManager.platformPool.newObject();
+				platform = World.poolManager.platformPool.newObject();
 				platform.reset(x_coord, y_coord, map_platform_length, Platform.PLATFORM_STATE_STILL);
 				Platform.static_platforms.add(platform);
 			

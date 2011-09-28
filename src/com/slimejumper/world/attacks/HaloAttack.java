@@ -1,8 +1,7 @@
 package com.slimejumper.world.attacks;
 
-import com.slimejumper.gameframework.math.Vector2;
+import com.slimejumper.tools.World;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.GameWorld;
 
 public class HaloAttack extends Attack{
 	public static final float HaloAttack_WIDTH = 0.5375f;
@@ -33,7 +32,7 @@ public class HaloAttack extends Attack{
 
 	public static void activate(Hero hero) {
 
-		HaloAttack halo_attack = GameWorld.poolManager.halo_attack_pool.newObject();
+		HaloAttack halo_attack = World.poolManager.halo_attack_pool.newObject();
 		halo_attack.reset(hero);
 		halo_attacks.add(halo_attack);
 	}
