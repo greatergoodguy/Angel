@@ -1,8 +1,6 @@
 package com.slimejumper.world;
 
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.tools.CollisionManager;
-import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.UnitCircle;
 import com.slimejumper.tools.World;
@@ -70,7 +68,7 @@ public class GameWorld extends World{
 	float level_timer;
 	int level_counter;
 
-	public GameWorld(WorldListener listener, PoolManager poolManager) {
+	public GameWorld(WorldListener listener) {
 //		initializeLists();
 		
 		this.hero = new Hero();

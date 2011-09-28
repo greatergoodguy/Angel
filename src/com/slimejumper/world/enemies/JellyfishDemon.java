@@ -54,7 +54,7 @@ public class JellyfishDemon extends Enemy{
 		
 		super.reset();
 		resetPositionLowerLeft(spawnPositionX, -JELLY_STANDARD_HEIGHT);
-		startBoostUpState();
+		startFloatDownState();
 		initializeParameters();
 	}
 	
@@ -62,7 +62,7 @@ public class JellyfishDemon extends Enemy{
 		state_timer = 0;
 		number_of_cycles = 0;
 		frame_number = 0;
-		facedirection = SPRITE_LEFT;
+		facedirection = SPRITE_RIGHT;
 	}
 	
 	public void update(float deltaTime){
@@ -115,13 +115,19 @@ public class JellyfishDemon extends Enemy{
 		velocity.set(0, 0);
 	}
 	
-	
+/*	
 	public void startBoostUpState(){		
 		resetDimensions(JELLY_STANDARD_WIDTH, JELLY_STANDARD_HEIGHT);
 		number_of_cycles = 0;
 		changeToBoostUpState();
 	}
-
+*/
+	public void startFloatDownState(){
+		resetDimensions(JELLY_STANDARD_WIDTH, JELLY_STANDARD_HEIGHT);
+		number_of_cycles = 0;
+		changeToFloatDownState();
+	}
+	
 	private void changeToBoostUpState(){
 		
 		state_timer = 0;
@@ -142,16 +148,16 @@ public class JellyfishDemon extends Enemy{
 	
 	private void updateBoostUpState(float deltaTime){
 		if(state_timer > JELLY_BOOST_UP_STATE_TIMER_BOUND){
-			changeToFloatDownState();
+			if(number_of_cycles >= 3)
+				changeToAttackState();	
+			else
+				changeToFloatDownState();
 		}
 	}
 	
 	private void updateFloatDownState(float deltaTime){
 		if(state_timer > JELLY_FLOAT_DOWN_STATE_TIMER_BOUND){
-			if(number_of_cycles >= 3)
-				changeToAttackState();	
-			else
-				changeToBoostUpState();
+			changeToBoostUpState();
 		}
 	}	
 	
@@ -179,13 +185,13 @@ public class JellyfishDemon extends Enemy{
 */
 	private void updateAttackState(float deltaTime){
 		if(state_timer > JELLY_ATTACK_STATE_TIMER_BOUND){
-			startBoostUpState();
+			startFloatDownState();
 		}
 	}
 
 	private void updateCollidedState(float deltaTime){
 		if(state_timer > JELLY_COLLIDED_STATE_TIMER_BOUND){
-			startBoostUpState();
+			startFloatDownState();
 		}
 	}
 /*
