@@ -26,10 +26,7 @@ public class GameWorld extends World{
 	public Background background;
 //	public static PoolManager poolManager;
 	
-	ObstacleGeneratorManager manager;
-	Remover remover;
-//	CollisionManager collisionManager;
-
+	ObstacleGeneratorManager level_manager;
 	public final WorldListener listener;
 
 	float level_timer;
@@ -39,14 +36,13 @@ public class GameWorld extends World{
 //		initializeLists();
 		
 		if(hero == null)
-			this.hero = new Hero();
+			World.hero = new Hero();
 		this.listener = listener;
 		
 		background = new Background(this);
-		manager = new ObstacleGeneratorManager(this);
-		remover = new Remover();
+		level_manager = new ObstacleGeneratorManager(this);
+//		remover = new Remover();
 		collisionManager.setCollidingHero(hero);
-//		collisionManager = new CollisionManager(this);
 
 		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
 		position = new Vector2();
@@ -60,13 +56,12 @@ public class GameWorld extends World{
 	}
 
 	public void update(float deltaTime) {
+		//First Update Sprites of this extended Class
 		updateSprites(deltaTime);
-		updateCenter();
-		updatePosition();
-		
-		collisionManager.manageCollisions();
-		remover.remove();
 		updateLevel(deltaTime);
+		
+		//Update General Parameters second (center, position, collisionManager, remover)
+		super.update();	
 	}
 
 	private void updateLevel(float deltaTime) {
@@ -81,11 +76,11 @@ public class GameWorld extends World{
 		
 		
 		if(level_counter == 1 )
-			manager.generateLevelOne(deltaTime);
+			level_manager.generateLevelOne(deltaTime);
 		else if(level_counter == 2 )
-			manager.generateLevelTwo(deltaTime);
+			level_manager.generateLevelTwo(deltaTime);
 		else
-			manager.generateSampleLevel(deltaTime);
+			level_manager.generateSampleLevel(deltaTime);
 			
 	}
 

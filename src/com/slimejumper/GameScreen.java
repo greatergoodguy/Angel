@@ -59,7 +59,7 @@ public class GameScreen extends GLScreen {
 			}
 		};
 		
-//		menuWorld = new MenuWorld(poolManager);
+//		menuWorld = new MenuWorld();
 		world = new GameWorld(worldListener);
 		
 		renderer = new WorldRenderer(glGraphics, batcher, world);

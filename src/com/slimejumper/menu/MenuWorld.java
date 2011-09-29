@@ -6,6 +6,7 @@ import com.slimejumper.tools.World;
 import com.slimejumper.world.Background;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
+import com.slimejumper.world.GameWorld.WorldListener;
 
 public class MenuWorld extends World{
 	public interface WorldListener {
@@ -20,11 +21,11 @@ public class MenuWorld extends World{
 	
 	public Background background = null;
 	
-	public Hero hero;
-	public MenuWorld(PoolManager poolManager){
-		MenuWorld.poolManager = poolManager;
-		
-		hero = new Hero();
+	public MenuWorld(){		
+		if(hero == null)
+			World.hero = new Hero();
+
+		collisionManager.setCollidingHero(hero);
 		
 		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
 		position = new Vector2();
@@ -34,5 +35,7 @@ public class MenuWorld extends World{
 	
 	public void update(float deltaTime){
 		hero.update(deltaTime);
+		
+		super.update();
 	}
 }

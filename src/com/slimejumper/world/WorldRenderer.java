@@ -40,6 +40,8 @@ public class WorldRenderer {
 		this.batcher = batcher;
 	}
 	
+	
+	
 	public void render(){
 		setCamera();
 		
