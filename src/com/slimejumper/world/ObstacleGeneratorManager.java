@@ -173,7 +173,7 @@ public class ObstacleGeneratorManager {
 	private void generateJellyfishDemonStream(float deltaTime){
 		enemy_launch_timer += deltaTime;
 		
-		if(enemy_launch_timer > 7.0f){
+		if(enemy_launch_timer > 14.0f){
 			obstacleShooter.generateJellyfishDemon();
 			enemy_launch_timer = 0;
 		}

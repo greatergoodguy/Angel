@@ -11,6 +11,7 @@ import com.slimejumper.gameframework.gl.Animation;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.gl.TextureRegion;
+import com.slimejumper.menu.MenuWorld;
 import com.slimejumper.tools.World;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
@@ -28,19 +29,22 @@ public class WorldRenderer {
 	public static final float FRUSTUM_WIDTH_OVER_TWO = FRUSTUM_WIDTH/2;
 		
 	GLGraphics glGraphics;
-	World world;			// World is used to center the background and access the Hero
 	public Camera2D cam;
 	SpriteBatcher batcher;
+	
+	World active_world;			// Different Sprites are rendered for Different Worlds;
 	
 	public WorldRenderer(GLGraphics glGraphics, SpriteBatcher batcher,
 				World world) {
 		this.glGraphics = glGraphics;
-		this.world = world;
+		this.active_world = world;
 		this.cam = new Camera2D(glGraphics, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		this.batcher = batcher;
 	}
 	
-	
+	public void resetActiveWorld(World new_active_world){
+		active_world = new_active_world;
+	}
 	
 	public void render(){
 		setCamera();
@@ -50,8 +54,11 @@ public class WorldRenderer {
 		gl.glEnable(GL10.GL_BLEND);
 		gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		
+		if(active_world instanceof GameWorld)
+			renderBackground();
+		else if(active_world instanceof MenuWorld)
+			renderBackground();
 		
-		renderBackground();
 		renderGameSprites();
 		renderHero();
 		
@@ -60,12 +67,12 @@ public class WorldRenderer {
 	}
 
 	private void setCamera() {
-		cam.center = world.center;
+		cam.center = active_world.center;
 	}
 	
 	private void renderBackground() {
 		batcher.beginBatch(Assets.background);
-		batcher.drawBackground(world);
+		batcher.drawBackground(active_world);
 		batcher.endBatch();
 	}
 
@@ -210,7 +217,7 @@ public class WorldRenderer {
 	}
 
 	private void renderHeroState() {
-		switch(world.hero.state){
+		switch(World.hero.state){
 		case Hero.HERO_STATE_JUMP:
 			adjustHeroOrientation(Assets.hero_jump);
 			break;
@@ -218,29 +225,29 @@ public class WorldRenderer {
 			adjustHeroOrientation(Assets.hero_fall);
 			break;
 		case Hero.HERO_STATE_LAND:
-			adjustHeroOrientation(Assets.hero_land.getKeyFrame(world.hero.state_timer, 
+			adjustHeroOrientation(Assets.hero_land.getKeyFrame(active_world.hero.state_timer, 
 					Animation.ANIMATION_NONLOOPING));
 			break;
 		case Hero.HERO_STATE_COLLIDED:
-			adjustHeroOrientation(Assets.hero_collided.getKeyFrame(world.hero.state_timer, 
+			adjustHeroOrientation(Assets.hero_collided.getKeyFrame(active_world.hero.state_timer, 
 					Animation.ANIMATION_LOOPING));
 			break;	
 		case Hero.HERO_STATE_BASIC_ATTACK:
-			switch(world.hero.basic_attack_type){
+			switch(active_world.hero.basic_attack_type){
 			case Hero.HERO_BASIC_HALO_ATTACK:
-				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(world.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(active_world.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_2:
-				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(world.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(active_world.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_3:
-				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(world.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(active_world.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
-				adjustHeroOrientation(Assets.hero_lyre_attack_1.getKeyFrame(world.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_lyre_attack_1.getKeyFrame(active_world.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			}
@@ -263,12 +270,12 @@ public class WorldRenderer {
 	}
 	
 	private void adjustHeroOrientation(TextureRegion region) {
-		switch(world.hero.facedirection){
+		switch(active_world.hero.facedirection){
 		case Hero.HERO_LEFT:
-			batcher.drawSpriteReverse(world.hero, region);
+			batcher.drawSpriteReverse(active_world.hero, region);
 			break;
 		case Hero.HERO_RIGHT:
-			batcher.drawSprite(world.hero, region);
+			batcher.drawSprite(active_world.hero, region);
 			break;
 		}
 	}

@@ -11,6 +11,7 @@ import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.menu.MenuWorld;
+import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.World;
 import com.slimejumper.world.GameWorld;
 import com.slimejumper.world.Hero;
@@ -27,21 +28,24 @@ public class GameScreen extends GLScreen {
 	static final int GAME_OVER = 4;
 	
 	int state;
+	float game_timer;
 	
 	Camera2D guiCam;
 	Controller controller;
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
+	World active_world;
 	MenuWorld menuWorld;
-	GameWorld world;
-	Hero hero;
+	GameWorld gameWorld;
+	
 	WorldRenderer renderer;
 	Vector2 touchPoint;
 
 	public GameScreen(Game game) {
 		super(game);
-
+		game_timer = 0;
+		
 		World.initalizeUniverse();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
@@ -59,16 +63,23 @@ public class GameScreen extends GLScreen {
 			}
 		};
 		
-//		menuWorld = new MenuWorld();
-		world = new GameWorld(worldListener);
+		menuWorld = new MenuWorld();
+		gameWorld = new GameWorld(worldListener);
+		active_world = menuWorld;
 		
-		renderer = new WorldRenderer(glGraphics, batcher, world);
+		renderer = new WorldRenderer(glGraphics, batcher, active_world);
 		touchPoint = new Vector2();
 	}
 
-
+	public void switchToDifferentWorld(World world){
+		active_world = world;
+		renderer.resetActiveWorld(active_world);
+		Remover.clearAllLists();
+	}
+	
 	@Override
 	public void update(float deltaTime) {
+		game_timer += deltaTime;
 		if(deltaTime > 0.1f)
 			deltaTime = 0.1f;
 		
@@ -77,6 +88,7 @@ public class GameScreen extends GLScreen {
 	}
 
 	private void updateRunning(float deltaTime) {
+		// Get Controller Input
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 		
@@ -85,14 +97,15 @@ public class GameScreen extends GLScreen {
 			TouchEvent event = touchEvents.get(i);
 			controller.input(event);
 			if(controller.fireAttack){
-				if(world.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
-					world.hero.changeToBasicAttackState();
+				if(World.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
+					World.hero.changeToBasicAttackState();
 				controller.fireAttack = false;
 			}
-			world.hero.moveDirection = processMoveDirection();
+			World.hero.moveDirection = processMoveDirection();
 		}
 		
-		world.update(deltaTime);
+		// Update World
+		active_world.update(deltaTime);
 	}
 
 	private int processMoveDirection() {		
