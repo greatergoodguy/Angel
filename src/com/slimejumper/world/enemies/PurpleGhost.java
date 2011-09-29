@@ -1,6 +1,6 @@
 package com.slimejumper.world.enemies;
 
-import com.slimejumper.world.GameWorld;
+import com.slimejumper.tools.World;
 
 public class PurpleGhost extends Enemy{
 	
@@ -30,7 +30,7 @@ public class PurpleGhost extends Enemy{
 		switch_motion_timer = 0;
 		
 		if(purpleghost_type == PurpleGhost_TYPE1){
-			resetPositionLowerLeft(GameWorld.WORLD_RIGHT_EDGE, 1.0f);
+			resetPositionLowerLeft(World.WORLD_RIGHT_EDGE, 1.0f);
 			velocity.set(PurpleGhost_HORIZONTAL_VEL, PurpleGhost_VERTICAL_VEL);
 		}
 		
@@ -44,7 +44,7 @@ public class PurpleGhost extends Enemy{
 	public void reset(float spawnPositionY){
 		
 		this.reset();
-		resetPositionLowerLeft(GameWorld.WORLD_RIGHT_EDGE, spawnPositionY);
+		resetPositionLowerLeft(World.WORLD_RIGHT_EDGE, spawnPositionY);
 		velocity.set(PurpleGhost_HORIZONTAL_VEL, PurpleGhost_VERTICAL_VEL);
 		switch_motion_timer = 0;
 	}

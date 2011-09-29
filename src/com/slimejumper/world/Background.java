@@ -2,6 +2,7 @@ package com.slimejumper.world;
 
 import com.slimejumper.Assets;
 import com.slimejumper.gameframework.math.Vector2;
+import com.slimejumper.tools.World;
 
 
 public class Background{	
@@ -12,13 +13,13 @@ public class Background{
 	
 	public Vector2 asset_position;
 		
-	GameWorld world;
+	World world;
 	float parallax_ratio;
 	
-	public Background(GameWorld world){
+	public Background(World world){
 		this.world = world;
 		parallax_ratio = (BACKGROUND_WIDTH - WorldRenderer.FRUSTUM_WIDTH) / 
-							(GameWorld.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
+							(World.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
 		
 		asset_position = new Vector2();
 	}

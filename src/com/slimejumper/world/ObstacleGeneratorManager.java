@@ -2,9 +2,11 @@ package com.slimejumper.world;
 
 import java.util.Random;
 
+import com.slimejumper.tools.World;
+
 public class ObstacleGeneratorManager {
 	
-	GameWorld world;
+	World world;
 	ObstacleGenerator obstacleShooter;
 	Random random;
 	
@@ -16,7 +18,7 @@ public class ObstacleGeneratorManager {
 	float level_one_timer;
 	float level_two_timer;
 	
-	public ObstacleGeneratorManager(GameWorld world){
+	public ObstacleGeneratorManager(World world){
 		this.world = world;
 		obstacleShooter = new ObstacleGenerator(world);
 		random = new Random();

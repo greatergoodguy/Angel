@@ -9,10 +9,10 @@ import com.slimejumper.world.enemies.PurpleGhost;
 
 public class ObstacleGenerator {
 		
-	GameWorld world;
+	World world;
 	Random random;
 	
-	public ObstacleGenerator(GameWorld world){
+	public ObstacleGenerator(World world){
 		this.world = world;
 		random = new Random();
 	}
@@ -25,7 +25,7 @@ public class ObstacleGenerator {
 		
 //		Platform platform = world.platformPool.newObject();
 		Platform platform = World.poolManager.platformPool.newObject();
-		platform.reset(GameWorld.WORLD_RIGHT_EDGE, spawnPositionY, Platform.PLATFORM_MEDIUM_LENGTH, Platform.PLATFORM_STATE_ZOOM);
+		platform.reset(World.WORLD_RIGHT_EDGE, spawnPositionY, Platform.PLATFORM_MEDIUM_LENGTH, Platform.PLATFORM_STATE_ZOOM);
 		Platform.volatile_platforms.add(platform);
 	}
 	
@@ -47,14 +47,14 @@ public class ObstacleGenerator {
 
 	public void generateJellyfishDemon() {
 		JellyfishDemon jellyfish_demon = World.poolManager.jellyfish_demon_pool.newObject();
-		float spawnPositionX = random.nextFloat() * GameWorld.WORLD_WIDTH/2 + GameWorld.WORLD_WIDTH/4;
+		float spawnPositionX = random.nextFloat() * World.WORLD_WIDTH/2 + World.WORLD_WIDTH/4;
 		jellyfish_demon.reset(spawnPositionX);
 		JellyfishDemon.jellyfish_demons.add(jellyfish_demon);
 	}
 	
 	public void generateJellyfishDemonPair() {
-		float spawnPositionX1 = random.nextFloat() * GameWorld.WORLD_WIDTH/2;
-		float spawnPositionX2 = random.nextFloat() * GameWorld.WORLD_WIDTH/2 + GameWorld.WORLD_WIDTH/2;
+		float spawnPositionX1 = random.nextFloat() * World.WORLD_WIDTH/2;
+		float spawnPositionX2 = random.nextFloat() * World.WORLD_WIDTH/2 + World.WORLD_WIDTH/2;
 		
 		JellyfishDemon jellyfish_demon1 = World.poolManager.jellyfish_demon_pool.newObject();
 		JellyfishDemon jellyfish_demon2 = World.poolManager.jellyfish_demon_pool.newObject();

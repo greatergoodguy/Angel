@@ -1,6 +1,6 @@
 package com.slimejumper.world.enemies;
 
-import com.slimejumper.world.GameWorld;
+import com.slimejumper.tools.World;
 
 public class FlyingSnake extends Enemy{
 	
@@ -54,7 +54,7 @@ public class FlyingSnake extends Enemy{
 	
 	public void reset(float spawnPositionY){
 		this.reset();
-		resetPositionLowerLeft(GameWorld.WORLD_RIGHT_EDGE, spawnPositionY);		
+		resetPositionLowerLeft(World.WORLD_RIGHT_EDGE, spawnPositionY);		
 	}
 	
 	public void update(float deltaTime){

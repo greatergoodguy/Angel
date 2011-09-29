@@ -11,6 +11,7 @@ import com.slimejumper.gameframework.gl.Animation;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.gl.TextureRegion;
+import com.slimejumper.tools.World;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -27,12 +28,12 @@ public class WorldRenderer {
 	public static final float FRUSTUM_WIDTH_OVER_TWO = FRUSTUM_WIDTH/2;
 		
 	GLGraphics glGraphics;
-	GameWorld world;			// World is used to center the background and access the Hero
+	World world;			// World is used to center the background and access the Hero
 	public Camera2D cam;
 	SpriteBatcher batcher;
 	
 	public WorldRenderer(GLGraphics glGraphics, SpriteBatcher batcher,
-			GameWorld world) {
+				World world) {
 		this.glGraphics = glGraphics;
 		this.world = world;
 		this.cam = new Camera2D(glGraphics, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);

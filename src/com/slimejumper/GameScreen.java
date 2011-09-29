@@ -35,6 +35,7 @@ public class GameScreen extends GLScreen {
 	
 	MenuWorld menuWorld;
 	GameWorld world;
+	Hero hero;
 	WorldRenderer renderer;
 	Vector2 touchPoint;
 
