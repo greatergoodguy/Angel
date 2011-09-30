@@ -54,10 +54,12 @@ public class WorldRenderer {
 		gl.glEnable(GL10.GL_BLEND);
 		gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		
-		if(active_world instanceof GameWorld)
-			renderBackground();
+		if(active_world instanceof GameWorld){
+			renderBackgroundBackLayer();
+			renderBackgroundMiddleLayer();
+		}
 		else if(active_world instanceof MenuWorld)
-			renderBackground();
+			renderBackgroundClouds();
 		
 		renderGameSprites();
 		renderHero();
@@ -70,11 +72,27 @@ public class WorldRenderer {
 		cam.center = active_world.center;
 	}
 	
-	private void renderBackground() {
+	private void renderBackgroundClouds() {
 		batcher.beginBatch(Assets.background_clouds);
-		batcher.drawBackground(active_world);
+		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
+				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
 		batcher.endBatch();
 	}
+	
+	private void renderBackgroundBackLayer() {
+		batcher.beginBatch(Assets.background_back_layer);
+		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
+				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
+		batcher.endBatch();		
+	}
+	
+	private void renderBackgroundMiddleLayer() {
+		batcher.beginBatch(Assets.background_middle_layer);
+		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
+				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundMiddleLayerRegion);
+		batcher.endBatch();		
+	}
+
 
 	private void renderGameSprites(){
 		batcher.beginBatch(Assets.game_sprites);

@@ -50,11 +50,12 @@ public class SpriteBatcher {
 		vertices.draw(GL10.GL_TRIANGLES, 0, numSprites*6);
 		vertices.unbind();
 	}
-	
-	public void drawBackground(World world) {
-		
+/*	
+	public void drawBackground(World world) {		
 		drawSpriteLowerLeft(world.position.x, world.position.y, WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
 	}
+*/
+	
 	
 	public void drawSprite(GameObject sprite, TextureRegion region){
 //		drawSpriteLeftCorner(sprite.position.x, sprite.position.y, sprite.width, sprite.height, region);

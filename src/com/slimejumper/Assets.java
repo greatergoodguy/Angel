@@ -76,6 +76,10 @@ public class Assets {
 
 	public static Texture background_clouds;
 	public static TextureRegion backgroundCloudsRegion;
+	public static Texture background_back_layer;
+	public static TextureRegion backgroundBackLayerRegion;
+	public static Texture background_middle_layer;
+	public static TextureRegion backgroundMiddleLayerRegion;
 	
 	public static Texture game_sprites;
 	public static TextureRegion platform_left;
@@ -227,6 +231,10 @@ public class Assets {
 		
 		background_clouds = new Texture(game, "BG1.png");
 		backgroundCloudsRegion = new TextureRegion(background_clouds, 0, 0, 800, 480);
+		background_back_layer = new Texture(game, "BG_back_layer.png");
+		backgroundBackLayerRegion = new TextureRegion(background_back_layer, 0, 0, 800, 480);
+		background_middle_layer = new Texture(game, "BG_middle_layer.png");
+		backgroundMiddleLayerRegion = new TextureRegion(background_middle_layer, 0, 0, 800, 480);
 		
 		game_sprites = new Texture(game, "GameSpritesALL.png");
 		platform_left = new TextureRegion(game_sprites, 0, 0, 40, 20);
