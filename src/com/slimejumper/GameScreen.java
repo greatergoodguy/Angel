@@ -13,8 +13,10 @@ import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.menu.MenuWorld;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.World;
+import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.GameWorld;
 import com.slimejumper.world.Hero;
+import com.slimejumper.world.Platform;
 import com.slimejumper.world.WorldRenderer;
 import com.slimejumper.world.GameWorld.WorldListener;
 
@@ -35,11 +37,11 @@ public class GameScreen extends GLScreen {
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
-	World active_world;
-	MenuWorld menuWorld;
-	GameWorld gameWorld;
+	static World active_world;
+	static MenuWorld menuWorld;
+	static World gameWorld;
 	
-	WorldRenderer renderer;
+	static WorldRenderer renderer;
 	Vector2 touchPoint;
 
 	public GameScreen(Game game) {
@@ -69,13 +71,26 @@ public class GameScreen extends GLScreen {
 		
 		renderer = new WorldRenderer(glGraphics, batcher, active_world);
 		touchPoint = new Vector2();
+		
+		switchToMenuWorld();
+	}
+	
+	public static void switchToMenuWorld(){
+		active_world = menuWorld;
+		Backgrounds.setActiveWorld(active_world);
+		Platform.initializePlatformGroundMinusOne();
+		Platform.initializePlatformMap();
 	}
 
-	public void switchToDifferentWorld(World world){
-		active_world = world;
+	public static void switchToGameWorld(){
+		active_world = gameWorld;
 		renderer.resetActiveWorld(active_world);
 		Remover.clearAllLists();
+		Platform.initializePlatformGround();
+		Backgrounds.setActiveWorld(active_world);
 	}
+	
+	boolean firstTime = true;
 	
 	@Override
 	public void update(float deltaTime) {

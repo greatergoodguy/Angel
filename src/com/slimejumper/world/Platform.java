@@ -260,7 +260,7 @@ public class Platform extends DynamicGameObject{
 		
 		while(x_coord < World.WORLD_RIGHT_EDGE){
 			// create new Platform and add to list
-			platform = World.poolManager.platformPool.newObject();
+			platform = World.poolManager.platform_pool.newObject();
 			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
 			Platform.ground_platforms.add(platform);
 			
@@ -268,6 +268,30 @@ public class Platform extends DynamicGameObject{
 			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
 		}
 		Collections.shuffle(Platform.ground_platforms);
+	}
+	
+	public static void initializePlatformGroundMinusOne(){
+		if(!Platform.ground_platforms.isEmpty()){
+			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");
+			return;
+		}
+		
+		final int ground_platform_length = 5;
+		float x_coord = 0;
+		Platform platform;
+		
+		while(x_coord < World.WORLD_RIGHT_EDGE){
+			// create new Platform and add to list
+			platform = World.poolManager.platform_pool.newObject();
+			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
+			Platform.ground_platforms.add(platform);
+			
+			// Advance counter and repeat
+			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
+		}
+		
+		platform = Platform.ground_platforms.removeLast();
+		World.poolManager.platform_pool.free(platform);
 	}
 	
 	public static void initializePlatformMap(){
@@ -288,7 +312,7 @@ public class Platform extends DynamicGameObject{
 		
 		while(y_coord < World.WORLD_TOP_BOUND){
 			while(x_coord < World.WORLD_RIGHT_EDGE){
-				platform = World.poolManager.platformPool.newObject();
+				platform = World.poolManager.platform_pool.newObject();
 				platform.reset(x_coord, y_coord, map_platform_length, Platform.PLATFORM_STATE_STILL);
 				Platform.static_platforms.add(platform);
 			

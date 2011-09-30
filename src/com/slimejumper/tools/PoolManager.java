@@ -13,7 +13,7 @@ import com.slimejumper.world.enemies.PurpleGhost;
 public class PoolManager {
 	
 
-	public Pool<Platform> platformPool;
+	public Pool<Platform> platform_pool;
 	public Pool<PurpleGhost> purple_ghost_pool;
 	public Pool<JellyfishDemon> jellyfish_demon_pool;
 	public Pool<HaloAttack> halo_attack_pool;
@@ -65,7 +65,7 @@ public class PoolManager {
 		};
 		
 		flying_snake_pool = new Pool<FlyingSnake>(flying_snake_factory, 20);
-		platformPool = new Pool<Platform>(platform_factory, 50);
+		platform_pool = new Pool<Platform>(platform_factory, 50);
 		purple_ghost_pool = new Pool<PurpleGhost>(purple_ghost_factory, 35);
 		jellyfish_demon_pool = new Pool<JellyfishDemon>(jellyfish_demon_factory, 35);
 		halo_attack_pool = new Pool<HaloAttack>(halo_attack_factory, 35);

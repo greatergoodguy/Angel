@@ -71,7 +71,7 @@ public class WorldRenderer {
 	}
 	
 	private void renderBackground() {
-		batcher.beginBatch(Assets.background);
+		batcher.beginBatch(Assets.background_clouds);
 		batcher.drawBackground(active_world);
 		batcher.endBatch();
 	}

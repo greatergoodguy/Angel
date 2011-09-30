@@ -74,8 +74,8 @@ public class Assets {
 	public static TextureRegion heroCollidedFrame2;
 	public static TextureRegion heroCollidedFrame3;
 
-	public static Texture background;
-	public static TextureRegion backgroundRegion;
+	public static Texture background_clouds;
+	public static TextureRegion backgroundCloudsRegion;
 	
 	public static Texture game_sprites;
 	public static TextureRegion platform_left;
@@ -225,8 +225,8 @@ public class Assets {
 				heroCollidedFrame3
 				);
 		
-		background = new Texture(game, "BG1.png");
-		backgroundRegion = new TextureRegion(background, 0, 0, 800, 480);
+		background_clouds = new Texture(game, "BG1.png");
+		backgroundCloudsRegion = new TextureRegion(background_clouds, 0, 0, 800, 480);
 		
 		game_sprites = new Texture(game, "GameSpritesALL.png");
 		platform_left = new TextureRegion(game_sprites, 0, 0, 40, 20);
@@ -362,7 +362,7 @@ public class Assets {
 	public static void reload(){
 		game_sprites.reload();
 		hero.reload();
-		background.reload();
+		background_clouds.reload();
 		if(Settings.soundEnabled)
 			//turn on music
 			;

@@ -24,7 +24,7 @@ public class ObstacleGenerator {
 		
 		
 //		Platform platform = world.platformPool.newObject();
-		Platform platform = World.poolManager.platformPool.newObject();
+		Platform platform = World.poolManager.platform_pool.newObject();
 		platform.reset(World.WORLD_RIGHT_EDGE, spawnPositionY, Platform.PLATFORM_MEDIUM_LENGTH, Platform.PLATFORM_STATE_ZOOM);
 		Platform.volatile_platforms.add(platform);
 	}

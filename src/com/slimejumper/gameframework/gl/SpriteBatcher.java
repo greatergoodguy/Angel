@@ -53,7 +53,7 @@ public class SpriteBatcher {
 	
 	public void drawBackground(World world) {
 		
-		drawSpriteLowerLeft(world.position.x, world.position.y, WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundRegion);
+		drawSpriteLowerLeft(world.position.x, world.position.y, WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
 	}
 	
 	public void drawSprite(GameObject sprite, TextureRegion region){

@@ -6,7 +6,6 @@ import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
-import com.slimejumper.world.enemies.PurpleGhost;
 
 public class Remover {
 	
@@ -32,7 +31,7 @@ public class Remover {
 
 		if (platform.life_timer > Platform.PLATFORM_LIFESPAN) {
 			Platform.volatile_platforms.removeFirst();
-			World.poolManager.platformPool.free(platform);			
+			World.poolManager.platform_pool.free(platform);			
 		}
 	}
 	
@@ -107,7 +106,15 @@ public class Remover {
 
 		while(!Platform.volatile_platforms.isEmpty()){
 			Platform platform = Platform.volatile_platforms.removeFirst();
-			World.poolManager.platformPool.free(platform);			
+			World.poolManager.platform_pool.free(platform);			
+		}
+		while(!Platform.ground_platforms.isEmpty()){
+			Platform platform = Platform.ground_platforms.removeFirst();
+			World.poolManager.platform_pool.free(platform);	
+		}
+		while(!Platform.static_platforms.isEmpty()){
+			Platform platform = Platform.static_platforms.removeFirst();
+			World.poolManager.platform_pool.free(platform);
 		}
 	}
 
