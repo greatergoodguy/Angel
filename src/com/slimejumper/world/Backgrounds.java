@@ -9,7 +9,7 @@ public class Backgrounds{
 	
 	public static int BACKGROUND_CLOUDS_WIDTH = 15;	
 	public static int BACKGROUND_BACK_LAYER_WIDTH = 15;	
-	public static float BACKGROUND_MIDDLE_LAYER_WIDTH = 14.5f;	
+	public static float BACKGROUND_MIDDLE_LAYER_WIDTH = 14.9f;	
 	
 	public static Vector2 new_position;
 		
