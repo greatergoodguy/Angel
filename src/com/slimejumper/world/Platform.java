@@ -248,6 +248,7 @@ public class Platform extends DynamicGameObject{
 		}
 	}
 	
+	// Ground is raised 0.75 meter from the bottom edge
 	public static void initializePlatformGround(){
 		if(!Platform.ground_platforms.isEmpty()){
 			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");
@@ -256,12 +257,13 @@ public class Platform extends DynamicGameObject{
 		
 		final int ground_platform_length = 5;
 		float x_coord = 0;
+		float y_coord = 0.75f;
 		Platform platform;
 		
 		while(x_coord < World.WORLD_RIGHT_EDGE){
 			// create new Platform and add to list
 			platform = World.poolManager.platform_pool.newObject();
-			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
+			platform.reset(x_coord, y_coord, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
 			Platform.ground_platforms.add(platform);
 			
 			// Advance counter and repeat
@@ -270,6 +272,7 @@ public class Platform extends DynamicGameObject{
 		Collections.shuffle(Platform.ground_platforms);
 	}
 	
+	// Ground is level with the bottom edge
 	public static void initializePlatformGroundMinusOne(){
 		if(!Platform.ground_platforms.isEmpty()){
 			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");

@@ -9,7 +9,7 @@ public class Backgrounds{
 	
 	public static int BACKGROUND_CLOUDS_WIDTH = 15;	
 	public static int BACKGROUND_BACK_LAYER_WIDTH = 15;	
-	public static int BACKGROUND_MIDDLE_LAYER_WIDTH = 15;	
+	public static float BACKGROUND_MIDDLE_LAYER_WIDTH = 14.5f;	
 	
 	public static Vector2 new_position;
 		
@@ -52,6 +52,7 @@ public class Backgrounds{
 		new_position.x = active_world.position.x * background_back_layer_parallax_ratio;
 		new_position.y = WorldRenderer.FRUSTUM_HEIGHT - active_world.position.y;
 		Assets.backgroundBackLayerRegion.adjust(new_position);
+		Assets.backgroundBackLayer2Region.adjust(new_position);
 
 		new_position.x = active_world.position.x * background_middle_layer_parallax_ratio;
 		new_position.y = WorldRenderer.FRUSTUM_HEIGHT - active_world.position.y;

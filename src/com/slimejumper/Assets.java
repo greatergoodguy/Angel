@@ -74,10 +74,15 @@ public class Assets {
 	public static TextureRegion heroCollidedFrame2;
 	public static TextureRegion heroCollidedFrame3;
 
+	// Foreground is on the Hero Atlas
+	public static TextureRegion foregroundRegion;
+	
 	public static Texture background_clouds;
 	public static TextureRegion backgroundCloudsRegion;
 	public static Texture background_back_layer;
 	public static TextureRegion backgroundBackLayerRegion;
+	public static Texture background_back_layer_2;
+	public static TextureRegion backgroundBackLayer2Region;
 	public static Texture background_middle_layer;
 	public static TextureRegion backgroundMiddleLayerRegion;
 	
@@ -218,6 +223,9 @@ public class Assets {
 				heroLyreAttack1Frame6
 				);
 		
+		// Foreground is on the Hero Atlas
+		foregroundRegion = new TextureRegion(hero, 0, 909, 400, 115);
+		
 		musicNoteFrame1 = new TextureRegion(hero, 472, 304, 13, 34);
 		
 		heroCollidedFrame1 = new TextureRegion(hero, 285, 260, 80, 80);
@@ -233,6 +241,8 @@ public class Assets {
 		backgroundCloudsRegion = new TextureRegion(background_clouds, 0, 0, 800, 480);
 		background_back_layer = new Texture(game, "BG_back_layer.png");
 		backgroundBackLayerRegion = new TextureRegion(background_back_layer, 0, 0, 800, 480);
+		background_back_layer_2 = new Texture(game, "BG_back_layer_2.png");
+		backgroundBackLayer2Region = new TextureRegion(background_back_layer_2, 0, 0, 800, 480);
 		background_middle_layer = new Texture(game, "BG_middle_layer.png");
 		backgroundMiddleLayerRegion = new TextureRegion(background_middle_layer, 0, 0, 800, 480);
 		
@@ -371,6 +381,9 @@ public class Assets {
 		game_sprites.reload();
 		hero.reload();
 		background_clouds.reload();
+		background_back_layer.reload();
+		background_back_layer_2.reload();
+		background_middle_layer.reload();
 		if(Settings.soundEnabled)
 			//turn on music
 			;

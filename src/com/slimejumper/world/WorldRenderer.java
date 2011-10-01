@@ -62,8 +62,7 @@ public class WorldRenderer {
 			renderBackgroundClouds();
 		
 		renderGameSprites();
-		renderHero();
-		
+		renderHero();		// Foreground is rendered via a conditional in this function
 		gl.glDisable(GL10.GL_BLEND);
 		
 	}
@@ -83,6 +82,11 @@ public class WorldRenderer {
 		batcher.beginBatch(Assets.background_back_layer);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
 				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
+		batcher.endBatch();		
+		
+		batcher.beginBatch(Assets.background_back_layer_2);
+		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
+				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayer2Region);
 		batcher.endBatch();		
 	}
 	
@@ -211,6 +215,9 @@ public class WorldRenderer {
 		renderHeroState();
 		renderHaloAttacks();
 		renderMusicNotes();
+		if(active_world instanceof GameWorld){
+			renderForeground();
+		}
 		batcher.endBatch();
 	}
 
@@ -265,6 +272,26 @@ public class WorldRenderer {
 			return;
 		for(MusicNote music_note : MusicNote.music_notes)
 			batcher.drawSprite(music_note, Assets.musicNoteFrame1);
+	}
+	
+	private void renderForeground(){
+		float FOREGROUND_WIDTH = 5;
+		float FOREGROUND_HEIGHT = 1.4375f;		
+
+		float x_coord_lower_left = 0;
+		float x_coord_center = FOREGROUND_WIDTH / 2;
+		float y_coord_center = FOREGROUND_HEIGHT / 2; 
+		int reflection_coefficient = 1;
+		
+		while(x_coord_lower_left < World.WORLD_RIGHT_EDGE){
+			// batcher.drawSpriteLowerLeft(x_coord_lower_left, 0, FOREGROUND_WIDTH*reflection_coefficient, FOREGROUND_HEIGHT, Assets.foregroundRegion);
+			batcher.drawSpriteCenter(x_coord_center, y_coord_center, 
+					FOREGROUND_WIDTH*reflection_coefficient, FOREGROUND_HEIGHT, Assets.foregroundRegion);
+			x_coord_lower_left += FOREGROUND_WIDTH;
+			x_coord_center += FOREGROUND_WIDTH;
+			
+			reflection_coefficient *= -1;
+		}
 	}
 	
 	private void adjustHeroOrientation(TextureRegion region) {
