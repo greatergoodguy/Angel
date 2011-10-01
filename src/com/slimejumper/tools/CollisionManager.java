@@ -11,26 +11,23 @@ import com.slimejumper.world.enemies.PurpleGhost;
 public class CollisionManager {
 	
 	public static final float COLLISION_TOLERANCE = 0.17f;
-	Hero hero = null;
+	public static Hero hero = null;
 	
-	public CollisionManager(){
+	public static void setCollidingHero(Hero active_hero){
+		hero = active_hero;
 	}
 	
-	public void setCollidingHero(Hero hero){
-		this.hero = hero;
-	}
-	
-	public void manageCollisions(){
+	public static void manageCollisions(){
 		heroConcentratedCollisions();
 		jellyfishDemonConcentratedCollisions();
 	}
 
-	private void heroConcentratedCollisions() {
+	private static void heroConcentratedCollisions() {
 		checkIncomingPlatformCollisions();
 		checkIncomingEnemyCollisions();
 	}
 
-	private void checkIncomingEnemyCollisions() {
+	private static void checkIncomingEnemyCollisions() {
 		if(hero.state == Hero.HERO_STATE_COLLIDED)
 			return;
 		
@@ -52,7 +49,7 @@ public class CollisionManager {
 		
 	}
 
-	private void checkIncomingPlatformCollisions() {
+	private static void checkIncomingPlatformCollisions() {
 		if (hero.velocity.y > 0)
 			return;
 	
@@ -64,7 +61,7 @@ public class CollisionManager {
 			heroPlatformRebound(platform);
 	}
 	
-	public void heroPlatformRebound(Platform platform){
+	public static void heroPlatformRebound(Platform platform){
 		if ((OverlapTester.overlapRectangles(hero, platform))
 				&& (platform.position.y	- hero.position.y < COLLISION_TOLERANCE)) {
 			hero.reboundPlatform(platform);
@@ -77,11 +74,11 @@ public class CollisionManager {
 		}
 	}
 
-	private void jellyfishDemonConcentratedCollisions() {
+	private static void jellyfishDemonConcentratedCollisions() {
 		checkIncomingHaloAttackCollision();	
 	}
 
-	private void checkIncomingHaloAttackCollision() {
+	private static void checkIncomingHaloAttackCollision() {
 		if(HaloAttack.halo_attacks.isEmpty() || JellyfishDemon.jellyfish_demons.isEmpty())
 			return;
 		

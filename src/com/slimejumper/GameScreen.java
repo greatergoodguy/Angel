@@ -48,7 +48,7 @@ public class GameScreen extends GLScreen {
 		super(game);
 		game_timer = 0;
 		
-		World.initalizeUniverse();
+		World.initializeUniverse();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		controller = new Controller(guiCam);

@@ -97,7 +97,6 @@ public class WorldRenderer {
 	private void renderGameSprites(){
 		batcher.beginBatch(Assets.game_sprites);
 		renderPlatforms();
-		renderTestEnemies();
 		renderPurpleGhosts();
 		renderJellyfishDemons();
 		renderFlyingSnakes();
@@ -137,25 +136,6 @@ public class WorldRenderer {
 				Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.platform_right);
 	}
 	
-	private void renderTestEnemies() {
-/*
-		batcher.drawSprite(world.testJelly, Assets.jellyfish_demon_motion.getKeyFrame(world.rwd1.life_timer, 
-				Animation.ANIMATION_LOOPING));
-*/
-		
-		if(Enemy.sample_enemies.isEmpty())
-			return;
-		for(Enemy enemy : Enemy.sample_enemies){
-			if(enemy instanceof RedWhaleDemon)
-				batcher.drawSprite(enemy, Assets.RedWhaleDemon.getKeyFrame(enemy.life_timer, 
-						Animation.ANIMATION_LOOPING));
-			else if(enemy instanceof JellyfishDemon)
-				batcher.drawSprite(enemy, Assets.JellyfishDemon);
-			else if(enemy instanceof PurpleGhost)
-				batcher.drawSprite(enemy, Assets.PurpleGhost);
-			
-		}		
-	}
 
 	private void renderPurpleGhosts() {
 		if(PurpleGhost.purple_ghosts.isEmpty())
