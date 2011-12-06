@@ -1,11 +1,15 @@
-package com.slimejumper.tools;
+package com.slimejumper.levels;
 import java.util.LinkedList;
 
 import com.slimejumper.gameframework.math.Vector2;
+import com.slimejumper.renderer.WorldRenderer;
+import com.slimejumper.tools.CollisionManager;
+import com.slimejumper.tools.PoolManager;
+import com.slimejumper.tools.Remover;
+import com.slimejumper.tools.UnitCircle;
 import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
-import com.slimejumper.world.WorldRenderer;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;

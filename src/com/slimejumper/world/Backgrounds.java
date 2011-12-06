@@ -2,7 +2,8 @@ package com.slimejumper.world;
 
 import com.slimejumper.Assets;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.tools.World;
+import com.slimejumper.levels.World;
+import com.slimejumper.renderer.WorldRenderer;
 
 
 public class Backgrounds{	

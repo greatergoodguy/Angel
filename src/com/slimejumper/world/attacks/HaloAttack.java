@@ -1,6 +1,6 @@
 package com.slimejumper.world.attacks;
 
-import com.slimejumper.tools.World;
+import com.slimejumper.levels.World;
 import com.slimejumper.world.Hero;
 
 public class HaloAttack extends Attack{

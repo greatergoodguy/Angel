@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import android.util.Log;
 
-import com.slimejumper.tools.World;
+import com.slimejumper.levels.World;
 
 public class Platform extends DynamicGameObject{
 	

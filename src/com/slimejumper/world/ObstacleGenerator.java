@@ -2,7 +2,7 @@ package com.slimejumper.world;
 
 import java.util.Random;
 
-import com.slimejumper.tools.World;
+import com.slimejumper.levels.World;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;

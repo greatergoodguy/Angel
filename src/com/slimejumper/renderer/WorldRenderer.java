@@ -1,4 +1,4 @@
-package com.slimejumper.world;
+package com.slimejumper.renderer;
 
 
 
@@ -11,8 +11,13 @@ import com.slimejumper.gameframework.gl.Animation;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.gl.TextureRegion;
-import com.slimejumper.menu.MenuWorld;
-import com.slimejumper.tools.World;
+import com.slimejumper.levels.GameWorld;
+import com.slimejumper.levels.MenuWorld;
+import com.slimejumper.levels.World;
+import com.slimejumper.world.DynamicGameObject;
+import com.slimejumper.world.GameObject;
+import com.slimejumper.world.Hero;
+import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;

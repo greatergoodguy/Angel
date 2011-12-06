@@ -1,7 +1,7 @@
 package com.slimejumper.gameframework.gl;
 
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.tools.World;
+import com.slimejumper.levels.World;
 
 public class TextureRegion {
 	public float u1, v1;

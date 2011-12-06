@@ -1,6 +1,6 @@
 package com.slimejumper.world.enemies;
 
-import com.slimejumper.tools.World;
+import com.slimejumper.levels.World;
 
 public class FlyingSnake extends Enemy{
 	

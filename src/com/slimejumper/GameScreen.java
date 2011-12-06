@@ -10,15 +10,15 @@ import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.menu.MenuWorld;
+import com.slimejumper.levels.GameWorld;
+import com.slimejumper.levels.MenuWorld;
+import com.slimejumper.levels.World;
+import com.slimejumper.levels.GameWorld.WorldListener;
+import com.slimejumper.renderer.WorldRenderer;
 import com.slimejumper.tools.Remover;
-import com.slimejumper.tools.World;
 import com.slimejumper.world.Backgrounds;
-import com.slimejumper.world.GameWorld;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
-import com.slimejumper.world.WorldRenderer;
-import com.slimejumper.world.GameWorld.WorldListener;
 
 
 public class GameScreen extends GLScreen {

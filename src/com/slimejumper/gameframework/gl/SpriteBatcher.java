@@ -4,9 +4,9 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.slimejumper.Assets;
 import com.slimejumper.framework.impl.GLGraphics;
-import com.slimejumper.tools.World;
+import com.slimejumper.levels.World;
+import com.slimejumper.renderer.WorldRenderer;
 import com.slimejumper.world.GameObject;
-import com.slimejumper.world.WorldRenderer;
 
 public class SpriteBatcher {
 	final float[] verticesBuffer;

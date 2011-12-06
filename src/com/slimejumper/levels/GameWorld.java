@@ -1,9 +1,9 @@
-package com.slimejumper.world;
+package com.slimejumper.levels;
 
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.UnitCircle;
-import com.slimejumper.tools.World;
+import com.slimejumper.world.ObstacleGeneratorManager;
 
 public class GameWorld extends World{
 	public interface WorldListener {

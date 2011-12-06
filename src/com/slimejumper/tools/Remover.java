@@ -1,5 +1,6 @@
 package com.slimejumper.tools;
 
+import com.slimejumper.levels.World;
 import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;

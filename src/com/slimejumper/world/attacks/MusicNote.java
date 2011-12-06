@@ -1,7 +1,7 @@
 package com.slimejumper.world.attacks;
 
+import com.slimejumper.levels.World;
 import com.slimejumper.tools.UnitCircle;
-import com.slimejumper.tools.World;
 import com.slimejumper.world.Hero;
 
 public class MusicNote extends Attack{

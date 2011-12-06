@@ -1,13 +1,8 @@
-package com.slimejumper.menu;
+package com.slimejumper.levels;
 
 import com.slimejumper.GameScreen;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.tools.PoolManager;
-import com.slimejumper.tools.World;
-import com.slimejumper.world.Backgrounds;
-import com.slimejumper.world.Hero;
-import com.slimejumper.world.Platform;
-import com.slimejumper.world.GameWorld.WorldListener;
 
 public class MenuWorld extends World{
 	public interface WorldListener {
