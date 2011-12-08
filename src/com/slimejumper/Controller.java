@@ -3,6 +3,7 @@ package com.slimejumper;
 import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.math.Vector2;
+import com.slimejumper.world.Hero;
 
 public class Controller {
 	
@@ -83,5 +84,22 @@ public class Controller {
 				leftPointerId = pointerIdDefault;
 			}
 		}
+	}
+	
+	public static int processMoveDirection(Controller controller) {		
+		if(controller.RightButtonDown && controller.LeftButtonDown){
+			if(controller.active_control == Controller.CONTROLLER_LEFT)
+				return Hero.HERO_LEFT;
+			else if(controller.active_control == Controller.CONTROLLER_RIGHT)
+				return Hero.HERO_RIGHT;
+			else
+				return Hero.HERO_RIGHT;
+		}
+		else if(controller.RightButtonDown)
+			return Hero.HERO_RIGHT;
+		else if(controller.LeftButtonDown)
+			return Hero.HERO_LEFT;
+		else
+			return Hero.HERO_NEUTRAL;
 	}
 }

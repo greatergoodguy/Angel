@@ -107,37 +107,10 @@ public class GameScreen extends GLScreen {
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 		
-		int len = touchEvents.size();
-		for(int i=0; i<len; i++){
-			TouchEvent event = touchEvents.get(i);
-			controller.input(event);
-			if(controller.fireAttack){
-				if(World.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
-					World.hero.changeToBasicAttackState();
-				controller.fireAttack = false;
-			}
-			World.hero.moveDirection = processMoveDirection();
-		}
-		
+		active_world.processController(controller, touchEvents);
+	
 		// Update World
 		active_world.update(deltaTime);
-	}
-
-	private int processMoveDirection() {		
-		if(controller.RightButtonDown && controller.LeftButtonDown){
-			if(controller.active_control == Controller.CONTROLLER_LEFT)
-				return Hero.HERO_LEFT;
-			else if(controller.active_control == Controller.CONTROLLER_RIGHT)
-				return Hero.HERO_RIGHT;
-			else
-				return Hero.HERO_RIGHT;
-		}
-		else if(controller.RightButtonDown)
-			return Hero.HERO_RIGHT;
-		else if(controller.LeftButtonDown)
-			return Hero.HERO_LEFT;
-		else
-			return Hero.HERO_NEUTRAL;
 	}
 
 	public void present(float deltaTime) {

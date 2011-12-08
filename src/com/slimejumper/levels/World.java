@@ -1,12 +1,15 @@
 package com.slimejumper.levels;
 import java.util.LinkedList;
+import java.util.List;
 
+import com.slimejumper.Controller;
+import com.slimejumper.gameframework.Input.TouchEvent;
+import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.WorldRenderer;
 import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
-import com.slimejumper.tools.UnitCircle;
 import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
@@ -159,5 +162,20 @@ public class World {
 
 		if (position.x > WORLD_RIGHT_BOUND - WORLD_LEFT_BOUND)
 			position.x = WORLD_RIGHT_BOUND - WORLD_LEFT_BOUND;
+	}
+
+	public void processController(Controller controller, List<TouchEvent> touchEvents) {
+		int len = touchEvents.size();
+		for(int i=0; i<len; i++){
+			TouchEvent event = touchEvents.get(i);
+			controller.input(event);
+			if(controller.fireAttack){
+				if(World.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
+					World.hero.changeToBasicAttackState();
+				controller.fireAttack = false;
+			}
+			World.hero.moveDirection = Controller.processMoveDirection(controller);
+		}
+		
 	}
 }
