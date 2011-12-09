@@ -11,9 +11,9 @@ import com.slimejumper.gameframework.gl.Animation;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.gl.TextureRegion;
-import com.slimejumper.levels.GameWorld;
-import com.slimejumper.levels.MenuWorld;
-import com.slimejumper.levels.World;
+import com.slimejumper.levels.CaveLevel;
+import com.slimejumper.levels.MenuLevel;
+import com.slimejumper.levels.Level;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.DynamicGameObject;
 import com.slimejumper.world.GameObject;
@@ -39,17 +39,17 @@ public class WorldRenderer {
 	public Camera2D cam;
 	SpriteBatcher batcher;
 	
-	World active_world;			// Different Sprites are rendered for Different Worlds;
+	Level active_world;			// Different Sprites are rendered for Different Worlds;
 	
 	public WorldRenderer(GLGraphics glGraphics, SpriteBatcher batcher,
-				World world) {
+				Level world) {
 		this.glGraphics = glGraphics;
 		this.active_world = world;
 		this.cam = new Camera2D(glGraphics, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
 		this.batcher = batcher;
 	}
 	
-	public void resetActiveWorld(World new_active_world){
+	public void resetActiveWorld(Level new_active_world){
 		active_world = new_active_world;
 	}
 	
@@ -61,11 +61,11 @@ public class WorldRenderer {
 		gl.glEnable(GL10.GL_BLEND);
 		gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
 		
-		if(active_world instanceof GameWorld){
+		if(active_world instanceof CaveLevel){
 			renderBackgroundBackLayer();
 			renderBackgroundMiddleLayer();
 		}
-		else if(active_world instanceof MenuWorld)
+		else if(active_world instanceof MenuLevel)
 			renderBackgroundClouds();
 		
 		renderGameSprites();
@@ -223,7 +223,7 @@ public class WorldRenderer {
 		renderHaloAttacks();
 		renderMusicNotes();
 		renderSpiralAttacks();
-		if(active_world instanceof GameWorld){
+		if(active_world instanceof CaveLevel){
 			renderForeground();
 		}
 		batcher.endBatch();
@@ -299,7 +299,7 @@ public class WorldRenderer {
 		float y_coord_center = FOREGROUND_HEIGHT / 2; 
 		int reflection_coefficient = 1;
 		
-		while(x_coord_lower_left < World.WORLD_RIGHT_EDGE){
+		while(x_coord_lower_left < Level.WORLD_RIGHT_EDGE){
 			// batcher.drawSpriteLowerLeft(x_coord_lower_left, 0, FOREGROUND_WIDTH*reflection_coefficient, FOREGROUND_HEIGHT, Assets.foregroundRegion);
 			batcher.drawSpriteCenter(x_coord_center, y_coord_center, 
 					FOREGROUND_WIDTH*reflection_coefficient, FOREGROUND_HEIGHT, Assets.foregroundRegion);

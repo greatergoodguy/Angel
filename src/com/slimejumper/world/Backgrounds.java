@@ -2,7 +2,7 @@ package com.slimejumper.world;
 
 import com.slimejumper.Assets;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.levels.World;
+import com.slimejumper.levels.Level;
 import com.slimejumper.renderer.WorldRenderer;
 
 
@@ -14,31 +14,31 @@ public class Backgrounds{
 	
 	public static Vector2 new_position;
 		
-	public static World active_world = null;
+	public static Level active_world = null;
 	
 	public static float background_clouds_parallax_ratio;
 	public static float background_back_layer_parallax_ratio;
 	public static float background_middle_layer_parallax_ratio;
 	
-	public Backgrounds(World new_active_world){
+	public Backgrounds(Level new_active_world){
 		active_world = new_active_world;
 		background_clouds_parallax_ratio = (BACKGROUND_CLOUDS_WIDTH - WorldRenderer.FRUSTUM_WIDTH) / 
-			(World.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
+			(Level.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
 		background_back_layer_parallax_ratio = (BACKGROUND_BACK_LAYER_WIDTH - WorldRenderer.FRUSTUM_WIDTH) / 
-			(World.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
+			(Level.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
 		background_middle_layer_parallax_ratio = (BACKGROUND_MIDDLE_LAYER_WIDTH - WorldRenderer.FRUSTUM_WIDTH) / 
-			(World.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
+			(Level.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
 		
 		new_position = new Vector2();
 	}
 	
 	public static void initalizeParameters(){
 		background_clouds_parallax_ratio = (BACKGROUND_CLOUDS_WIDTH - WorldRenderer.FRUSTUM_WIDTH) / 
-			(World.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
+			(Level.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
 		background_back_layer_parallax_ratio = (BACKGROUND_BACK_LAYER_WIDTH - WorldRenderer.FRUSTUM_WIDTH) / 
-			(World.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
+			(Level.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
 		background_middle_layer_parallax_ratio = (BACKGROUND_MIDDLE_LAYER_WIDTH - WorldRenderer.FRUSTUM_WIDTH) / 
-			(World.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
+			(Level.WORLD_WIDTH - WorldRenderer.FRUSTUM_WIDTH);
 
 		new_position = new Vector2();
 	}
@@ -60,7 +60,7 @@ public class Backgrounds{
 		Assets.backgroundMiddleLayerRegion.adjust(new_position);
 	}
 	
-	public static void setActiveWorld(World new_active_world){
+	public static void setActiveWorld(Level new_active_world){
 		active_world = new_active_world;
 	}
 

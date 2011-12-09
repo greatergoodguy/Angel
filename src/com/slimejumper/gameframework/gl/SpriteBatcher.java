@@ -6,7 +6,7 @@ import android.util.FloatMath;
 
 import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.levels.World;
+import com.slimejumper.levels.Level;
 import com.slimejumper.world.GameObject;
 
 public class SpriteBatcher {
@@ -77,10 +77,10 @@ public class SpriteBatcher {
 	public void drawSpriteLowerLeft(float lower_left_x, float lower_left_y, float width, float height, TextureRegion region){
 		// Check to make sure Sprite is within the World Bounds
 		
-		if(lower_left_x > World.WORLD_RIGHT_EDGE || 
-				lower_left_x + width < World.WORLD_LEFT_EDGE ||
-				lower_left_y > World.WORLD_TOP_EDGE ||
-				lower_left_y + height < World.WORLD_BOTTOM_EDGE)
+		if(lower_left_x > Level.WORLD_RIGHT_EDGE || 
+				lower_left_x + width < Level.WORLD_LEFT_EDGE ||
+				lower_left_y > Level.WORLD_TOP_EDGE ||
+				lower_left_y + height < Level.WORLD_BOTTOM_EDGE)
 			return;
 		
 		///////////////////////////////////////////////////////
@@ -116,10 +116,10 @@ public class SpriteBatcher {
 	public void drawSpriteCenter(float center_x, float center_y, float width, float height, TextureRegion region){
 		// Check to make sure Sprite is within the World Bounds
 		
-		if(center_x > World.WORLD_RIGHT_EDGE || 
-				center_x + 5.0 < World.WORLD_LEFT_EDGE ||
-				center_y > World.WORLD_TOP_EDGE ||
-				center_y + 5.0 < World.WORLD_BOTTOM_EDGE)
+		if(center_x > Level.WORLD_RIGHT_EDGE || 
+				center_x + 5.0 < Level.WORLD_LEFT_EDGE ||
+				center_y > Level.WORLD_TOP_EDGE ||
+				center_y + 5.0 < Level.WORLD_BOTTOM_EDGE)
 			return;
 		
 		///////////////////////////////////////////////////////

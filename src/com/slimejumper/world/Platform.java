@@ -4,7 +4,7 @@ import java.util.Collections;
 
 import android.util.Log;
 
-import com.slimejumper.levels.World;
+import com.slimejumper.levels.Level;
 import com.slimejumper.tools.SpriteContainer;
 
 public class Platform extends DynamicGameObject{
@@ -256,9 +256,9 @@ public class Platform extends DynamicGameObject{
 		float y_coord = 0.75f;
 		Platform platform;
 		
-		while(x_coord < World.WORLD_RIGHT_EDGE){
+		while(x_coord < Level.WORLD_RIGHT_EDGE){
 			// create new Platform and add to list
-			platform = World.poolManager.platform_pool.newObject();
+			platform = Level.poolManager.platform_pool.newObject();
 			platform.reset(x_coord, y_coord, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
@@ -279,9 +279,9 @@ public class Platform extends DynamicGameObject{
 		float x_coord = 0;
 		Platform platform;
 		
-		while(x_coord < World.WORLD_RIGHT_EDGE){
+		while(x_coord < Level.WORLD_RIGHT_EDGE){
 			// create new Platform and add to list
-			platform = World.poolManager.platform_pool.newObject();
+			platform = Level.poolManager.platform_pool.newObject();
 			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
@@ -290,7 +290,7 @@ public class Platform extends DynamicGameObject{
 		}
 		
 		platform = SpriteContainer.ground_platforms.removeLast();
-		World.poolManager.platform_pool.free(platform);
+		Level.poolManager.platform_pool.free(platform);
 	}
 	
 	public static void initializePlatformMap(){
@@ -309,9 +309,9 @@ public class Platform extends DynamicGameObject{
 		
 		Platform platform;
 		
-		while(y_coord < World.WORLD_TOP_BOUND){
-			while(x_coord < World.WORLD_RIGHT_EDGE){
-				platform = World.poolManager.platform_pool.newObject();
+		while(y_coord < Level.WORLD_TOP_BOUND){
+			while(x_coord < Level.WORLD_RIGHT_EDGE){
+				platform = Level.poolManager.platform_pool.newObject();
 				platform.reset(x_coord, y_coord, map_platform_length, Platform.PLATFORM_STATE_STILL);
 				SpriteContainer.static_platforms.add(platform);
 			

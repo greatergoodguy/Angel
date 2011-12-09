@@ -1,7 +1,7 @@
 package com.slimejumper.tools;
 
 import com.slimejumper.gameframework.math.OverlapTester;
-import com.slimejumper.levels.GameWorld;
+import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;

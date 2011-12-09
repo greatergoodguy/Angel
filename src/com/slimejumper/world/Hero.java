@@ -3,7 +3,7 @@ package com.slimejumper.world;
 import java.util.Random;
 
 import com.slimejumper.Assets;
-import com.slimejumper.levels.World;
+import com.slimejumper.levels.Level;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.SpiralAttack;
@@ -76,7 +76,7 @@ public class Hero extends DynamicGameObject{
 		state = HERO_STATE_FALL;
 		facedirection = HERO_LEFT;
 		moveDirection = HERO_NEUTRAL;
-		accel.set(0, World.WORLD_GRAVITY);
+		accel.set(0, Level.WORLD_GRAVITY);
 		
 		attack_launched = false;
 		invincibility_timer = 0;

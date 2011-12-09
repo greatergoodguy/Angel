@@ -1,7 +1,7 @@
 package com.slimejumper.world.attacks;
 
 import com.slimejumper.gameframework.math.UnitCircle;
-import com.slimejumper.levels.World;
+import com.slimejumper.levels.Level;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Hero;
 
@@ -92,7 +92,7 @@ public class MusicNote extends Attack{
 	
 	public static void activateMusicalCircularBurst(Hero hero) {
 		for(int frame_counter_starter=0; frame_counter_starter<UnitCircle.UNIT_CIRCLE_SIZE; frame_counter_starter+=3){
-			MusicNote music_note = World.poolManager.music_note_pool.newObject();
+			MusicNote music_note = Level.poolManager.music_note_pool.newObject();
 			music_note.reset(frame_counter_starter);
 			
 			SpriteContainer.music_notes.add(music_note);

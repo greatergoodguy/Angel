@@ -10,10 +10,10 @@ import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.levels.GameWorld;
-import com.slimejumper.levels.MenuWorld;
-import com.slimejumper.levels.World;
-import com.slimejumper.levels.GameWorld.WorldListener;
+import com.slimejumper.levels.CaveLevel;
+import com.slimejumper.levels.MenuLevel;
+import com.slimejumper.levels.Level;
+import com.slimejumper.levels.CaveLevel.WorldListener;
 import com.slimejumper.renderer.WorldRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.world.Backgrounds;
@@ -37,9 +37,9 @@ public class GameScreen extends GLScreen {
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
-	static World active_world;
-	static MenuWorld menuWorld;
-	static World gameWorld;
+	static Level active_world;
+	static MenuLevel menuWorld;
+	static Level gameWorld;
 	
 	static WorldRenderer renderer;
 	Vector2 touchPoint;
@@ -48,7 +48,7 @@ public class GameScreen extends GLScreen {
 		super(game);
 		game_timer = 0;
 		
-		World.initializeUniverse();
+		Level.initializeUniverse();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		controller = new Controller(guiCam);
@@ -65,8 +65,8 @@ public class GameScreen extends GLScreen {
 			}
 		};
 		
-		menuWorld = new MenuWorld();
-		gameWorld = new GameWorld(worldListener);
+		menuWorld = new MenuLevel();
+		gameWorld = new CaveLevel(worldListener);
 		active_world = menuWorld;
 		
 		renderer = new WorldRenderer(glGraphics, batcher, active_world);
