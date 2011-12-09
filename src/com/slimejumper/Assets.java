@@ -10,6 +10,8 @@ public class Assets {
 	
 	public final static float HERO_HALO_ATTACK_1_FRAME_DURATION = 0.07f;
 	public final static float HERO_LYRE_ATTACK_FRAME_DURATION = 0.15f;
+	public final static float HERO_SPIRAL_ATTACK_1_FRAME_DURATION = 0.10f;
+	
 	public final static float HERO_LAND_FRAME_DURATION = 0.04f;
 	public final static float HERO_COLLIDED_FRAME_DURATION = 0.20f;
 	
@@ -26,7 +28,7 @@ public class Assets {
 	
 	public final static float SHOCKBALL_FRAME_DURATION = 0.14f;
 	public final static float HALO_ATTACK_FRAME_DURATION = 0.12f;
-	
+	public final static float SPIRAL_ATTACK_FRAME_DURATION = 0.12f;
 	
 	public static Texture hero;
 	public static TextureRegion heroRegion;
@@ -68,6 +70,17 @@ public class Assets {
 	public static TextureRegion heroLyreAttack1Frame6;
 	
 	public static TextureRegion musicNoteFrame1;
+	
+	public static Animation hero_spiral_attack_1;
+	public static TextureRegion heroSpiralAttack1Frame1;
+	public static TextureRegion heroSpiralAttack1Frame2;
+	public static TextureRegion heroSpiralAttack1Frame3;
+	public static TextureRegion heroSpiralAttack1Frame4;
+	
+	public static Animation spiral_attack;
+	public static TextureRegion spiralAttackFrame1;
+	public static TextureRegion spiralAttackFrame2;
+	public static TextureRegion spiralAttackFrame3;
 	
 	public static Animation hero_collided;
 	public static TextureRegion heroCollidedFrame1;
@@ -196,12 +209,12 @@ public class Assets {
 				haloAttackFrame2
 				);
 		//1 2 3 4 5 6 5 4 5 6 5 4 5 6 5 4 5 6
-		heroLyreAttack1Frame1 = new TextureRegion(hero, 80, 350, 77, 97);
-		heroLyreAttack1Frame2 = new TextureRegion(hero, 163, 350, 77, 97);
-		heroLyreAttack1Frame3 = new TextureRegion(hero, 246, 350, 77, 97);
-		heroLyreAttack1Frame4 = new TextureRegion(hero, 329, 350, 77, 97);
-		heroLyreAttack1Frame5 = new TextureRegion(hero, 412, 350, 77, 97);
-		heroLyreAttack1Frame6 = new TextureRegion(hero, 0, 430, 77, 97);
+		heroLyreAttack1Frame1 = new TextureRegion(hero, 80, 350, 83, 85);
+		heroLyreAttack1Frame2 = new TextureRegion(hero, 163, 350, 83, 85);
+		heroLyreAttack1Frame3 = new TextureRegion(hero, 246, 350, 83, 85);
+		heroLyreAttack1Frame4 = new TextureRegion(hero, 329, 350, 83, 85);
+		heroLyreAttack1Frame5 = new TextureRegion(hero, 412, 350, 83, 85);
+		heroLyreAttack1Frame6 = new TextureRegion(hero, 0, 430, 83, 85);
 		hero_lyre_attack_1 = new Animation(HERO_LYRE_ATTACK_FRAME_DURATION,
 				heroLyreAttack1Frame1,
 				heroLyreAttack1Frame2,
@@ -227,6 +240,24 @@ public class Assets {
 		foregroundRegion = new TextureRegion(hero, 0, 909, 400, 115);
 		
 		musicNoteFrame1 = new TextureRegion(hero, 472, 304, 13, 34);
+		
+		heroSpiralAttack1Frame1 = new TextureRegion(hero, 90, 440, 91, 80);
+		heroSpiralAttack1Frame2 = new TextureRegion(hero, 185, 440, 91, 80);
+		heroSpiralAttack1Frame3 = new TextureRegion(hero, 280, 440, 91, 80);
+		heroSpiralAttack1Frame4 = new TextureRegion(hero, 375, 440, 91, 80);
+		hero_spiral_attack_1 = new Animation(HERO_SPIRAL_ATTACK_1_FRAME_DURATION,
+				heroSpiralAttack1Frame1,
+				heroSpiralAttack1Frame2,
+				heroSpiralAttack1Frame3,
+				heroSpiralAttack1Frame4);
+		
+		spiralAttackFrame1 = new TextureRegion(hero, 470, 440, 28, 28);
+		spiralAttackFrame2 = new TextureRegion(hero, 470, 470, 28, 28);
+		spiralAttackFrame3 = new TextureRegion(hero, 470, 500, 28, 28);
+		spiral_attack = new Animation(SPIRAL_ATTACK_FRAME_DURATION,
+				spiralAttackFrame1,
+				spiralAttackFrame2,
+				spiralAttackFrame3);
 		
 		heroCollidedFrame1 = new TextureRegion(hero, 285, 260, 80, 80);
 		heroCollidedFrame2 = new TextureRegion(hero, 365, 260, 80, 80);

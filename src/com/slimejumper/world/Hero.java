@@ -6,6 +6,7 @@ import com.slimejumper.Assets;
 import com.slimejumper.levels.World;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
+import com.slimejumper.world.attacks.SpiralAttack;
 
 
 public class Hero extends DynamicGameObject{
@@ -21,7 +22,7 @@ public class Hero extends DynamicGameObject{
 	
 	public int basic_attack_type;
 	public static final int HERO_BASIC_HALO_ATTACK = 1;
-	public static final int HERO_BASIC_ATTACK_2 = 2;
+	public static final int HERO_BASIC_SPIRAL_ATTACK = 2;
 	public static final int HERO_BASIC_ATTACK_3 = 3;
 	public static final int HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK = 4;
 	
@@ -32,6 +33,7 @@ public class Hero extends DynamicGameObject{
 	public static final float HERO_MAX_VELY = -15;
 	public static final float HERO_JUMP_VELOCITY = 6.5f;  // 6.5f seems suitable
 	public static final float HERO_MOVE_VELOCITY = 5;
+	public static final float HERO_HOP_VELOCITY = 2.5f;
 	
 	public static final float HERO_HIT_VERTICAL_VELOCITY = 1.5f;
 	public static final float HERO_HIT_HORIZONTAL_VELOCITY = 1;
@@ -40,8 +42,10 @@ public class Hero extends DynamicGameObject{
 	public static final float HERO_STANDARD_HEIGHT = 1.0f;
 	public static final float HERO_HALO_ATTACK_WIDTH = 1.0f;
 	public static final float HERO_HALO_ATTACK_HEIGHT = 1.125f;
-	public static final float HERO_LYRE_ATTACK_WIDTH = 0.9625f;
-	public static final float HERO_LYRE_ATTACK_HEIGHT = 1.2125f;
+	public static final float HERO_LYRE_ATTACK_WIDTH = 1.0375f;
+	public static final float HERO_LYRE_ATTACK_HEIGHT = 1.0625f;
+	public static final float HERO_SPIRAL_ATTACK_WIDTH = 1.1375f;
+	public static final float HERO_SPIRAL_ATTACK_HEIGHT = 1.0f;
 	
 	public float state_timer;
 	public static final float HERO_LAND_TIMER_LIMIT = 0.16f;
@@ -50,6 +54,7 @@ public class Hero extends DynamicGameObject{
 	public float basic_attack_timer_limit;
 	public static final float HERO_BASIC_HALO_ATTACK_TIMER = Assets.HERO_HALO_ATTACK_1_FRAME_DURATION * 14;
 	public static final float HERO_BASIC_LYRE_SPECIAL_ATTACK_TIMER = Assets.HERO_LYRE_ATTACK_FRAME_DURATION * 12;
+	public static final float HERO_BASIC_SPIRAL_ATTACK_TIMER = Assets.HERO_SPIRAL_ATTACK_1_FRAME_DURATION * 5;
 	
 	public static final float HERO_ATTACK_LAUNCH_TIMER = Assets.HERO_HALO_ATTACK_1_FRAME_DURATION * 3;
 	
@@ -210,15 +215,15 @@ public class Hero extends DynamicGameObject{
 		}
 		// HERO_BASIC_ATTACK_2
 		else if(randomValue >= 0.3f && randomValue < 0.6f){
-			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
-			basic_attack_type = HERO_BASIC_HALO_ATTACK;
-			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
+			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
+			basic_attack_type = HERO_BASIC_SPIRAL_ATTACK;
+			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
 		}
 		// HERO_BASIC_ATTACK_3
 		else if(randomValue >= 0.6f && randomValue < 0.9f){
-			resetDimensions(HERO_LYRE_ATTACK_WIDTH, HERO_LYRE_ATTACK_HEIGHT);
-			basic_attack_type = HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK;
-			basic_attack_timer_limit = HERO_BASIC_LYRE_SPECIAL_ATTACK_TIMER;
+			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
+			basic_attack_type = HERO_BASIC_SPIRAL_ATTACK;
+			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
 		}
 		// HERO_BASIC_ATTACK_SPECIAL
 		else{
@@ -237,7 +242,11 @@ public class Hero extends DynamicGameObject{
 				HaloAttack.activate(this);
 			}
 			break;
-		case HERO_BASIC_ATTACK_2:
+		case HERO_BASIC_SPIRAL_ATTACK:
+			if(state_timer > HERO_ATTACK_LAUNCH_TIMER && !attack_launched){
+				attack_launched = true;
+				SpiralAttack.activate(this);
+			}
 			break;
 		case HERO_BASIC_ATTACK_3:
 			break;
@@ -317,6 +326,10 @@ public class Hero extends DynamicGameObject{
 	
 	public void deactivateInvincibility(){
 		is_invincible = false;
+	}
+	
+	public void hop() {
+		velocity.y = HERO_HOP_VELOCITY;
 	}
 	
 	public void moveLeft(){

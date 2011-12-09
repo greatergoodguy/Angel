@@ -16,6 +16,7 @@ import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
+import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.Enemy;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
@@ -89,7 +90,8 @@ public class World {
 		
 		HaloAttack.halo_attacks = new LinkedList<HaloAttack>();
 		MusicNote.music_notes = new LinkedList<MusicNote>();
-		Shockball.shockballs = new LinkedList<Shockball>();	
+		Shockball.shockballs = new LinkedList<Shockball>();
+		SpiralAttack.spiral_attacks = new LinkedList<SpiralAttack>();
 		
 	}
 
@@ -134,7 +136,8 @@ public class World {
 			music_note.update(hero, deltaTime);
 		for(Shockball shockball : Shockball.shockballs)
 			shockball.update(deltaTime);
-		
+		for(SpiralAttack spiral_attack : SpiralAttack.spiral_attacks)
+			spiral_attack.update(deltaTime);
 	}
 
 	

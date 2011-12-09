@@ -21,6 +21,7 @@ import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
+import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.Enemy;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
@@ -220,6 +221,7 @@ public class WorldRenderer {
 		renderHeroState();
 		renderHaloAttacks();
 		renderMusicNotes();
+		renderSpiralAttacks();
 		if(active_world instanceof GameWorld){
 			renderForeground();
 		}
@@ -235,29 +237,29 @@ public class WorldRenderer {
 			adjustHeroOrientation(Assets.hero_fall);
 			break;
 		case Hero.HERO_STATE_LAND:
-			adjustHeroOrientation(Assets.hero_land.getKeyFrame(active_world.hero.state_timer, 
+			adjustHeroOrientation(Assets.hero_land.getKeyFrame(World.hero.state_timer, 
 					Animation.ANIMATION_NONLOOPING));
 			break;
 		case Hero.HERO_STATE_COLLIDED:
-			adjustHeroOrientation(Assets.hero_collided.getKeyFrame(active_world.hero.state_timer, 
+			adjustHeroOrientation(Assets.hero_collided.getKeyFrame(World.hero.state_timer, 
 					Animation.ANIMATION_LOOPING));
 			break;	
 		case Hero.HERO_STATE_BASIC_ATTACK:
-			switch(active_world.hero.basic_attack_type){
+			switch(World.hero.basic_attack_type){
 			case Hero.HERO_BASIC_HALO_ATTACK:
-				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(active_world.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(World.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
-			case Hero.HERO_BASIC_ATTACK_2:
-				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(active_world.hero.state_timer,
+			case Hero.HERO_BASIC_SPIRAL_ATTACK:
+				adjustHeroOrientation(Assets.hero_spiral_attack_1.getKeyFrame(World.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_3:
-				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(active_world.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(World.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
-				adjustHeroOrientation(Assets.hero_lyre_attack_1.getKeyFrame(active_world.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_lyre_attack_1.getKeyFrame(World.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			}
@@ -277,6 +279,14 @@ public class WorldRenderer {
 			return;
 		for(MusicNote music_note : MusicNote.music_notes)
 			batcher.drawSprite(music_note, Assets.musicNoteFrame1);
+	}
+	
+	private void renderSpiralAttacks() {
+		if(SpiralAttack.spiral_attacks.isEmpty())
+			return;
+		for(SpiralAttack spiral_attack : SpiralAttack.spiral_attacks)
+			batcher.drawSprite(spiral_attack, Assets.spiral_attack.getKeyFrame(spiral_attack.life_timer,
+						Animation.ANIMATION_LOOPING));
 	}
 	
 	private void renderForeground(){
@@ -300,12 +310,12 @@ public class WorldRenderer {
 	}
 	
 	private void adjustHeroOrientation(TextureRegion region) {
-		switch(active_world.hero.facedirection){
+		switch(World.hero.facedirection){
 		case Hero.HERO_LEFT:
-			batcher.drawSpriteReverse(active_world.hero, region);
+			batcher.drawSpriteReverse(World.hero, region);
 			break;
 		case Hero.HERO_RIGHT:
-			batcher.drawSprite(active_world.hero, region);
+			batcher.drawSprite(World.hero, region);
 			break;
 		}
 	}

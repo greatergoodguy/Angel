@@ -10,6 +10,7 @@ public class Attack extends DynamicGameObject {
 	public static LinkedList<HaloAttack> halo_attacks;
 	public static LinkedList<Shockball> shockballs;
 	public static LinkedList<MusicNote> music_notes;
+	public static LinkedList<SpiralAttack> spiral_attacks;
 	
 	public Attack(float x, float y, float width, float height) {
 		super(x, y, width, height);

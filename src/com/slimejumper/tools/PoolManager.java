@@ -6,6 +6,7 @@ import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
+import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
@@ -20,6 +21,7 @@ public class PoolManager {
 	public Pool<Shockball> shockball_pool;
 	public Pool<MusicNote> music_note_pool;
 	public Pool<FlyingSnake> flying_snake_pool;
+	public Pool<SpiralAttack> spiral_attack_pool;
 	
 	public PoolManager(){
 		PoolObjectFactory<Platform> platform_factory = new PoolObjectFactory<Platform>() {
@@ -64,13 +66,19 @@ public class PoolManager {
 			}
 		};
 		
-		flying_snake_pool = new Pool<FlyingSnake>(flying_snake_factory, 20);
+		PoolObjectFactory<SpiralAttack> spiral_attack_factory = new PoolObjectFactory<SpiralAttack>(){
+			public SpiralAttack createObject(){
+				return new SpiralAttack();
+			}
+		};
+		
 		platform_pool = new Pool<Platform>(platform_factory, 50);
 		purple_ghost_pool = new Pool<PurpleGhost>(purple_ghost_factory, 35);
 		jellyfish_demon_pool = new Pool<JellyfishDemon>(jellyfish_demon_factory, 35);
 		halo_attack_pool = new Pool<HaloAttack>(halo_attack_factory, 35);
 		shockball_pool = new Pool<Shockball>(shockball_factory, 35);
 		music_note_pool = new Pool<MusicNote>(music_note_factory, 60);
-		
+		flying_snake_pool = new Pool<FlyingSnake>(flying_snake_factory, 20);
+		spiral_attack_pool = new Pool<SpiralAttack>(spiral_attack_factory, 20);
 	}
 }
