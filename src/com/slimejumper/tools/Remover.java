@@ -25,69 +25,69 @@ public class Remover {
 	}
 	
 	private static void removePlatforms() {
-		if(Platform.volatile_platforms.isEmpty())
+		if(SpriteContainer.volatile_platforms.isEmpty())
 			return;		
 
-		Platform platform = Platform.volatile_platforms.getFirst();
+		Platform platform = SpriteContainer.volatile_platforms.getFirst();
 
 		if (platform.life_timer > Platform.PLATFORM_LIFESPAN) {
-			Platform.volatile_platforms.removeFirst();
+			SpriteContainer.volatile_platforms.removeFirst();
 			World.poolManager.platform_pool.free(platform);			
 		}
 	}
 	
 	private static void removeJellyfishDemons() {
-		if(JellyfishDemon.jellyfish_demons.isEmpty())
+		if(SpriteContainer.jellyfish_demons.isEmpty())
 			return;
 		
-		JellyfishDemon jellyfish_demon = JellyfishDemon.jellyfish_demons.getFirst();
+		JellyfishDemon jellyfish_demon = SpriteContainer.jellyfish_demons.getFirst();
 		if(jellyfish_demon.life_timer > JellyfishDemon.JELLY_LIFESPAN){
-			JellyfishDemon.jellyfish_demons.removeFirst();
+			SpriteContainer.jellyfish_demons.removeFirst();
 			World.poolManager.jellyfish_demon_pool.free(jellyfish_demon);
 		}
 		
 	}
 	
 	private static void removeFlyingSnakes() {
-		if(FlyingSnake.flying_snakes.isEmpty())
+		if(SpriteContainer.flying_snakes.isEmpty())
 			return;
 		
-		FlyingSnake flying_snake = FlyingSnake.flying_snakes.getFirst();
+		FlyingSnake flying_snake = SpriteContainer.flying_snakes.getFirst();
 		if(flying_snake.life_timer > FlyingSnake.FLYING_SNAKE_LIFESPAN){
-			FlyingSnake.flying_snakes.removeFirst();
+			SpriteContainer.flying_snakes.removeFirst();
 			World.poolManager.flying_snake_pool.free(flying_snake);
 		}
 	}
 	private static void removeHaloAttacks() {
-		if(HaloAttack.halo_attacks.isEmpty())
+		if(SpriteContainer.halo_attacks.isEmpty())
 			return;
 		
-		HaloAttack halo_attack = HaloAttack.halo_attacks.getFirst();
+		HaloAttack halo_attack = SpriteContainer.halo_attacks.getFirst();
 		if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
-			HaloAttack.halo_attacks.removeFirst();
+			SpriteContainer.halo_attacks.removeFirst();
 			World.poolManager.halo_attack_pool.free(halo_attack);
 		}
 		
 	}
 	
 	private static void removeMusicNotes() {
-		if(MusicNote.music_notes.isEmpty())
+		if(SpriteContainer.music_notes.isEmpty())
 			return;
 		
-		MusicNote music_note = MusicNote.music_notes.getFirst();
+		MusicNote music_note = SpriteContainer.music_notes.getFirst();
 		if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
-			MusicNote.music_notes.removeFirst();
+			SpriteContainer.music_notes.removeFirst();
 			World.poolManager.music_note_pool.free(music_note);
 		}
 	}
 	
 	private static void removeShockballs() {
-		if(Shockball.shockballs.isEmpty())
+		if(SpriteContainer.shockballs.isEmpty())
 			return;
 		
-		Shockball shockball = Shockball.shockballs.getFirst();
+		Shockball shockball = SpriteContainer.shockballs.getFirst();
 		if(shockball.life_timer > Shockball.SHOCKBALL_LIFESPAN){
-			Shockball.shockballs.removeFirst();
+			SpriteContainer.shockballs.removeFirst();
 			World.poolManager.shockball_pool.free(shockball);
 		}	
 	}
@@ -105,54 +105,54 @@ public class Remover {
 	// clear
 	private static void clearPlatforms() {
 
-		while(!Platform.volatile_platforms.isEmpty()){
-			Platform platform = Platform.volatile_platforms.removeFirst();
+		while(!SpriteContainer.volatile_platforms.isEmpty()){
+			Platform platform = SpriteContainer.volatile_platforms.removeFirst();
 			World.poolManager.platform_pool.free(platform);			
 		}
-		while(!Platform.ground_platforms.isEmpty()){
-			Platform platform = Platform.ground_platforms.removeFirst();
+		while(!SpriteContainer.ground_platforms.isEmpty()){
+			Platform platform = SpriteContainer.ground_platforms.removeFirst();
 			World.poolManager.platform_pool.free(platform);	
 		}
-		while(!Platform.static_platforms.isEmpty()){
-			Platform platform = Platform.static_platforms.removeFirst();
+		while(!SpriteContainer.static_platforms.isEmpty()){
+			Platform platform = SpriteContainer.static_platforms.removeFirst();
 			World.poolManager.platform_pool.free(platform);
 		}
 	}
 
 	private static void clearJellyfishDemons() {
-		while(!JellyfishDemon.jellyfish_demons.isEmpty()){
-			JellyfishDemon jellyfish_demon = JellyfishDemon.jellyfish_demons.removeFirst();
+		while(!SpriteContainer.jellyfish_demons.isEmpty()){
+			JellyfishDemon jellyfish_demon = SpriteContainer.jellyfish_demons.removeFirst();
 			World.poolManager.jellyfish_demon_pool.free(jellyfish_demon);
 		}
 		
 	}
 
 	private static void clearFlyingSnakes() {
-		while(!FlyingSnake.flying_snakes.isEmpty()){
-			FlyingSnake flying_snake = FlyingSnake.flying_snakes.removeFirst();
+		while(!SpriteContainer.flying_snakes.isEmpty()){
+			FlyingSnake flying_snake = SpriteContainer.flying_snakes.removeFirst();
 			World.poolManager.flying_snake_pool.free(flying_snake);
 		}
 		
 	}
 
 	private static void clearHaloAttacks() {
-		while(!HaloAttack.halo_attacks.isEmpty()){
-			HaloAttack halo_attack = HaloAttack.halo_attacks.removeFirst();
+		while(!SpriteContainer.halo_attacks.isEmpty()){
+			HaloAttack halo_attack = SpriteContainer.halo_attacks.removeFirst();
 			World.poolManager.halo_attack_pool.free(halo_attack);
 		}
 		
 	}
 
 	private static void clearMusicNotes() {
-		while(!MusicNote.music_notes.isEmpty()){
-			MusicNote music_note = MusicNote.music_notes.removeFirst();
+		while(!SpriteContainer.music_notes.isEmpty()){
+			MusicNote music_note = SpriteContainer.music_notes.removeFirst();
 			World.poolManager.music_note_pool.free(music_note);
 		}		
 	}
 
 	private static void clearShockBalls() {
-		while(!Shockball.shockballs.isEmpty()){
-			Shockball shockball = Shockball.shockballs.removeFirst();
+		while(!SpriteContainer.shockballs.isEmpty()){
+			Shockball shockball = SpriteContainer.shockballs.removeFirst();
 			World.poolManager.shockball_pool.free(shockball);
 		}		
 	}

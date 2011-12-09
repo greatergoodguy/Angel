@@ -10,6 +10,7 @@ import com.slimejumper.renderer.WorldRenderer;
 import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
@@ -57,8 +58,6 @@ public class World {
 	
 	public static PoolManager poolManager;
 
-	public static Hero hero = null;
-
 	public Vector2 center;
 	public Vector2 position;
 	
@@ -69,29 +68,11 @@ public class World {
 	}
 
 	public static void initializeUniverse(){
-		initializeLists();
+		SpriteContainer.initializeLists();
 		poolManager = new PoolManager();
-		hero = new Hero();
-		CollisionManager.setCollidingHero(hero);
+		CollisionManager.setCollidingHero(SpriteContainer.hero);
 		UnitCircle.initializeUnitCircle();
 		Backgrounds.initalizeParameters();
-		
-	}
-
-	
-	private static void initializeLists() {
-		PurpleGhost.purple_ghosts = new LinkedList<PurpleGhost>();
-		JellyfishDemon.jellyfish_demons = new LinkedList<JellyfishDemon>();
-		FlyingSnake.flying_snakes = new LinkedList<FlyingSnake>();
-		
-		Platform.static_platforms = new LinkedList<Platform>();
-		Platform.volatile_platforms = new LinkedList<Platform>();
-		Platform.ground_platforms = new LinkedList<Platform>();
-		
-		HaloAttack.halo_attacks = new LinkedList<HaloAttack>();
-		MusicNote.music_notes = new LinkedList<MusicNote>();
-		Shockball.shockballs = new LinkedList<Shockball>();
-		SpiralAttack.spiral_attacks = new LinkedList<SpiralAttack>();
 		
 	}
 
@@ -109,54 +90,54 @@ public class World {
 		Backgrounds.update();
 		updatePlatforms(deltaTime);
 		updateEnemies(deltaTime);
-		hero.update(deltaTime);
+		SpriteContainer.hero.update(deltaTime);
 		updateAttacks(deltaTime);
 	}
 
 	private static void updatePlatforms(float deltaTime) {
-		for(Platform platform : Platform.static_platforms)
+		for(Platform platform : SpriteContainer.static_platforms)
 			platform.update(deltaTime);
-		for (Platform platform : Platform.volatile_platforms)
+		for (Platform platform : SpriteContainer.volatile_platforms)
 			platform.update(deltaTime);
 	}
 
 	private static void updateEnemies(float deltaTime) {
-		for (PurpleGhost purple_ghost : PurpleGhost.purple_ghosts)
+		for (PurpleGhost purple_ghost : SpriteContainer.purple_ghosts)
 			purple_ghost.update(deltaTime);
-		for(JellyfishDemon jellyfish_demon : JellyfishDemon.jellyfish_demons)
+		for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons)
 			jellyfish_demon.update(deltaTime);
-		for(FlyingSnake flying_snake : FlyingSnake.flying_snakes)
+		for(FlyingSnake flying_snake : SpriteContainer.flying_snakes)
 			flying_snake.update(deltaTime);
 	}
 	
 	private void updateAttacks(float deltaTime) {
-		for(HaloAttack halo_attack : HaloAttack.halo_attacks)
+		for(HaloAttack halo_attack : SpriteContainer.halo_attacks)
 			halo_attack.update(deltaTime);
-		for(MusicNote music_note : MusicNote.music_notes)
-			music_note.update(hero, deltaTime);
-		for(Shockball shockball : Shockball.shockballs)
+		for(MusicNote music_note : SpriteContainer.music_notes)
+			music_note.update(SpriteContainer.hero, deltaTime);
+		for(Shockball shockball : SpriteContainer.shockballs)
 			shockball.update(deltaTime);
-		for(SpiralAttack spiral_attack : SpiralAttack.spiral_attacks)
+		for(SpiralAttack spiral_attack : SpriteContainer.spiral_attacks)
 			spiral_attack.update(deltaTime);
 	}
 
 	
 	private void updateCenter() {
 		// Checks Horizontal Bounds
-		if (hero.center.x < WORLD_LEFT_BOUND)
+		if (SpriteContainer.hero.center.x < WORLD_LEFT_BOUND)
 			center.x = WORLD_LEFT_BOUND;
-		else if (hero.center.x > WORLD_RIGHT_BOUND)
+		else if (SpriteContainer.hero.center.x > WORLD_RIGHT_BOUND)
 			center.x = WORLD_RIGHT_BOUND;
 		else
-			center.x = hero.center.x;
+			center.x = SpriteContainer.hero.center.x;
 		
 		// Checks Vertical Bound
-		if(hero.center.y < WORLD_BOTTOM_BOUND + WORLD_VERTICAL_BOUND_ADJUSTER)
+		if(SpriteContainer.hero.center.y < WORLD_BOTTOM_BOUND + WORLD_VERTICAL_BOUND_ADJUSTER)
 			center.y = WORLD_BOTTOM_BOUND;
-		else if(hero.center.y > WORLD_TOP_BOUND)
+		else if(SpriteContainer.hero.center.y > WORLD_TOP_BOUND)
 			center.y = WORLD_TOP_BOUND - WORLD_VERTICAL_BOUND_ADJUSTER;
 		else
-			center.y = hero.center.y - WORLD_VERTICAL_BOUND_ADJUSTER;
+			center.y = SpriteContainer.hero.center.y - WORLD_VERTICAL_BOUND_ADJUSTER;
 	}
 
 	private void updatePosition() {
@@ -173,11 +154,11 @@ public class World {
 			TouchEvent event = touchEvents.get(i);
 			controller.input(event);
 			if(controller.fireAttack){
-				if(World.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
-					World.hero.changeToBasicAttackState();
+				if(SpriteContainer.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
+					SpriteContainer.hero.changeToBasicAttackState();
 				controller.fireAttack = false;
 			}
-			World.hero.moveDirection = Controller.processMoveDirection(controller);
+			SpriteContainer.hero.moveDirection = Controller.processMoveDirection(controller);
 		}
 		
 	}

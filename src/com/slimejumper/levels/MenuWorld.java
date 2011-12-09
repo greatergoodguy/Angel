@@ -3,6 +3,7 @@ package com.slimejumper.levels;
 import com.slimejumper.GameScreen;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.tools.PoolManager;
+import com.slimejumper.tools.SpriteContainer;
 
 public class MenuWorld extends World{
 	public interface WorldListener {
@@ -25,8 +26,8 @@ public class MenuWorld extends World{
 	
 	public void update(float deltaTime){		
 		super.update(deltaTime);
-		if(hero.position.y < 0.0f){
-			hero.resetPositionLowerLeft(2, 11);
+		if(SpriteContainer.hero.position.y < 0.0f){
+			SpriteContainer.hero.resetPositionLowerLeft(2, 11);
 			GameScreen.switchToGameWorld();
 		}
 	}

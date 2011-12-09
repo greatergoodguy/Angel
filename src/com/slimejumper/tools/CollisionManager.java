@@ -31,7 +31,7 @@ public class CollisionManager {
 		if(hero.state == Hero.HERO_STATE_COLLIDED)
 			return;
 		
-		for(PurpleGhost purple_ghost : PurpleGhost.purple_ghosts){
+		for(PurpleGhost purple_ghost : SpriteContainer.purple_ghosts){
 			if(OverlapTester.overlapRectangles(hero, purple_ghost)){
 				hero.changeToCollidedState();
 //				world.listener.hit();
@@ -39,7 +39,7 @@ public class CollisionManager {
 				
 		}
 		
-		for(JellyfishDemon jellyfish_demon : JellyfishDemon.jellyfish_demons){
+		for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons){
 			if(OverlapTester.overlapRectangles(hero, jellyfish_demon)){
 				hero.changeToCollidedState();
 //				world.listener.hit();
@@ -53,11 +53,11 @@ public class CollisionManager {
 		if (hero.velocity.y > 0)
 			return;
 	
-		for (Platform platform : Platform.volatile_platforms) 
+		for (Platform platform : SpriteContainer.volatile_platforms) 
 			heroPlatformRebound(platform);
-		for(Platform platform : Platform.ground_platforms)
+		for(Platform platform : SpriteContainer.ground_platforms)
 			heroPlatformRebound(platform);
-		for(Platform platform : Platform.static_platforms)
+		for(Platform platform : SpriteContainer.static_platforms)
 			heroPlatformRebound(platform);
 	}
 	
@@ -79,11 +79,11 @@ public class CollisionManager {
 	}
 
 	private static void checkIncomingHaloAttackCollision() {
-		if(HaloAttack.halo_attacks.isEmpty() || JellyfishDemon.jellyfish_demons.isEmpty())
+		if(SpriteContainer.halo_attacks.isEmpty() || SpriteContainer.jellyfish_demons.isEmpty())
 			return;
 		
-		for(HaloAttack halo_attack : HaloAttack.halo_attacks){
-			for(JellyfishDemon jellyfish_demon : JellyfishDemon.jellyfish_demons){
+		for(HaloAttack halo_attack : SpriteContainer.halo_attacks){
+			for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons){
 				
 				if(jellyfish_demon.state == JellyfishDemon.JELLY_STATE_COLLIDED || 
 						OverlapTester.overlapRectangles(halo_attack, jellyfish_demon)){

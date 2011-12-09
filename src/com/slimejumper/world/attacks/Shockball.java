@@ -1,6 +1,7 @@
 package com.slimejumper.world.attacks;
 
 import com.slimejumper.levels.World;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.GameObject;
 
 public class Shockball extends Attack{
@@ -33,12 +34,12 @@ public class Shockball extends Attack{
 		Shockball shockball1 = World.poolManager.shockball_pool.newObject();
 		shockball1.reset(gameObject);
 		shockball1.velocity.x = SHOCKBALL_LAUNCH_VELOCITY;			
-		shockballs.add(shockball1);
+		SpriteContainer.shockballs.add(shockball1);
 			
 		Shockball shockball2 = World.poolManager.shockball_pool.newObject();
 		shockball2.reset(gameObject);
 		shockball2.velocity.x = -SHOCKBALL_LAUNCH_VELOCITY;
-		shockballs.add(shockball2);
+		SpriteContainer.shockballs.add(shockball2);
 
 	}
 }

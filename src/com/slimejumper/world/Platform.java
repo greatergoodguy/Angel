@@ -1,11 +1,11 @@
 package com.slimejumper.world;
 
 import java.util.Collections;
-import java.util.LinkedList;
 
 import android.util.Log;
 
 import com.slimejumper.levels.World;
+import com.slimejumper.tools.SpriteContainer;
 
 public class Platform extends DynamicGameObject{
 	
@@ -13,10 +13,6 @@ public class Platform extends DynamicGameObject{
 	 * Platform Lists need to abide by certain rules
 	 * static_platforms and ground platforms
 	 */
-	
-	public static LinkedList<Platform> volatile_platforms;
-	public static LinkedList<Platform> static_platforms;
-	public static LinkedList<Platform> ground_platforms;
 	
 	public static final float PLATFORM_OSCILLATE_TIMER_BOUND = 0.22f;
 	public static final float PLATFORM_REST_TIMER_BOUND = 1.8f;
@@ -36,7 +32,7 @@ public class Platform extends DynamicGameObject{
 	public static final int PLATFORM_STATE_OSCILLATE_RIGHT = 3;
 	public static final int PLATFORM_STATE_OSCILLATE_UP = 4;
 	public static final int PLATFORM_STATE_OSCILLATE_DOWN = 5;
-	private static final int PLATFORM_STATE_REST = 6;
+	public static final int PLATFORM_STATE_REST = 6;
 	
 	public int state;
 	public float state_timer;
@@ -250,7 +246,7 @@ public class Platform extends DynamicGameObject{
 	
 	// Ground is raised 0.75 meter from the bottom edge
 	public static void initializePlatformGround(){
-		if(!Platform.ground_platforms.isEmpty()){
+		if(!SpriteContainer.ground_platforms.isEmpty()){
 			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");
 			return;
 		}
@@ -264,17 +260,17 @@ public class Platform extends DynamicGameObject{
 			// create new Platform and add to list
 			platform = World.poolManager.platform_pool.newObject();
 			platform.reset(x_coord, y_coord, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
-			Platform.ground_platforms.add(platform);
+			SpriteContainer.ground_platforms.add(platform);
 			
 			// Advance counter and repeat
 			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
 		}
-		Collections.shuffle(Platform.ground_platforms);
+		Collections.shuffle(SpriteContainer.ground_platforms);
 	}
 	
 	// Ground is level with the bottom edge
 	public static void initializePlatformGroundMinusOne(){
-		if(!Platform.ground_platforms.isEmpty()){
+		if(!SpriteContainer.ground_platforms.isEmpty()){
 			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");
 			return;
 		}
@@ -287,19 +283,19 @@ public class Platform extends DynamicGameObject{
 			// create new Platform and add to list
 			platform = World.poolManager.platform_pool.newObject();
 			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
-			Platform.ground_platforms.add(platform);
+			SpriteContainer.ground_platforms.add(platform);
 			
 			// Advance counter and repeat
 			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
 		}
 		
-		platform = Platform.ground_platforms.removeLast();
+		platform = SpriteContainer.ground_platforms.removeLast();
 		World.poolManager.platform_pool.free(platform);
 	}
 	
 	public static void initializePlatformMap(){
 		
-		if(!Platform.static_platforms.isEmpty()){
+		if(!SpriteContainer.static_platforms.isEmpty()){
 			Log.d("Platform.initializePlatformMap()", "static_platform already filled");
 			return;
 		}
@@ -317,7 +313,7 @@ public class Platform extends DynamicGameObject{
 			while(x_coord < World.WORLD_RIGHT_EDGE){
 				platform = World.poolManager.platform_pool.newObject();
 				platform.reset(x_coord, y_coord, map_platform_length, Platform.PLATFORM_STATE_STILL);
-				Platform.static_platforms.add(platform);
+				SpriteContainer.static_platforms.add(platform);
 			
 				x_coord += 8;
 			}
@@ -328,6 +324,6 @@ public class Platform extends DynamicGameObject{
 			
 			y_coord += 2.5;
 		}
-		Collections.shuffle(Platform.static_platforms);
+		Collections.shuffle(SpriteContainer.static_platforms);
 	}
 }

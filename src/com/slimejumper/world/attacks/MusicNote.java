@@ -2,6 +2,7 @@ package com.slimejumper.world.attacks;
 
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.levels.World;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Hero;
 
 public class MusicNote extends Attack{
@@ -94,7 +95,7 @@ public class MusicNote extends Attack{
 			MusicNote music_note = World.poolManager.music_note_pool.newObject();
 			music_note.reset(frame_counter_starter);
 			
-			music_notes.add(music_note);
+			SpriteContainer.music_notes.add(music_note);
 		}
 	}
 

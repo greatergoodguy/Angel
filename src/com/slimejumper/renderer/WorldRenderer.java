@@ -14,6 +14,7 @@ import com.slimejumper.gameframework.gl.TextureRegion;
 import com.slimejumper.levels.GameWorld;
 import com.slimejumper.levels.MenuWorld;
 import com.slimejumper.levels.World;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.DynamicGameObject;
 import com.slimejumper.world.GameObject;
 import com.slimejumper.world.Hero;
@@ -115,16 +116,16 @@ public class WorldRenderer {
 	}
 	
 	private void renderPlatforms() {
-		if(!Platform.volatile_platforms.isEmpty()){		
-			for(Platform platform : Platform.volatile_platforms)
+		if(!SpriteContainer.volatile_platforms.isEmpty()){		
+			for(Platform platform : SpriteContainer.volatile_platforms)
 				renderPlatform(platform);
 		}
-		if(!Platform.ground_platforms.isEmpty()){		
-			for(Platform platform : Platform.ground_platforms)
+		if(!SpriteContainer.ground_platforms.isEmpty()){		
+			for(Platform platform : SpriteContainer.ground_platforms)
 				renderPlatform(platform);
 		}
-		if(!Platform.static_platforms.isEmpty()){
-			for(Platform platform : Platform.static_platforms)
+		if(!SpriteContainer.static_platforms.isEmpty()){
+			for(Platform platform : SpriteContainer.static_platforms)
 				renderPlatform(platform);
 		}
 	}
@@ -148,17 +149,17 @@ public class WorldRenderer {
 	
 
 	private void renderPurpleGhosts() {
-		if(PurpleGhost.purple_ghosts.isEmpty())
+		if(SpriteContainer.purple_ghosts.isEmpty())
 			return;
-		for(PurpleGhost purple_ghost : PurpleGhost.purple_ghosts)
+		for(PurpleGhost purple_ghost : SpriteContainer.purple_ghosts)
 			batcher.drawSpriteReverse(purple_ghost, Assets.PurpleGhost);
 		
 	}
 	
 	private void renderJellyfishDemons(){
-		if(JellyfishDemon.jellyfish_demons.isEmpty())
+		if(SpriteContainer.jellyfish_demons.isEmpty())
 			return;
-		for(JellyfishDemon jellyfish_demon : JellyfishDemon.jellyfish_demons){
+		for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons){
 			switch(jellyfish_demon.state){
 /*			
 			case JellyfishDemon.JELLY_STATE_STANDARD:
@@ -187,9 +188,9 @@ public class WorldRenderer {
 	}
 	
 	private void renderFlyingSnakes(){
-		if(FlyingSnake.flying_snakes.isEmpty())
+		if(SpriteContainer.flying_snakes.isEmpty())
 			return;
-		for(FlyingSnake flying_snake : FlyingSnake.flying_snakes){
+		for(FlyingSnake flying_snake : SpriteContainer.flying_snakes){
 			switch(flying_snake.state){
 			case FlyingSnake.FLYING_SNAKE_STATE_STANDARD:
 				batcher.drawSprite(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
@@ -208,9 +209,9 @@ public class WorldRenderer {
 	}
 	
 	private void renderShockBalls(){
-		if(Shockball.shockballs.isEmpty())
+		if(SpriteContainer.shockballs.isEmpty())
 			return;
-		for(Shockball shockball : Shockball.shockballs)
+		for(Shockball shockball : SpriteContainer.shockballs)
 			batcher.drawSprite(shockball, Assets.shockball.getKeyFrame(shockball.life_timer, Animation.ANIMATION_LOOPING));
 		
 	}
@@ -229,7 +230,7 @@ public class WorldRenderer {
 	}
 
 	private void renderHeroState() {
-		switch(World.hero.state){
+		switch(SpriteContainer.hero.state){
 		case Hero.HERO_STATE_JUMP:
 			adjustHeroOrientation(Assets.hero_jump);
 			break;
@@ -237,29 +238,29 @@ public class WorldRenderer {
 			adjustHeroOrientation(Assets.hero_fall);
 			break;
 		case Hero.HERO_STATE_LAND:
-			adjustHeroOrientation(Assets.hero_land.getKeyFrame(World.hero.state_timer, 
+			adjustHeroOrientation(Assets.hero_land.getKeyFrame(SpriteContainer.hero.state_timer, 
 					Animation.ANIMATION_NONLOOPING));
 			break;
 		case Hero.HERO_STATE_COLLIDED:
-			adjustHeroOrientation(Assets.hero_collided.getKeyFrame(World.hero.state_timer, 
+			adjustHeroOrientation(Assets.hero_collided.getKeyFrame(SpriteContainer.hero.state_timer, 
 					Animation.ANIMATION_LOOPING));
 			break;	
 		case Hero.HERO_STATE_BASIC_ATTACK:
-			switch(World.hero.basic_attack_type){
+			switch(SpriteContainer.hero.basic_attack_type){
 			case Hero.HERO_BASIC_HALO_ATTACK:
-				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(World.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(SpriteContainer.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_SPIRAL_ATTACK:
-				adjustHeroOrientation(Assets.hero_spiral_attack_1.getKeyFrame(World.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_spiral_attack_1.getKeyFrame(SpriteContainer.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_3:
-				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(World.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_halo_attack_1.getKeyFrame(SpriteContainer.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
-				adjustHeroOrientation(Assets.hero_lyre_attack_1.getKeyFrame(World.hero.state_timer,
+				adjustHeroOrientation(Assets.hero_lyre_attack_1.getKeyFrame(SpriteContainer.hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			}
@@ -267,24 +268,24 @@ public class WorldRenderer {
 	}
 
 	private void renderHaloAttacks(){
-		if(HaloAttack.halo_attacks.isEmpty())
+		if(SpriteContainer.halo_attacks.isEmpty())
 			return;
-		for(HaloAttack halo_attack : HaloAttack.halo_attacks)
+		for(HaloAttack halo_attack : SpriteContainer.halo_attacks)
 			adjustGameSpriteOrientation(halo_attack, Assets.halo_attack.getKeyFrame(halo_attack.life_timer,
 						Animation.ANIMATION_LOOPING));
 	}
 
 	private void renderMusicNotes() {
-		if(MusicNote.music_notes.isEmpty())
+		if(SpriteContainer.music_notes.isEmpty())
 			return;
-		for(MusicNote music_note : MusicNote.music_notes)
+		for(MusicNote music_note : SpriteContainer.music_notes)
 			batcher.drawSprite(music_note, Assets.musicNoteFrame1);
 	}
 	
 	private void renderSpiralAttacks() {
-		if(SpiralAttack.spiral_attacks.isEmpty())
+		if(SpriteContainer.spiral_attacks.isEmpty())
 			return;
-		for(SpiralAttack spiral_attack : SpiralAttack.spiral_attacks)
+		for(SpiralAttack spiral_attack : SpriteContainer.spiral_attacks)
 			adjustGameSpriteOrientation(spiral_attack, Assets.spiral_attack.getKeyFrame(spiral_attack.life_timer,
 						Animation.ANIMATION_LOOPING), spiral_attack.angle);
 	}
@@ -310,12 +311,12 @@ public class WorldRenderer {
 	}
 	
 	private void adjustHeroOrientation(TextureRegion region) {
-		switch(World.hero.facedirection){
+		switch(SpriteContainer.hero.facedirection){
 		case Hero.HERO_LEFT:
-			batcher.drawSpriteReverse(World.hero, region);
+			batcher.drawSpriteReverse(SpriteContainer.hero, region);
 			break;
 		case Hero.HERO_RIGHT:
-			batcher.drawSprite(World.hero, region);
+			batcher.drawSprite(SpriteContainer.hero, region);
 			break;
 		}
 	}
