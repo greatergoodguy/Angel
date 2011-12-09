@@ -2,10 +2,11 @@ package com.slimejumper.gameframework.gl;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import com.slimejumper.Assets;
+import android.util.FloatMath;
+
 import com.slimejumper.framework.impl.GLGraphics;
+import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.World;
-import com.slimejumper.renderer.WorldRenderer;
 import com.slimejumper.world.GameObject;
 
 public class SpriteBatcher {
@@ -58,13 +59,19 @@ public class SpriteBatcher {
 	
 	
 	public void drawSprite(GameObject sprite, TextureRegion region){
-//		drawSpriteLeftCorner(sprite.position.x, sprite.position.y, sprite.width, sprite.height, region);
 		drawSpriteCenter(sprite.center.x, sprite.center.y, sprite.width, sprite.height, region);
 	}
 	
+	public void drawSpriteCenter(GameObject sprite, TextureRegion region, float angle){
+		drawSpriteCenter(sprite.center.x, sprite.center.y, sprite.width, sprite.height, angle, region);
+	}
+	
 	public void drawSpriteReverse(GameObject sprite, TextureRegion region){
-//		drawSpriteLeftCorner(sprite.position.x + sprite.width, sprite.position.y, sprite.width * -1, sprite.height, region);
 		drawSpriteCenter(sprite.center.x, sprite.center.y, sprite.width * -1, sprite.height, region);
+	}
+	
+	public void drawSpriteCenterReverse(GameObject sprite, TextureRegion region, float angle){
+		drawSpriteCenter(sprite.center.x, sprite.center.y, sprite.width * -1, sprite.height, angle, region);
 	}
 	
 	public void drawSpriteLowerLeft(float lower_left_x, float lower_left_y, float width, float height, TextureRegion region){
@@ -145,11 +152,9 @@ public class SpriteBatcher {
 		numSprites++;
 	}
 	
-// Below Function may not operate correctly due to how image bounds and collision bounds are created
-	
-/*	
-	public void drawSprite(float x, float y, float width, float height, float angle,
-			TextureRegion region){
+// Below Function must use center position coordinates	
+
+	public void drawSpriteCenter(float center_x, float center_y, float width, float height, float angle, TextureRegion region){
 		
 		float halfWidth = width/2;
 		float halfHeight = height/2;
@@ -170,14 +175,14 @@ public class SpriteBatcher {
 		float x4 = -halfWidth * cos - halfHeight * sin;
 		float y4 = -halfWidth * sin + halfHeight * cos;
 		
-		x1 += x;
-		y1 += y;
-		x2 += x;
-		y2 += y;
-		x3 += x;
-		y3 += y;
-		x4 += x;
-		y4 += y;
+		x1 += center_x;
+		y1 += center_y;
+		x2 += center_x;
+		y2 += center_y;
+		x3 += center_x;
+		y3 += center_y;
+		x4 += center_x;
+		y4 += center_y;
 		
 		verticesBuffer[bufferIndex++] = x1;
 		verticesBuffer[bufferIndex++] = y1;
@@ -201,5 +206,5 @@ public class SpriteBatcher {
 		
 		numSprites++;
 	}
-*/
+	
 }

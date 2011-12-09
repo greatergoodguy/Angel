@@ -285,8 +285,8 @@ public class WorldRenderer {
 		if(SpiralAttack.spiral_attacks.isEmpty())
 			return;
 		for(SpiralAttack spiral_attack : SpiralAttack.spiral_attacks)
-			batcher.drawSprite(spiral_attack, Assets.spiral_attack.getKeyFrame(spiral_attack.life_timer,
-						Animation.ANIMATION_LOOPING));
+			adjustGameSpriteOrientation(spiral_attack, Assets.spiral_attack.getKeyFrame(spiral_attack.life_timer,
+						Animation.ANIMATION_LOOPING), spiral_attack.angle);
 	}
 	
 	private void renderForeground(){
@@ -330,5 +330,22 @@ public class WorldRenderer {
 			batcher.drawSprite(object, region);
 			break;
 		}
-	}	
+	}
+	
+	private void adjustGameSpriteOrientation(SpiralAttack spiral_attack,
+			TextureRegion region, float angle) {
+		switch(spiral_attack.facedirection){
+		case GameObject.SPRITE_LEFT:
+			
+			batcher.drawSpriteCenter(spiral_attack, Assets.spiral_attack.getKeyFrame(spiral_attack.life_timer,
+					Animation.ANIMATION_LOOPING), angle);
+			break;
+		case GameObject.SPRITE_RIGHT:
+			float new_angle = 360 - angle;
+			
+			batcher.drawSpriteCenterReverse(spiral_attack, Assets.spiral_attack.getKeyFrame(spiral_attack.life_timer,
+					Animation.ANIMATION_LOOPING), new_angle);
+			break;
+		}
+	}
 }

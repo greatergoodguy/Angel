@@ -28,7 +28,7 @@ public class Assets {
 	
 	public final static float SHOCKBALL_FRAME_DURATION = 0.14f;
 	public final static float HALO_ATTACK_FRAME_DURATION = 0.12f;
-	public final static float SPIRAL_ATTACK_FRAME_DURATION = 0.12f;
+	public final static float SPIRAL_ATTACK_FRAME_DURATION = 0.20f;
 	
 	public static Texture hero;
 	public static TextureRegion heroRegion;
@@ -257,7 +257,8 @@ public class Assets {
 		spiral_attack = new Animation(SPIRAL_ATTACK_FRAME_DURATION,
 				spiralAttackFrame1,
 				spiralAttackFrame2,
-				spiralAttackFrame3);
+				spiralAttackFrame3,
+				spiralAttackFrame2);
 		
 		heroCollidedFrame1 = new TextureRegion(hero, 285, 260, 80, 80);
 		heroCollidedFrame2 = new TextureRegion(hero, 365, 260, 80, 80);
