@@ -5,6 +5,7 @@ import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
+import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 
@@ -17,11 +18,14 @@ public class Remover {
 	// remove
 	public static void remove(){
 		removePlatforms();
+		
 		removeJellyfishDemons();
 		removeFlyingSnakes();
+		
 		removeHaloAttacks();
 		removeMusicNotes();
 		removeShockballs();
+		removeSpiralAttacks();
 	}
 	
 	private static void removePlatforms() {
@@ -91,14 +95,28 @@ public class Remover {
 			Level.poolManager.shockball_pool.free(shockball);
 		}	
 	}
+	
+	private static void removeSpiralAttacks(){
+		if(SpriteContainer.spiral_attacks.isEmpty())
+			return;
+		
+		SpiralAttack spiral_attack = SpriteContainer.spiral_attacks.getFirst();
+		if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
+			SpriteContainer.spiral_attacks.removeFirst();
+			Level.poolManager.spiral_attack_pool.free(spiral_attack);
+		}
+	}
 
 	public static void clearAllLists(){
 		clearPlatforms();
+		
 		clearJellyfishDemons();
 		clearFlyingSnakes();
+		
 		clearHaloAttacks();
 		clearMusicNotes();
 		clearShockBalls();
+		clearSpiralAttacks();
 	}
 
 	
@@ -155,6 +173,13 @@ public class Remover {
 			Shockball shockball = SpriteContainer.shockballs.removeFirst();
 			Level.poolManager.shockball_pool.free(shockball);
 		}		
+	}
+	
+	private static void clearSpiralAttacks(){
+		while(!SpriteContainer.spiral_attacks.isEmpty()){
+			SpiralAttack spiral_attack = SpriteContainer.spiral_attacks.removeFirst();
+			Level.poolManager.spiral_attack_pool.free(spiral_attack);
+		}
 	}
 	
 /*	
