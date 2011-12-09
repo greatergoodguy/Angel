@@ -16,7 +16,7 @@ public class CaveLevel extends Level{
 		public void coin();
 	}
 
-	ObstacleGeneratorManager level_manager;
+	ObstacleGeneratorManager obstacle_generator_manager;
 	public final WorldListener listener;
 
 	float level_timer;
@@ -29,7 +29,7 @@ public class CaveLevel extends Level{
 //			World.hero = new Hero();
 		this.listener = listener;
 	
-		level_manager = new ObstacleGeneratorManager(this);
+		obstacle_generator_manager = new ObstacleGeneratorManager(this);
 
 		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
 		position = new Vector2();
@@ -65,11 +65,11 @@ public class CaveLevel extends Level{
 		
 		
 		if(level_counter == 1 )
-			level_manager.generateLevelOne(deltaTime);
+			obstacle_generator_manager.generateLevelOne(deltaTime);
 		else if(level_counter == 2 )
-			level_manager.generateLevelTwo(deltaTime);
+			obstacle_generator_manager.generateLevelTwo(deltaTime);
 		else
-			level_manager.generateSampleLevel(deltaTime);
+			obstacle_generator_manager.generateSampleLevel(deltaTime);
 			
 	}
 }

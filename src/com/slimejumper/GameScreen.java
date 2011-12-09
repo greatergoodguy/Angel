@@ -14,7 +14,7 @@ import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.levels.Level;
 import com.slimejumper.levels.CaveLevel.WorldListener;
-import com.slimejumper.renderer.WorldRenderer;
+import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Hero;
@@ -41,7 +41,7 @@ public class GameScreen extends GLScreen {
 	static MenuLevel menuWorld;
 	static Level gameWorld;
 	
-	static WorldRenderer renderer;
+	static BaseRenderer renderer;
 	Vector2 touchPoint;
 
 	public GameScreen(Game game) {
@@ -69,7 +69,7 @@ public class GameScreen extends GLScreen {
 		gameWorld = new CaveLevel(worldListener);
 		active_world = menuWorld;
 		
-		renderer = new WorldRenderer(glGraphics, batcher, active_world);
+		renderer = new BaseRenderer(glGraphics, batcher, active_world);
 		touchPoint = new Vector2();
 		
 		switchToMenuWorld();

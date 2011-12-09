@@ -30,7 +30,7 @@ import com.slimejumper.world.enemies.PurpleGhost;
 import com.slimejumper.world.enemies.RedWhaleDemon;
 
 
-public class WorldRenderer {
+public class BaseRenderer {
 	public static final float FRUSTUM_WIDTH = 10;
 	public static final float FRUSTUM_HEIGHT = 6;
 	public static final float FRUSTUM_WIDTH_OVER_TWO = FRUSTUM_WIDTH/2;
@@ -41,7 +41,7 @@ public class WorldRenderer {
 	
 	Level active_world;			// Different Sprites are rendered for Different Worlds;
 	
-	public WorldRenderer(GLGraphics glGraphics, SpriteBatcher batcher,
+	public BaseRenderer(GLGraphics glGraphics, SpriteBatcher batcher,
 				Level world) {
 		this.glGraphics = glGraphics;
 		this.active_world = world;
@@ -53,13 +53,22 @@ public class WorldRenderer {
 		active_world = new_active_world;
 	}
 	
-	public void render(){
+	public void renderSetUp(){
 		setCamera();
 		
 		cam.setViewportAndMatrices();
 		GL10 gl = glGraphics.getGL();
 		gl.glEnable(GL10.GL_BLEND);
 		gl.glBlendFunc(GL10.GL_ONE, GL10.GL_ONE_MINUS_SRC_ALPHA);
+	}
+	
+	public void renderTearDown(){
+		GL10 gl = glGraphics.getGL();
+		gl.glDisable(GL10.GL_BLEND);
+	}
+	
+	public void render(){		
+		renderSetUp();
 		
 		if(active_world instanceof CaveLevel){
 			renderBackgroundBackLayer();
@@ -70,7 +79,8 @@ public class WorldRenderer {
 		
 		renderGameSprites();
 		renderHero();		// Foreground is rendered via a conditional in this function
-		gl.glDisable(GL10.GL_BLEND);
+		
+		renderTearDown();
 		
 	}
 
@@ -81,26 +91,26 @@ public class WorldRenderer {
 	private void renderBackgroundClouds() {
 		batcher.beginBatch(Assets.background_clouds);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
+				BaseRenderer.FRUSTUM_WIDTH, BaseRenderer.FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
 		batcher.endBatch();
 	}
 	
 	private void renderBackgroundBackLayer() {
 		batcher.beginBatch(Assets.background_back_layer);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
+				BaseRenderer.FRUSTUM_WIDTH, BaseRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
 		batcher.endBatch();		
 		
 		batcher.beginBatch(Assets.background_back_layer_2);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayer2Region);
+				BaseRenderer.FRUSTUM_WIDTH, BaseRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayer2Region);
 		batcher.endBatch();		
 	}
 	
 	private void renderBackgroundMiddleLayer() {
 		batcher.beginBatch(Assets.background_middle_layer);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				WorldRenderer.FRUSTUM_WIDTH, WorldRenderer.FRUSTUM_HEIGHT, Assets.backgroundMiddleLayerRegion);
+				BaseRenderer.FRUSTUM_WIDTH, BaseRenderer.FRUSTUM_HEIGHT, Assets.backgroundMiddleLayerRegion);
 		batcher.endBatch();		
 	}
 

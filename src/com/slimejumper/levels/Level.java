@@ -1,12 +1,11 @@
 package com.slimejumper.levels;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.slimejumper.Controller;
 import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.renderer.WorldRenderer;
+import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
@@ -18,12 +17,11 @@ import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
 import com.slimejumper.world.attacks.SpiralAttack;
-import com.slimejumper.world.enemies.Enemy;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
 
-public class Level {
+public abstract class Level {
 
 	public static final float METER = 80; // 1 meter equals 80 pixels
 
@@ -32,8 +30,8 @@ public class Level {
 	public static final float WORLD_HEIGHT = 6 * 2; // 6 refers to the visible
 													// height
 
-	public static final float WORLD_CENTER_DEFAULT_X = WorldRenderer.FRUSTUM_WIDTH / 2;
-	public static final float WORLD_CENTER_DEFAULT_Y = WorldRenderer.FRUSTUM_HEIGHT / 2;
+	public static final float WORLD_CENTER_DEFAULT_X = BaseRenderer.FRUSTUM_WIDTH / 2;
+	public static final float WORLD_CENTER_DEFAULT_Y = BaseRenderer.FRUSTUM_HEIGHT / 2;
 	
 	public static final float WORLD_GRAVITY = -8.5f;
 	public static final float WORLD_GRAVITY_TIMES_TWO = WORLD_GRAVITY * 2;
@@ -60,12 +58,6 @@ public class Level {
 
 	public Vector2 center;
 	public Vector2 position;
-	
-
-	public Level() {
-		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
-		position = new Vector2();
-	}
 
 	public static void initializeUniverse(){
 		SpriteContainer.initializeLists();
