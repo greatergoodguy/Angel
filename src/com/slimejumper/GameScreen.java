@@ -19,6 +19,7 @@ import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteContainer;
+import com.slimejumper.tools.SpriteFactory;
 import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Platform;
 
@@ -47,18 +48,20 @@ public class GameScreen extends GLScreen {
 	Vector2 touchPoint;
 
 	public SpriteContainer sprite_container;
+	public static PoolManager pool_manager;
 	public Remover remover;
 	public CollisionManager collision_manager;
-	public static PoolManager pool_manager;
+	public SpriteFactory sprite_factory;
 	
 	public GameScreen(Game game) {
 		super(game);
 		game_timer = 0;
 		
 		sprite_container = new SpriteContainer();
+		pool_manager = new PoolManager();
 		remover = new Remover();
 		collision_manager = new CollisionManager();
-		pool_manager = new PoolManager();
+		sprite_factory = new SpriteFactory(pool_manager);
 		Level.initializeUniverse();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);

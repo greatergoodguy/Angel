@@ -90,13 +90,14 @@ public class Hero extends DynamicGameObject{
 	public void update(float deltaTime){				
 		
 		super.update(deltaTime);
-//		hero_center.set(position.x+width/2, position.y+height/2); 
-		deathLoop();
+
+//		deathLoop();
 		checkSideBounds();
 
 		adjustVectors();
 		adjustFaceDirection();
 		checkInvincibility(deltaTime);
+		
 		state_timer += deltaTime;
 		
 		switch(state){
