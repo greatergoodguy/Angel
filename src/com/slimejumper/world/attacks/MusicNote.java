@@ -89,7 +89,7 @@ public class MusicNote extends Attack{
 		this.reset();
 		this.frame_counter = frame_counter;
 	}
-	
+/*	
 	public static void activateMusicalCircularBurst(Hero hero) {
 		for(int frame_counter_starter=0; frame_counter_starter<UnitCircle.UNIT_CIRCLE_SIZE; frame_counter_starter+=3){
 			MusicNote music_note = GameScreen.pool_manager.music_note_pool.newObject();
@@ -98,5 +98,5 @@ public class MusicNote extends Attack{
 			SpriteContainer.music_notes.add(music_note);
 		}
 	}
-
+*/
 }

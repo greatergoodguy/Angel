@@ -31,12 +31,13 @@ public class HaloAttack extends Attack{
 		velocity.x = HaloAttack_LAUNCH_VELOCITY * facedirection;
 	}
 
+/*
 	public static void activate(Hero hero) {
 
 		HaloAttack halo_attack = GameScreen.pool_manager.halo_attack_pool.newObject();
 		halo_attack.reset(hero);
 		SpriteContainer.halo_attacks.add(halo_attack);
 	}
-	
+*/	
 	
 }

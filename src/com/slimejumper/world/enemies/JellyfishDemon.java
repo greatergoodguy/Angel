@@ -1,6 +1,8 @@
 package com.slimejumper.world.enemies;
 
 import com.slimejumper.Assets;
+import com.slimejumper.GameScreen;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.Shockball;
 
@@ -104,7 +106,17 @@ public class JellyfishDemon extends Enemy{
 		state_timer = 0;
 		state = JELLY_STATE_ATTACK;
 		velocity.set(0, 0);
-		Shockball.activateDualShot(this);
+		activateDualShot();
+	}
+	
+	public void activateDualShot(){
+		Shockball shockball1 = GameScreen.pool_manager.shockball_pool.newObject();
+		shockball1.reset(this);	
+		SpriteContainer.shockballs.add(shockball1);
+			
+		Shockball shockball2 = GameScreen.pool_manager.shockball_pool.newObject();
+		shockball2.reset(this);
+		SpriteContainer.shockballs.add(shockball2);
 	}
 
 	public void changeToCollidedState(HaloAttack halo_attack){

@@ -27,10 +27,11 @@ public class Shockball extends Attack{
 	public void reset(GameObject gameObject) {
 		super.reset();
 		resetPositionCenter(gameObject.center);
+		velocity.x = SHOCKBALL_LAUNCH_VELOCITY;		
 	}
 
+/*
 	public static void activateDualShot(GameObject gameObject) {
-
 		Shockball shockball1 = GameScreen.pool_manager.shockball_pool.newObject();
 		shockball1.reset(gameObject);
 		shockball1.velocity.x = SHOCKBALL_LAUNCH_VELOCITY;			
@@ -40,6 +41,6 @@ public class Shockball extends Attack{
 		shockball2.reset(gameObject);
 		shockball2.velocity.x = -SHOCKBALL_LAUNCH_VELOCITY;
 		SpriteContainer.shockballs.add(shockball2);
-
 	}
+*/	
 }

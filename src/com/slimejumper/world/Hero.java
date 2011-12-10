@@ -3,7 +3,10 @@ package com.slimejumper.world;
 import java.util.Random;
 
 import com.slimejumper.Assets;
+import com.slimejumper.GameScreen;
+import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.levels.Level;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.SpiralAttack;
@@ -240,13 +243,13 @@ public class Hero extends DynamicGameObject{
 		case HERO_BASIC_HALO_ATTACK:
 			if(state_timer > HERO_ATTACK_LAUNCH_TIMER && !attack_launched){
 				attack_launched = true;
-				HaloAttack.activate(this);
+				activateHaloAttack();
 			}
 			break;
 		case HERO_BASIC_SPIRAL_ATTACK:
 			if(state_timer > HERO_ATTACK_LAUNCH_TIMER && !attack_launched){
 				attack_launched = true;
-				SpiralAttack.activate(this);
+				activateSpiralAttack();
 			}
 			break;
 		case HERO_BASIC_ATTACK_3:
@@ -254,7 +257,7 @@ public class Hero extends DynamicGameObject{
 		case HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
 			if(state_timer > HERO_ATTACK_LAUNCH_TIMER && !attack_launched){
 				attack_launched = true;
-				MusicNote.activateMusicalCircularBurst(this);
+				activateMusicalBurst();
 			}
 			break;
 		}
@@ -343,5 +346,27 @@ public class Hero extends DynamicGameObject{
 
 	public void moveCancel(){
 		velocity.x = 0;
+	}
+	
+	public void activateHaloAttack(){
+		HaloAttack halo_attack = GameScreen.pool_manager.halo_attack_pool.newObject();
+		halo_attack.reset(this);
+		SpriteContainer.halo_attacks.add(halo_attack);
+	}
+	
+	public void activateSpiralAttack(){
+		SpiralAttack spiral_attack = GameScreen.pool_manager.spiral_attack_pool.newObject();
+		spiral_attack.reset(this);
+		hop();
+		SpriteContainer.spiral_attacks.add(spiral_attack);
+	}
+	
+	public void activateMusicalBurst(){
+		for(int frame_counter_starter=0; frame_counter_starter<UnitCircle.UNIT_CIRCLE_SIZE; frame_counter_starter+=3){
+			MusicNote music_note = GameScreen.pool_manager.music_note_pool.newObject();
+			music_note.reset(frame_counter_starter);
+			
+			SpriteContainer.music_notes.add(music_note);
+		}
 	}
 }
