@@ -1,9 +1,7 @@
 package com.slimejumper.levels;
 
-import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.tools.ObstacleGeneratorManager;
-import com.slimejumper.tools.Remover;
 
 public class CaveLevel extends Level{
 	public interface WorldListener {

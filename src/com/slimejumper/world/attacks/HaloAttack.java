@@ -1,6 +1,6 @@
 package com.slimejumper.world.attacks;
 
-import com.slimejumper.levels.Level;
+import com.slimejumper.GameScreen;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Hero;
 
@@ -33,7 +33,7 @@ public class HaloAttack extends Attack{
 
 	public static void activate(Hero hero) {
 
-		HaloAttack halo_attack = Level.poolManager.halo_attack_pool.newObject();
+		HaloAttack halo_attack = GameScreen.pool_manager.halo_attack_pool.newObject();
 		halo_attack.reset(hero);
 		SpriteContainer.halo_attacks.add(halo_attack);
 	}

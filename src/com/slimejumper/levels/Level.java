@@ -2,6 +2,7 @@ package com.slimejumper.levels;
 import java.util.List;
 
 import com.slimejumper.Controller;
+import com.slimejumper.GameScreen;
 import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
@@ -54,14 +55,17 @@ public abstract class Level {
 
 	public static final float COLLISION_TOLERANCE = 0.1f;
 	
-	public static PoolManager poolManager;
-
 	public Vector2 center;
 	public Vector2 position;
+	
+	public float width;
+	public float height;
 
+	public Level(){
+		
+	}
+	
 	public static void initializeUniverse(){
-		SpriteContainer.initializeLists();
-		poolManager = new PoolManager();
 		CollisionManager.setCollidingHero(SpriteContainer.hero);
 		UnitCircle.initializeUnitCircle();
 		Backgrounds.initalizeParameters();

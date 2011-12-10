@@ -11,13 +11,15 @@ import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.CaveLevel;
-import com.slimejumper.levels.MenuLevel;
-import com.slimejumper.levels.Level;
 import com.slimejumper.levels.CaveLevel.WorldListener;
+import com.slimejumper.levels.Level;
+import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.renderer.BaseRenderer;
+import com.slimejumper.tools.CollisionManager;
+import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Backgrounds;
-import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
 
 
@@ -44,10 +46,19 @@ public class GameScreen extends GLScreen {
 	static BaseRenderer renderer;
 	Vector2 touchPoint;
 
+	public SpriteContainer sprite_container;
+	public Remover remover;
+	public CollisionManager collision_manager;
+	public static PoolManager pool_manager;
+	
 	public GameScreen(Game game) {
 		super(game);
 		game_timer = 0;
 		
+		sprite_container = new SpriteContainer();
+		remover = new Remover();
+		collision_manager = new CollisionManager();
+		pool_manager = new PoolManager();
 		Level.initializeUniverse();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);

@@ -1,6 +1,6 @@
 package com.slimejumper.tools;
 
-import com.slimejumper.levels.Level;
+import com.slimejumper.GameScreen;
 import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
@@ -10,6 +10,10 @@ import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 
 public class Remover {
+	
+	public Remover(){
+		
+	}
 	
 	/*
 	 * Every List needs a remove method and a clear method
@@ -36,7 +40,7 @@ public class Remover {
 
 		if (platform.life_timer > Platform.PLATFORM_LIFESPAN) {
 			SpriteContainer.volatile_platforms.removeFirst();
-			Level.poolManager.platform_pool.free(platform);			
+			GameScreen.pool_manager.platform_pool.free(platform);			
 		}
 	}
 	
@@ -47,7 +51,7 @@ public class Remover {
 		JellyfishDemon jellyfish_demon = SpriteContainer.jellyfish_demons.getFirst();
 		if(jellyfish_demon.life_timer > JellyfishDemon.JELLY_LIFESPAN){
 			SpriteContainer.jellyfish_demons.removeFirst();
-			Level.poolManager.jellyfish_demon_pool.free(jellyfish_demon);
+			GameScreen.pool_manager.jellyfish_demon_pool.free(jellyfish_demon);
 		}
 		
 	}
@@ -59,7 +63,7 @@ public class Remover {
 		FlyingSnake flying_snake = SpriteContainer.flying_snakes.getFirst();
 		if(flying_snake.life_timer > FlyingSnake.FLYING_SNAKE_LIFESPAN){
 			SpriteContainer.flying_snakes.removeFirst();
-			Level.poolManager.flying_snake_pool.free(flying_snake);
+			GameScreen.pool_manager.flying_snake_pool.free(flying_snake);
 		}
 	}
 	private static void removeHaloAttacks() {
@@ -69,7 +73,7 @@ public class Remover {
 		HaloAttack halo_attack = SpriteContainer.halo_attacks.getFirst();
 		if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
 			SpriteContainer.halo_attacks.removeFirst();
-			Level.poolManager.halo_attack_pool.free(halo_attack);
+			GameScreen.pool_manager.halo_attack_pool.free(halo_attack);
 		}
 		
 	}
@@ -81,7 +85,7 @@ public class Remover {
 		MusicNote music_note = SpriteContainer.music_notes.getFirst();
 		if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
 			SpriteContainer.music_notes.removeFirst();
-			Level.poolManager.music_note_pool.free(music_note);
+			GameScreen.pool_manager.music_note_pool.free(music_note);
 		}
 	}
 	
@@ -92,7 +96,7 @@ public class Remover {
 		Shockball shockball = SpriteContainer.shockballs.getFirst();
 		if(shockball.life_timer > Shockball.SHOCKBALL_LIFESPAN){
 			SpriteContainer.shockballs.removeFirst();
-			Level.poolManager.shockball_pool.free(shockball);
+			GameScreen.pool_manager.shockball_pool.free(shockball);
 		}	
 	}
 	
@@ -103,7 +107,7 @@ public class Remover {
 		SpiralAttack spiral_attack = SpriteContainer.spiral_attacks.getFirst();
 		if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
 			SpriteContainer.spiral_attacks.removeFirst();
-			Level.poolManager.spiral_attack_pool.free(spiral_attack);
+			GameScreen.pool_manager.spiral_attack_pool.free(spiral_attack);
 		}
 	}
 
@@ -125,22 +129,22 @@ public class Remover {
 
 		while(!SpriteContainer.volatile_platforms.isEmpty()){
 			Platform platform = SpriteContainer.volatile_platforms.removeFirst();
-			Level.poolManager.platform_pool.free(platform);			
+			GameScreen.pool_manager.platform_pool.free(platform);			
 		}
 		while(!SpriteContainer.ground_platforms.isEmpty()){
 			Platform platform = SpriteContainer.ground_platforms.removeFirst();
-			Level.poolManager.platform_pool.free(platform);	
+			GameScreen.pool_manager.platform_pool.free(platform);	
 		}
 		while(!SpriteContainer.static_platforms.isEmpty()){
 			Platform platform = SpriteContainer.static_platforms.removeFirst();
-			Level.poolManager.platform_pool.free(platform);
+			GameScreen.pool_manager.platform_pool.free(platform);
 		}
 	}
 
 	private static void clearJellyfishDemons() {
 		while(!SpriteContainer.jellyfish_demons.isEmpty()){
 			JellyfishDemon jellyfish_demon = SpriteContainer.jellyfish_demons.removeFirst();
-			Level.poolManager.jellyfish_demon_pool.free(jellyfish_demon);
+			GameScreen.pool_manager.jellyfish_demon_pool.free(jellyfish_demon);
 		}
 		
 	}
@@ -148,7 +152,7 @@ public class Remover {
 	private static void clearFlyingSnakes() {
 		while(!SpriteContainer.flying_snakes.isEmpty()){
 			FlyingSnake flying_snake = SpriteContainer.flying_snakes.removeFirst();
-			Level.poolManager.flying_snake_pool.free(flying_snake);
+			GameScreen.pool_manager.flying_snake_pool.free(flying_snake);
 		}
 		
 	}
@@ -156,7 +160,7 @@ public class Remover {
 	private static void clearHaloAttacks() {
 		while(!SpriteContainer.halo_attacks.isEmpty()){
 			HaloAttack halo_attack = SpriteContainer.halo_attacks.removeFirst();
-			Level.poolManager.halo_attack_pool.free(halo_attack);
+			GameScreen.pool_manager.halo_attack_pool.free(halo_attack);
 		}
 		
 	}
@@ -164,21 +168,21 @@ public class Remover {
 	private static void clearMusicNotes() {
 		while(!SpriteContainer.music_notes.isEmpty()){
 			MusicNote music_note = SpriteContainer.music_notes.removeFirst();
-			Level.poolManager.music_note_pool.free(music_note);
+			GameScreen.pool_manager.music_note_pool.free(music_note);
 		}		
 	}
 
 	private static void clearShockBalls() {
 		while(!SpriteContainer.shockballs.isEmpty()){
 			Shockball shockball = SpriteContainer.shockballs.removeFirst();
-			Level.poolManager.shockball_pool.free(shockball);
+			GameScreen.pool_manager.shockball_pool.free(shockball);
 		}		
 	}
 	
 	private static void clearSpiralAttacks(){
 		while(!SpriteContainer.spiral_attacks.isEmpty()){
 			SpiralAttack spiral_attack = SpriteContainer.spiral_attacks.removeFirst();
-			Level.poolManager.spiral_attack_pool.free(spiral_attack);
+			GameScreen.pool_manager.spiral_attack_pool.free(spiral_attack);
 		}
 	}
 	

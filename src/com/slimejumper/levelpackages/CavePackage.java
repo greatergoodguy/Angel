@@ -1,5 +1,5 @@
 package com.slimejumper.levelpackages;
 
-public class CavePackage {
+public class CavePackage extends Package{
 
 }

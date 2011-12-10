@@ -1,5 +1,5 @@
 package com.slimejumper.levelpackages;
 
-public class MenuPackage {
+public class MenuPackage extends Package{
 
 }

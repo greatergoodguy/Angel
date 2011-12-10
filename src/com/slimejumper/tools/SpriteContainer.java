@@ -40,7 +40,11 @@ public class SpriteContainer {
 
 	public static Hero hero = null;
 	
-	public static void initializeLists() {
+	public SpriteContainer(){
+		initializeLists();
+	}
+	
+	public void initializeLists() {
 		purple_ghosts = new LinkedList<PurpleGhost>();
 		jellyfish_demons = new LinkedList<JellyfishDemon>();
 		flying_snakes = new LinkedList<FlyingSnake>();
