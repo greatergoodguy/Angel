@@ -11,11 +11,9 @@ import com.slimejumper.world.enemies.PurpleGhost;
 
 public class ObstacleGenerator {
 		
-	Level world;
 	Random random;
 	
-	public ObstacleGenerator(Level world){
-		this.world = world;
+	public ObstacleGenerator(){
 		random = new Random();
 	}
 	
@@ -63,8 +61,6 @@ public class ObstacleGenerator {
 		jellyfish_demon1.reset(spawnPositionX1);
 		jellyfish_demon2.reset(spawnPositionX2);
 		SpriteContainer.jellyfish_demons.add(jellyfish_demon1);
-		SpriteContainer.jellyfish_demons.add(jellyfish_demon2);
-		
-		
+		SpriteContainer.jellyfish_demons.add(jellyfish_demon2);		
 	}
 }

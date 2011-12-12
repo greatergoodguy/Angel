@@ -2,51 +2,28 @@ package com.slimejumper.levels;
 
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.tools.ObstacleGeneratorManager;
+import com.slimejumper.tools.SpriteManager;
 
 public class CaveLevel extends Level{
-	public interface WorldListener {
-		public void jump();
-
-		public void killJump();
-
-		public void hit();
-
-		public void coin();
-	}
 
 	ObstacleGeneratorManager obstacle_generator_manager;
-	public final WorldListener listener;
-
+	
 	float level_timer;
 	int level_counter;
 
-	public CaveLevel(WorldListener listener) {
-//		initializeLists();
-		
-//		if(hero == null)
-//			World.hero = new Hero();
-		this.listener = listener;
+	public CaveLevel(WorldListener listener, SpriteManager sprite_manager) {
+		super(listener, sprite_manager);
 	
-		obstacle_generator_manager = new ObstacleGeneratorManager(this);
+		obstacle_generator_manager = new ObstacleGeneratorManager();
 
 		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
 		position = new Vector2();
 		
 		level_timer = 0;
 		level_counter = 1;
-		
-//		Platform.initializePlatformMap();
 	}
 
 	public void update(float deltaTime) {
-/*		
-		//First Update Sprites of this extended Class
-		updateSprites(deltaTime);
-		updateLevel(deltaTime);
-		
-		//Update Sprites and General Parameters (center, position, collisionManager, remover)
-		super.update();	
-*/
 		super.update(deltaTime);
 		updateLevel(deltaTime);
 	}

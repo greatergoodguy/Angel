@@ -2,15 +2,14 @@ package com.slimejumper.levels;
 import java.util.List;
 
 import com.slimejumper.Controller;
-import com.slimejumper.GameScreen;
 import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.CollisionManager;
-import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteContainer;
+import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
@@ -24,6 +23,16 @@ import com.slimejumper.world.enemies.PurpleGhost;
 
 public abstract class Level {
 
+	public interface WorldListener {
+		public void jump();
+
+		public void killJump();
+
+		public void hit();
+
+		public void coin();
+	}
+	
 	public static final float METER = 80; // 1 meter equals 80 pixels
 
 	public static final float WORLD_WIDTH = 10 * 2; // 10 refers to the visible
@@ -61,13 +70,18 @@ public abstract class Level {
 	public float width;
 	public float height;
 
-	public Level(){
-		
+
+	public final WorldListener listener;
+	public final SpriteManager sprite_manager;
+	
+	
+	public Level(WorldListener listener, SpriteManager sprite_manager){
+		this.listener = listener;
+		this.sprite_manager = sprite_manager;
 	}
 	
 	public static void initializeUniverse(){
 		CollisionManager.setCollidingHero(SpriteContainer.hero);
-		UnitCircle.initializeUnitCircle();
 		Backgrounds.initalizeParameters();
 		
 	}

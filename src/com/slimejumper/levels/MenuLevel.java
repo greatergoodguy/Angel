@@ -2,23 +2,13 @@ package com.slimejumper.levels;
 
 import com.slimejumper.GameScreen;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.SpriteContainer;
+import com.slimejumper.tools.SpriteManager;
 
 public class MenuLevel extends Level{
-	public interface WorldListener {
-		public void jump();
-
-		public void killJump();
-
-		public void hit();
-
-		public void coin();
-	}
 	
-	public MenuLevel(){		
-//		if(hero == null)
-//			World.hero = new Hero();
+	public MenuLevel(WorldListener listener, SpriteManager sprite_manager){
+		super(listener, sprite_manager);
 		
 		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
 		position = new Vector2();

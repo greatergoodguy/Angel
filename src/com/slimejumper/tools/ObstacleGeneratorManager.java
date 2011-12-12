@@ -6,7 +6,7 @@ import com.slimejumper.levels.Level;
 
 public class ObstacleGeneratorManager {
 	
-	Level world;
+//	Level world;
 	ObstacleGenerator obstacleShooter;
 	Random random;
 	
@@ -18,13 +18,9 @@ public class ObstacleGeneratorManager {
 	float level_one_timer;
 	float level_two_timer;
 	
-	public ObstacleGeneratorManager(Level world){
-		this.world = world;
-		obstacleShooter = new ObstacleGenerator(world);
+	public ObstacleGeneratorManager(){
+		obstacleShooter = new ObstacleGenerator();
 		random = new Random();
-		
-//		initializePlatformGround();
-//		initializePlatformMap();
 		
 		platform_timer = 0;
 		enemy_launch_timer = 0;

@@ -9,17 +9,16 @@ import com.slimejumper.gameframework.Game;
 import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
+import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.CaveLevel;
-import com.slimejumper.levels.CaveLevel.WorldListener;
 import com.slimejumper.levels.Level;
+import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.renderer.BaseRenderer;
-import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
-import com.slimejumper.tools.SpriteContainer;
-import com.slimejumper.tools.SpriteFactory;
+import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Platform;
 
@@ -47,21 +46,17 @@ public class GameScreen extends GLScreen {
 	static BaseRenderer renderer;
 	Vector2 touchPoint;
 
-	public SpriteContainer sprite_container;
 	public static PoolManager pool_manager;
-	public Remover remover;
-	public CollisionManager collision_manager;
-	public SpriteFactory sprite_factory;
+	public SpriteManager sprite_manager;
 	
 	public GameScreen(Game game) {
 		super(game);
 		game_timer = 0;
 		
-		sprite_container = new SpriteContainer();
-		pool_manager = new PoolManager();
-		remover = new Remover();
-		collision_manager = new CollisionManager();
-		sprite_factory = new SpriteFactory(pool_manager);
+		pool_manager = new PoolManager();		
+		sprite_manager = new SpriteManager();
+		
+		UnitCircle.initializeUnitCircle();
 		Level.initializeUniverse();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
@@ -79,9 +74,8 @@ public class GameScreen extends GLScreen {
 			}
 		};
 		
-		menuWorld = new MenuLevel();
-		gameWorld = new CaveLevel(worldListener);
-		active_world = menuWorld;
+		menuWorld = new MenuLevel(worldListener, sprite_manager);
+		gameWorld = new CaveLevel(worldListener, sprite_manager);
 		
 		renderer = new BaseRenderer(glGraphics, batcher, active_world);
 		touchPoint = new Vector2();
@@ -91,9 +85,11 @@ public class GameScreen extends GLScreen {
 	
 	public static void switchToMenuWorld(){
 		active_world = menuWorld;
-		Backgrounds.setActiveWorld(active_world);
+		renderer.resetActiveWorld(active_world);
+		Remover.clearAllLists();
 		Platform.initializePlatformGroundMinusOne();
 		Platform.initializePlatformMap();
+		Backgrounds.setActiveWorld(active_world);
 	}
 
 	public static void switchToGameWorld(){
