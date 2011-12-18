@@ -15,6 +15,7 @@ import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level;
 import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.renderer.BaseRenderer;
+import com.slimejumper.renderer.CaveRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Backgrounds;
@@ -37,9 +38,9 @@ public class CaveScreen extends GLScreen {
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
-	static CaveLevel gameWorld;
-	
-	static BaseRenderer renderer;
+	static CaveLevel cave_level;
+	CaveRenderer cave_renderer;
+
 	Vector2 touchPoint;
 
 	public SpriteManager sprite_manager;
@@ -49,9 +50,6 @@ public class CaveScreen extends GLScreen {
 		game_timer = 0;
 
 		sprite_manager = new SpriteManager();
-		
-		UnitCircle.initializeUnitCircle();
-		Level.initializeUniverse();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		controller = new Controller(guiCam);
@@ -68,21 +66,19 @@ public class CaveScreen extends GLScreen {
 			}
 		};
 		
-		gameWorld = new CaveLevel(worldListener, sprite_manager);
+		cave_level = new CaveLevel(worldListener, sprite_manager);
 		
-		renderer = new BaseRenderer(glGraphics, batcher, gameWorld);
+		cave_renderer = new CaveRenderer(glGraphics, batcher, cave_level);
 		touchPoint = new Vector2();
 		
-		switchToGameWorld();
+		initializeLevel();
 	}
 
-	public static void switchToGameWorld(){
+	public static void initializeLevel(){
 		Remover.clearAllLists();
 		Platform.initializePlatformGround();
-		Backgrounds.setActiveWorld(gameWorld);
+		Backgrounds.setActiveWorld(cave_level);
 	}
-	
-	boolean firstTime = true;
 	
 	@Override
 	public void update(float deltaTime) {
@@ -99,10 +95,10 @@ public class CaveScreen extends GLScreen {
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 		
-		gameWorld.processController(controller, touchEvents);
+		cave_level.processController(controller, touchEvents);
 	
 		// Update World
-		gameWorld.update(deltaTime);
+		cave_level.update(deltaTime);
 	}
 
 	public void present(float deltaTime) {
@@ -111,7 +107,7 @@ public class CaveScreen extends GLScreen {
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		
-		renderer.render();
+		cave_renderer.render();
 		guiCam.setViewportAndMatrices();
 	}
 

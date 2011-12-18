@@ -12,8 +12,8 @@ import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.gl.TextureRegion;
 import com.slimejumper.levels.CaveLevel;
-import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.levels.Level;
+import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.DynamicGameObject;
 import com.slimejumper.world.GameObject;
@@ -23,34 +23,30 @@ import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
 import com.slimejumper.world.attacks.SpiralAttack;
-import com.slimejumper.world.enemies.Enemy;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
-import com.slimejumper.world.enemies.RedWhaleDemon;
 
 
-public class BaseRenderer {
-	public static final float FRUSTUM_WIDTH = 10;
-	public static final float FRUSTUM_HEIGHT = 6;
-	public static final float FRUSTUM_WIDTH_OVER_TWO = FRUSTUM_WIDTH/2;
+public abstract class BaseRenderer {
+	public static final float BASE_RENDERER_FRUSTUM_WIDTH = 10;
+	public static final float BASE_RENDERER_FRUSTUM_HEIGHT = 6;
+	public static final float FRUSTUM_WIDTH_OVER_TWO = BASE_RENDERER_FRUSTUM_WIDTH/2;
+	
+	
 		
 	GLGraphics glGraphics;
 	public Camera2D cam;
 	SpriteBatcher batcher;
-	
+
 	Level active_world;			// Different Sprites are rendered for Different Worlds;
 	
 	public BaseRenderer(GLGraphics glGraphics, SpriteBatcher batcher,
 				Level world) {
 		this.glGraphics = glGraphics;
 		this.active_world = world;
-		this.cam = new Camera2D(glGraphics, FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+		this.cam = new Camera2D(glGraphics, BASE_RENDERER_FRUSTUM_WIDTH, BASE_RENDERER_FRUSTUM_HEIGHT);
 		this.batcher = batcher;
-	}
-	
-	public void resetActiveWorld(Level new_active_world){
-		active_world = new_active_world;
 	}
 	
 	public void renderSetUp(){
@@ -67,6 +63,9 @@ public class BaseRenderer {
 		gl.glDisable(GL10.GL_BLEND);
 	}
 	
+	public abstract void render();
+	
+/*
 	public void render(){		
 		renderSetUp();
 		
@@ -83,39 +82,41 @@ public class BaseRenderer {
 		renderTearDown();
 		
 	}
+*/
 
 	private void setCamera() {
 		cam.center = active_world.center;
 	}
-	
+
+/*	
 	private void renderBackgroundClouds() {
 		batcher.beginBatch(Assets.background_clouds);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				BaseRenderer.FRUSTUM_WIDTH, BaseRenderer.FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
+				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
 		batcher.endBatch();
 	}
 	
 	private void renderBackgroundBackLayer() {
 		batcher.beginBatch(Assets.background_back_layer);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				BaseRenderer.FRUSTUM_WIDTH, BaseRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
+				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
 		batcher.endBatch();		
 		
 		batcher.beginBatch(Assets.background_back_layer_2);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				BaseRenderer.FRUSTUM_WIDTH, BaseRenderer.FRUSTUM_HEIGHT, Assets.backgroundBackLayer2Region);
+				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundBackLayer2Region);
 		batcher.endBatch();		
 	}
 	
 	private void renderBackgroundMiddleLayer() {
 		batcher.beginBatch(Assets.background_middle_layer);
 		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				BaseRenderer.FRUSTUM_WIDTH, BaseRenderer.FRUSTUM_HEIGHT, Assets.backgroundMiddleLayerRegion);
+				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundMiddleLayerRegion);
 		batcher.endBatch();		
 	}
+*/
 
-
-	private void renderGameSprites(){
+	protected void renderGameSprites(){
 		batcher.beginBatch(Assets.game_sprites);
 		renderPlatforms();
 		renderPurpleGhosts();
@@ -226,16 +227,14 @@ public class BaseRenderer {
 		
 	}
 
-	private void renderHero() {
+	protected void renderHero() {
 		batcher.beginBatch(Assets.hero);
 		
 		renderHeroState();
 		renderHaloAttacks();
 		renderMusicNotes();
 		renderSpiralAttacks();
-		if(active_world instanceof CaveLevel){
-			renderForeground();
-		}
+		
 		batcher.endBatch();
 	}
 
@@ -299,7 +298,7 @@ public class BaseRenderer {
 			adjustGameSpriteOrientation(spiral_attack, Assets.spiral_attack.getKeyFrame(spiral_attack.life_timer,
 						Animation.ANIMATION_LOOPING), spiral_attack.angle);
 	}
-	
+/*	
 	private void renderForeground(){
 		float FOREGROUND_WIDTH = 5;
 		float FOREGROUND_HEIGHT = 1.4375f;		
@@ -319,7 +318,7 @@ public class BaseRenderer {
 			reflection_coefficient *= -1;
 		}
 	}
-	
+*/	
 	private void adjustHeroOrientation(TextureRegion region) {
 		switch(SpriteContainer.hero.facedirection){
 		case Hero.HERO_LEFT:

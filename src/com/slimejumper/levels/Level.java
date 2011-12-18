@@ -40,8 +40,8 @@ public abstract class Level {
 	public static final float WORLD_HEIGHT = 6 * 2; // 6 refers to the visible
 													// height
 
-	public static final float WORLD_CENTER_DEFAULT_X = BaseRenderer.FRUSTUM_WIDTH / 2;
-	public static final float WORLD_CENTER_DEFAULT_Y = BaseRenderer.FRUSTUM_HEIGHT / 2;
+	public static final float WORLD_CENTER_DEFAULT_X = BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH / 2;
+	public static final float WORLD_CENTER_DEFAULT_Y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT / 2;
 	
 	public static final float WORLD_GRAVITY = -8.5f;
 	public static final float WORLD_GRAVITY_TIMES_TWO = WORLD_GRAVITY * 2;
@@ -78,6 +78,9 @@ public abstract class Level {
 	public Level(WorldListener listener, SpriteManager sprite_manager){
 		this.listener = listener;
 		this.sprite_manager = sprite_manager;
+		
+		initializeUniverse();
+		UnitCircle.initializeUnitCircle();
 	}
 	
 	public static void initializeUniverse(){

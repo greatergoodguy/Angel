@@ -1,6 +1,5 @@
 package com.slimejumper.levels;
 
-import com.slimejumper.GameScreen;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
@@ -18,7 +17,8 @@ public class MenuLevel extends Level{
 		super.update(deltaTime);
 		if(SpriteContainer.hero.position.y < 0.0f){
 			SpriteContainer.hero.resetPositionLowerLeft(2, 11);
-			GameScreen.switchToGameWorld();
+			
+			// Switch to next level
 		}
 	}
 }
