@@ -1,13 +1,15 @@
 package com.slimejumper.renderer;
 
 import com.slimejumper.Assets;
+import com.slimejumper.Controller;
 import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.levels.Level;
 
 public class MenuRenderer extends BaseRenderer{
 
-	public MenuRenderer(GLGraphics glGraphics, SpriteBatcher batcher, Level level) {
+	public MenuRenderer(GLGraphics glGraphics, SpriteBatcher batcher, Level level,
+			Controller controller) {
 		super(glGraphics, batcher, level);
 	}
 	
@@ -25,7 +27,7 @@ public class MenuRenderer extends BaseRenderer{
 	}
 
 	private void renderController() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
