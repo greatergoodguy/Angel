@@ -2,8 +2,6 @@ package com.slimejumper.tools;
 
 import java.util.Random;
 
-import com.slimejumper.levels.Level;
-
 public class ObstacleGeneratorManager {
 	
 //	Level world;

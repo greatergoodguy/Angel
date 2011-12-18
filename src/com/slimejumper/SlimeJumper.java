@@ -8,13 +8,14 @@ import com.slimejumper.GameScreen;
 import com.slimejumper.Settings;
 import com.slimejumper.framework.impl.GLGame;
 import com.slimejumper.gameframework.Screen;
+import com.slimejumper.tools.PoolManager;
 
 public class SlimeJumper extends GLGame {
 	boolean firstTimeCreate = true;
 
 	public Screen getStartScreen() {
 		
-		return new GameScreen(this);
+		return new MenuScreen(this);
 	}
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config){
@@ -22,7 +23,7 @@ public class SlimeJumper extends GLGame {
 		
 		if(firstTimeCreate){
 			Settings.load(getFileIO());
-			Assets.load(this);
+			Assets.load(this);			
 			firstTimeCreate = false;
 		} else {
 			Assets.reload();

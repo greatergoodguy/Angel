@@ -46,14 +46,12 @@ public class GameScreen extends GLScreen {
 	static BaseRenderer renderer;
 	Vector2 touchPoint;
 
-	public static PoolManager pool_manager;
 	public SpriteManager sprite_manager;
 	
 	public GameScreen(Game game) {
 		super(game);
 		game_timer = 0;
-		
-		pool_manager = new PoolManager();		
+			
 		sprite_manager = new SpriteManager();
 		
 		UnitCircle.initializeUnitCircle();
@@ -87,7 +85,7 @@ public class GameScreen extends GLScreen {
 		active_world = menuWorld;
 		renderer.resetActiveWorld(active_world);
 		Remover.clearAllLists();
-		Platform.initializePlatformGroundMinusOne();
+		Platform.initializePlatformGround();
 		Platform.initializePlatformMap();
 		Backgrounds.setActiveWorld(active_world);
 	}

@@ -1,7 +1,8 @@
 package com.slimejumper.world.enemies;
 
 import com.slimejumper.Assets;
-import com.slimejumper.GameScreen;
+import com.slimejumper.SlimeJumper;
+import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.Shockball;
@@ -110,11 +111,11 @@ public class JellyfishDemon extends Enemy{
 	}
 	
 	public void activateDualShot(){
-		Shockball shockball1 = GameScreen.pool_manager.shockball_pool.newObject();
+		Shockball shockball1 = PoolManager.pool_manager_singleton.shockball_pool.newObject();
 		shockball1.reset(this);	
 		SpriteContainer.shockballs.add(shockball1);
 			
-		Shockball shockball2 = GameScreen.pool_manager.shockball_pool.newObject();
+		Shockball shockball2 = PoolManager.pool_manager_singleton.shockball_pool.newObject();
 		shockball2.reset(this);
 		SpriteContainer.shockballs.add(shockball2);
 	}

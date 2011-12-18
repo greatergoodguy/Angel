@@ -12,7 +12,7 @@ import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
 
 public class PoolManager {
-	
+	public static final PoolManager pool_manager_singleton = new PoolManager();
 
 	public Pool<Platform> platform_pool;
 	public Pool<PurpleGhost> purple_ghost_pool;
@@ -23,7 +23,7 @@ public class PoolManager {
 	public Pool<FlyingSnake> flying_snake_pool;
 	public Pool<SpiralAttack> spiral_attack_pool;
 	
-	public PoolManager(){
+	private PoolManager(){
 		PoolObjectFactory<Platform> platform_factory = new PoolObjectFactory<Platform>() {
 			public Platform createObject() {
 				return new Platform();

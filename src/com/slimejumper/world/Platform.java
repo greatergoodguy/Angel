@@ -5,7 +5,9 @@ import java.util.Collections;
 import android.util.Log;
 
 import com.slimejumper.GameScreen;
+import com.slimejumper.SlimeJumper;
 import com.slimejumper.levels.Level;
+import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.SpriteContainer;
 
 public class Platform extends DynamicGameObject{
@@ -259,7 +261,7 @@ public class Platform extends DynamicGameObject{
 		
 		while(x_coord < Level.WORLD_RIGHT_EDGE){
 			// create new Platform and add to list
-			platform = GameScreen.pool_manager.platform_pool.newObject();
+			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
 			platform.reset(x_coord, y_coord, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
@@ -282,7 +284,7 @@ public class Platform extends DynamicGameObject{
 		
 		while(x_coord < Level.WORLD_RIGHT_EDGE){
 			// create new Platform and add to list
-			platform = GameScreen.pool_manager.platform_pool.newObject();
+			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
 			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
@@ -291,7 +293,7 @@ public class Platform extends DynamicGameObject{
 		}
 		
 		platform = SpriteContainer.ground_platforms.removeLast();
-		GameScreen.pool_manager.platform_pool.free(platform);
+		PoolManager.pool_manager_singleton.platform_pool.free(platform);
 	}
 	
 	public static void initializePlatformMap(){
@@ -312,7 +314,7 @@ public class Platform extends DynamicGameObject{
 		
 		while(y_coord < Level.WORLD_TOP_BOUND){
 			while(x_coord < Level.WORLD_RIGHT_EDGE){
-				platform = GameScreen.pool_manager.platform_pool.newObject();
+				platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
 				platform.reset(x_coord, y_coord, map_platform_length, Platform.PLATFORM_STATE_STILL);
 				SpriteContainer.static_platforms.add(platform);
 			
