@@ -11,12 +11,10 @@ import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level;
-import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.levels.Level.WorldListener;
+import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.renderer.BaseRenderer;
-import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Backgrounds;
@@ -39,7 +37,7 @@ public class MenuScreen extends GLScreen{
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
-	static MenuLevel menuWorld;
+	static MenuLevel menuLevel;
 	
 	static BaseRenderer renderer;
 	Vector2 touchPoint;
@@ -70,8 +68,8 @@ public class MenuScreen extends GLScreen{
 			}
 		};
 		
-		menuWorld = new MenuLevel(worldListener, sprite_manager);		
-		renderer = new BaseRenderer(glGraphics, batcher, menuWorld);
+		menuLevel = new MenuLevel(worldListener, sprite_manager);		
+		renderer = new BaseRenderer(glGraphics, batcher, menuLevel);
 		touchPoint = new Vector2();
 		
 		switchToMenuWorld();
@@ -81,7 +79,7 @@ public class MenuScreen extends GLScreen{
 		Remover.clearAllLists();
 		Platform.initializePlatformGround();
 		Platform.initializePlatformMap();
-		Backgrounds.setActiveWorld(menuWorld);
+		Backgrounds.setActiveWorld(menuLevel);
 	}
 	
 	@Override
@@ -99,10 +97,10 @@ public class MenuScreen extends GLScreen{
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 		
-		menuWorld.processController(controller, touchEvents);
+		menuLevel.processController(controller, touchEvents);
 	
 		// Update World
-		menuWorld.update(deltaTime);
+		menuLevel.update(deltaTime);
 	}
 
 	public void present(float deltaTime) {

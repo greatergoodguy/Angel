@@ -16,7 +16,6 @@ import com.slimejumper.levels.Level;
 import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.renderer.BaseRenderer;
-import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Backgrounds;

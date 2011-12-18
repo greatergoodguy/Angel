@@ -14,9 +14,7 @@ import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level;
 import com.slimejumper.levels.Level.WorldListener;
-import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.renderer.BaseRenderer;
-import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Backgrounds;
@@ -39,9 +37,7 @@ public class CaveScreen extends GLScreen {
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
-	static Level active_world;
-	static MenuLevel menuWorld;
-	static Level gameWorld;
+	static CaveLevel gameWorld;
 	
 	static BaseRenderer renderer;
 	Vector2 touchPoint;
@@ -72,30 +68,18 @@ public class CaveScreen extends GLScreen {
 			}
 		};
 		
-		menuWorld = new MenuLevel(worldListener, sprite_manager);
 		gameWorld = new CaveLevel(worldListener, sprite_manager);
 		
-		renderer = new BaseRenderer(glGraphics, batcher, active_world);
+		renderer = new BaseRenderer(glGraphics, batcher, gameWorld);
 		touchPoint = new Vector2();
 		
 		switchToGameWorld();
 	}
-	
-	public static void switchToMenuWorld(){
-		active_world = menuWorld;
-		renderer.resetActiveWorld(active_world);
-		Remover.clearAllLists();
-		Platform.initializePlatformGroundMinusOne();
-		Platform.initializePlatformMap();
-		Backgrounds.setActiveWorld(active_world);
-	}
 
 	public static void switchToGameWorld(){
-		active_world = gameWorld;
-		renderer.resetActiveWorld(active_world);
 		Remover.clearAllLists();
 		Platform.initializePlatformGround();
-		Backgrounds.setActiveWorld(active_world);
+		Backgrounds.setActiveWorld(gameWorld);
 	}
 	
 	boolean firstTime = true;
@@ -115,10 +99,10 @@ public class CaveScreen extends GLScreen {
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 		
-		active_world.processController(controller, touchEvents);
+		gameWorld.processController(controller, touchEvents);
 	
 		// Update World
-		active_world.update(deltaTime);
+		gameWorld.update(deltaTime);
 	}
 
 	public void present(float deltaTime) {
