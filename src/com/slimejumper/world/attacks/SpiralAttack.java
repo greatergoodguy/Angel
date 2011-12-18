@@ -1,7 +1,5 @@
 package com.slimejumper.world.attacks;
 
-import com.slimejumper.GameScreen;
-import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Hero;
 
 public class SpiralAttack extends Attack{

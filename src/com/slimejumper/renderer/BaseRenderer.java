@@ -36,22 +36,21 @@ public abstract class BaseRenderer {
 	
 		
 	GLGraphics glGraphics;
-	public Camera2D cam;
 	SpriteBatcher batcher;
 
-	Level active_world;			// Different Sprites are rendered for Different Worlds;
+	protected Camera2D cam;
+	protected Level level;			// Different Sprites are rendered for Different Worlds;
 	
 	public BaseRenderer(GLGraphics glGraphics, SpriteBatcher batcher,
-				Level world) {
+				Level level) {
 		this.glGraphics = glGraphics;
-		this.active_world = world;
+		this.level = level;
 		this.cam = new Camera2D(glGraphics, BASE_RENDERER_FRUSTUM_WIDTH, BASE_RENDERER_FRUSTUM_HEIGHT);
 		this.batcher = batcher;
 	}
 	
 	public void renderSetUp(){
-		setCamera();
-		
+		cam.center = level.center;
 		cam.setViewportAndMatrices();
 		GL10 gl = glGraphics.getGL();
 		gl.glEnable(GL10.GL_BLEND);
@@ -64,57 +63,6 @@ public abstract class BaseRenderer {
 	}
 	
 	public abstract void render();
-	
-/*
-	public void render(){		
-		renderSetUp();
-		
-		if(active_world instanceof CaveLevel){
-			renderBackgroundBackLayer();
-			renderBackgroundMiddleLayer();
-		}
-		else if(active_world instanceof MenuLevel)
-			renderBackgroundClouds();
-		
-		renderGameSprites();
-		renderHero();		// Foreground is rendered via a conditional in this function
-		
-		renderTearDown();
-		
-	}
-*/
-
-	private void setCamera() {
-		cam.center = active_world.center;
-	}
-
-/*	
-	private void renderBackgroundClouds() {
-		batcher.beginBatch(Assets.background_clouds);
-		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
-		batcher.endBatch();
-	}
-	
-	private void renderBackgroundBackLayer() {
-		batcher.beginBatch(Assets.background_back_layer);
-		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
-		batcher.endBatch();		
-		
-		batcher.beginBatch(Assets.background_back_layer_2);
-		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundBackLayer2Region);
-		batcher.endBatch();		
-	}
-	
-	private void renderBackgroundMiddleLayer() {
-		batcher.beginBatch(Assets.background_middle_layer);
-		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
-				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundMiddleLayerRegion);
-		batcher.endBatch();		
-	}
-*/
 
 	protected void renderGameSprites(){
 		batcher.beginBatch(Assets.game_sprites);
@@ -163,7 +111,7 @@ public abstract class BaseRenderer {
 		if(SpriteContainer.purple_ghosts.isEmpty())
 			return;
 		for(PurpleGhost purple_ghost : SpriteContainer.purple_ghosts)
-			batcher.drawSpriteReverse(purple_ghost, Assets.PurpleGhost);
+			batcher.drawSpriteCenterReverse(purple_ghost, Assets.PurpleGhost);
 		
 	}
 	
@@ -204,16 +152,16 @@ public abstract class BaseRenderer {
 		for(FlyingSnake flying_snake : SpriteContainer.flying_snakes){
 			switch(flying_snake.state){
 			case FlyingSnake.FLYING_SNAKE_STATE_STANDARD:
-				batcher.drawSprite(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
+				batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
 				break;
 			case FlyingSnake.FLYING_SNAKE_STATE_ATTACK_CHARGE:
-				batcher.drawSprite(flying_snake, Assets.flying_snake_attack.getKeyFrame(flying_snake.state_timer, Animation.ANIMATION_NONLOOPING));
+				batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_attack.getKeyFrame(flying_snake.state_timer, Animation.ANIMATION_NONLOOPING));
 				break;
 			case FlyingSnake.FLYING_SNAKE_STATE_ATTACK:
-				batcher.drawSprite(flying_snake, Assets.flyingSnakeAttackFrame);
+				batcher.drawSpriteCenter(flying_snake, Assets.flyingSnakeAttackFrame);
 				break;
 			case FlyingSnake.FLYING_SNAKE_STATE_RELOAD:
-				batcher.drawSprite(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
+				batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
 				break;
 			}
 		}
@@ -223,7 +171,7 @@ public abstract class BaseRenderer {
 		if(SpriteContainer.shockballs.isEmpty())
 			return;
 		for(Shockball shockball : SpriteContainer.shockballs)
-			batcher.drawSprite(shockball, Assets.shockball.getKeyFrame(shockball.life_timer, Animation.ANIMATION_LOOPING));
+			batcher.drawSpriteCenter(shockball, Assets.shockball.getKeyFrame(shockball.life_timer, Animation.ANIMATION_LOOPING));
 		
 	}
 
@@ -288,7 +236,7 @@ public abstract class BaseRenderer {
 		if(SpriteContainer.music_notes.isEmpty())
 			return;
 		for(MusicNote music_note : SpriteContainer.music_notes)
-			batcher.drawSprite(music_note, Assets.musicNoteFrame1);
+			batcher.drawSpriteCenter(music_note, Assets.musicNoteFrame1);
 	}
 	
 	private void renderSpiralAttacks() {
@@ -322,10 +270,10 @@ public abstract class BaseRenderer {
 	private void adjustHeroOrientation(TextureRegion region) {
 		switch(SpriteContainer.hero.facedirection){
 		case Hero.HERO_LEFT:
-			batcher.drawSpriteReverse(SpriteContainer.hero, region);
+			batcher.drawSpriteCenterReverse(SpriteContainer.hero, region);
 			break;
 		case Hero.HERO_RIGHT:
-			batcher.drawSprite(SpriteContainer.hero, region);
+			batcher.drawSpriteCenter(SpriteContainer.hero, region);
 			break;
 		}
 	}
@@ -334,10 +282,10 @@ public abstract class BaseRenderer {
 			TextureRegion region) {
 		switch(object.facedirection){
 		case GameObject.SPRITE_LEFT:
-			batcher.drawSpriteReverse(object, region);
+			batcher.drawSpriteCenterReverse(object, region);
 			break;
 		case GameObject.SPRITE_RIGHT:
-			batcher.drawSprite(object, region);
+			batcher.drawSpriteCenter(object, region);
 			break;
 		}
 	}

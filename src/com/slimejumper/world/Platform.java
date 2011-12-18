@@ -4,8 +4,6 @@ import java.util.Collections;
 
 import android.util.Log;
 
-import com.slimejumper.GameScreen;
-import com.slimejumper.SlimeJumper;
 import com.slimejumper.levels.Level;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.SpriteContainer;

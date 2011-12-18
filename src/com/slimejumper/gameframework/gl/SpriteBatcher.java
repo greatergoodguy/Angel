@@ -58,7 +58,7 @@ public class SpriteBatcher {
 */
 	
 	
-	public void drawSprite(GameObject sprite, TextureRegion region){
+	public void drawSpriteCenter(GameObject sprite, TextureRegion region){
 		drawSpriteCenter(sprite.center.x, sprite.center.y, sprite.width, sprite.height, region);
 	}
 	
@@ -66,13 +66,18 @@ public class SpriteBatcher {
 		drawSpriteCenter(sprite.center.x, sprite.center.y, sprite.width, sprite.height, angle, region);
 	}
 	
-	public void drawSpriteReverse(GameObject sprite, TextureRegion region){
+	public void drawSpriteCenterReverse(GameObject sprite, TextureRegion region){
 		drawSpriteCenter(sprite.center.x, sprite.center.y, sprite.width * -1, sprite.height, region);
 	}
 	
 	public void drawSpriteCenterReverse(GameObject sprite, TextureRegion region, float angle){
 		drawSpriteCenter(sprite.center.x, sprite.center.y, sprite.width * -1, sprite.height, angle, region);
 	}
+	
+	public void drawSpriteLowerLeftReverse(float lower_left_x, float lower_left_y, float width, float height, TextureRegion region){
+		drawSpriteCenter(lower_left_x + width/2, lower_left_y + height/2, width * -1, height, region);
+	}
+		
 	
 	public void drawSpriteLowerLeft(float lower_left_x, float lower_left_y, float width, float height, TextureRegion region){
 		// Check to make sure Sprite is within the World Bounds

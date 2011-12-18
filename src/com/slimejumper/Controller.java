@@ -6,6 +6,8 @@ import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.world.Hero;
 
 public class Controller {
+	public static final float CONTROLLER_ICON_WIDTH = 2.5f;
+	public static final float CONTROLLER_ICON_HEIGHT = 3;
 	
 	public static final int CONTROLLER_LEFT = 0;
 	public static final int CONTROLLER_RIGHT = 1;
@@ -13,12 +15,14 @@ public class Controller {
 	private static int pointerIdDefault = -30;
 	public static int leftPointerId = pointerIdDefault;
 	public static int rightPointerId = pointerIdDefault;
+	public static int attackPointerId = pointerIdDefault;
 
 	public boolean LeftButtonDown = false;
 	public boolean RightButtonDown = false;
 	public int active_control;
 	
 	public boolean fireAttack = false;
+	public boolean fireAttackDown = false;
 
 	static Vector2 touchPoint;
 
@@ -50,7 +54,10 @@ public class Controller {
 				active_control = CONTROLLER_LEFT;
 			} else if((touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y) || 
 						(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y)){
+				attackPointerId = event.pointer;
 				fireAttack = true;
+				fireAttackDown = true;
+				
 			}
 		}
 
@@ -71,6 +78,13 @@ public class Controller {
 					LeftButtonDown = false;
 				}
 
+			} else if (event.pointer == attackPointerId) {
+				if((touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y) || 
+						(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y)){
+					fireAttackDown = true;
+				} else {
+					fireAttackDown = false;
+				}
 			}
 		}
 
@@ -82,6 +96,10 @@ public class Controller {
 			else if (event.pointer == leftPointerId){
 				LeftButtonDown = false;
 				leftPointerId = pointerIdDefault;
+			}
+			else if (event.pointer == attackPointerId){
+				fireAttackDown = false;
+				attackPointerId = pointerIdDefault;
 			}
 		}
 	}

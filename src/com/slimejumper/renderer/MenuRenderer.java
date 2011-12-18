@@ -8,9 +8,13 @@ import com.slimejumper.levels.Level;
 
 public class MenuRenderer extends BaseRenderer{
 
+	Controller controller;
+	
 	public MenuRenderer(GLGraphics glGraphics, SpriteBatcher batcher, Level level,
 			Controller controller) {
 		super(glGraphics, batcher, level);
+		
+		this.controller = controller;
 	}
 	
 	public void render(){
@@ -26,15 +30,54 @@ public class MenuRenderer extends BaseRenderer{
 		renderTearDown();
 	}
 
-	private void renderController() {
-		
-		
-	}
-
 	private void renderBackgroundClouds() {
 		batcher.beginBatch(Assets.background_clouds);
-		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
+		batcher.drawSpriteLowerLeft(level.position.x, level.position.y, 
 				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundCloudsRegion);
 		batcher.endBatch();
+	}
+	
+	private void renderController() {
+		batcher.beginBatch(Assets.controller_icons);
+
+		/*
+		 * Left Arrow
+		 */
+		if(!controller.LeftButtonDown)
+			batcher.drawSpriteLowerLeftReverse(level.position.x, level.position.y,
+				Controller.CONTROLLER_ICON_WIDTH, Controller.CONTROLLER_ICON_HEIGHT, Assets.arrow_unpressed);
+		else
+			batcher.drawSpriteLowerLeftReverse(level.position.x, level.position.y,
+				Controller.CONTROLLER_ICON_WIDTH, Controller.CONTROLLER_ICON_HEIGHT, Assets.arrow_pressed);
+		
+		/*
+		 * Right Arrow
+		 */
+		if(!controller.RightButtonDown)
+			batcher.drawSpriteLowerLeft(level.position.x + 3*Controller.CONTROLLER_ICON_WIDTH, level.position.y,
+				Controller.CONTROLLER_ICON_WIDTH, Controller.CONTROLLER_ICON_HEIGHT, Assets.arrow_unpressed);
+		else
+			batcher.drawSpriteLowerLeft(level.position.x + 3*Controller.CONTROLLER_ICON_WIDTH, level.position.y,
+				Controller.CONTROLLER_ICON_WIDTH, Controller.CONTROLLER_ICON_HEIGHT, Assets.arrow_pressed);
+			
+		/*
+		 * Attack Icon
+		 */
+		if(!controller.fireAttackDown){
+			batcher.drawSpriteLowerLeftReverse(level.position.x, level.position.y + Controller.CONTROLLER_ICON_HEIGHT,
+				Controller.CONTROLLER_ICON_WIDTH, Controller.CONTROLLER_ICON_HEIGHT, Assets.attack_unpressed);
+		
+			batcher.drawSpriteLowerLeft(level.position.x + 3*Controller.CONTROLLER_ICON_WIDTH, level.position.y + Controller.CONTROLLER_ICON_HEIGHT,
+				Controller.CONTROLLER_ICON_WIDTH, Controller.CONTROLLER_ICON_HEIGHT, Assets.attack_unpressed);
+		}
+		else{
+			batcher.drawSpriteLowerLeftReverse(level.position.x, level.position.y + Controller.CONTROLLER_ICON_HEIGHT,
+				Controller.CONTROLLER_ICON_WIDTH, Controller.CONTROLLER_ICON_HEIGHT, Assets.attack_pressed);
+			
+			batcher.drawSpriteLowerLeft(level.position.x + 3*Controller.CONTROLLER_ICON_WIDTH, level.position.y + Controller.CONTROLLER_ICON_HEIGHT,
+				Controller.CONTROLLER_ICON_WIDTH, Controller.CONTROLLER_ICON_HEIGHT, Assets.attack_pressed);
+		}
+		
+		batcher.endBatch();		
 	}
 }

@@ -27,19 +27,19 @@ public class CaveRenderer extends BaseRenderer{
 	
 	private void renderBackgroundBackLayer() {
 		batcher.beginBatch(Assets.background_back_layer);
-		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
+		batcher.drawSpriteLowerLeft(level.position.x, level.position.y, 
 				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
 		batcher.endBatch();		
 		
 		batcher.beginBatch(Assets.background_back_layer_2);
-		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
+		batcher.drawSpriteLowerLeft(level.position.x, level.position.y, 
 				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundBackLayer2Region);
 		batcher.endBatch();		
 	}
 	
 	private void renderBackgroundMiddleLayer() {
 		batcher.beginBatch(Assets.background_middle_layer);
-		batcher.drawSpriteLowerLeft(active_world.position.x, active_world.position.y, 
+		batcher.drawSpriteLowerLeft(level.position.x, level.position.y, 
 				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundMiddleLayerRegion);
 		batcher.endBatch();		
 	}

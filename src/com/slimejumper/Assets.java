@@ -157,6 +157,12 @@ public class Assets {
 	
 	public static Animation flying_snake_reload;
 	
+	public static Texture controller_icons;
+	public static TextureRegion arrow_pressed;
+	public static TextureRegion arrow_unpressed;
+	public static TextureRegion attack_pressed;
+	public static TextureRegion attack_unpressed;
+	
 	public static void load(GLGame game){
 		hero = new Texture(game, "Hero.png");
 		heroRegion = new TextureRegion(hero, 0, 0, 80, 80);
@@ -407,6 +413,12 @@ public class Assets {
 				flyingSnakeStandardFrame3,
 				flyingSnakeStandardFrame2
 				);
+		
+		controller_icons = new Texture(game, "Icons.png");
+		arrow_unpressed = new TextureRegion(controller_icons, 0, 0, 240, 200);
+		arrow_pressed = new TextureRegion(controller_icons, 0, 200, 240, 200);
+		attack_unpressed = new TextureRegion(controller_icons, 240, 0, 240, 200);
+		attack_pressed = new TextureRegion(controller_icons, 240, 200, 240, 200);
 	}
 	
 	public static void reload(){
