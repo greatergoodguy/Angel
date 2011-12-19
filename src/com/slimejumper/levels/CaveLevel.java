@@ -1,6 +1,5 @@
 package com.slimejumper.levels;
 
-import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.tools.ObstacleGeneratorManager;
 import com.slimejumper.tools.SpriteManager;
 
@@ -15,9 +14,6 @@ public class CaveLevel extends Level{
 		super(listener, sprite_manager);
 	
 		obstacle_generator_manager = new ObstacleGeneratorManager();
-
-		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
-		position = new Vector2();
 		
 		level_timer = 0;
 		level_counter = 1;

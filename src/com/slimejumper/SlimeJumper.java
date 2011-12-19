@@ -11,7 +11,7 @@ public class SlimeJumper extends GLGame {
 
 	public Screen getStartScreen() {
 		
-		return new MenuScreen(this);
+		return new CaveScreen(this);
 	}
 	
 	public void onSurfaceCreated(GL10 gl, EGLConfig config){

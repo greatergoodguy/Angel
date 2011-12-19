@@ -81,6 +81,9 @@ public abstract class Level {
 		
 		initializeUniverse();
 		UnitCircle.initializeUnitCircle();
+		
+		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
+		position = new Vector2();
 	}
 	
 	public static void initializeUniverse(){
