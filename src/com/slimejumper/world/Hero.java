@@ -63,7 +63,6 @@ public class Hero extends DynamicGameObject{
 	public static final float HERO_ATTACK_LAUNCH_TIMER = Assets.HERO_HALO_ATTACK_1_FRAME_DURATION * 3;
 	
 	public int state;
-	public int moveDirection;
 
 	public boolean attack_launched;
 	
@@ -79,7 +78,6 @@ public class Hero extends DynamicGameObject{
 		
 		state = HERO_STATE_FALL;
 		facedirection = HERO_LEFT;
-		moveDirection = HERO_NEUTRAL;
 		accel.set(0, Level.WORLD_GRAVITY);
 		
 		attack_launched = false;
@@ -98,7 +96,7 @@ public class Hero extends DynamicGameObject{
 //		deathLoop();
 		checkSideBounds();
 
-		adjustVectors();
+//		adjustVectors();
 		adjustFaceDirection();
 		checkInvincibility(deltaTime);
 		
@@ -293,25 +291,14 @@ public class Hero extends DynamicGameObject{
 			state == HERO_STATE_LAND ||
 			state == HERO_STATE_BASIC_ATTACK){
 			
-			
-			switch(moveDirection){
-			case HERO_LEFT:
-				moveLeft();
-				break;
-			case HERO_RIGHT:
-				moveRight();
-				break;
-			case HERO_NEUTRAL:
-				moveCancel();
-				break;
-			}
-			if(velocity.y < HERO_MAX_VELY)
-				velocity.y = HERO_MAX_VELY;
 		}
 		
 		else if(state == HERO_STATE_COLLIDED){
 			
 		}
+		
+		if(velocity.y < HERO_MAX_VELY)
+			velocity.y = HERO_MAX_VELY;
 	}
 
 	public void reboundPlatform(GameObject platform){

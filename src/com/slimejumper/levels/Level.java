@@ -73,11 +73,13 @@ public abstract class Level {
 
 	public final WorldListener listener;
 	public final SpriteManager sprite_manager;
+	public final Controller controller;
 	
 	
-	public Level(WorldListener listener, SpriteManager sprite_manager){
+	public Level(WorldListener listener, SpriteManager sprite_manager, Controller controller){
 		this.listener = listener;
 		this.sprite_manager = sprite_manager;
+		this.controller = controller;
 		
 		initializeUniverse();
 		UnitCircle.initializeUnitCircle();
@@ -87,7 +89,6 @@ public abstract class Level {
 	}
 	
 	public static void initializeUniverse(){
-		CollisionManager.setCollidingHero(SpriteContainer.hero);
 		Backgrounds.initalizeParameters();
 		
 	}
@@ -106,8 +107,10 @@ public abstract class Level {
 		Backgrounds.update();
 		updatePlatforms(deltaTime);
 		updateEnemies(deltaTime);
-		SpriteContainer.hero.update(deltaTime);
 		updateAttacks(deltaTime);
+		
+		updateHero(deltaTime);
+		updateShadowHero(deltaTime);
 	}
 
 	private static void updatePlatforms(float deltaTime) {
@@ -137,6 +140,33 @@ public abstract class Level {
 			spiral_attack.update(deltaTime);
 	}
 
+	private void updateHero(float deltaTime) {
+		if(controller.fireAttack){
+			if(SpriteContainer.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
+				SpriteContainer.hero.changeToBasicAttackState();
+			controller.fireAttack = false;
+		}
+		
+		int controller_move_direction = Controller.processMoveDirection(controller);
+		
+		switch(controller_move_direction){
+		case Controller.CONTROLLER_LEFT:
+			SpriteContainer.hero.moveLeft();
+			break;
+		case Controller.CONTROLLER_RIGHT:
+			SpriteContainer.hero.moveRight();
+			break;
+		case Controller.CONTROLLER_NEUTRAL:
+			SpriteContainer.hero.moveCancel();
+			break;
+		}
+		
+		SpriteContainer.hero.update(deltaTime);
+	}
+	
+	private void updateShadowHero(float deltaTime) {
+		SpriteContainer.shadow_hero.update(deltaTime);
+	}
 	
 	private void updateCenter() {
 		// Checks Horizontal Bounds
@@ -169,12 +199,17 @@ public abstract class Level {
 		for(int i=0; i<len; i++){
 			TouchEvent event = touchEvents.get(i);
 			controller.input(event);
+/*			
 			if(controller.fireAttack){
 				if(SpriteContainer.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
 					SpriteContainer.hero.changeToBasicAttackState();
 				controller.fireAttack = false;
 			}
+*/
+
+/*			
 			SpriteContainer.hero.moveDirection = Controller.processMoveDirection(controller);
+*/			
 		}
 		
 	}

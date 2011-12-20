@@ -1,12 +1,13 @@
 package com.slimejumper.levels;
 
+import com.slimejumper.Controller;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
 
 public class MenuLevel extends Level{
 	
-	public MenuLevel(WorldListener listener, SpriteManager sprite_manager){
-		super(listener, sprite_manager);
+	public MenuLevel(WorldListener listener, SpriteManager sprite_manager, Controller controller){
+		super(listener, sprite_manager, controller);
 	}
 	
 	public void update(float deltaTime){		

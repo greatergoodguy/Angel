@@ -23,6 +23,7 @@ public class TesterRenderer extends BaseRenderer{
 		renderBackgroundClouds();
 		
 		renderGameSprites();
+		renderShadowHero();
 		renderHero();
 		
 		renderController();

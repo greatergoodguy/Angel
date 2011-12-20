@@ -1,11 +1,12 @@
 package com.slimejumper.levels;
 
+import com.slimejumper.Controller;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
 
 public class TesterLevel extends Level{
-	public TesterLevel(WorldListener listener, SpriteManager sprite_manager){
-		super(listener, sprite_manager);
+	public TesterLevel(WorldListener listener, SpriteManager sprite_manager, Controller controller){
+		super(listener, sprite_manager, controller);
 	}
 	
 	public void update(float deltaTime){		

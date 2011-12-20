@@ -63,7 +63,7 @@ public class MenuScreen extends GLScreen{
 			}
 		};
 		
-		menuLevel = new MenuLevel(worldListener, sprite_manager);		
+		menuLevel = new MenuLevel(worldListener, sprite_manager, controller);		
 		renderer = new MenuRenderer(glGraphics, batcher, menuLevel, controller);
 		touchPoint = new Vector2();
 		

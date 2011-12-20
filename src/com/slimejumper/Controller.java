@@ -3,7 +3,6 @@ package com.slimejumper;
 import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.world.Hero;
 
 public class Controller {
 	public static final float CONTROLLER_ICON_WIDTH = 2.5f;
@@ -11,6 +10,7 @@ public class Controller {
 	
 	public static final int CONTROLLER_LEFT = 0;
 	public static final int CONTROLLER_RIGHT = 1;
+	public static final int CONTROLLER_NEUTRAL = 2;
 	
 	private static int pointerIdDefault = -30;
 	public static int leftPointerId = pointerIdDefault;
@@ -103,12 +103,13 @@ public class Controller {
 			}
 		}
 	}
-	
+
+/*
 	public static int processMoveDirection(Controller controller) {		
 		if(controller.RightButtonDown && controller.LeftButtonDown){
-			if(controller.active_control == Controller.CONTROLLER_LEFT)
+			if(controller.active_control == CONTROLLER_LEFT)
 				return Hero.HERO_LEFT;
-			else if(controller.active_control == Controller.CONTROLLER_RIGHT)
+			else if(controller.active_control == CONTROLLER_RIGHT)
 				return Hero.HERO_RIGHT;
 			else
 				return Hero.HERO_RIGHT;
@@ -119,5 +120,23 @@ public class Controller {
 			return Hero.HERO_LEFT;
 		else
 			return Hero.HERO_NEUTRAL;
+	}
+*/	
+	
+	public static int processMoveDirection(Controller controller) {		
+		if(controller.RightButtonDown && controller.LeftButtonDown){
+			if(controller.active_control == CONTROLLER_LEFT)
+				return CONTROLLER_LEFT;
+			else if(controller.active_control == CONTROLLER_RIGHT)
+				return CONTROLLER_RIGHT;
+			else
+				return CONTROLLER_RIGHT;
+		}
+		else if(controller.RightButtonDown)
+			return CONTROLLER_RIGHT;
+		else if(controller.LeftButtonDown)
+			return CONTROLLER_LEFT;
+		else
+			return CONTROLLER_NEUTRAL;
 	}
 }

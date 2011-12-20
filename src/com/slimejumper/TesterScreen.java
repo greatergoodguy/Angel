@@ -10,9 +10,9 @@ import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.levels.Level.WorldListener;
-import com.slimejumper.renderer.MenuRenderer;
+import com.slimejumper.levels.TesterLevel;
+import com.slimejumper.renderer.TesterRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Backgrounds;
@@ -33,8 +33,8 @@ public class TesterScreen extends GLScreen{
 	SpriteBatcher batcher;
 	WorldListener worldListener;
 	
-	static MenuLevel menuLevel;
-	MenuRenderer renderer;
+	static TesterLevel tester_level;
+	TesterRenderer tester_renderer;
 	
 	Vector2 touchPoint;
 
@@ -61,8 +61,8 @@ public class TesterScreen extends GLScreen{
 			}
 		};
 		
-		menuLevel = new MenuLevel(worldListener, sprite_manager);		
-		renderer = new MenuRenderer(glGraphics, batcher, menuLevel, controller);
+		tester_level = new TesterLevel(worldListener, sprite_manager, controller);		
+		tester_renderer = new TesterRenderer(glGraphics, batcher, tester_level, controller);
 		touchPoint = new Vector2();
 		
 		initializeLevel();
@@ -72,7 +72,7 @@ public class TesterScreen extends GLScreen{
 		Remover.clearAllLists();
 		Platform.initializePlatformGround();
 		Platform.initializePlatformMap();
-		Backgrounds.setActiveWorld(menuLevel);
+		Backgrounds.setActiveWorld(tester_level);
 	}
 	
 	@Override
@@ -90,10 +90,10 @@ public class TesterScreen extends GLScreen{
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
 		
-		menuLevel.processController(controller, touchEvents);
+		tester_level.processController(controller, touchEvents);
 	
 		// Update World
-		menuLevel.update(deltaTime);
+		tester_level.update(deltaTime);
 	}
 
 	public void present(float deltaTime) {
@@ -102,7 +102,7 @@ public class TesterScreen extends GLScreen{
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		
-		renderer.render();
+		tester_renderer.render();
 		guiCam.setViewportAndMatrices();
 	}
 

@@ -11,37 +11,33 @@ import com.slimejumper.world.enemies.PurpleGhost;
 public class CollisionManager {
 	
 	public static final float COLLISION_TOLERANCE = 0.17f;
-	public static Hero hero = null;
-	
-	public static void setCollidingHero(Hero active_hero){
-		hero = active_hero;
-	}
 	
 	public static void manageCollisions(){
 		heroConcentratedCollisions();
+		shadowHeroConcentratedCollisions();
 		jellyfishDemonConcentratedCollisions();
 	}
 
 	private static void heroConcentratedCollisions() {
-		checkIncomingPlatformCollisions();
+		checkHeroPlatformCollisions();
 		checkIncomingEnemyCollisions();
 	}
 
 	private static void checkIncomingEnemyCollisions() {
-		if(hero.state == Hero.HERO_STATE_COLLIDED)
+		if(SpriteContainer.hero.state == Hero.HERO_STATE_COLLIDED)
 			return;
 		
 		for(PurpleGhost purple_ghost : SpriteContainer.purple_ghosts){
-			if(OverlapTester.overlapRectangles(hero, purple_ghost)){
-				hero.changeToCollidedState();
+			if(OverlapTester.overlapRectangles(SpriteContainer.hero, purple_ghost)){
+				SpriteContainer.hero.changeToCollidedState();
 //				world.listener.hit();
 			}
 				
 		}
 		
 		for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons){
-			if(OverlapTester.overlapRectangles(hero, jellyfish_demon)){
-				hero.changeToCollidedState();
+			if(OverlapTester.overlapRectangles(SpriteContainer.hero, jellyfish_demon)){
+				SpriteContainer.hero.changeToCollidedState();
 //				world.listener.hit();
 			}
 				
@@ -49,8 +45,8 @@ public class CollisionManager {
 		
 	}
 
-	private static void checkIncomingPlatformCollisions() {
-		if (hero.velocity.y > 0)
+	private static void checkHeroPlatformCollisions() {
+		if (SpriteContainer.hero.velocity.y > 0)
 			return;
 	
 		for (Platform platform : SpriteContainer.volatile_platforms) 
@@ -61,19 +57,49 @@ public class CollisionManager {
 			heroPlatformRebound(platform);
 	}
 	
+	private static void shadowHeroConcentratedCollisions() {
+		checkShadowHeroPlatformCollisions();
+	}
+	
+	private static void checkShadowHeroPlatformCollisions() {
+		if (SpriteContainer.shadow_hero.velocity.y > 0)
+			return;
+	
+		for (Platform platform : SpriteContainer.volatile_platforms) 
+			shadowHeroPlatformRebound(platform);
+		for(Platform platform : SpriteContainer.ground_platforms)
+			shadowHeroPlatformRebound(platform);
+		for(Platform platform : SpriteContainer.static_platforms)
+			shadowHeroPlatformRebound(platform);
+		
+	}
+
 	public static void heroPlatformRebound(Platform platform){
-		if ((OverlapTester.overlapRectangles(hero, platform))
-				&& (platform.position.y	- hero.position.y < COLLISION_TOLERANCE)) {
-			hero.reboundPlatform(platform);
-			if(hero.state == Hero.HERO_STATE_BASIC_ATTACK){
+		if ((OverlapTester.overlapRectangles(SpriteContainer.hero, platform))
+				&& (platform.position.y	- SpriteContainer.hero.position.y < COLLISION_TOLERANCE)) {
+			SpriteContainer.hero.reboundPlatform(platform);
+			if(SpriteContainer.hero.state == Hero.HERO_STATE_BASIC_ATTACK){
 				
 			}
 			else
-				hero.changeToLandState();
+				SpriteContainer.hero.changeToLandState();
 //			world.listener.jump();
 		}
 	}
 
+	public static void shadowHeroPlatformRebound(Platform platform){
+		if ((OverlapTester.overlapRectangles(SpriteContainer.shadow_hero, platform))
+				&& (platform.position.y	- SpriteContainer.shadow_hero.position.y < COLLISION_TOLERANCE)) {
+			SpriteContainer.shadow_hero.reboundPlatform(platform);
+			if(SpriteContainer.shadow_hero.state == Hero.HERO_STATE_BASIC_ATTACK){
+				
+			}
+			else
+				SpriteContainer.shadow_hero.changeToLandState();
+//			world.listener.jump();
+		}
+	}
+	
 	private static void jellyfishDemonConcentratedCollisions() {
 		checkIncomingHaloAttackCollision();	
 	}

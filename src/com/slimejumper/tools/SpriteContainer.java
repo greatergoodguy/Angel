@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
+import com.slimejumper.world.ShadowHero;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -39,6 +40,7 @@ public class SpriteContainer {
 	public static LinkedList<Platform> ground_platforms;
 
 	public static Hero hero = null;
+	public static ShadowHero shadow_hero = null;
 	
 	public SpriteContainer(){
 		initializeLists();
@@ -59,5 +61,6 @@ public class SpriteContainer {
 		spiral_attacks = new LinkedList<SpiralAttack>();
 		
 		hero = new Hero();
+		shadow_hero = new ShadowHero();
 	}
 }

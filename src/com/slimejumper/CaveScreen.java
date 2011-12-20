@@ -66,8 +66,7 @@ public class CaveScreen extends GLScreen {
 			}
 		};
 		
-		cave_level = new CaveLevel(worldListener, sprite_manager);
-		
+		cave_level = new CaveLevel(worldListener, sprite_manager, controller);		
 		cave_renderer = new CaveRenderer(glGraphics, batcher, cave_level);
 		touchPoint = new Vector2();
 		
