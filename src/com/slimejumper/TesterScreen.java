@@ -15,7 +15,6 @@ import com.slimejumper.levels.TesterLevel;
 import com.slimejumper.renderer.TesterRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Platform;
 
 public class TesterScreen extends GLScreen{
@@ -72,7 +71,6 @@ public class TesterScreen extends GLScreen{
 		Remover.clearAllLists();
 		Platform.initializePlatformGround();
 		Platform.initializePlatformMap();
-		Backgrounds.setActiveWorld(tester_level);
 	}
 	
 	@Override

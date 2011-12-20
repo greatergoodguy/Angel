@@ -9,16 +9,12 @@ import com.slimejumper.gameframework.Game;
 import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
-import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.CaveLevel;
-import com.slimejumper.levels.Level;
 import com.slimejumper.levels.Level.WorldListener;
-import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.renderer.CaveRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Platform;
 
 
@@ -76,7 +72,6 @@ public class CaveScreen extends GLScreen {
 	public static void initializeLevel(){
 		Remover.clearAllLists();
 		Platform.initializePlatformGround();
-		Backgrounds.setActiveWorld(cave_level);
 	}
 	
 	@Override

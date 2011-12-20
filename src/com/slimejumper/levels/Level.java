@@ -10,7 +10,6 @@ import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
@@ -80,17 +79,11 @@ public abstract class Level {
 		this.listener = listener;
 		this.sprite_manager = sprite_manager;
 		this.controller = controller;
-		
-		initializeUniverse();
+
 		UnitCircle.initializeUnitCircle();
 		
 		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
 		position = new Vector2();
-	}
-	
-	public static void initializeUniverse(){
-		Backgrounds.initalizeParameters();
-		
 	}
 
 	public void update(float deltaTime) {
@@ -104,7 +97,7 @@ public abstract class Level {
 	}
 
 	private void updateSprites(float deltaTime) {
-		Backgrounds.update();
+//		Backgrounds.update();
 		updatePlatforms(deltaTime);
 		updateEnemies(deltaTime);
 		updateAttacks(deltaTime);

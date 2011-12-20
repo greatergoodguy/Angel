@@ -15,7 +15,6 @@ import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.renderer.MenuRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.Backgrounds;
 import com.slimejumper.world.Platform;
 
 public class MenuScreen extends GLScreen{
@@ -74,7 +73,6 @@ public class MenuScreen extends GLScreen{
 		Remover.clearAllLists();
 		Platform.initializePlatformGround();
 		Platform.initializePlatformMap();
-		Backgrounds.setActiveWorld(menuLevel);
 	}
 	
 	@Override
