@@ -24,8 +24,8 @@ public class CaveLevel extends Level{
 	public CaveLevel(WorldListener listener, SpriteManager sprite_manager, Controller controller) {
 		super(listener, sprite_manager, controller);
 	
-		cave_back_layer_background = new Background(BACKGROUND_CAVE_BACK_LAYER_WIDTH, Level.WORLD_WIDTH);
-		cave_middle_layer_background = new Background(BACKGROUND_CAVE_MIDDLE_LAYER_WIDTH, Level.WORLD_WIDTH);
+		cave_back_layer_background = new Background(BACKGROUND_CAVE_BACK_LAYER_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
+		cave_middle_layer_background = new Background(BACKGROUND_CAVE_MIDDLE_LAYER_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
 		
 		obstacle_generator_manager = new ObstacleGeneratorManager();
 		

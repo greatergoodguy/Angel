@@ -474,6 +474,7 @@ public class Assets {
 		 */
 		
 		background_clouds = new Texture(game, "BG1.png");
+//		backgroundCloudsRegion = new TextureRegion(background_clouds, 0, 0, 1200, 960);
 		backgroundCloudsRegion = new TextureRegion(background_clouds, 0, 0, 800, 480);
 		background_back_layer = new Texture(game, "BG_back_layer.png");
 		backgroundBackLayerRegion = new TextureRegion(background_back_layer, 0, 0, 800, 480);

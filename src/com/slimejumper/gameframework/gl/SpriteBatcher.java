@@ -7,6 +7,8 @@ import android.util.FloatMath;
 import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.Level;
+import com.slimejumper.renderer.BaseRenderer;
+import com.slimejumper.world.Background;
 import com.slimejumper.world.GameObject;
 
 public class SpriteBatcher {
@@ -80,15 +82,17 @@ public class SpriteBatcher {
 		
 	
 	public void drawSpriteLowerLeft(float lower_left_x, float lower_left_y, float width, float height, TextureRegion region){
+/*
 		// Check to make sure Sprite is within the World Bounds
 		
-		if(lower_left_x > Level.WORLD_RIGHT_EDGE || 
-				lower_left_x + width < Level.WORLD_LEFT_EDGE ||
-				lower_left_y > Level.WORLD_TOP_EDGE ||
-				lower_left_y + height < Level.WORLD_BOTTOM_EDGE)
+		if(lower_left_x > Level.WORLD_DEFAULT_WIDTH || 
+				lower_left_x + width < 0 ||
+				lower_left_y > Level.WORLD_DEFAULT_HEIGHT ||
+				lower_left_y + height < 0)
 			return;
 		
 		///////////////////////////////////////////////////////
+*/
 		
 		float x1 = lower_left_x;
 		float y1 = lower_left_y;
@@ -119,15 +123,18 @@ public class SpriteBatcher {
 	}
 	
 	public void drawSpriteCenter(float center_x, float center_y, float width, float height, TextureRegion region){
+
+/*
 		// Check to make sure Sprite is within the World Bounds
 		
-		if(center_x > Level.WORLD_RIGHT_EDGE || 
-				center_x + 5.0 < Level.WORLD_LEFT_EDGE ||
-				center_y > Level.WORLD_TOP_EDGE ||
-				center_y + 5.0 < Level.WORLD_BOTTOM_EDGE)
+		if(center_x > Level.WORLD_DEFAULT_WIDTH || 
+				center_x + 5.0 < 0 ||
+				center_y > Level.WORLD_DEFAULT_HEIGHT ||
+				center_y + 5.0 < 0)
 			return;
 		
-		///////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////		 
+*/
 		
 		float x1 = center_x - width/2;
 		float y1 = center_y - height/2;
@@ -211,5 +218,50 @@ public class SpriteBatcher {
 		
 		numSprites++;
 	}
-	
+	public void drawBackgroundLowerLeft(float lower_left_x, float lower_left_y, Background background, Texture texture){
+/*
+		// Check to make sure Sprite is within the World Bounds
+		
+		if(lower_left_x > Level.WORLD_DEFAULT_WIDTH || 
+				lower_left_x + width < 0 ||
+				lower_left_y > Level.WORLD_DEFAULT_HEIGHT ||
+				lower_left_y + height < 0)
+			return;
+		
+		///////////////////////////////////////////////////////
+*/
+		
+		float x1 = lower_left_x;
+		float y1 = lower_left_y;
+		float x2 = lower_left_x + BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH;
+		float y2 = lower_left_y + BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT;		
+		
+		float u1 = Level.METER * (lower_left_x * background.parallax_ratio / texture.width);
+		float v1 = Level.METER * ((BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - lower_left_y) / texture.height); 
+		float u2 = u1 + BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH_PX / texture.width;
+		float v2 = v1 + BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT_PX / texture.height;
+
+		
+		verticesBuffer[bufferIndex++] = x1;
+		verticesBuffer[bufferIndex++] = y1;
+		verticesBuffer[bufferIndex++] = u1;
+		verticesBuffer[bufferIndex++] = v2;
+		
+		verticesBuffer[bufferIndex++] = x2;
+		verticesBuffer[bufferIndex++] = y1;
+		verticesBuffer[bufferIndex++] = u2;
+		verticesBuffer[bufferIndex++] = v2;
+		
+		verticesBuffer[bufferIndex++] = x2;
+		verticesBuffer[bufferIndex++] = y2;
+		verticesBuffer[bufferIndex++] = u2;
+		verticesBuffer[bufferIndex++] = v1;
+		
+		verticesBuffer[bufferIndex++] = x1;
+		verticesBuffer[bufferIndex++] = y2;
+		verticesBuffer[bufferIndex++] = u1;
+		verticesBuffer[bufferIndex++] = v1;
+		
+		numSprites++;
+	}
 }

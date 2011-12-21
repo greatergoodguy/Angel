@@ -34,28 +34,34 @@ public abstract class Level {
 	
 	public static final float METER = 80; // 1 meter equals 80 pixels
 
-	public static final float WORLD_WIDTH = 10 * 2; // 10 refers to the visible
-													// width
-	public static final float WORLD_HEIGHT = 6 * 2; // 6 refers to the visible
-													// height
-
 	public static final float WORLD_CENTER_DEFAULT_X = BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH / 2;
 	public static final float WORLD_CENTER_DEFAULT_Y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT / 2;
 	
 	public static final float WORLD_GRAVITY = -8.5f;
 	public static final float WORLD_GRAVITY_TIMES_TWO = WORLD_GRAVITY * 2;
 	
+	public static final float WORLD_DEFAULT_WIDTH = 10 * 2; // 10 refers to the visible
+													// width
+	public static final float WORLD_DEFAULT_HEIGHT = 6 * 2; // 6 refers to the visible
+													// height
 	
-	public static final float WORLD_LEFT_EDGE = 0f;
-	public static final float WORLD_RIGHT_EDGE = 20.0f;
-	public static final float WORLD_BOTTOM_EDGE = 0f;
-	public static final float WORLD_TOP_EDGE = 12.0f;
+/*	
+	public static final float WORLD_DEFAULT_LEFT_EDGE = 0f;
+	public static final float WORLD_DEFAULT_RIGHT_EDGE = 20.0f;
+	public static final float WORLD_DEFAULT_BOTTOM_EDGE = 0f;
+	public static final float WORLD_DEFAULT_TOP_EDGE = 12.0f;
+*/
 
-	public static final float WORLD_LEFT_BOUND = 5.0f;
-	public static final float WORLD_RIGHT_BOUND = 15.0f;
-	public static final float WORLD_BOTTOM_BOUND = 3.0f;
-	public static final float WORLD_TOP_BOUND = 9.0f;
-	private static final float WORLD_VERTICAL_BOUND_ADJUSTER = 1.5f;
+	public static final float WORLD_HORIZONTAL_BOUND_ADJUSTER = 5.0f;
+	public static final float WORLD_VERTICAL_BOUND_ADJUSTER = 3.0f;
+/*
+	public static final float WORLD_DEFAULT_LEFT_BOUND = 5.0f;
+	public static final float WORLD_DEFAULT_RIGHT_BOUND = 15.0f;
+	public static final float WORLD_DEFAULT_BOTTOM_BOUND = 3.0f;
+	public static final float WORLD_DEFAULT_TOP_BOUND = 9.0f;
+*/
+	
+	private static final float WORLD_VERTICAL_POSITIONING_ADJUSTER = 1.5f;
 
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
@@ -66,9 +72,13 @@ public abstract class Level {
 	public Vector2 center;
 	public Vector2 position;
 	
-	public float width;
-	public float height;
-
+	public float world_width;
+	public float world_height;
+	
+	public float world_left_bound;
+	public float world_right_bound;
+	public float world_bottom_bound;
+	public float world_top_bound;
 
 	public final WorldListener listener;
 	public final SpriteManager sprite_manager;
@@ -84,8 +94,36 @@ public abstract class Level {
 		
 		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
 		position = new Vector2();
+		
+		world_width = WORLD_DEFAULT_WIDTH;
+		world_height = WORLD_DEFAULT_HEIGHT;
+		
+		world_left_bound = WORLD_HORIZONTAL_BOUND_ADJUSTER;
+		world_right_bound = world_width - WORLD_HORIZONTAL_BOUND_ADJUSTER;
+		world_bottom_bound = WORLD_VERTICAL_BOUND_ADJUSTER;
+		world_top_bound = world_height - WORLD_VERTICAL_BOUND_ADJUSTER;
 	}
 
+	public Level(WorldListener listener, SpriteManager sprite_manager, Controller controller,
+			float world_width, float world_height){
+		this.listener = listener;
+		this.sprite_manager = sprite_manager;
+		this.controller = controller;
+
+		UnitCircle.initializeUnitCircle();
+		
+		center = new Vector2(WORLD_CENTER_DEFAULT_X, WORLD_CENTER_DEFAULT_Y);
+		position = new Vector2();
+		
+		this.world_width = world_width;
+		this.world_height = world_height;
+		
+		world_left_bound = WORLD_HORIZONTAL_BOUND_ADJUSTER;
+		world_right_bound = world_width - WORLD_HORIZONTAL_BOUND_ADJUSTER;
+		world_bottom_bound = WORLD_VERTICAL_BOUND_ADJUSTER;
+		world_top_bound = world_height - WORLD_VERTICAL_BOUND_ADJUSTER;
+	}
+	
 	public void update(float deltaTime) {
 
 		updateSprites(deltaTime);
@@ -134,15 +172,17 @@ public abstract class Level {
 	}
 
 	private void updateHero(float deltaTime) {
+		/*
+		 * Controller Input
+		 */
+		
 		if(controller.fireAttack){
 			if(SpriteContainer.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
 				SpriteContainer.hero.changeToBasicAttackState();
 			controller.fireAttack = false;
 		}
 		
-		int controller_move_direction = Controller.processMoveDirection(controller);
-		
-		switch(controller_move_direction){
+		switch(Controller.processMoveDirection(controller)){
 		case Controller.CONTROLLER_LEFT:
 			SpriteContainer.hero.moveLeft();
 			break;
@@ -154,7 +194,17 @@ public abstract class Level {
 			break;
 		}
 		
+		/*
+		 * Update
+		 */
+		
 		SpriteContainer.hero.update(deltaTime);
+		
+		/*
+		 * Check Bounds
+		 */
+		
+		SpriteContainer.hero.checkSideBounds(this);
 	}
 	
 	private void updateShadowHero(float deltaTime) {
@@ -163,28 +213,28 @@ public abstract class Level {
 	
 	private void updateCenter() {
 		// Checks Horizontal Bounds
-		if (SpriteContainer.hero.center.x < WORLD_LEFT_BOUND)
-			center.x = WORLD_LEFT_BOUND;
-		else if (SpriteContainer.hero.center.x > WORLD_RIGHT_BOUND)
-			center.x = WORLD_RIGHT_BOUND;
+		if (SpriteContainer.hero.center.x < world_left_bound)
+			center.x = world_left_bound;
+		else if (SpriteContainer.hero.center.x > world_right_bound)
+			center.x = world_right_bound;
 		else
 			center.x = SpriteContainer.hero.center.x;
 		
 		// Checks Vertical Bound
-		if(SpriteContainer.hero.center.y < WORLD_BOTTOM_BOUND + WORLD_VERTICAL_BOUND_ADJUSTER)
-			center.y = WORLD_BOTTOM_BOUND;
-		else if(SpriteContainer.hero.center.y > WORLD_TOP_BOUND)
-			center.y = WORLD_TOP_BOUND - WORLD_VERTICAL_BOUND_ADJUSTER;
+		if(SpriteContainer.hero.center.y < world_bottom_bound + WORLD_VERTICAL_POSITIONING_ADJUSTER)
+			center.y = world_bottom_bound;
+		else if(SpriteContainer.hero.center.y > world_top_bound)
+			center.y = world_top_bound - WORLD_VERTICAL_POSITIONING_ADJUSTER;
 		else
-			center.y = SpriteContainer.hero.center.y - WORLD_VERTICAL_BOUND_ADJUSTER;
+			center.y = SpriteContainer.hero.center.y - WORLD_VERTICAL_POSITIONING_ADJUSTER;
 	}
 
 	private void updatePosition() {
 		position.x = center.x - WORLD_CENTER_DEFAULT_X;
 		position.y = center.y - WORLD_CENTER_DEFAULT_Y;
 
-		if (position.x > WORLD_RIGHT_BOUND - WORLD_LEFT_BOUND)
-			position.x = WORLD_RIGHT_BOUND - WORLD_LEFT_BOUND;
+		if (position.x > world_right_bound - world_left_bound)
+			position.x = world_right_bound - world_left_bound;
 	}
 
 	public void processController(Controller controller, List<TouchEvent> touchEvents) {

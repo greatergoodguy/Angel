@@ -3,7 +3,6 @@ package com.slimejumper.world;
 import java.util.Random;
 
 import com.slimejumper.Assets;
-import com.slimejumper.SlimeJumper;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.levels.Level;
 import com.slimejumper.tools.PoolManager;
@@ -94,7 +93,7 @@ public class Hero extends DynamicGameObject{
 		super.update(deltaTime);
 
 //		deathLoop();
-		checkSideBounds();
+//		checkSideBounds();
 
 //		adjustVectors();
 		adjustFaceDirection();
@@ -129,11 +128,11 @@ public class Hero extends DynamicGameObject{
 		
 	}
 
-	public void checkSideBounds() {
+	public void checkSideBounds(Level level) {
 		if(position.x < 0)
 			resetPositionLowerLeft(0, position.y);
-		if(position.x > 20.0f - width)
-			resetPositionLowerLeft(20.0f - width, position.y);
+		if(position.x > level.world_width - width)
+			resetPositionLowerLeft(level.world_width - width, position.y);
 	}
 
 	private void changeToJumpOrFallState(){

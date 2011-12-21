@@ -30,7 +30,7 @@ public class PurpleGhost extends Enemy{
 		switch_motion_timer = 0;
 		
 		if(purpleghost_type == PurpleGhost_TYPE1){
-			resetPositionLowerLeft(Level.WORLD_RIGHT_EDGE, 1.0f);
+			resetPositionLowerLeft(Level.WORLD_DEFAULT_WIDTH, 1.0f);
 			velocity.set(PurpleGhost_HORIZONTAL_VEL, PurpleGhost_VERTICAL_VEL);
 		}
 		
@@ -44,7 +44,7 @@ public class PurpleGhost extends Enemy{
 	public void reset(float spawnPositionY){
 		
 		this.reset();
-		resetPositionLowerLeft(Level.WORLD_RIGHT_EDGE, spawnPositionY);
+		resetPositionLowerLeft(Level.WORLD_DEFAULT_WIDTH, spawnPositionY);
 		velocity.set(PurpleGhost_HORIZONTAL_VEL, PurpleGhost_VERTICAL_VEL);
 		switch_motion_timer = 0;
 	}

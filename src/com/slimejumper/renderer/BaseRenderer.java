@@ -11,9 +11,7 @@ import com.slimejumper.gameframework.gl.Animation;
 import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.gl.TextureRegion;
-import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level;
-import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.DynamicGameObject;
 import com.slimejumper.world.GameObject;
@@ -33,7 +31,8 @@ public abstract class BaseRenderer {
 	public static final float BASE_RENDERER_FRUSTUM_HEIGHT = 6;
 	public static final float FRUSTUM_WIDTH_OVER_TWO = BASE_RENDERER_FRUSTUM_WIDTH/2;
 	
-	
+	public static final float BASE_RENDERER_FRUSTUM_WIDTH_PX = 800f;
+	public static final float BASE_RENDERER_FRUSTUM_HEIGHT_PX = 480f;
 		
 	GLGraphics glGraphics;
 	SpriteBatcher batcher;

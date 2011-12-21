@@ -55,7 +55,7 @@ public class CaveRenderer extends BaseRenderer{
 		float y_coord_center = FOREGROUND_HEIGHT / 2; 
 		int reflection_coefficient = 1;
 		
-		while(x_coord_lower_left < Level.WORLD_RIGHT_EDGE){
+		while(x_coord_lower_left < Level.WORLD_DEFAULT_WIDTH){
 			// batcher.drawSpriteLowerLeft(x_coord_lower_left, 0, FOREGROUND_WIDTH*reflection_coefficient, FOREGROUND_HEIGHT, Assets.foregroundRegion);
 			batcher.drawSpriteCenter(x_coord_center, y_coord_center, 
 					FOREGROUND_WIDTH*reflection_coefficient, FOREGROUND_HEIGHT, Assets.foregroundRegion);

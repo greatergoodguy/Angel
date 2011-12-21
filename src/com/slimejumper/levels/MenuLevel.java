@@ -17,7 +17,7 @@ public class MenuLevel extends Level{
 	public MenuLevel(WorldListener listener, SpriteManager sprite_manager, Controller controller){
 		super(listener, sprite_manager, controller);
 		
-		cloud_background = new Background(BACKGROUND_CLOUDS_WIDTH, Level.WORLD_WIDTH);
+		cloud_background = new Background(BACKGROUND_CLOUDS_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
 	}
 	
 	public void update(float deltaTime){		

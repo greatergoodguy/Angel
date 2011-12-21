@@ -1,7 +1,6 @@
 package com.slimejumper.world.enemies;
 
 import com.slimejumper.Assets;
-import com.slimejumper.SlimeJumper;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.attacks.HaloAttack;

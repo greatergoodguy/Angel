@@ -257,7 +257,7 @@ public class Platform extends DynamicGameObject{
 		float y_coord = 0.75f;
 		Platform platform;
 		
-		while(x_coord < Level.WORLD_RIGHT_EDGE){
+		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 			// create new Platform and add to list
 			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
 			platform.reset(x_coord, y_coord, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
@@ -280,7 +280,7 @@ public class Platform extends DynamicGameObject{
 		float x_coord = 0;
 		Platform platform;
 		
-		while(x_coord < Level.WORLD_RIGHT_EDGE){
+		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 			// create new Platform and add to list
 			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
 			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
@@ -310,8 +310,8 @@ public class Platform extends DynamicGameObject{
 		
 		Platform platform;
 		
-		while(y_coord < Level.WORLD_TOP_BOUND){
-			while(x_coord < Level.WORLD_RIGHT_EDGE){
+		while(y_coord < Level.WORLD_DEFAULT_HEIGHT - Level.WORLD_VERTICAL_BOUND_ADJUSTER){
+			while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 				platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
 				platform.reset(x_coord, y_coord, map_platform_length, Platform.PLATFORM_STATE_STILL);
 				SpriteContainer.static_platforms.add(platform);
