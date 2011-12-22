@@ -208,7 +208,34 @@ public abstract class Level {
 	}
 	
 	private void updateShadowHero(float deltaTime) {
+		/*
+		 * Sync Ability
+		 */
+		
+		if(SpriteContainer.shadow_hero.motion_sync_on){
+			switch(Controller.processMoveDirection(controller)){
+			case Controller.CONTROLLER_LEFT:
+				SpriteContainer.shadow_hero.moveLeft();
+				break;
+			case Controller.CONTROLLER_RIGHT:
+				SpriteContainer.shadow_hero.moveRight();
+				break;
+			case Controller.CONTROLLER_NEUTRAL:
+				SpriteContainer.shadow_hero.moveCancel();
+				break;
+			}
+		}
+		/*
+		 * Update
+		 */
+		
 		SpriteContainer.shadow_hero.update(deltaTime);
+		
+		/*
+		 * Check Bounds
+		 */
+		
+		SpriteContainer.shadow_hero.checkSideBounds(this);
 	}
 	
 	private void updateCenter() {

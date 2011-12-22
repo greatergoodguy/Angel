@@ -28,5 +28,11 @@ public class TesterLevel extends Level{
 			
 			// Switch to next level
 		}
+		
+		if(SpriteContainer.shadow_hero.position.y < 0.0f){
+			SpriteContainer.shadow_hero.resetPositionLowerLeft(2, 11);
+			
+			// Switch to next level
+		}
 	}
 }
