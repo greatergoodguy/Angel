@@ -1,5 +1,6 @@
 package com.slimejumper.tools;
 
+import com.slimejumper.world.Hero;
 import com.slimejumper.world.Platform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
@@ -25,10 +26,15 @@ public class Remover {
 		removeJellyfishDemons();
 		removeFlyingSnakes();
 		
-		removeHaloAttacks();
-		removeMusicNotes();
+		removeHaloAttacks(SpriteContainer.hero);
+		removeMusicNotes(SpriteContainer.hero);
+		removeSpiralAttacks(SpriteContainer.hero);
+		
+		removeHaloAttacks(SpriteContainer.shadow_hero);
+		removeMusicNotes(SpriteContainer.shadow_hero);
+		removeSpiralAttacks(SpriteContainer.shadow_hero);
+		
 		removeShockballs();
-		removeSpiralAttacks();
 	}
 	
 	private static void removePlatforms() {
@@ -65,26 +71,37 @@ public class Remover {
 			PoolManager.pool_manager_singleton.flying_snake_pool.free(flying_snake);
 		}
 	}
-	private static void removeHaloAttacks() {
-		if(SpriteContainer.halo_attacks.isEmpty())
+	private static void removeHaloAttacks(Hero hero) {
+		if(hero.halo_attacks.isEmpty())
 			return;
 		
-		HaloAttack halo_attack = SpriteContainer.halo_attacks.getFirst();
+		HaloAttack halo_attack = hero.halo_attacks.getFirst();
 		if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
-			SpriteContainer.halo_attacks.removeFirst();
+			hero.halo_attacks.removeFirst();
 			PoolManager.pool_manager_singleton.halo_attack_pool.free(halo_attack);
 		}
 		
 	}
 	
-	private static void removeMusicNotes() {
-		if(SpriteContainer.music_notes.isEmpty())
+	private static void removeMusicNotes(Hero hero) {
+		if(hero.music_notes.isEmpty())
 			return;
 		
-		MusicNote music_note = SpriteContainer.music_notes.getFirst();
+		MusicNote music_note = hero.music_notes.getFirst();
 		if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
-			SpriteContainer.music_notes.removeFirst();
+			hero.music_notes.removeFirst();
 			PoolManager.pool_manager_singleton.music_note_pool.free(music_note);
+		}
+	}
+	
+	private static void removeSpiralAttacks(Hero hero){
+		if(hero.spiral_attacks.isEmpty())
+			return;
+		
+		SpiralAttack spiral_attack = hero.spiral_attacks.getFirst();
+		if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
+			hero.spiral_attacks.removeFirst();
+			PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
 		}
 	}
 	
@@ -98,17 +115,6 @@ public class Remover {
 			PoolManager.pool_manager_singleton.shockball_pool.free(shockball);
 		}	
 	}
-	
-	private static void removeSpiralAttacks(){
-		if(SpriteContainer.spiral_attacks.isEmpty())
-			return;
-		
-		SpiralAttack spiral_attack = SpriteContainer.spiral_attacks.getFirst();
-		if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
-			SpriteContainer.spiral_attacks.removeFirst();
-			PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
-		}
-	}
 
 	public static void clearAllLists(){
 		clearPlatforms();
@@ -116,10 +122,15 @@ public class Remover {
 		clearJellyfishDemons();
 		clearFlyingSnakes();
 		
-		clearHaloAttacks();
-		clearMusicNotes();
+		clearHaloAttacks(SpriteContainer.hero);
+		clearMusicNotes(SpriteContainer.hero);
+		clearSpiralAttacks(SpriteContainer.hero);
+		
+		clearHaloAttacks(SpriteContainer.shadow_hero);
+		clearMusicNotes(SpriteContainer.shadow_hero);
+		clearSpiralAttacks(SpriteContainer.shadow_hero);
+		
 		clearShockBalls();
-		clearSpiralAttacks();
 	}
 
 	
@@ -156,33 +167,33 @@ public class Remover {
 		
 	}
 
-	private static void clearHaloAttacks() {
-		while(!SpriteContainer.halo_attacks.isEmpty()){
-			HaloAttack halo_attack = SpriteContainer.halo_attacks.removeFirst();
+	private static void clearHaloAttacks(Hero hero) {
+		while(!hero.halo_attacks.isEmpty()){
+			HaloAttack halo_attack = hero.halo_attacks.removeFirst();
 			PoolManager.pool_manager_singleton.halo_attack_pool.free(halo_attack);
 		}
 		
 	}
 
-	private static void clearMusicNotes() {
-		while(!SpriteContainer.music_notes.isEmpty()){
-			MusicNote music_note = SpriteContainer.music_notes.removeFirst();
+	private static void clearMusicNotes(Hero hero) {
+		while(!hero.music_notes.isEmpty()){
+			MusicNote music_note = hero.music_notes.removeFirst();
 			PoolManager.pool_manager_singleton.music_note_pool.free(music_note);
 		}		
 	}
 
+	private static void clearSpiralAttacks(Hero hero){
+		while(!hero.spiral_attacks.isEmpty()){
+			SpiralAttack spiral_attack = hero.spiral_attacks.removeFirst();
+			PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
+		}
+	}
+	
 	private static void clearShockBalls() {
 		while(!SpriteContainer.shockballs.isEmpty()){
 			Shockball shockball = SpriteContainer.shockballs.removeFirst();
 			PoolManager.pool_manager_singleton.shockball_pool.free(shockball);
 		}		
-	}
-	
-	private static void clearSpiralAttacks(){
-		while(!SpriteContainer.spiral_attacks.isEmpty()){
-			SpiralAttack spiral_attack = SpriteContainer.spiral_attacks.removeFirst();
-			PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
-		}
 	}
 	
 /*	

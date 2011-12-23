@@ -4,6 +4,7 @@ import com.slimejumper.Assets;
 import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.levels.Level;
+import com.slimejumper.tools.SpriteContainer;
 
 public class CaveRenderer extends BaseRenderer{
 
@@ -18,7 +19,7 @@ public class CaveRenderer extends BaseRenderer{
 		renderBackgroundMiddleLayer();
 		
 		renderGameSprites();
-		renderHero();		// Foreground is rendered via a conditional in this function
+		renderHero(SpriteContainer.hero);		// Foreground is rendered via a conditional in this function
 		
 		renderForeground();
 		

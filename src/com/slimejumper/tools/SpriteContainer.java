@@ -18,10 +18,7 @@ public class SpriteContainer {
 	 * Attacks
 	 */
 	
-	public static LinkedList<HaloAttack> halo_attacks;
 	public static LinkedList<Shockball> shockballs;
-	public static LinkedList<MusicNote> music_notes;
-	public static LinkedList<SpiralAttack> spiral_attacks;
 	
 	/*
 	 * Enemies
@@ -54,11 +51,8 @@ public class SpriteContainer {
 		static_platforms = new LinkedList<Platform>();
 		volatile_platforms = new LinkedList<Platform>();
 		ground_platforms = new LinkedList<Platform>();
-		
-		halo_attacks = new LinkedList<HaloAttack>();
-		music_notes = new LinkedList<MusicNote>();
-		shockballs = new LinkedList<Shockball>();
-		spiral_attacks = new LinkedList<SpiralAttack>();
+
+		SpriteContainer.shockballs = new LinkedList<Shockball>();
 		
 		hero = new Hero();
 		shadow_hero = new ShadowHero(hero);

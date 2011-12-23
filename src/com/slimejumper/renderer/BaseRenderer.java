@@ -174,20 +174,29 @@ public abstract class BaseRenderer {
 		
 	}
 
-	protected void renderHero() {
+	protected void renderHero(Hero hero) {
 		batcher.beginBatch(Assets.hero);
 		
-		renderHeroState();
-		renderHaloAttacks();
-		renderMusicNotes();
-		renderSpiralAttacks();
+		renderHeroState(hero);
+		renderHaloAttacks(hero);
+		renderMusicNotes(hero);
+		renderSpiralAttacks(hero);
+		
+		batcher.endBatch();
+	}
+	
+	protected void renderShadowHero(Hero hero) {
+		batcher.beginBatch(Assets.shadow_hero);
+		
+		renderHeroState(hero);
+		renderHaloAttacks(hero);
+		renderMusicNotes(hero);
+		renderSpiralAttacks(hero);
 		
 		batcher.endBatch();
 	}
 
-	private void renderHeroState() {
-		Hero hero = SpriteContainer.hero;
-		
+	private void renderHeroState(Hero hero) {		
 		switch(hero.state){
 		case Hero.HERO_STATE_JUMP:
 			adjustHeroOrientation(hero, Assets.hero_jump);
@@ -196,125 +205,58 @@ public abstract class BaseRenderer {
 			adjustHeroOrientation(hero, Assets.hero_fall);
 			break;
 		case Hero.HERO_STATE_LAND:
-			adjustHeroOrientation(hero, Assets.hero_land.getKeyFrame(SpriteContainer.hero.state_timer, 
+			adjustHeroOrientation(hero, Assets.hero_land.getKeyFrame(hero.state_timer, 
 					Animation.ANIMATION_NONLOOPING));
 			break;
 		case Hero.HERO_STATE_COLLIDED:
-			adjustHeroOrientation(hero, Assets.hero_collided.getKeyFrame(SpriteContainer.hero.state_timer, 
+			adjustHeroOrientation(hero, Assets.hero_collided.getKeyFrame(hero.state_timer, 
 					Animation.ANIMATION_LOOPING));
 			break;	
 		case Hero.HERO_STATE_BASIC_ATTACK:
 			switch(hero.basic_attack_type){
 			case Hero.HERO_BASIC_HALO_ATTACK:
-				adjustHeroOrientation(hero, Assets.hero_halo_attack_1.getKeyFrame(SpriteContainer.hero.state_timer,
+				adjustHeroOrientation(hero, Assets.hero_halo_attack_1.getKeyFrame(hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_SPIRAL_ATTACK:
-				adjustHeroOrientation(hero, Assets.hero_spiral_attack_1.getKeyFrame(SpriteContainer.hero.state_timer,
+				adjustHeroOrientation(hero, Assets.hero_spiral_attack_1.getKeyFrame(hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_3:
-				adjustHeroOrientation(hero, Assets.hero_halo_attack_1.getKeyFrame(SpriteContainer.hero.state_timer,
+				adjustHeroOrientation(hero, Assets.hero_halo_attack_1.getKeyFrame(hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
-				adjustHeroOrientation(hero, Assets.hero_lyre_attack_1.getKeyFrame(SpriteContainer.hero.state_timer,
+				adjustHeroOrientation(hero, Assets.hero_lyre_attack_1.getKeyFrame(hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			}
 		}			
 	}
 
-	private void renderHaloAttacks(){
-		if(SpriteContainer.halo_attacks.isEmpty())
+	private void renderHaloAttacks(Hero hero){
+		if(hero.halo_attacks.isEmpty())
 			return;
-		for(HaloAttack halo_attack : SpriteContainer.halo_attacks)
+		for(HaloAttack halo_attack : hero.halo_attacks)
 			adjustGameSpriteOrientation(halo_attack, Assets.halo_attack.getKeyFrame(halo_attack.life_timer,
 						Animation.ANIMATION_LOOPING));
 	}
 
-	private void renderMusicNotes() {
-		if(SpriteContainer.music_notes.isEmpty())
+	private void renderMusicNotes(Hero hero) {
+		if(hero.music_notes.isEmpty())
 			return;
-		for(MusicNote music_note : SpriteContainer.music_notes)
+		for(MusicNote music_note : hero.music_notes)
 			batcher.drawSpriteCenter(music_note, Assets.musicNoteFrame1);
 	}
 	
-	private void renderSpiralAttacks() {
-		if(SpriteContainer.spiral_attacks.isEmpty())
+	private void renderSpiralAttacks(Hero hero) {
+		if(hero.spiral_attacks.isEmpty())
 			return;
-		for(SpiralAttack spiral_attack : SpriteContainer.spiral_attacks)
+		for(SpiralAttack spiral_attack : hero.spiral_attacks)
 			adjustGameSpriteOrientation(spiral_attack, Assets.spiral_attack.getKeyFrame(spiral_attack.life_timer,
 						Animation.ANIMATION_LOOPING), spiral_attack.angle);
 	}
-
-	protected void renderShadowHero() {
-		batcher.beginBatch(Assets.shadow_hero);
-		
-		renderShadowHeroState();
-		renderShadowHaloAttacks();
-		renderShadowMusicNotes();
-		renderShadowSpiralAttacks();
-		
-		batcher.endBatch();
-	}
 	
-	
-	private void renderShadowHeroState() {
-		Hero shadow_hero = SpriteContainer.shadow_hero;
-		
-		switch(SpriteContainer.shadow_hero.state){
-		case Hero.HERO_STATE_JUMP:
-			adjustHeroOrientation(shadow_hero, Assets.shadow_hero_jump);
-			break;
-		case Hero.HERO_STATE_FALL:
-			adjustHeroOrientation(shadow_hero, Assets.shadow_hero_fall);
-			break;
-		case Hero.HERO_STATE_LAND:
-			adjustHeroOrientation(shadow_hero, Assets.shadow_hero_land.getKeyFrame(SpriteContainer.shadow_hero.state_timer, 
-					Animation.ANIMATION_NONLOOPING));
-			break;
-		case Hero.HERO_STATE_COLLIDED:
-			adjustHeroOrientation(shadow_hero, Assets.shadow_hero_collided.getKeyFrame(SpriteContainer.shadow_hero.state_timer, 
-					Animation.ANIMATION_LOOPING));
-			break;	
-		case Hero.HERO_STATE_BASIC_ATTACK:
-			switch(shadow_hero.basic_attack_type){
-			case Hero.HERO_BASIC_HALO_ATTACK:
-				adjustHeroOrientation(shadow_hero, Assets.shadow_hero_halo_attack_1.getKeyFrame(SpriteContainer.shadow_hero.state_timer,
-					Animation.ANIMATION_NONLOOPING));
-				break;
-			case Hero.HERO_BASIC_SPIRAL_ATTACK:
-				adjustHeroOrientation(shadow_hero, Assets.shadow_hero_spiral_attack_1.getKeyFrame(SpriteContainer.shadow_hero.state_timer,
-					Animation.ANIMATION_NONLOOPING));
-				break;
-			case Hero.HERO_BASIC_ATTACK_3:
-				adjustHeroOrientation(shadow_hero, Assets.shadow_hero_halo_attack_1.getKeyFrame(SpriteContainer.shadow_hero.state_timer,
-					Animation.ANIMATION_NONLOOPING));
-				break;
-			case Hero.HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
-				adjustHeroOrientation(shadow_hero, Assets.shadow_hero_lyre_attack_1.getKeyFrame(SpriteContainer.shadow_hero.state_timer,
-					Animation.ANIMATION_NONLOOPING));
-				break;
-			}
-		}
-		
-	}
-
-	private void renderShadowHaloAttacks() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void renderShadowMusicNotes() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void renderShadowSpiralAttacks() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private void adjustHeroOrientation(Hero hero, TextureRegion region) {
 		switch(hero.facedirection){

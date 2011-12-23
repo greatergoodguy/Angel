@@ -6,6 +6,7 @@ import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.levels.Level;
 import com.slimejumper.levels.TesterLevel;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Background;
 
 public class TesterRenderer extends BaseRenderer{
@@ -25,8 +26,8 @@ public class TesterRenderer extends BaseRenderer{
 		renderBackgroundClouds();
 		
 		renderGameSprites();
-		renderShadowHero();
-		renderHero();
+		renderShadowHero(SpriteContainer.shadow_hero);
+		renderHero(SpriteContainer.hero);
 		
 		renderController();
 		

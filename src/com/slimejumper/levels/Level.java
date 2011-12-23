@@ -135,7 +135,6 @@ public abstract class Level {
 	}
 
 	private void updateSprites(float deltaTime) {
-//		Backgrounds.update();
 		updatePlatforms(deltaTime);
 		updateEnemies(deltaTime);
 		updateAttacks(deltaTime);
@@ -161,14 +160,9 @@ public abstract class Level {
 	}
 	
 	private void updateAttacks(float deltaTime) {
-		for(HaloAttack halo_attack : SpriteContainer.halo_attacks)
-			halo_attack.update(deltaTime);
-		for(MusicNote music_note : SpriteContainer.music_notes)
-			music_note.update(SpriteContainer.hero, deltaTime);
+				
 		for(Shockball shockball : SpriteContainer.shockballs)
 			shockball.update(deltaTime);
-		for(SpiralAttack spiral_attack : SpriteContainer.spiral_attacks)
-			spiral_attack.update(deltaTime);
 	}
 
 	private void updateHero(float deltaTime) {
@@ -179,7 +173,8 @@ public abstract class Level {
 		if(controller.fireAttack){
 			if(SpriteContainer.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
 				SpriteContainer.hero.changeToBasicAttackState();
-			controller.fireAttack = false;
+			
+			controller.fireAttack = SpriteContainer.shadow_hero.controller_sync_on;
 		}
 		
 		switch(Controller.processMoveDirection(controller)){
@@ -213,6 +208,13 @@ public abstract class Level {
 		 */
 		
 		if(SpriteContainer.shadow_hero.controller_sync_on){
+			
+			if(controller.fireAttack){
+				if(SpriteContainer.shadow_hero.state != Hero.HERO_STATE_BASIC_ATTACK)
+					SpriteContainer.shadow_hero.changeToBasicAttackState();
+				controller.fireAttack = false;
+			}
+			
 			switch(Controller.processMoveDirection(controller)){
 			case Controller.CONTROLLER_LEFT:
 				SpriteContainer.shadow_hero.moveLeft();

@@ -28,7 +28,7 @@ public class ShadowHero extends Hero{
 	public void update(float deltaTime){
 		super.update(deltaTime);
 		
-		updateSwapTimer(deltaTime);
+	//	updateSwapTimer(deltaTime);
 		
 		if(life_timer > 5)
 			controllerSyncActivate();

@@ -183,7 +183,9 @@ public class Assets {
 	 * Shadow Hero Atlas
 	 */
 	
+	
 	public static Texture shadow_hero;
+	/*
 	public static TextureRegion shadow_heroRegion;
 	public static TextureRegion shadow_hero_jump;
 	public static TextureRegion shadow_hero_fall;
@@ -239,6 +241,7 @@ public class Assets {
 	public static TextureRegion shadow_heroCollidedFrame1;
 	public static TextureRegion shadow_heroCollidedFrame2;
 	public static TextureRegion shadow_heroCollidedFrame3;
+	*/
 	
 	public static void load(GLGame game){
 		
@@ -362,6 +365,7 @@ public class Assets {
 		 */
 		
 		shadow_hero = new Texture(game, "ShadowHero.png");
+		/*
 		shadow_heroRegion = new TextureRegion(shadow_hero, 0, 0, 80, 80);
 		shadow_hero_jump = new TextureRegion(shadow_hero, 400, 80, 80, 80);
 		shadow_hero_fall = new TextureRegion(shadow_hero, 80, 0, 80, 80);
@@ -468,6 +472,7 @@ public class Assets {
 				shadow_heroCollidedFrame2,
 				shadow_heroCollidedFrame3
 				);
+		*/
 		
 		/*
 		 * Backgrounds

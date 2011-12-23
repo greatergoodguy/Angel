@@ -5,6 +5,7 @@ import com.slimejumper.Controller;
 import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.levels.Level;
+import com.slimejumper.tools.SpriteContainer;
 
 public class MenuRenderer extends BaseRenderer{
 
@@ -23,7 +24,7 @@ public class MenuRenderer extends BaseRenderer{
 		renderBackgroundClouds();
 		
 		renderGameSprites();
-		renderHero();
+		renderHero(SpriteContainer.hero);
 		
 		renderController();
 		

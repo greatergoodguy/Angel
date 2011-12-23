@@ -1,5 +1,6 @@
 package com.slimejumper.world;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 import com.slimejumper.Assets;
@@ -13,6 +14,17 @@ import com.slimejumper.world.attacks.SpiralAttack;
 
 
 public class Hero extends DynamicGameObject{
+	/*
+	 * Hero Attacks
+	 */
+	
+	public LinkedList<MusicNote> music_notes;
+	public LinkedList<SpiralAttack> spiral_attacks;
+	public LinkedList<HaloAttack> halo_attacks;
+	
+	/*
+	 * Constants
+	 */
 	
 	public static final int HERO_START_X = 3;
 	public static final int HERO_START_Y = 3;
@@ -70,10 +82,13 @@ public class Hero extends DynamicGameObject{
 	public float invincibility_timer;
 	public float invincibility_timer_limit;
 	
-//	public Vector2 hero_center;
 
 	public Hero() {
 		super(HERO_START_X, HERO_START_Y, HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
+		
+		halo_attacks = new LinkedList<HaloAttack>();
+		music_notes = new LinkedList<MusicNote>();
+		spiral_attacks = new LinkedList<SpiralAttack>();
 		
 		state = HERO_STATE_FALL;
 		facedirection = HERO_LEFT;
@@ -92,6 +107,13 @@ public class Hero extends DynamicGameObject{
 		
 		super.update(deltaTime);
 
+		for(HaloAttack halo_attack : halo_attacks)
+			halo_attack.update(deltaTime);
+		for(MusicNote music_note : music_notes)
+			music_note.update(this, deltaTime);
+		for(SpiralAttack spiral_attack : spiral_attacks)
+			spiral_attack.update(deltaTime);
+		
 //		deathLoop();
 //		checkSideBounds();
 
@@ -222,7 +244,7 @@ public class Hero extends DynamicGameObject{
 			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
 		}
 		// HERO_BASIC_ATTACK_3
-		else if(randomValue >= 0.6f && randomValue < 0.9f){
+		else if(randomValue >= 0.6f && randomValue < 0.7f){
 			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
 			basic_attack_type = HERO_BASIC_SPIRAL_ATTACK;
 			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
@@ -338,14 +360,14 @@ public class Hero extends DynamicGameObject{
 	public void activateHaloAttack(){
 		HaloAttack halo_attack = PoolManager.pool_manager_singleton.halo_attack_pool.newObject();
 		halo_attack.reset(this);
-		SpriteContainer.halo_attacks.add(halo_attack);
+		halo_attacks.add(halo_attack);
 	}
 	
 	public void activateSpiralAttack(){
 		SpiralAttack spiral_attack = PoolManager.pool_manager_singleton.spiral_attack_pool.newObject();
 		spiral_attack.reset(this);
 		hop();
-		SpriteContainer.spiral_attacks.add(spiral_attack);
+		spiral_attacks.add(spiral_attack);
 	}
 	
 	public void activateMusicalBurst(){
@@ -353,7 +375,7 @@ public class Hero extends DynamicGameObject{
 			MusicNote music_note = PoolManager.pool_manager_singleton.music_note_pool.newObject();
 			music_note.reset(frame_counter_starter);
 			
-			SpriteContainer.music_notes.add(music_note);
+			music_notes.add(music_note);
 		}
 	}
 }

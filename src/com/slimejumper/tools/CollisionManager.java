@@ -104,10 +104,10 @@ public class CollisionManager {
 	}
 
 	private static void checkIncomingHaloAttackCollision() {
-		if(SpriteContainer.halo_attacks.isEmpty() || SpriteContainer.jellyfish_demons.isEmpty())
+		if(SpriteContainer.hero.halo_attacks.isEmpty() || SpriteContainer.jellyfish_demons.isEmpty())
 			return;
 		
-		for(HaloAttack halo_attack : SpriteContainer.halo_attacks){
+		for(HaloAttack halo_attack : SpriteContainer.hero.halo_attacks){
 			for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons){
 				
 				if(jellyfish_demon.state == JellyfishDemon.JELLY_STATE_COLLIDED || 
