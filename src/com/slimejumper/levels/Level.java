@@ -212,7 +212,7 @@ public abstract class Level {
 		 * Sync Ability
 		 */
 		
-		if(SpriteContainer.shadow_hero.motion_sync_on){
+		if(SpriteContainer.shadow_hero.controller_sync_on){
 			switch(Controller.processMoveDirection(controller)){
 			case Controller.CONTROLLER_LEFT:
 				SpriteContainer.shadow_hero.moveLeft();

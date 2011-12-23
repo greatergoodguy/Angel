@@ -69,10 +69,17 @@ public class GameObject {
 	 * Resets the center and position to a new location.
 	 * Bound is also repositioned.
 	 */
+
+	public void resetPositionLowerLeft(Vector2 new_lower_left){
+		position.set(new_lower_left.x, new_lower_left.y);
+		center.set(position.x + width/2, position.y + height/2);
+		bounds.lowerLeft.set(position);
+	}
+	
 	
 	public void resetPositionLowerLeft(float lower_left_x, float lower_left_y){
 		position.set(lower_left_x, lower_left_y);
-		center.set(lower_left_x + width/2, lower_left_y + height/2);
+		center.set(position.x + width/2, position.y + height/2);
 		bounds.lowerLeft.set(position);
 	}
 	

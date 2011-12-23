@@ -61,6 +61,6 @@ public class SpriteContainer {
 		spiral_attacks = new LinkedList<SpiralAttack>();
 		
 		hero = new Hero();
-		shadow_hero = new ShadowHero();
+		shadow_hero = new ShadowHero(hero);
 	}
 }
