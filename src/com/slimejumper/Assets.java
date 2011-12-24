@@ -1,6 +1,7 @@
 package com.slimejumper;
 
 import com.slimejumper.framework.impl.GLGame;
+import com.slimejumper.gameframework.Music;
 import com.slimejumper.gameframework.Sound;
 import com.slimejumper.gameframework.gl.Animation;
 import com.slimejumper.gameframework.gl.Texture;
@@ -107,14 +108,18 @@ public class Assets {
 	public static Texture background_middle_layer;
 	public static TextureRegion backgroundMiddleLayerRegion;
 	
+	public static Texture background_trees;
+	
 	/*
 	 * Game Sprites Atlas
 	 */
 	
 	public static Texture game_sprites;
-	public static TextureRegion platform_left;
-	public static TextureRegion platform_right;
-	public static TextureRegion platform_middle;
+	public static TextureRegion PlatformLeft;
+	public static TextureRegion PlatformRight;
+	public static TextureRegion PlatformMiddle;
+	
+	public static TextureRegion RockPlatform;
 	
 	public static TextureRegion JellyfishDemon;
 	public static TextureRegion PurpleGhost;
@@ -242,6 +247,12 @@ public class Assets {
 	public static TextureRegion shadow_heroCollidedFrame2;
 	public static TextureRegion shadow_heroCollidedFrame3;
 	*/
+	
+	/*
+	 * Music
+	 */
+	
+	public static Music test_music;
 	
 	public static void load(GLGame game){
 		
@@ -488,10 +499,18 @@ public class Assets {
 		background_middle_layer = new Texture(game, "BG_middle_layer.png");
 		backgroundMiddleLayerRegion = new TextureRegion(background_middle_layer, 0, 0, 800, 480);
 		
+		background_trees = new Texture(game, "Level1BG 2048x1024.png");
+		
+		/*
+		 * Game Sprites
+		 */
+		
 		game_sprites = new Texture(game, "GameSpritesALL.png");
-		platform_left = new TextureRegion(game_sprites, 0, 0, 40, 20);
-		platform_right = new TextureRegion(game_sprites, 0, 32, 40, 20);
-		platform_middle = new TextureRegion(game_sprites, 0, 64, 40, 20);
+		PlatformLeft = new TextureRegion(game_sprites, 0, 0, 40, 20);
+		PlatformRight = new TextureRegion(game_sprites, 0, 32, 40, 20);
+		PlatformMiddle = new TextureRegion(game_sprites, 0, 64, 40, 20);
+		
+		RockPlatform = new TextureRegion(game_sprites, 50, 90, 160, 30);
 
 		JellyfishDemon = new TextureRegion(game_sprites, 50, 0, 64, 64);
 		PurpleGhost = new TextureRegion(game_sprites, 0, 300, 64, 64);
@@ -623,6 +642,10 @@ public class Assets {
 		arrow_pressed = new TextureRegion(controller_icons, 0, 200, 240, 200);
 		attack_unpressed = new TextureRegion(controller_icons, 240, 0, 240, 200);
 		attack_pressed = new TextureRegion(controller_icons, 240, 200, 240, 200);
+		
+		test_music = game.getAudio().newMusic("test_music.ogg");
+		test_music.setLooping(true);
+		test_music.setVolume(0.5f);
 	}
 	
 	public static void reload(){
@@ -634,15 +657,11 @@ public class Assets {
 		background_back_layer_2.reload();
 		background_middle_layer.reload();
 		controller_icons.reload();
-		
-		if(Settings.soundEnabled)
-			//turn on music
-			;
+	
 	}
 	
 	public static void playSound(Sound sound){
 		if(Settings.soundEnabled)
-			//play effects
-			;
+			sound.play(1);
 	}
 }

@@ -118,7 +118,7 @@ public class MenuScreen extends GLScreen{
 
 	@Override
 	public void dispose() {
-
+		Assets.test_music.dispose();
 	}
 
 

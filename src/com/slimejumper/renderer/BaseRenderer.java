@@ -92,17 +92,17 @@ public abstract class BaseRenderer {
 		float platform_section_x_coord = platform.position.x;
 		
 		batcher.drawSpriteLowerLeft(platform_section_x_coord, platform.position.y,
-				Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.platform_left);
+				Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.PlatformLeft);
 		platform_section_x_coord += Platform.PLATFORM_UNIT_WIDTH;
 		
 		for(int i=0; i<platform.middle_length; i++){
 			batcher.drawSpriteLowerLeft(platform_section_x_coord, platform.position.y,
-					Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.platform_middle);
+					Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.PlatformMiddle);
 			platform_section_x_coord += Platform.PLATFORM_UNIT_WIDTH;
 		}
 		
 		batcher.drawSpriteLowerLeft(platform_section_x_coord, platform.position.y,
-				Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.platform_right);
+				Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.PlatformRight);
 	}
 	
 

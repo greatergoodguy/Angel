@@ -2,6 +2,7 @@ package com.slimejumper.levels;
 
 import com.slimejumper.Assets;
 import com.slimejumper.Controller;
+import com.slimejumper.Settings;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.SpriteContainer;
@@ -16,6 +17,9 @@ public class MenuLevel extends Level{
 	
 	public MenuLevel(WorldListener listener, SpriteManager sprite_manager, Controller controller){
 		super(listener, sprite_manager, controller);
+		
+		 if(Settings.soundEnabled)
+	        	Assets.test_music.play();
 		
 		cloud_background = new Background(BACKGROUND_CLOUDS_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
 	}

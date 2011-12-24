@@ -327,4 +327,28 @@ public class Platform extends DynamicGameObject{
 		}
 		Collections.shuffle(SpriteContainer.static_platforms);
 	}
+
+	public static void initializePlatformGround(Level level) {
+		if(!SpriteContainer.ground_platforms.isEmpty()){
+			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");
+			return;
+		}
+		
+		final int ground_platform_length = 5;
+		float x_coord = 0;
+		float y_coord = 0.75f;
+		Platform platform;
+		
+		while(x_coord < level.world_width){
+			// create new Platform and add to list
+			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
+			platform.reset(x_coord, y_coord, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
+			SpriteContainer.ground_platforms.add(platform);
+			
+			// Advance counter and repeat
+			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
+		}
+		Collections.shuffle(SpriteContainer.ground_platforms);
+		
+	}
 }

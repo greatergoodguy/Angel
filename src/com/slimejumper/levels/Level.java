@@ -40,10 +40,8 @@ public abstract class Level {
 	public static final float WORLD_GRAVITY = -8.5f;
 	public static final float WORLD_GRAVITY_TIMES_TWO = WORLD_GRAVITY * 2;
 	
-	public static final float WORLD_DEFAULT_WIDTH = 10 * 2; // 10 refers to the visible
-													// width
-	public static final float WORLD_DEFAULT_HEIGHT = 6 * 2; // 6 refers to the visible
-													// height
+	public static final float WORLD_DEFAULT_WIDTH = 20;
+	public static final float WORLD_DEFAULT_HEIGHT = 13.5f;
 	
 /*	
 	public static final float WORLD_DEFAULT_LEFT_EDGE = 0f;

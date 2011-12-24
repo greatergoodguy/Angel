@@ -1,5 +1,7 @@
 package com.slimejumper.renderer;
 
+import java.util.LinkedList;
+
 import com.slimejumper.Assets;
 import com.slimejumper.Controller;
 import com.slimejumper.framework.impl.GLGraphics;
@@ -8,6 +10,7 @@ import com.slimejumper.levels.Level;
 import com.slimejumper.levels.TesterLevel;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Background;
+import com.slimejumper.world.environment.RockPlatform;
 
 public class TesterRenderer extends BaseRenderer{
 
@@ -23,9 +26,11 @@ public class TesterRenderer extends BaseRenderer{
 	public void render(){
 		renderSetUp();
 		
-		renderBackgroundClouds();
+		renderBackgroundTrees();
 		
 		renderGameSprites();
+		renderRockPlatforms();
+		
 		renderShadowHero(SpriteContainer.shadow_hero);
 		renderHero(SpriteContainer.hero);
 		
@@ -34,8 +39,27 @@ public class TesterRenderer extends BaseRenderer{
 		renderTearDown();
 	}
 
+	private void renderRockPlatforms() {
+		batcher.beginBatch(Assets.game_sprites);
+		
+		LinkedList<RockPlatform> rock_platforms = ((TesterLevel) level).rock_platforms;
+		for(RockPlatform rock_platform : rock_platforms)
+			batcher.drawSpriteCenter(rock_platform, Assets.RockPlatform);
+		batcher.endBatch();
+		
+	}
+
+	private void renderBackgroundTrees() {
+		Background background = ((TesterLevel) level).background_trees;
+		batcher.beginBatch(Assets.background_trees);
+		batcher.drawBackgroundLowerLeft(level.position.x, level.position.y, 
+				background, Assets.background_trees);
+		batcher.endBatch();
+		
+	}
+
 	private void renderBackgroundClouds() {
-		Background background = ((TesterLevel) level).cloud_background;
+		Background background = ((TesterLevel) level).background_clouds;
 		
 		batcher.beginBatch(Assets.background_clouds);
 		

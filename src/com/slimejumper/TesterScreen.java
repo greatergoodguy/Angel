@@ -63,14 +63,6 @@ public class TesterScreen extends GLScreen{
 		tester_level = new TesterLevel(worldListener, sprite_manager, controller);		
 		tester_renderer = new TesterRenderer(glGraphics, batcher, tester_level, controller);
 		touchPoint = new Vector2();
-		
-		initializeLevel();
-	}
-	
-	public static void initializeLevel(){
-		Remover.clearAllLists();
-		Platform.initializePlatformGround();
-		Platform.initializePlatformMap();
 	}
 	
 	@Override
@@ -116,7 +108,7 @@ public class TesterScreen extends GLScreen{
 
 	@Override
 	public void dispose() {
-
+		Assets.test_music.dispose();
 	}
 
 
