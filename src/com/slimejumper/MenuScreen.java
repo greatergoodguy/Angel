@@ -15,7 +15,7 @@ import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.renderer.MenuRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 
 public class MenuScreen extends GLScreen{
 	
@@ -71,8 +71,8 @@ public class MenuScreen extends GLScreen{
 	
 	public static void initializeLevel(){
 		Remover.clearAllLists();
-		Platform.initializePlatformGround();
-		Platform.initializePlatformMap();
+		GreekPlatform.initializePlatformGround();
+		GreekPlatform.initializePlatformMap();
 	}
 	
 	@Override

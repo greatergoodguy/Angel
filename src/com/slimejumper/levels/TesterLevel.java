@@ -8,7 +8,7 @@ import com.slimejumper.Settings;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Background;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.environment.RockPlatform;
 
 public class TesterLevel extends Level{
@@ -34,8 +34,8 @@ public class TesterLevel extends Level{
 		if(Settings.soundEnabled)
 	        	Assets.test_music.play();
 		
-		Platform.initializePlatformGround(this);
-		Platform.initializePlatformMap();
+		GreekPlatform.initializePlatformGround(this);
+		GreekPlatform.initializePlatformMap();
 		
 		RockPlatform.initializeRockPlatformGround(this, rock_platforms);
 		

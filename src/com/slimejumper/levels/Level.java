@@ -11,7 +11,7 @@ import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -142,9 +142,9 @@ public abstract class Level {
 	}
 
 	private static void updatePlatforms(float deltaTime) {
-		for(Platform platform : SpriteContainer.static_platforms)
+		for(GreekPlatform platform : SpriteContainer.static_platforms)
 			platform.update(deltaTime);
-		for (Platform platform : SpriteContainer.volatile_platforms)
+		for (GreekPlatform platform : SpriteContainer.volatile_platforms)
 			platform.update(deltaTime);
 	}
 

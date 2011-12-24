@@ -8,7 +8,7 @@ import com.slimejumper.levels.Level;
 import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.SpriteContainer;
 
-public class Platform extends DynamicGameObject{
+public class GreekPlatform extends DynamicGameObject{
 	
 	/* 
 	 * Platform Lists need to abide by certain rules
@@ -43,12 +43,12 @@ public class Platform extends DynamicGameObject{
 	
 	public int next_state;
 	
-	public Platform(){
+	public GreekPlatform(){
 		this(0, 0, 0, 4);
 	}
 	
 	// length must be at least 2
-	public Platform(float x, float y, int length) {
+	public GreekPlatform(float x, float y, int length) {
 		
 		
 		super(x, y, length*PLATFORM_UNIT_WIDTH, PLATFORM_HEIGHT);
@@ -59,7 +59,7 @@ public class Platform extends DynamicGameObject{
 		middle_length = length-2;
 	}
 	
-	public Platform(float x, float y, float velX, int length) {
+	public GreekPlatform(float x, float y, float velX, int length) {
 		
 		
 		super(x, y, length*PLATFORM_UNIT_WIDTH, PLATFORM_HEIGHT);
@@ -255,16 +255,16 @@ public class Platform extends DynamicGameObject{
 		final int ground_platform_length = 5;
 		float x_coord = 0;
 		float y_coord = 0.75f;
-		Platform platform;
+		GreekPlatform platform;
 		
 		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 			// create new Platform and add to list
 			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
-			platform.reset(x_coord, y_coord, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
+			platform.reset(x_coord, y_coord, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
 			// Advance counter and repeat
-			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
+			x_coord += 5 * GreekPlatform.PLATFORM_UNIT_WIDTH;
 		}
 		Collections.shuffle(SpriteContainer.ground_platforms);
 	}
@@ -278,16 +278,16 @@ public class Platform extends DynamicGameObject{
 		
 		final int ground_platform_length = 5;
 		float x_coord = 0;
-		Platform platform;
+		GreekPlatform platform;
 		
 		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 			// create new Platform and add to list
 			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
-			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
+			platform.reset(x_coord, 0, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
 			// Advance counter and repeat
-			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
+			x_coord += 5 * GreekPlatform.PLATFORM_UNIT_WIDTH;
 		}
 		
 		platform = SpriteContainer.ground_platforms.removeLast();
@@ -308,12 +308,12 @@ public class Platform extends DynamicGameObject{
 		float x_coord = 4;
 		float y_coord = 2.5f;
 		
-		Platform platform;
+		GreekPlatform platform;
 		
 		while(y_coord < Level.WORLD_DEFAULT_HEIGHT - Level.WORLD_VERTICAL_BOUND_ADJUSTER){
 			while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 				platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
-				platform.reset(x_coord, y_coord, map_platform_length, Platform.PLATFORM_STATE_STILL);
+				platform.reset(x_coord, y_coord, map_platform_length, GreekPlatform.PLATFORM_STATE_STILL);
 				SpriteContainer.static_platforms.add(platform);
 			
 				x_coord += 8;
@@ -337,16 +337,16 @@ public class Platform extends DynamicGameObject{
 		final int ground_platform_length = 5;
 		float x_coord = 0;
 		float y_coord = 0.75f;
-		Platform platform;
+		GreekPlatform platform;
 		
 		while(x_coord < level.world_width){
 			// create new Platform and add to list
 			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
-			platform.reset(x_coord, y_coord, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
+			platform.reset(x_coord, y_coord, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
 			// Advance counter and repeat
-			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
+			x_coord += 5 * GreekPlatform.PLATFORM_UNIT_WIDTH;
 		}
 		Collections.shuffle(SpriteContainer.ground_platforms);
 		

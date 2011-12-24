@@ -15,7 +15,7 @@ import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.renderer.CaveRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 
 
 public class CaveScreen extends GLScreen {
@@ -71,7 +71,7 @@ public class CaveScreen extends GLScreen {
 
 	public static void initializeLevel(){
 		Remover.clearAllLists();
-		Platform.initializePlatformGround();
+		GreekPlatform.initializePlatformGround();
 	}
 	
 	@Override

@@ -2,7 +2,7 @@ package com.slimejumper.tools;
 
 import com.slimejumper.gameframework.math.OverlapTester;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
@@ -48,11 +48,11 @@ public class CollisionManager {
 		if (SpriteContainer.hero.velocity.y > 0)
 			return;
 	
-		for (Platform platform : SpriteContainer.volatile_platforms) 
+		for (GreekPlatform platform : SpriteContainer.volatile_platforms) 
 			heroPlatformRebound(platform);
-		for(Platform platform : SpriteContainer.ground_platforms)
+		for(GreekPlatform platform : SpriteContainer.ground_platforms)
 			heroPlatformRebound(platform);
-		for(Platform platform : SpriteContainer.static_platforms)
+		for(GreekPlatform platform : SpriteContainer.static_platforms)
 			heroPlatformRebound(platform);
 	}
 	
@@ -64,16 +64,16 @@ public class CollisionManager {
 		if (SpriteContainer.shadow_hero.velocity.y > 0)
 			return;
 	
-		for (Platform platform : SpriteContainer.volatile_platforms) 
+		for (GreekPlatform platform : SpriteContainer.volatile_platforms) 
 			shadowHeroPlatformRebound(platform);
-		for(Platform platform : SpriteContainer.ground_platforms)
+		for(GreekPlatform platform : SpriteContainer.ground_platforms)
 			shadowHeroPlatformRebound(platform);
-		for(Platform platform : SpriteContainer.static_platforms)
+		for(GreekPlatform platform : SpriteContainer.static_platforms)
 			shadowHeroPlatformRebound(platform);
 		
 	}
 
-	public static void heroPlatformRebound(Platform platform){
+	public static void heroPlatformRebound(GreekPlatform platform){
 		if ((OverlapTester.overlapRectangles(SpriteContainer.hero, platform))
 				&& (platform.position.y	- SpriteContainer.hero.position.y < COLLISION_TOLERANCE)) {
 			SpriteContainer.hero.reboundPlatform(platform);
@@ -86,7 +86,7 @@ public class CollisionManager {
 		}
 	}
 
-	public static void shadowHeroPlatformRebound(Platform platform){
+	public static void shadowHeroPlatformRebound(GreekPlatform platform){
 		if ((OverlapTester.overlapRectangles(SpriteContainer.shadow_hero, platform))
 				&& (platform.position.y	- SpriteContainer.shadow_hero.position.y < COLLISION_TOLERANCE)) {
 			SpriteContainer.shadow_hero.reboundPlatform(platform);

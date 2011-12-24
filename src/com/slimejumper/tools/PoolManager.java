@@ -2,7 +2,7 @@ package com.slimejumper.tools;
 
 import com.slimejumper.gameframework.Pool;
 import com.slimejumper.gameframework.Pool.PoolObjectFactory;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -15,7 +15,7 @@ import com.slimejumper.world.environment.RockPlatform;
 public class PoolManager {
 	public static final PoolManager pool_manager_singleton = new PoolManager();
 
-	public Pool<Platform> platform_pool;
+	public Pool<GreekPlatform> platform_pool;
 	public Pool<PurpleGhost> purple_ghost_pool;
 	public Pool<JellyfishDemon> jellyfish_demon_pool;
 	public Pool<HaloAttack> halo_attack_pool;
@@ -26,9 +26,9 @@ public class PoolManager {
 	public Pool<RockPlatform> rock_platform_pool;
 	
 	private PoolManager(){
-		PoolObjectFactory<Platform> platform_factory = new PoolObjectFactory<Platform>() {
-			public Platform createObject() {
-				return new Platform();
+		PoolObjectFactory<GreekPlatform> platform_factory = new PoolObjectFactory<GreekPlatform>() {
+			public GreekPlatform createObject() {
+				return new GreekPlatform();
 			}
 		};
 		
@@ -80,7 +80,7 @@ public class PoolManager {
 			}
 		};
 		
-		platform_pool = new Pool<Platform>(platform_factory, 50);
+		platform_pool = new Pool<GreekPlatform>(platform_factory, 50);
 		purple_ghost_pool = new Pool<PurpleGhost>(purple_ghost_factory, 35);
 		jellyfish_demon_pool = new Pool<JellyfishDemon>(jellyfish_demon_factory, 35);
 		halo_attack_pool = new Pool<HaloAttack>(halo_attack_factory, 35);

@@ -1,7 +1,7 @@
 package com.slimejumper.tools;
 
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -41,9 +41,9 @@ public class Remover {
 		if(SpriteContainer.volatile_platforms.isEmpty())
 			return;		
 
-		Platform platform = SpriteContainer.volatile_platforms.getFirst();
+		GreekPlatform platform = SpriteContainer.volatile_platforms.getFirst();
 
-		if (platform.life_timer > Platform.PLATFORM_LIFESPAN) {
+		if (platform.life_timer > GreekPlatform.PLATFORM_LIFESPAN) {
 			SpriteContainer.volatile_platforms.removeFirst();
 			PoolManager.pool_manager_singleton.platform_pool.free(platform);			
 		}
@@ -138,15 +138,15 @@ public class Remover {
 	private static void clearPlatforms() {
 
 		while(!SpriteContainer.volatile_platforms.isEmpty()){
-			Platform platform = SpriteContainer.volatile_platforms.removeFirst();
+			GreekPlatform platform = SpriteContainer.volatile_platforms.removeFirst();
 			PoolManager.pool_manager_singleton.platform_pool.free(platform);			
 		}
 		while(!SpriteContainer.ground_platforms.isEmpty()){
-			Platform platform = SpriteContainer.ground_platforms.removeFirst();
+			GreekPlatform platform = SpriteContainer.ground_platforms.removeFirst();
 			PoolManager.pool_manager_singleton.platform_pool.free(platform);	
 		}
 		while(!SpriteContainer.static_platforms.isEmpty()){
-			Platform platform = SpriteContainer.static_platforms.removeFirst();
+			GreekPlatform platform = SpriteContainer.static_platforms.removeFirst();
 			PoolManager.pool_manager_singleton.platform_pool.free(platform);
 		}
 	}

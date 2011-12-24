@@ -16,7 +16,7 @@ import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.DynamicGameObject;
 import com.slimejumper.world.GameObject;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -75,34 +75,34 @@ public abstract class BaseRenderer {
 	
 	private void renderPlatforms() {
 		if(!SpriteContainer.volatile_platforms.isEmpty()){		
-			for(Platform platform : SpriteContainer.volatile_platforms)
+			for(GreekPlatform platform : SpriteContainer.volatile_platforms)
 				renderPlatform(platform);
 		}
 		if(!SpriteContainer.ground_platforms.isEmpty()){		
-			for(Platform platform : SpriteContainer.ground_platforms)
+			for(GreekPlatform platform : SpriteContainer.ground_platforms)
 				renderPlatform(platform);
 		}
 		if(!SpriteContainer.static_platforms.isEmpty()){
-			for(Platform platform : SpriteContainer.static_platforms)
+			for(GreekPlatform platform : SpriteContainer.static_platforms)
 				renderPlatform(platform);
 		}
 	}
 	
-	private void renderPlatform(Platform platform) {
+	private void renderPlatform(GreekPlatform platform) {
 		float platform_section_x_coord = platform.position.x;
 		
 		batcher.drawSpriteLowerLeft(platform_section_x_coord, platform.position.y,
-				Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.PlatformLeft);
-		platform_section_x_coord += Platform.PLATFORM_UNIT_WIDTH;
+				GreekPlatform.PLATFORM_UNIT_WIDTH, GreekPlatform.PLATFORM_HEIGHT, Assets.PlatformLeft);
+		platform_section_x_coord += GreekPlatform.PLATFORM_UNIT_WIDTH;
 		
 		for(int i=0; i<platform.middle_length; i++){
 			batcher.drawSpriteLowerLeft(platform_section_x_coord, platform.position.y,
-					Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.PlatformMiddle);
-			platform_section_x_coord += Platform.PLATFORM_UNIT_WIDTH;
+					GreekPlatform.PLATFORM_UNIT_WIDTH, GreekPlatform.PLATFORM_HEIGHT, Assets.PlatformMiddle);
+			platform_section_x_coord += GreekPlatform.PLATFORM_UNIT_WIDTH;
 		}
 		
 		batcher.drawSpriteLowerLeft(platform_section_x_coord, platform.position.y,
-				Platform.PLATFORM_UNIT_WIDTH, Platform.PLATFORM_HEIGHT, Assets.PlatformRight);
+				GreekPlatform.PLATFORM_UNIT_WIDTH, GreekPlatform.PLATFORM_HEIGHT, Assets.PlatformRight);
 	}
 	
 

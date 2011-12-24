@@ -3,7 +3,7 @@ package com.slimejumper.tools;
 import java.util.Random;
 
 import com.slimejumper.levels.Level;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
@@ -23,8 +23,8 @@ public class SpriteFactory {
 		
 		
 //		Platform platform = world.platformPool.newObject();
-		Platform platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
-		platform.reset(Level.WORLD_DEFAULT_WIDTH, spawnPositionY, Platform.PLATFORM_MEDIUM_LENGTH, Platform.PLATFORM_STATE_ZOOM);
+		GreekPlatform platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
+		platform.reset(Level.WORLD_DEFAULT_WIDTH, spawnPositionY, GreekPlatform.PLATFORM_MEDIUM_LENGTH, GreekPlatform.PLATFORM_STATE_ZOOM);
 		SpriteContainer.volatile_platforms.add(platform);
 	}
 	

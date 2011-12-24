@@ -3,7 +3,7 @@ package com.slimejumper.tools;
 import java.util.LinkedList;
 
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.Platform;
+import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.ShadowHero;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
@@ -32,9 +32,9 @@ public class SpriteContainer {
 	 * Platforms
 	 */
 	
-	public static LinkedList<Platform> volatile_platforms;
-	public static LinkedList<Platform> static_platforms;
-	public static LinkedList<Platform> ground_platforms;
+	public static LinkedList<GreekPlatform> volatile_platforms;
+	public static LinkedList<GreekPlatform> static_platforms;
+	public static LinkedList<GreekPlatform> ground_platforms;
 
 	public static Hero hero = null;
 	public static ShadowHero shadow_hero = null;
@@ -48,9 +48,9 @@ public class SpriteContainer {
 		jellyfish_demons = new LinkedList<JellyfishDemon>();
 		flying_snakes = new LinkedList<FlyingSnake>();
 		
-		static_platforms = new LinkedList<Platform>();
-		volatile_platforms = new LinkedList<Platform>();
-		ground_platforms = new LinkedList<Platform>();
+		static_platforms = new LinkedList<GreekPlatform>();
+		volatile_platforms = new LinkedList<GreekPlatform>();
+		ground_platforms = new LinkedList<GreekPlatform>();
 
 		SpriteContainer.shockballs = new LinkedList<Shockball>();
 		
