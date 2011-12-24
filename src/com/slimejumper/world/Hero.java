@@ -176,8 +176,14 @@ public class Hero extends DynamicGameObject{
 	}
 	
 	public void changeToLandState(){
+		velocity.y = HERO_JUMP_VELOCITY;
 		state = HERO_STATE_LAND;
 		state_timer = 0;
+	}
+
+	private void updateLandState(float deltaTime){
+		if(state_timer > HERO_LAND_TIMER_LIMIT)
+			changeToJumpOrFallState();
 	}
 
 	public void changeToCollidedState() {
@@ -202,11 +208,6 @@ public class Hero extends DynamicGameObject{
 	private void updateJumpState(float deltaTime){
 		if(velocity.y < 0)
 			changeToFallState();
-	}
-	
-	private void updateLandState(float deltaTime){
-		if(state_timer > HERO_LAND_TIMER_LIMIT)
-			changeToJumpOrFallState();
 	}
 	
 	private void updateCollidedState(float deltaTime){
@@ -324,7 +325,10 @@ public class Hero extends DynamicGameObject{
 
 	public void reboundPlatform(GameObject platform){
 		position.y = platform.position.y + platform.height;
-		velocity.y = HERO_JUMP_VELOCITY;
+		if(state == Hero.HERO_STATE_BASIC_ATTACK)
+			velocity.y = HERO_JUMP_VELOCITY / 2;
+		else
+			changeToLandState();
 	}
 	
 	public void activateInvincibility(){

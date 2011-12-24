@@ -3,10 +3,10 @@ package com.slimejumper.tools;
 import java.util.Random;
 
 import com.slimejumper.levels.Level;
-import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
+import com.slimejumper.world.environment.GreekPlatform;
 
 public class SpriteFactory {
 	

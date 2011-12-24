@@ -42,6 +42,8 @@ public class TesterRenderer extends BaseRenderer{
 	private void renderRockPlatforms() {
 		batcher.beginBatch(Assets.game_sprites);
 		
+		batcher.drawSpriteCenter(((TesterLevel) level).rock_platform_1, Assets.RockPlatform);
+		
 		LinkedList<RockPlatform> rock_platforms = ((TesterLevel) level).rock_platforms;
 		for(RockPlatform rock_platform : rock_platforms)
 			batcher.drawSpriteCenter(rock_platform, Assets.RockPlatform);

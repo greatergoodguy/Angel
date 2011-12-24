@@ -16,7 +16,6 @@ import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.DynamicGameObject;
 import com.slimejumper.world.GameObject;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.Shockball;
@@ -24,6 +23,7 @@ import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
+import com.slimejumper.world.environment.GreekPlatform;
 
 
 public abstract class BaseRenderer {

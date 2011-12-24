@@ -4,9 +4,8 @@ import java.util.LinkedList;
 
 import com.slimejumper.levels.Level;
 import com.slimejumper.tools.PoolManager;
-import com.slimejumper.world.DynamicGameObject;
 
-public class RockPlatform extends DynamicGameObject{
+public class RockPlatform extends Platform{
 	public static final float ROCK_PLATFORM_WIDTH = 2.0f;
 	public static final float ROCK_PLATFORM_HEIGHT = 0.375f;
 	

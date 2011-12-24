@@ -2,10 +2,11 @@ package com.slimejumper.tools;
 
 import com.slimejumper.gameframework.math.OverlapTester;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.GreekPlatform;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
+import com.slimejumper.world.environment.GreekPlatform;
+import com.slimejumper.world.environment.RockPlatform;
 
 public class CollisionManager {
 	
@@ -77,12 +78,6 @@ public class CollisionManager {
 		if ((OverlapTester.overlapRectangles(SpriteContainer.hero, platform))
 				&& (platform.position.y	- SpriteContainer.hero.position.y < COLLISION_TOLERANCE)) {
 			SpriteContainer.hero.reboundPlatform(platform);
-			if(SpriteContainer.hero.state == Hero.HERO_STATE_BASIC_ATTACK){
-				
-			}
-			else
-				SpriteContainer.hero.changeToLandState();
-//			world.listener.jump();
 		}
 	}
 
@@ -117,5 +112,10 @@ public class CollisionManager {
 			}
 		}
 			
+	}
+
+	public static void HeroPlatformCollision(Hero hero, 	RockPlatform rock_platform_1) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -15,7 +15,7 @@ import com.slimejumper.levels.TesterLevel;
 import com.slimejumper.renderer.TesterRenderer;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.GreekPlatform;
+import com.slimejumper.world.environment.GreekPlatform;
 
 public class TesterScreen extends GLScreen{
 	static final int GAME_READY = 0;

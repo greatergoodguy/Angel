@@ -5,10 +5,11 @@ import java.util.LinkedList;
 import com.slimejumper.Assets;
 import com.slimejumper.Controller;
 import com.slimejumper.Settings;
+import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Background;
-import com.slimejumper.world.GreekPlatform;
+import com.slimejumper.world.environment.GreekPlatform;
 import com.slimejumper.world.environment.RockPlatform;
 
 public class TesterLevel extends Level{
@@ -62,8 +63,7 @@ public class TesterLevel extends Level{
 	}
 
 	private void manageCollisions() {
-		
-		
+		CollisionManager.HeroPlatformCollision(SpriteContainer.hero, rock_platform_1);
 	}
 
 	private void removeUnnecessary() {
