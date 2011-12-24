@@ -35,7 +35,7 @@ public class TesterLevel extends Level{
 		if(Settings.soundEnabled)
 	        	Assets.test_music.play();
 		
-		GreekPlatform.initializePlatformGround(this);
+//		GreekPlatform.initializePlatformGround(this);
 		GreekPlatform.initializePlatformMap();
 		
 		RockPlatform.initializeRockPlatformGround(this, rock_platforms);
@@ -44,10 +44,8 @@ public class TesterLevel extends Level{
 	}
 	
 	public void update(float deltaTime){		
-		super.update(deltaTime);
-		
+		super.update(deltaTime);		
 		manageCollisions();
-		removeUnnecessary();
 		
 		if(SpriteContainer.hero.position.y < 0.0f){
 			SpriteContainer.hero.resetPositionLowerLeft(2, 11);
@@ -63,11 +61,7 @@ public class TesterLevel extends Level{
 	}
 
 	private void manageCollisions() {
-		CollisionManager.HeroPlatformCollision(SpriteContainer.hero, rock_platform_1);
-	}
-
-	private void removeUnnecessary() {
-		// TODO Auto-generated method stub
-		
+		CollisionManager.HeroPlatformCollision(SpriteContainer.hero, rock_platforms);
+		CollisionManager.HeroPlatformCollision(SpriteContainer.shadow_hero, rock_platforms);
 	}
 }

@@ -1,11 +1,14 @@
 package com.slimejumper.tools;
 
+import java.util.LinkedList;
+
 import com.slimejumper.gameframework.math.OverlapTester;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
 import com.slimejumper.world.environment.GreekPlatform;
+import com.slimejumper.world.environment.Platform;
 import com.slimejumper.world.environment.RockPlatform;
 
 public class CollisionManager {
@@ -114,8 +117,14 @@ public class CollisionManager {
 			
 	}
 
-	public static void HeroPlatformCollision(Hero hero, 	RockPlatform rock_platform_1) {
-		// TODO Auto-generated method stub
+	public static void HeroPlatformCollision(Hero hero, LinkedList<? extends Platform> platforms) {
+		for(Platform platform : platforms){
+		
+			if ((OverlapTester.overlapRectangles(hero, platform))
+				&& (platform.position.y	- hero.position.y < COLLISION_TOLERANCE))
+				hero.reboundPlatform(platform);
+		
+		}
 		
 	}
 }

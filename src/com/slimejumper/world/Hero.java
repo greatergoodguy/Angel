@@ -7,10 +7,10 @@ import com.slimejumper.Assets;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.levels.Level;
 import com.slimejumper.tools.PoolManager;
-import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.SpiralAttack;
+import com.slimejumper.world.environment.Platform;
 
 
 public class Hero extends DynamicGameObject{
@@ -107,22 +107,13 @@ public class Hero extends DynamicGameObject{
 		
 		super.update(deltaTime);
 
-		for(HaloAttack halo_attack : halo_attacks)
-			halo_attack.update(deltaTime);
-		for(MusicNote music_note : music_notes)
-			music_note.update(this, deltaTime);
-		for(SpiralAttack spiral_attack : spiral_attacks)
-			spiral_attack.update(deltaTime);
-		
-//		deathLoop();
-//		checkSideBounds();
-
-//		adjustVectors();
+		updateAttacks(deltaTime);
+		removeUnnecessaryAttacks();
+				
 		adjustFaceDirection();
 		checkInvincibility(deltaTime);
 		
-		state_timer += deltaTime;
-		
+		state_timer += deltaTime;		
 		switch(state){
 		case HERO_STATE_JUMP:
 			updateJumpState(deltaTime);
@@ -140,6 +131,15 @@ public class Hero extends DynamicGameObject{
 			updateBasicAttackState(deltaTime);
 			break;
 		}
+	}
+
+	private void updateAttacks(float deltaTime) {
+		for(HaloAttack halo_attack : halo_attacks)
+			halo_attack.update(deltaTime);
+		for(MusicNote music_note : music_notes)
+			music_note.update(this, deltaTime);
+		for(SpiralAttack spiral_attack : spiral_attacks)
+			spiral_attack.update(deltaTime);		
 	}
 
 	private void deathLoop() {
@@ -323,7 +323,7 @@ public class Hero extends DynamicGameObject{
 			velocity.y = HERO_MAX_VELY;
 	}
 
-	public void reboundPlatform(GameObject platform){
+	public void reboundPlatform(Platform platform){
 		position.y = platform.position.y + platform.height;
 		if(state == Hero.HERO_STATE_BASIC_ATTACK)
 			velocity.y = HERO_JUMP_VELOCITY / 2;
@@ -380,6 +380,32 @@ public class Hero extends DynamicGameObject{
 			music_note.reset(frame_counter_starter);
 			
 			music_notes.add(music_note);
+		}
+	}
+
+	public void removeUnnecessaryAttacks() {
+		if(!halo_attacks.isEmpty()){
+			HaloAttack halo_attack = halo_attacks.getFirst();
+			if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
+				halo_attacks.removeFirst();
+				PoolManager.pool_manager_singleton.halo_attack_pool.free(halo_attack);
+			}
+		}
+		
+		if(!music_notes.isEmpty()){
+			MusicNote music_note = music_notes.getFirst();
+			if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
+				music_notes.removeFirst();
+				PoolManager.pool_manager_singleton.music_note_pool.free(music_note);
+			}
+		}
+		
+		if(!spiral_attacks.isEmpty()){
+			SpiralAttack spiral_attack = spiral_attacks.getFirst();
+			if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
+				spiral_attacks.removeFirst();
+				PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
+			}
 		}
 	}
 }

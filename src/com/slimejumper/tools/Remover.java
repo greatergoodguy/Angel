@@ -26,14 +26,6 @@ public class Remover {
 		removeJellyfishDemons();
 		removeFlyingSnakes();
 		
-		removeHaloAttacks(SpriteContainer.hero);
-		removeMusicNotes(SpriteContainer.hero);
-		removeSpiralAttacks(SpriteContainer.hero);
-		
-		removeHaloAttacks(SpriteContainer.shadow_hero);
-		removeMusicNotes(SpriteContainer.shadow_hero);
-		removeSpiralAttacks(SpriteContainer.shadow_hero);
-		
 		removeShockballs();
 	}
 	
@@ -71,40 +63,7 @@ public class Remover {
 			PoolManager.pool_manager_singleton.flying_snake_pool.free(flying_snake);
 		}
 	}
-	private static void removeHaloAttacks(Hero hero) {
-		if(hero.halo_attacks.isEmpty())
-			return;
-		
-		HaloAttack halo_attack = hero.halo_attacks.getFirst();
-		if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
-			hero.halo_attacks.removeFirst();
-			PoolManager.pool_manager_singleton.halo_attack_pool.free(halo_attack);
-		}
-		
-	}
-	
-	private static void removeMusicNotes(Hero hero) {
-		if(hero.music_notes.isEmpty())
-			return;
-		
-		MusicNote music_note = hero.music_notes.getFirst();
-		if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
-			hero.music_notes.removeFirst();
-			PoolManager.pool_manager_singleton.music_note_pool.free(music_note);
-		}
-	}
-	
-	private static void removeSpiralAttacks(Hero hero){
-		if(hero.spiral_attacks.isEmpty())
-			return;
-		
-		SpiralAttack spiral_attack = hero.spiral_attacks.getFirst();
-		if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
-			hero.spiral_attacks.removeFirst();
-			PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
-		}
-	}
-	
+
 	private static void removeShockballs() {
 		if(SpriteContainer.shockballs.isEmpty())
 			return;
