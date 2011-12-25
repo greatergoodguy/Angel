@@ -68,4 +68,10 @@ public class CaveLevel extends Level{
 		new_position.y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - position.y;
 		Assets.backgroundMiddleLayerRegion.adjust(new_position);	
 	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 }

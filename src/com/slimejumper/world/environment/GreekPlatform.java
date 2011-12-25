@@ -259,7 +259,7 @@ public class GreekPlatform extends Platform{
 		
 		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 			// create new Platform and add to list
-			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
+			platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
 			platform.reset(x_coord, y_coord, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
@@ -282,7 +282,7 @@ public class GreekPlatform extends Platform{
 		
 		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 			// create new Platform and add to list
-			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
+			platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
 			platform.reset(x_coord, 0, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
@@ -291,7 +291,7 @@ public class GreekPlatform extends Platform{
 		}
 		
 		platform = SpriteContainer.ground_platforms.removeLast();
-		PoolManager.pool_manager_singleton.platform_pool.free(platform);
+		PoolManager.pool_manager_singleton.greek_platform_pool.free(platform);
 	}
 	
 	public static void initializePlatformMap(){
@@ -312,7 +312,7 @@ public class GreekPlatform extends Platform{
 		
 		while(y_coord < 8.0f){
 			while(x_coord < Level.WORLD_DEFAULT_WIDTH){
-				platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
+				platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
 				platform.reset(x_coord, y_coord, map_platform_length, GreekPlatform.PLATFORM_STATE_STILL);
 				SpriteContainer.static_platforms.add(platform);
 			
@@ -341,7 +341,7 @@ public class GreekPlatform extends Platform{
 		
 		while(x_coord < level.world_width){
 			// create new Platform and add to list
-			platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
+			platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
 			platform.reset(x_coord, y_coord, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			

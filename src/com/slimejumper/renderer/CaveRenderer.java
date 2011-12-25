@@ -19,7 +19,7 @@ public class CaveRenderer extends BaseRenderer{
 		renderBackgroundMiddleLayer();
 		
 		renderGameSprites();
-		renderHero(Hero.hero_singleton);		// Foreground is rendered via a conditional in this function
+		renderHero(hero);		// Foreground is rendered via a conditional in this function
 		
 		renderForeground();
 		

@@ -42,4 +42,10 @@ public class MenuLevel extends Level{
 		new_position.y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - position.y;
 		Assets.backgroundCloudsRegion.adjust(new_position);		
 	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 }

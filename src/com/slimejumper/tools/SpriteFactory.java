@@ -22,7 +22,7 @@ public class SpriteFactory {
 		
 		
 //		Platform platform = world.platformPool.newObject();
-		GreekPlatform platform = PoolManager.pool_manager_singleton.platform_pool.newObject();
+		GreekPlatform platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
 		platform.reset(Level.WORLD_DEFAULT_WIDTH, spawnPositionY, GreekPlatform.PLATFORM_MEDIUM_LENGTH, GreekPlatform.PLATFORM_STATE_ZOOM);
 		SpriteContainer.volatile_platforms.add(platform);
 	}

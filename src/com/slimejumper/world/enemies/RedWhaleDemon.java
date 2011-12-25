@@ -10,12 +10,16 @@ public class RedWhaleDemon extends Enemy{
 	
 	private float switch_motion_timer;
 	
+	public RedWhaleDemon() {
+		super(0, 0, RedWhaleDemon_WIDTH, RedWhaleDemon_HEIGHT);
+	}
+	
 	public RedWhaleDemon(float x, float y){
 		super(x, y, RedWhaleDemon_WIDTH, RedWhaleDemon_HEIGHT);
 		switch_motion_timer = 0;
 		velocity.y = RedWhaleDemon_VERTICAL_VEL;		
 	}
-	
+
 	public void update(float deltaTime){
 		super.update(deltaTime);
 		updateTimers(deltaTime);

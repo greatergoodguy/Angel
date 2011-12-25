@@ -7,6 +7,7 @@ import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.CollisionManager;
+import com.slimejumper.tools.PoolManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Hero;
@@ -19,6 +20,8 @@ import com.slimejumper.world.environment.GreekPlatform;
 
 public abstract class Level {
 
+	public PoolManager pool_manager = PoolManager.pool_manager_singleton;
+	
 	public interface WorldListener {
 		public void jump();
 
@@ -276,7 +279,8 @@ public abstract class Level {
 /*			
 			SpriteContainer.hero.moveDirection = Controller.processMoveDirection(controller);
 */			
-		}
-		
+		}	
 	}
+	
+	public abstract void dispose();
 }

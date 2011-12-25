@@ -27,6 +27,8 @@ import com.slimejumper.world.environment.GreekPlatform;
 
 
 public abstract class BaseRenderer {
+	Hero hero = Hero.hero_singleton;
+	
 	public static final float BASE_RENDERER_FRUSTUM_WIDTH = 10;
 	public static final float BASE_RENDERER_FRUSTUM_HEIGHT = 6;
 	public static final float FRUSTUM_WIDTH_OVER_TWO = BASE_RENDERER_FRUSTUM_WIDTH/2;

@@ -84,4 +84,10 @@ public class TesterLevel extends Level{
 		CollisionManager.HeroAttackEnemyCollision(Hero.hero_singleton, red_whale_demons);
 		CollisionManager.HeroEnemyCollision(Hero.hero_singleton, red_whale_demons);
 	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 }

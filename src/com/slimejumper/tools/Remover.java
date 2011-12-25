@@ -37,7 +37,7 @@ public class Remover {
 
 		if (platform.life_timer > GreekPlatform.PLATFORM_LIFESPAN) {
 			SpriteContainer.volatile_platforms.removeFirst();
-			PoolManager.pool_manager_singleton.platform_pool.free(platform);			
+			PoolManager.pool_manager_singleton.greek_platform_pool.free(platform);			
 		}
 	}
 	
@@ -90,15 +90,15 @@ public class Remover {
 
 		while(!SpriteContainer.volatile_platforms.isEmpty()){
 			GreekPlatform platform = SpriteContainer.volatile_platforms.removeFirst();
-			PoolManager.pool_manager_singleton.platform_pool.free(platform);			
+			PoolManager.pool_manager_singleton.greek_platform_pool.free(platform);			
 		}
 		while(!SpriteContainer.ground_platforms.isEmpty()){
 			GreekPlatform platform = SpriteContainer.ground_platforms.removeFirst();
-			PoolManager.pool_manager_singleton.platform_pool.free(platform);	
+			PoolManager.pool_manager_singleton.greek_platform_pool.free(platform);	
 		}
 		while(!SpriteContainer.static_platforms.isEmpty()){
 			GreekPlatform platform = SpriteContainer.static_platforms.removeFirst();
-			PoolManager.pool_manager_singleton.platform_pool.free(platform);
+			PoolManager.pool_manager_singleton.greek_platform_pool.free(platform);
 		}
 	}
 
@@ -114,8 +114,7 @@ public class Remover {
 		while(!SpriteContainer.flying_snakes.isEmpty()){
 			FlyingSnake flying_snake = SpriteContainer.flying_snakes.removeFirst();
 			PoolManager.pool_manager_singleton.flying_snake_pool.free(flying_snake);
-		}
-		
+		}	
 	}
 	
 	private static void clearShockBalls() {

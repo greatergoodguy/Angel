@@ -24,7 +24,7 @@ public class MenuRenderer extends BaseRenderer{
 		renderBackgroundClouds();
 		
 		renderGameSprites();
-		renderHero(Hero.hero_singleton);
+		renderHero(hero);
 		
 		renderController();
 		

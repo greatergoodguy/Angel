@@ -35,7 +35,7 @@ public class TesterRenderer extends BaseRenderer{
 		renderRockPlatformsAndPurpleGhost();
 		
 		renderShadowHero(ShadowHero.shadow_hero_singleton);
-		renderHero(Hero.hero_singleton);
+		renderHero(hero);
 		
 		renderController();
 		
