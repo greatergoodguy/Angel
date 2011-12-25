@@ -14,6 +14,9 @@ import com.slimejumper.world.environment.Platform;
 
 
 public class Hero extends DynamicGameObject{
+
+	public static final Hero hero_singleton = new Hero();
+	
 	/*
 	 * Hero Attacks
 	 */
@@ -80,8 +83,7 @@ public class Hero extends DynamicGameObject{
 	public static final float HERO_DEFAULT_INVINCIBILITY_TIMER_LIMIT = 1.0f;
 	public static final float HERO_LYRE_INVINCIBILITY_TIMER_LIMIT = 4.0f;
 	public float invincibility_timer;
-	public float invincibility_timer_limit;
-	
+	public float invincibility_timer_limit;	
 
 	public Hero() {
 		super(HERO_START_X, HERO_START_Y, HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
@@ -233,7 +235,7 @@ public class Hero extends DynamicGameObject{
 		Random random = new Random();
 		float randomValue = random.nextFloat();
 		// HERO_BASIC_ATTACK_1
-		if(randomValue >= 0 && randomValue < 0.3f){
+		if(randomValue >= 0 && randomValue < 0.99f){
 			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
 			basic_attack_type = HERO_BASIC_HALO_ATTACK;
 			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
@@ -245,10 +247,10 @@ public class Hero extends DynamicGameObject{
 			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
 		}
 		// HERO_BASIC_ATTACK_3
-		else if(randomValue >= 0.6f && randomValue < 0.7f){
-			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
-			basic_attack_type = HERO_BASIC_SPIRAL_ATTACK;
-			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
+		else if(randomValue >= 0.6f && randomValue < 0.85f){
+			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
+			basic_attack_type = HERO_BASIC_HALO_ATTACK;
+			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
 		}
 		// HERO_BASIC_ATTACK_SPECIAL
 		else{

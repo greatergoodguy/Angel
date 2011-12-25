@@ -305,7 +305,7 @@ public class Assets {
 				herohaloattack1frame14
 				);
 		haloAttackFrame1 = new TextureRegion(hero, 240, 270, 35, 20);
-		haloAttackFrame2 = new TextureRegion(hero, 240, 300, 43, 20);
+		haloAttackFrame2 = new TextureRegion(hero, 240, 300, 35, 20);
 		halo_attack = new Animation(HALO_ATTACK_FRAME_DURATION,
 				haloAttackFrame1,
 				haloAttackFrame2

@@ -5,7 +5,6 @@ import java.util.Random;
 import com.slimejumper.levels.Level;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
-import com.slimejumper.world.enemies.PurpleGhost;
 import com.slimejumper.world.environment.GreekPlatform;
 
 public class SpriteFactory {
@@ -27,7 +26,7 @@ public class SpriteFactory {
 		platform.reset(Level.WORLD_DEFAULT_WIDTH, spawnPositionY, GreekPlatform.PLATFORM_MEDIUM_LENGTH, GreekPlatform.PLATFORM_STATE_ZOOM);
 		SpriteContainer.volatile_platforms.add(platform);
 	}
-	
+/*	
 	public void createPurpleGhost(float min, float max){
 		float spawnPositionY = random.nextFloat() * (max - min) + min;
 		
@@ -36,7 +35,7 @@ public class SpriteFactory {
 		SpriteContainer.purple_ghosts.add(purple_ghost);
 
 	}
-	
+*/	
 	public void createFlyingSnake(float spawnPositionY){
 		
 		FlyingSnake flying_snake = PoolManager.pool_manager_singleton.flying_snake_pool.newObject();

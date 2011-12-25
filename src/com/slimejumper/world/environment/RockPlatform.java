@@ -20,6 +20,7 @@ public class RockPlatform extends Platform{
 
 
 	private void reset(float x_coord, float y_coord) {
+		super.reset();
 		resetPositionLowerLeft(x_coord, y_coord);
 	}
 	

@@ -81,14 +81,6 @@ public class Remover {
 		clearJellyfishDemons();
 		clearFlyingSnakes();
 		
-		clearHaloAttacks(SpriteContainer.hero);
-		clearMusicNotes(SpriteContainer.hero);
-		clearSpiralAttacks(SpriteContainer.hero);
-		
-		clearHaloAttacks(SpriteContainer.shadow_hero);
-		clearMusicNotes(SpriteContainer.shadow_hero);
-		clearSpiralAttacks(SpriteContainer.shadow_hero);
-		
 		clearShockBalls();
 	}
 
@@ -124,28 +116,6 @@ public class Remover {
 			PoolManager.pool_manager_singleton.flying_snake_pool.free(flying_snake);
 		}
 		
-	}
-
-	private static void clearHaloAttacks(Hero hero) {
-		while(!hero.halo_attacks.isEmpty()){
-			HaloAttack halo_attack = hero.halo_attacks.removeFirst();
-			PoolManager.pool_manager_singleton.halo_attack_pool.free(halo_attack);
-		}
-		
-	}
-
-	private static void clearMusicNotes(Hero hero) {
-		while(!hero.music_notes.isEmpty()){
-			MusicNote music_note = hero.music_notes.removeFirst();
-			PoolManager.pool_manager_singleton.music_note_pool.free(music_note);
-		}		
-	}
-
-	private static void clearSpiralAttacks(Hero hero){
-		while(!hero.spiral_attacks.isEmpty()){
-			SpiralAttack spiral_attack = hero.spiral_attacks.removeFirst();
-			PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
-		}
 	}
 	
 	private static void clearShockBalls() {

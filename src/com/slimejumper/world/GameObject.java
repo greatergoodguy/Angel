@@ -32,7 +32,7 @@ public class GameObject {
 	
 	public GameObject(float x, float y, float width, float height){
 		this.position = new Vector2(x,y);
-		this.center = new Vector2(position.x + width/2, position.y + height);
+		this.center = new Vector2(position.x + width/2, position.y + height/2);
 		
 		this.bounds = new Rectangle(position.x, position.y, width, height);
 		

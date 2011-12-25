@@ -5,9 +5,9 @@ import com.slimejumper.Controller;
 import com.slimejumper.Settings;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.BaseRenderer;
-import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Background;
+import com.slimejumper.world.Hero;
 
 public class MenuLevel extends Level{
 	
@@ -29,8 +29,8 @@ public class MenuLevel extends Level{
 
 		updateCloudBackground();
 		
-		if(SpriteContainer.hero.position.y < 0.0f){
-			SpriteContainer.hero.resetPositionLowerLeft(2, 11);
+		if(Hero.hero_singleton.position.y < 0.0f){
+			Hero.hero_singleton.resetPositionLowerLeft(2, 11);
 			
 			// Switch to next level
 		}

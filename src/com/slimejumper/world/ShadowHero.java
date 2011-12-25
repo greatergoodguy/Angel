@@ -1,8 +1,9 @@
 package com.slimejumper.world;
 
-import com.slimejumper.gameframework.math.Vector2;
 
 public class ShadowHero extends Hero{
+	
+	public final static ShadowHero shadow_hero_singleton = new ShadowHero(Hero.hero_singleton);
 	
 	public Hero hero;	// A reference to the hero that the shadow hero is shadowing
 	

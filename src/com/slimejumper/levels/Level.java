@@ -1,4 +1,5 @@
 package com.slimejumper.levels;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.slimejumper.Controller;
@@ -10,11 +11,10 @@ import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.tools.SpriteManager;
+import com.slimejumper.world.GameObject;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.attacks.HaloAttack;
-import com.slimejumper.world.attacks.MusicNote;
+import com.slimejumper.world.ShadowHero;
 import com.slimejumper.world.attacks.Shockball;
-import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
@@ -163,27 +163,27 @@ public abstract class Level {
 			shockball.update(deltaTime);
 	}
 
-	private void updateHero(float deltaTime) {
+	protected void updateHero(float deltaTime) {
 		/*
 		 * Controller Input
 		 */
 		
 		if(controller.fireAttack){
-			if(SpriteContainer.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
-				SpriteContainer.hero.changeToBasicAttackState();
+			if(Hero.hero_singleton.state != Hero.HERO_STATE_BASIC_ATTACK)
+				Hero.hero_singleton.changeToBasicAttackState();
 			
-			controller.fireAttack = SpriteContainer.shadow_hero.controller_sync_on;
+			controller.fireAttack = ShadowHero.shadow_hero_singleton.controller_sync_on;
 		}
 		
 		switch(Controller.processMoveDirection(controller)){
 		case Controller.CONTROLLER_LEFT:
-			SpriteContainer.hero.moveLeft();
+			Hero.hero_singleton.moveLeft();
 			break;
 		case Controller.CONTROLLER_RIGHT:
-			SpriteContainer.hero.moveRight();
+			Hero.hero_singleton.moveRight();
 			break;
 		case Controller.CONTROLLER_NEUTRAL:
-			SpriteContainer.hero.moveCancel();
+			Hero.hero_singleton.moveCancel();
 			break;
 		}
 		
@@ -191,13 +191,13 @@ public abstract class Level {
 		 * Update
 		 */
 		
-		SpriteContainer.hero.update(deltaTime);
+		Hero.hero_singleton.update(deltaTime);
 		
 		/*
 		 * Check Bounds
 		 */
 		
-		SpriteContainer.hero.checkSideBounds(this);
+		Hero.hero_singleton.checkSideBounds(this);
 	}
 	
 	private void updateShadowHero(float deltaTime) {
@@ -205,23 +205,23 @@ public abstract class Level {
 		 * Sync Ability
 		 */
 		
-		if(SpriteContainer.shadow_hero.controller_sync_on){
+		if(ShadowHero.shadow_hero_singleton.controller_sync_on){
 			
 			if(controller.fireAttack){
-				if(SpriteContainer.shadow_hero.state != Hero.HERO_STATE_BASIC_ATTACK)
-					SpriteContainer.shadow_hero.changeToBasicAttackState();
+				if(ShadowHero.shadow_hero_singleton.state != Hero.HERO_STATE_BASIC_ATTACK)
+					ShadowHero.shadow_hero_singleton.changeToBasicAttackState();
 				controller.fireAttack = false;
 			}
 			
 			switch(Controller.processMoveDirection(controller)){
 			case Controller.CONTROLLER_LEFT:
-				SpriteContainer.shadow_hero.moveLeft();
+				ShadowHero.shadow_hero_singleton.moveLeft();
 				break;
 			case Controller.CONTROLLER_RIGHT:
-				SpriteContainer.shadow_hero.moveRight();
+				ShadowHero.shadow_hero_singleton.moveRight();
 				break;
 			case Controller.CONTROLLER_NEUTRAL:
-				SpriteContainer.shadow_hero.moveCancel();
+				ShadowHero.shadow_hero_singleton.moveCancel();
 				break;
 			}
 		}
@@ -229,34 +229,34 @@ public abstract class Level {
 		 * Update
 		 */
 		
-		SpriteContainer.shadow_hero.update(deltaTime);
+		ShadowHero.shadow_hero_singleton.update(deltaTime);
 		
 		/*
 		 * Check Bounds
 		 */
 		
-		SpriteContainer.shadow_hero.checkSideBounds(this);
+		ShadowHero.shadow_hero_singleton.checkSideBounds(this);
 	}
 	
-	private void updateCenter() {
+	protected void updateCenter() {
 		// Checks Horizontal Bounds
-		if (SpriteContainer.hero.center.x < world_left_bound)
+		if (Hero.hero_singleton.center.x < world_left_bound)
 			center.x = world_left_bound;
-		else if (SpriteContainer.hero.center.x > world_right_bound)
+		else if (Hero.hero_singleton.center.x > world_right_bound)
 			center.x = world_right_bound;
 		else
-			center.x = SpriteContainer.hero.center.x;
+			center.x = Hero.hero_singleton.center.x;
 		
 		// Checks Vertical Bound
-		if(SpriteContainer.hero.center.y < world_bottom_bound + WORLD_VERTICAL_POSITIONING_ADJUSTER)
+		if(Hero.hero_singleton.center.y < world_bottom_bound + WORLD_VERTICAL_POSITIONING_ADJUSTER)
 			center.y = world_bottom_bound;
-		else if(SpriteContainer.hero.center.y > world_top_bound)
+		else if(Hero.hero_singleton.center.y > world_top_bound)
 			center.y = world_top_bound - WORLD_VERTICAL_POSITIONING_ADJUSTER;
 		else
-			center.y = SpriteContainer.hero.center.y - WORLD_VERTICAL_POSITIONING_ADJUSTER;
+			center.y = Hero.hero_singleton.center.y - WORLD_VERTICAL_POSITIONING_ADJUSTER;
 	}
 
-	private void updatePosition() {
+	protected void updatePosition() {
 		position.x = center.x - WORLD_CENTER_DEFAULT_X;
 		position.y = center.y - WORLD_CENTER_DEFAULT_Y;
 

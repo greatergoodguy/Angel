@@ -36,9 +36,6 @@ public class SpriteContainer {
 	public static LinkedList<GreekPlatform> static_platforms;
 	public static LinkedList<GreekPlatform> ground_platforms;
 
-	public static Hero hero = null;
-	public static ShadowHero shadow_hero = null;
-	
 	public SpriteContainer(){
 		initializeLists();
 	}
@@ -53,8 +50,5 @@ public class SpriteContainer {
 		ground_platforms = new LinkedList<GreekPlatform>();
 
 		SpriteContainer.shockballs = new LinkedList<Shockball>();
-		
-		hero = new Hero();
-		shadow_hero = new ShadowHero(hero);
 	}
 }
