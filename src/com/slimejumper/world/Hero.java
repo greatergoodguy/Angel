@@ -108,7 +108,9 @@ public class Hero extends DynamicGameObject{
 	public void update(float deltaTime){				
 		
 		super.update(deltaTime);
-
+		if(velocity.y < HERO_MAX_VELY)
+			velocity.y = HERO_MAX_VELY;
+		
 		updateAttacks(deltaTime);
 		removeUnnecessaryAttacks();
 				
@@ -143,7 +145,7 @@ public class Hero extends DynamicGameObject{
 		for(SpiralAttack spiral_attack : spiral_attacks)
 			spiral_attack.update(deltaTime);		
 	}
-
+/*
 	private void deathLoop() {
 		if(position.y + height < 0){
 			position.y = 9;
@@ -151,7 +153,7 @@ public class Hero extends DynamicGameObject{
 		}
 		
 	}
-
+*/
 	public void checkSideBounds(Level level) {
 		if(position.x < 0)
 			resetPositionLowerLeft(0, position.y);
@@ -170,6 +172,16 @@ public class Hero extends DynamicGameObject{
 	private void changeToFallState() {
 		state = HERO_STATE_FALL;
 		state_timer = 0;
+	}
+
+	private void updateFallState(float deltaTime){
+		if(velocity.y >= 0)
+			changeToLandState();
+	}
+
+	private void updateJumpState(float deltaTime){
+		if(velocity.y < 0)
+			changeToFallState();
 	}
 
 	private void changeToJumpState() {
@@ -202,16 +214,6 @@ public class Hero extends DynamicGameObject{
 		activateInvincibility();
 	}
 
-	private void updateFallState(float deltaTime){
-		if(velocity.y >= 0)
-			changeToLandState();
-	}
-	
-	private void updateJumpState(float deltaTime){
-		if(velocity.y < 0)
-			changeToFallState();
-	}
-	
 	private void updateCollidedState(float deltaTime){
 		if(state_timer > HERO_COLLIDED_TIMER_LIMIT)
 			changeToJumpOrFallState();
@@ -229,35 +231,6 @@ public class Hero extends DynamicGameObject{
 		attack_launched = false;
 		if(velocity.y < 0)
 			velocity.y = 2.0f;
-	}
-
-	private void setBasicAttackType() {
-		Random random = new Random();
-		float randomValue = random.nextFloat();
-		// HERO_BASIC_ATTACK_1
-		if(randomValue >= 0 && randomValue < 0.99f){
-			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
-			basic_attack_type = HERO_BASIC_HALO_ATTACK;
-			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
-		}
-		// HERO_BASIC_ATTACK_2
-		else if(randomValue >= 0.3f && randomValue < 0.6f){
-			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
-			basic_attack_type = HERO_BASIC_SPIRAL_ATTACK;
-			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
-		}
-		// HERO_BASIC_ATTACK_3
-		else if(randomValue >= 0.6f && randomValue < 0.85f){
-			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
-			basic_attack_type = HERO_BASIC_HALO_ATTACK;
-			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
-		}
-		// HERO_BASIC_ATTACK_SPECIAL
-		else{
-			resetDimensions(HERO_LYRE_ATTACK_WIDTH, HERO_LYRE_ATTACK_HEIGHT);
-			basic_attack_type = HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK;
-			basic_attack_timer_limit = HERO_BASIC_LYRE_SPECIAL_ATTACK_TIMER;
-		}
 	}
 
 	private void updateBasicAttackState(float deltaTime){		
@@ -289,6 +262,35 @@ public class Hero extends DynamicGameObject{
 			changeToJumpOrFallState();
 	}
 
+	private void setBasicAttackType() {
+		Random random = new Random();
+		float randomValue = random.nextFloat();
+		// HERO_BASIC_ATTACK_1
+		if(randomValue >= 0 && randomValue < 0.99f){
+			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
+			basic_attack_type = HERO_BASIC_HALO_ATTACK;
+			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
+		}
+		// HERO_BASIC_ATTACK_2
+		else if(randomValue >= 0.3f && randomValue < 0.6f){
+			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
+			basic_attack_type = HERO_BASIC_SPIRAL_ATTACK;
+			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
+		}
+		// HERO_BASIC_ATTACK_3
+		else if(randomValue >= 0.6f && randomValue < 0.85f){
+			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
+			basic_attack_type = HERO_BASIC_HALO_ATTACK;
+			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
+		}
+		// HERO_BASIC_ATTACK_SPECIAL
+		else{
+			resetDimensions(HERO_LYRE_ATTACK_WIDTH, HERO_LYRE_ATTACK_HEIGHT);
+			basic_attack_type = HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK;
+			basic_attack_timer_limit = HERO_BASIC_LYRE_SPECIAL_ATTACK_TIMER;
+		}
+	}
+
 	public void adjustFaceDirection() {
 		if(state == HERO_STATE_COLLIDED ||
 			(state == HERO_STATE_BASIC_ATTACK && basic_attack_type == HERO_BASIC_HALO_ATTACK))
@@ -309,30 +311,6 @@ public class Hero extends DynamicGameObject{
 		}		
 	}
 
-	private void adjustVectors() {
-		if(state == HERO_STATE_JUMP ||
-			state == HERO_STATE_FALL ||
-			state == HERO_STATE_LAND ||
-			state == HERO_STATE_BASIC_ATTACK){
-			
-		}
-		
-		else if(state == HERO_STATE_COLLIDED){
-			
-		}
-		
-		if(velocity.y < HERO_MAX_VELY)
-			velocity.y = HERO_MAX_VELY;
-	}
-
-	public void reboundPlatform(Platform platform){
-		position.y = platform.position.y + platform.height;
-		if(state == Hero.HERO_STATE_BASIC_ATTACK)
-			velocity.y = HERO_JUMP_VELOCITY / 2;
-		else
-			changeToLandState();
-	}
-	
 	public void activateInvincibility(){
 		activateInvincibility(HERO_DEFAULT_INVINCIBILITY_TIMER_LIMIT);		
 	}
@@ -363,6 +341,15 @@ public class Hero extends DynamicGameObject{
 		velocity.x = 0;
 	}
 	
+	public void reboundPlatform(Platform platform){
+		position.y = platform.position.y + platform.height;
+		if(state == Hero.HERO_STATE_BASIC_ATTACK ||
+			state == Hero.HERO_STATE_COLLIDED)
+			velocity.y = HERO_JUMP_VELOCITY / 2;
+		else
+			changeToLandState();
+	}
+
 	public void activateHaloAttack(){
 		HaloAttack halo_attack = PoolManager.pool_manager_singleton.halo_attack_pool.newObject();
 		halo_attack.reset(this);

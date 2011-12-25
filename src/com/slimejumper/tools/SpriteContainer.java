@@ -35,12 +35,8 @@ public class SpriteContainer {
 	public static LinkedList<GreekPlatform> volatile_platforms;
 	public static LinkedList<GreekPlatform> static_platforms;
 	public static LinkedList<GreekPlatform> ground_platforms;
-
-	public SpriteContainer(){
-		initializeLists();
-	}
 	
-	public void initializeLists() {
+	public static void initializeLists() {
 		purple_ghosts = new LinkedList<PurpleGhost>();
 		jellyfish_demons = new LinkedList<JellyfishDemon>();
 		flying_snakes = new LinkedList<FlyingSnake>();

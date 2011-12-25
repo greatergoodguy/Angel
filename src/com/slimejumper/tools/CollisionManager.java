@@ -12,6 +12,7 @@ import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.Enemy;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
+import com.slimejumper.world.enemies.RedWhaleDemon;
 import com.slimejumper.world.environment.GreekPlatform;
 import com.slimejumper.world.environment.Platform;
 
@@ -46,8 +47,7 @@ public class CollisionManager {
 			if(OverlapTester.overlapRectangles(Hero.hero_singleton, jellyfish_demon)){
 				Hero.hero_singleton.changeToCollidedState();
 //				world.listener.hit();
-			}
-				
+			}	
 		}
 		
 	}
@@ -162,5 +162,14 @@ public class CollisionManager {
 				}
 			}
 		}
+	}
+
+	public static void HeroEnemyCollision(Hero hero, LinkedList<? extends Enemy> enemies) {
+		for(Enemy enemy : enemies){
+			if(OverlapTester.overlapRectangles(hero, enemy)){
+				hero.changeToCollidedState();
+			}	
+		}
+		
 	}
 }

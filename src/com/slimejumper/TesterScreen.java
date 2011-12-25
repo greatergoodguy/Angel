@@ -13,9 +13,7 @@ import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.levels.TesterLevel;
 import com.slimejumper.renderer.TesterRenderer;
-import com.slimejumper.tools.Remover;
-import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.environment.GreekPlatform;
+import com.slimejumper.tools.SpriteContainer;
 
 public class TesterScreen extends GLScreen{
 	static final int GAME_READY = 0;
@@ -36,14 +34,10 @@ public class TesterScreen extends GLScreen{
 	TesterRenderer tester_renderer;
 	
 	Vector2 touchPoint;
-
-	public SpriteManager sprite_manager;
 	
 	public TesterScreen(Game game) {
 		super(game);
 		game_timer = 0;
-			
-		sprite_manager = new SpriteManager();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		controller = new Controller(guiCam);
@@ -60,9 +54,11 @@ public class TesterScreen extends GLScreen{
 			}
 		};
 		
-		tester_level = new TesterLevel(worldListener, sprite_manager, controller);		
+		tester_level = new TesterLevel(worldListener, controller);		
 		tester_renderer = new TesterRenderer(glGraphics, batcher, tester_level, controller);
 		touchPoint = new Vector2();
+		
+		SpriteContainer.initializeLists();
 	}
 	
 	@Override

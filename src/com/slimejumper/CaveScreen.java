@@ -14,7 +14,7 @@ import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.renderer.CaveRenderer;
 import com.slimejumper.tools.Remover;
-import com.slimejumper.tools.SpriteManager;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.environment.GreekPlatform;
 
 
@@ -38,14 +38,10 @@ public class CaveScreen extends GLScreen {
 	CaveRenderer cave_renderer;
 
 	Vector2 touchPoint;
-
-	public SpriteManager sprite_manager;
 	
 	public CaveScreen(Game game) {
 		super(game);
 		game_timer = 0;
-
-		sprite_manager = new SpriteManager();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		controller = new Controller(guiCam);
@@ -62,7 +58,7 @@ public class CaveScreen extends GLScreen {
 			}
 		};
 		
-		cave_level = new CaveLevel(worldListener, sprite_manager, controller);		
+		cave_level = new CaveLevel(worldListener, controller);		
 		cave_renderer = new CaveRenderer(glGraphics, batcher, cave_level);
 		touchPoint = new Vector2();
 		
@@ -70,6 +66,7 @@ public class CaveScreen extends GLScreen {
 	}
 
 	public static void initializeLevel(){
+		SpriteContainer.initializeLists();
 		Remover.clearAllLists();
 		GreekPlatform.initializePlatformGround();
 	}

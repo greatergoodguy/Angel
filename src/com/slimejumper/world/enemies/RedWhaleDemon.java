@@ -6,7 +6,7 @@ public class RedWhaleDemon extends Enemy{
 	public static final float RedWhaleDemon_WIDTH = 1.25f;
 	public static final float RedWhaleDemon_HEIGHT = 1.00f;
 	
-	public static final float RedWhaleDemon_VERTICAL_VEL = 1.0f;
+	public static final float RedWhaleDemon_VERTICAL_VEL = 0.2f;
 	
 	private float switch_motion_timer;
 	

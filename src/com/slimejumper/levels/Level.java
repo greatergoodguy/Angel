@@ -1,5 +1,4 @@
 package com.slimejumper.levels;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.slimejumper.Controller;
@@ -10,8 +9,6 @@ import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteContainer;
-import com.slimejumper.tools.SpriteManager;
-import com.slimejumper.world.GameObject;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.ShadowHero;
 import com.slimejumper.world.attacks.Shockball;
@@ -79,13 +76,11 @@ public abstract class Level {
 	public float world_top_bound;
 
 	public final WorldListener listener;
-	public final SpriteManager sprite_manager;
 	public final Controller controller;
 	
 	
-	public Level(WorldListener listener, SpriteManager sprite_manager, Controller controller){
+	public Level(WorldListener listener, Controller controller){
 		this.listener = listener;
-		this.sprite_manager = sprite_manager;
 		this.controller = controller;
 
 		UnitCircle.initializeUnitCircle();
@@ -102,10 +97,9 @@ public abstract class Level {
 		world_top_bound = world_height - WORLD_VERTICAL_BOUND_ADJUSTER;
 	}
 
-	public Level(WorldListener listener, SpriteManager sprite_manager, Controller controller,
+	public Level(WorldListener listener, Controller controller,
 			float world_width, float world_height){
 		this.listener = listener;
-		this.sprite_manager = sprite_manager;
 		this.controller = controller;
 
 		UnitCircle.initializeUnitCircle();
@@ -174,17 +168,19 @@ public abstract class Level {
 			
 			controller.fireAttack = ShadowHero.shadow_hero_singleton.controller_sync_on;
 		}
-		
-		switch(Controller.processMoveDirection(controller)){
-		case Controller.CONTROLLER_LEFT:
-			Hero.hero_singleton.moveLeft();
-			break;
-		case Controller.CONTROLLER_RIGHT:
-			Hero.hero_singleton.moveRight();
-			break;
-		case Controller.CONTROLLER_NEUTRAL:
-			Hero.hero_singleton.moveCancel();
-			break;
+
+		if(Hero.hero_singleton.state != Hero.HERO_STATE_COLLIDED){
+			switch(Controller.processMoveDirection(controller)){
+			case Controller.CONTROLLER_LEFT:
+				Hero.hero_singleton.moveLeft();
+				break;
+			case Controller.CONTROLLER_RIGHT:
+				Hero.hero_singleton.moveRight();
+				break;
+			case Controller.CONTROLLER_NEUTRAL:
+				Hero.hero_singleton.moveCancel();
+				break;
+			}
 		}
 		
 		/*

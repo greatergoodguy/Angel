@@ -14,7 +14,7 @@ import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.levels.MenuLevel;
 import com.slimejumper.renderer.MenuRenderer;
 import com.slimejumper.tools.Remover;
-import com.slimejumper.tools.SpriteManager;
+import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.environment.GreekPlatform;
 
 public class MenuScreen extends GLScreen{
@@ -38,14 +38,10 @@ public class MenuScreen extends GLScreen{
 	MenuRenderer renderer;
 	
 	Vector2 touchPoint;
-
-	public SpriteManager sprite_manager;
 	
 	public MenuScreen(Game game) {
 		super(game);
 		game_timer = 0;
-			
-		sprite_manager = new SpriteManager();
 		
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		controller = new Controller(guiCam);
@@ -62,7 +58,7 @@ public class MenuScreen extends GLScreen{
 			}
 		};
 		
-		menuLevel = new MenuLevel(worldListener, sprite_manager, controller);		
+		menuLevel = new MenuLevel(worldListener, controller);		
 		renderer = new MenuRenderer(glGraphics, batcher, menuLevel, controller);
 		touchPoint = new Vector2();
 		
@@ -70,6 +66,7 @@ public class MenuScreen extends GLScreen{
 	}
 	
 	public static void initializeLevel(){
+		SpriteContainer.initializeLists();
 		Remover.clearAllLists();
 		GreekPlatform.initializePlatformGround();
 		GreekPlatform.initializePlatformMap();

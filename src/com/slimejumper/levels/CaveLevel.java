@@ -5,7 +5,6 @@ import com.slimejumper.Controller;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.ObstacleGeneratorManager;
-import com.slimejumper.tools.SpriteManager;
 import com.slimejumper.world.Background;
 
 public class CaveLevel extends Level{
@@ -21,8 +20,8 @@ public class CaveLevel extends Level{
 	float level_timer;
 	int level_counter;
 
-	public CaveLevel(WorldListener listener, SpriteManager sprite_manager, Controller controller) {
-		super(listener, sprite_manager, controller);
+	public CaveLevel(WorldListener listener, Controller controller) {
+		super(listener, controller);
 	
 		cave_back_layer_background = new Background(BACKGROUND_CAVE_BACK_LAYER_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
 		cave_middle_layer_background = new Background(BACKGROUND_CAVE_MIDDLE_LAYER_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
