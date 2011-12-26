@@ -20,6 +20,27 @@ public class RedWhaleDemon extends Enemy{
 		velocity.y = RedWhaleDemon_VERTICAL_VEL;		
 	}
 
+	public void reset(){
+		super.reset();
+	}
+	
+	public void reset(float x_coord, float y_coord) {
+		super.reset();
+		resetPositionLowerLeft(x_coord, y_coord);	
+	}
+	
+	public void changeToStillState(){
+		switch_motion_timer = 0;
+		velocity.x = 0;
+		velocity.y = 0;
+	}
+	
+	public void changeToFloatState(){
+		switch_motion_timer = 0;
+		velocity.x = 0;
+		velocity.y = RedWhaleDemon_VERTICAL_VEL;
+	}
+	
 	public void update(float deltaTime){
 		super.update(deltaTime);
 		updateTimers(deltaTime);
@@ -36,9 +57,5 @@ public class RedWhaleDemon extends Enemy{
 			velocity.y = -velocity.y;
 			switch_motion_timer = 0;
 		}		
-	}
-	
-	public void reset(){
-		super.reset();
 	}
 }

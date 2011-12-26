@@ -162,7 +162,11 @@ public class Hero extends DynamicGameObject{
 	}
 
 	private void changeToJumpOrFallState(){
+		float old_x = position.x;
+		float old_y = position.y;
 		resetDimensions(HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
+		resetPositionLowerLeft(old_x, old_y);
+		
 		if(velocity.y < 0)
 			changeToFallState();		
 		else
@@ -179,16 +183,16 @@ public class Hero extends DynamicGameObject{
 			changeToLandState();
 	}
 
-	private void updateJumpState(float deltaTime){
-		if(velocity.y < 0)
-			changeToFallState();
-	}
-
 	private void changeToJumpState() {
 		state = HERO_STATE_JUMP;
 		state_timer = 0;
 	}
 	
+	private void updateJumpState(float deltaTime){
+		if(velocity.y < 0)
+			changeToFallState();
+	}
+
 	public void changeToLandState(){
 		velocity.y = HERO_JUMP_VELOCITY;
 		state = HERO_STATE_LAND;

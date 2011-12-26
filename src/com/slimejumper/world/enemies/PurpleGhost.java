@@ -1,6 +1,5 @@
 package com.slimejumper.world.enemies;
 
-import com.slimejumper.levels.Level;
 
 public class PurpleGhost extends Enemy{
 	
@@ -22,7 +21,6 @@ public class PurpleGhost extends Enemy{
 	}
 	
 	public void update(float deltaTime){
-
 		super.update(deltaTime);
 	}
 	

@@ -21,6 +21,7 @@ import com.slimejumper.world.environment.GreekPlatform;
 public abstract class Level {
 
 	public PoolManager pool_manager = PoolManager.pool_manager_singleton;
+	public Hero hero = Hero.hero_singleton;
 	
 	public interface WorldListener {
 		public void jump();
@@ -166,22 +167,22 @@ public abstract class Level {
 		 */
 		
 		if(controller.fireAttack){
-			if(Hero.hero_singleton.state != Hero.HERO_STATE_BASIC_ATTACK)
-				Hero.hero_singleton.changeToBasicAttackState();
+			if(hero.state != Hero.HERO_STATE_BASIC_ATTACK)
+				hero.changeToBasicAttackState();
 			
 			controller.fireAttack = ShadowHero.shadow_hero_singleton.controller_sync_on;
 		}
 
-		if(Hero.hero_singleton.state != Hero.HERO_STATE_COLLIDED){
+		if(hero.state != Hero.HERO_STATE_COLLIDED){
 			switch(Controller.processMoveDirection(controller)){
 			case Controller.CONTROLLER_LEFT:
-				Hero.hero_singleton.moveLeft();
+				hero.moveLeft();
 				break;
 			case Controller.CONTROLLER_RIGHT:
-				Hero.hero_singleton.moveRight();
+				hero.moveRight();
 				break;
 			case Controller.CONTROLLER_NEUTRAL:
-				Hero.hero_singleton.moveCancel();
+				hero.moveCancel();
 				break;
 			}
 		}
@@ -190,13 +191,13 @@ public abstract class Level {
 		 * Update
 		 */
 		
-		Hero.hero_singleton.update(deltaTime);
+		hero.update(deltaTime);
 		
 		/*
 		 * Check Bounds
 		 */
 		
-		Hero.hero_singleton.checkSideBounds(this);
+		hero.checkSideBounds(this);
 	}
 	
 	private void updateShadowHero(float deltaTime) {

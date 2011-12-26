@@ -190,64 +190,7 @@ public class Assets {
 	
 	
 	public static Texture shadow_hero;
-	/*
-	public static TextureRegion shadow_heroRegion;
-	public static TextureRegion shadow_hero_jump;
-	public static TextureRegion shadow_hero_fall;
-	
-	public static Animation shadow_hero_land;
-	public static TextureRegion shadow_heroLandFrame1;
-	public static TextureRegion shadow_heroLandFrame2;
-	public static TextureRegion shadow_heroLandFrame3;
-	public static TextureRegion shadow_heroLandFrame4;
-	
-	public static Animation shadow_hero_halo_attack_1;
-	public static TextureRegion shadow_heroHaloAttack1Frame1;
-	public static TextureRegion shadow_heroHaloAttack1Frame2;
-	public static TextureRegion shadow_heroHaloAttack1Frame3;
-	public static TextureRegion shadow_heroHaloAttack1Frame4;
-	public static TextureRegion shadow_heroHaloAttack1Frame5;
-	public static TextureRegion shadow_heroHaloAttack1Frame6;
-	public static TextureRegion shadow_heroHaloAttack1Frame7;
-	public static TextureRegion shadow_heroHaloAttack1Frame8;
-	public static TextureRegion shadow_heroHaloAttack1Frame9;
-	public static TextureRegion shadow_heroHaloAttack1Frame10;
-	public static TextureRegion shadow_heroHaloAttack1Frame11;
-	public static TextureRegion shadow_heroHaloAttack1Frame12;
-	public static TextureRegion shadow_heroHaloAttack1Frame13;
-	public static TextureRegion shadow_herohaloattack1frame14;
-	
-	public static Animation shadow_halo_attack;
-	public static TextureRegion shadow_haloAttackFrame1;
-	public static TextureRegion shadow_haloAttackFrame2;
-	
-	public static Animation shadow_hero_lyre_attack_1;
-	public static TextureRegion shadow_heroLyreAttack1Frame1;
-	public static TextureRegion shadow_heroLyreAttack1Frame2;
-	public static TextureRegion shadow_heroLyreAttack1Frame3;
-	public static TextureRegion shadow_heroLyreAttack1Frame4;
-	public static TextureRegion shadow_heroLyreAttack1Frame5;
-	public static TextureRegion shadow_heroLyreAttack1Frame6;
-	
-	public static TextureRegion shadow_musicNoteFrame1;
-	
-	public static Animation shadow_hero_spiral_attack_1;
-	public static TextureRegion shadow_heroSpiralAttack1Frame1;
-	public static TextureRegion shadow_heroSpiralAttack1Frame2;
-	public static TextureRegion shadow_heroSpiralAttack1Frame3;
-	public static TextureRegion shadow_heroSpiralAttack1Frame4;
-	
-	public static Animation shadow_spiral_attack;
-	public static TextureRegion shadow_spiralAttackFrame1;
-	public static TextureRegion shadow_spiralAttackFrame2;
-	public static TextureRegion shadow_spiralAttackFrame3;
-	
-	public static Animation shadow_hero_collided;
-	public static TextureRegion shadow_heroCollidedFrame1;
-	public static TextureRegion shadow_heroCollidedFrame2;
-	public static TextureRegion shadow_heroCollidedFrame3;
-	*/
-	
+
 	/*
 	 * Music
 	 */
@@ -376,114 +319,6 @@ public class Assets {
 		 */
 		
 		shadow_hero = new Texture(game, "ShadowHero.png");
-		/*
-		shadow_heroRegion = new TextureRegion(shadow_hero, 0, 0, 80, 80);
-		shadow_hero_jump = new TextureRegion(shadow_hero, 400, 80, 80, 80);
-		shadow_hero_fall = new TextureRegion(shadow_hero, 80, 0, 80, 80);
-		shadow_heroLandFrame1 = new TextureRegion(shadow_hero, 160, 0, 80, 80);
-		shadow_heroLandFrame2 = new TextureRegion(shadow_hero, 240, 0, 80, 80);
-		shadow_heroLandFrame3 = new TextureRegion(shadow_hero, 320, 0, 80, 80);
-		shadow_heroLandFrame4 = new TextureRegion(shadow_hero, 400, 0, 80, 80);
-		shadow_hero_land = new Animation(HERO_LAND_FRAME_DURATION,
-				shadow_heroLandFrame1,
-				shadow_heroLandFrame2,
-				shadow_heroLandFrame3,
-				shadow_heroLandFrame4
-				);
-		shadow_heroHaloAttack1Frame1 = new TextureRegion(shadow_hero, 0, 80, 80, 90);
-		shadow_heroHaloAttack1Frame2 = new TextureRegion(shadow_hero, 80, 80, 80, 90);
-		shadow_heroHaloAttack1Frame3 = new TextureRegion(shadow_hero, 160, 80, 80, 90);
-		shadow_heroHaloAttack1Frame4 = new TextureRegion(shadow_hero, 240, 80, 80, 90);
-		shadow_heroHaloAttack1Frame5 = new TextureRegion(shadow_hero, 320, 80, 80, 90);
-		shadow_heroHaloAttack1Frame6 = new TextureRegion(shadow_hero, 0, 170, 80, 90);
-		shadow_heroHaloAttack1Frame7 = new TextureRegion(shadow_hero, 80, 170, 80, 90);
-		shadow_heroHaloAttack1Frame8 = new TextureRegion(shadow_hero, 160, 170, 80, 90);
-		shadow_heroHaloAttack1Frame9 = new TextureRegion(shadow_hero, 240, 170, 80, 90);
-		shadow_heroHaloAttack1Frame10 = new TextureRegion(shadow_hero, 320, 170, 80, 90);
-		shadow_heroHaloAttack1Frame11 = new TextureRegion(shadow_hero, 400, 170, 80, 90);
-		shadow_heroHaloAttack1Frame12 = new TextureRegion(shadow_hero, 0, 260, 80, 90);
-		shadow_heroHaloAttack1Frame13 = new TextureRegion(shadow_hero, 80, 260, 80, 90);
-		shadow_herohaloattack1frame14 = new TextureRegion(shadow_hero, 160, 260, 80, 90);
-		shadow_hero_halo_attack_1 = new Animation(HERO_HALO_ATTACK_1_FRAME_DURATION,
-				shadow_heroHaloAttack1Frame1,
-				shadow_heroHaloAttack1Frame2,
-				shadow_heroHaloAttack1Frame3,
-				shadow_heroHaloAttack1Frame4,
-				shadow_heroHaloAttack1Frame5,
-				shadow_heroHaloAttack1Frame6,
-				shadow_heroHaloAttack1Frame7,
-				shadow_heroHaloAttack1Frame8,
-				shadow_heroHaloAttack1Frame9,
-				shadow_heroHaloAttack1Frame10,
-				shadow_heroHaloAttack1Frame11,
-				shadow_heroHaloAttack1Frame12,
-				shadow_heroHaloAttack1Frame13,
-				shadow_herohaloattack1frame14
-				);
-		shadow_haloAttackFrame1 = new TextureRegion(shadow_hero, 240, 270, 35, 20);
-		shadow_haloAttackFrame2 = new TextureRegion(shadow_hero, 240, 300, 43, 20);
-		shadow_halo_attack = new Animation(HALO_ATTACK_FRAME_DURATION,
-				shadow_haloAttackFrame1,
-				shadow_haloAttackFrame2
-				);
-		//1 2 3 4 5 6 5 4 5 6 5 4 5 6 5 4 5 6
-		shadow_heroLyreAttack1Frame1 = new TextureRegion(shadow_hero, 80, 350, 83, 85);
-		shadow_heroLyreAttack1Frame2 = new TextureRegion(shadow_hero, 163, 350, 83, 85);
-		shadow_heroLyreAttack1Frame3 = new TextureRegion(shadow_hero, 246, 350, 83, 85);
-		shadow_heroLyreAttack1Frame4 = new TextureRegion(shadow_hero, 329, 350, 83, 85);
-		shadow_heroLyreAttack1Frame5 = new TextureRegion(shadow_hero, 412, 350, 83, 85);
-		shadow_heroLyreAttack1Frame6 = new TextureRegion(shadow_hero, 0, 430, 83, 85);
-		shadow_hero_lyre_attack_1 = new Animation(HERO_LYRE_ATTACK_FRAME_DURATION,
-				shadow_heroLyreAttack1Frame1,
-				shadow_heroLyreAttack1Frame2,
-				shadow_heroLyreAttack1Frame3,
-				shadow_heroLyreAttack1Frame4,
-				shadow_heroLyreAttack1Frame5,
-				shadow_heroLyreAttack1Frame6,
-				shadow_heroLyreAttack1Frame5,
-				shadow_heroLyreAttack1Frame4,
-				shadow_heroLyreAttack1Frame5,
-				shadow_heroLyreAttack1Frame6,
-				shadow_heroLyreAttack1Frame5,
-				shadow_heroLyreAttack1Frame4,
-				shadow_heroLyreAttack1Frame5,
-				shadow_heroLyreAttack1Frame6,
-				shadow_heroLyreAttack1Frame5,
-				shadow_heroLyreAttack1Frame4,
-				shadow_heroLyreAttack1Frame5,
-				shadow_heroLyreAttack1Frame6
-				);
-		
-		shadow_musicNoteFrame1 = new TextureRegion(shadow_hero, 472, 304, 13, 34);
-		
-		shadow_heroSpiralAttack1Frame1 = new TextureRegion(shadow_hero, 90, 440, 91, 80);
-		shadow_heroSpiralAttack1Frame2 = new TextureRegion(shadow_hero, 185, 440, 91, 80);
-		shadow_heroSpiralAttack1Frame3 = new TextureRegion(shadow_hero, 280, 440, 91, 80);
-		shadow_heroSpiralAttack1Frame4 = new TextureRegion(shadow_hero, 375, 440, 91, 80);
-		shadow_hero_spiral_attack_1 = new Animation(HERO_SPIRAL_ATTACK_1_FRAME_DURATION,
-				shadow_heroSpiralAttack1Frame1,
-				shadow_heroSpiralAttack1Frame2,
-				shadow_heroSpiralAttack1Frame3,
-				shadow_heroSpiralAttack1Frame4);
-		
-		shadow_spiralAttackFrame1 = new TextureRegion(shadow_hero, 470, 440, 28, 28);
-		shadow_spiralAttackFrame2 = new TextureRegion(shadow_hero, 470, 470, 28, 28);
-		shadow_spiralAttackFrame3 = new TextureRegion(shadow_hero, 470, 500, 28, 28);
-		shadow_spiral_attack = new Animation(SPIRAL_ATTACK_FRAME_DURATION,
-				shadow_spiralAttackFrame1,
-				shadow_spiralAttackFrame2,
-				shadow_spiralAttackFrame3,
-				shadow_spiralAttackFrame2);
-		
-		shadow_heroCollidedFrame1 = new TextureRegion(shadow_hero, 285, 260, 80, 80);
-		shadow_heroCollidedFrame2 = new TextureRegion(shadow_hero, 365, 260, 80, 80);
-		shadow_heroCollidedFrame3 = new TextureRegion(shadow_hero, 0, 350, 80, 80);
-		shadow_hero_collided = new Animation(HERO_COLLIDED_FRAME_DURATION,
-				shadow_heroCollidedFrame1,
-				shadow_heroCollidedFrame2,
-				shadow_heroCollidedFrame3
-				);
-		*/
 		
 		/*
 		 * Backgrounds
@@ -513,7 +348,7 @@ public class Assets {
 		RockPlatform = new TextureRegion(game_sprites, 50, 90, 160, 30);
 
 		JellyfishDemon = new TextureRegion(game_sprites, 50, 0, 64, 64);
-		PurpleGhost = new TextureRegion(game_sprites, 0, 300, 64, 64);
+		PurpleGhost = new TextureRegion(game_sprites, 940, 220, 64, 64);
 		
 		RedWhaleDemonFrame1 = new TextureRegion(game_sprites, 0, 140, 100, 80);
 		RedWhaleDemonFrame2 = new TextureRegion(game_sprites, 100, 140, 100, 80);
@@ -652,6 +487,7 @@ public class Assets {
 		game_sprites.reload();
 		hero.reload();
 		shadow_hero.reload();
+		background_trees.reload();
 		background_clouds.reload();
 		background_back_layer.reload();
 		background_back_layer_2.reload();

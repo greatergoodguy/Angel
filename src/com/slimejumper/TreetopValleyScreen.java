@@ -64,8 +64,8 @@ public class TreetopValleyScreen extends GLScreen{
 	@Override
 	public void update(float deltaTime) {
 		game_timer += deltaTime;
-		if(deltaTime > 0.1f)
-			deltaTime = 0.1f;
+		if(deltaTime > 0.05f)
+			deltaTime = 0.05f;
 		
 		updateRunning(deltaTime);
 
