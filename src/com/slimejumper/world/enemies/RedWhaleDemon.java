@@ -5,6 +5,7 @@ public class RedWhaleDemon extends Enemy{
 
 	public static final float RedWhaleDemon_WIDTH = 1.25f;
 	public static final float RedWhaleDemon_HEIGHT = 1.00f;
+	public static final int RedWhaleDemon_HEALTH = 2;
 	
 	public static final float RedWhaleDemon_VERTICAL_VEL = 0.2f;
 	
@@ -19,40 +20,33 @@ public class RedWhaleDemon extends Enemy{
 		switch_motion_timer = 0;
 		velocity.y = RedWhaleDemon_VERTICAL_VEL;		
 	}
-
-	public void reset(){
-		super.reset();
-	}
 	
 	public void reset(float x_coord, float y_coord) {
 		super.reset();
-		resetPositionLowerLeft(x_coord, y_coord);	
+		resetPositionLowerLeft(x_coord, y_coord);
+
+		switch_motion_timer = 0;
+		health_bar = RedWhaleDemon_HEALTH;
 	}
 	
 	public void changeToStillState(){
-		switch_motion_timer = 0;
 		velocity.x = 0;
 		velocity.y = 0;
 	}
 	
 	public void changeToFloatState(){
-		switch_motion_timer = 0;
 		velocity.x = 0;
 		velocity.y = RedWhaleDemon_VERTICAL_VEL;
 	}
 	
 	public void update(float deltaTime){
 		super.update(deltaTime);
-		updateTimers(deltaTime);
-		adjustVectors();
+		updateState(deltaTime);
 	}
 
-	private void updateTimers(float deltaTime) {
+	private void updateState(float deltaTime) {
 		switch_motion_timer += deltaTime;
 		
-	}
-
-	private void adjustVectors() {
 		if(switch_motion_timer > 3){
 			velocity.y = -velocity.y;
 			switch_motion_timer = 0;

@@ -174,6 +174,10 @@ public class Assets {
 	
 	public static Animation flying_snake_reload;
 	
+
+	public static TextureRegion cloudPlatformBackLayer;
+	public static TextureRegion cloudPlatformFrontLayer;
+	
 	/*
 	 * Controller Icon Atlas
 	 */
@@ -334,7 +338,7 @@ public class Assets {
 		background_middle_layer = new Texture(game, "BG_middle_layer.png");
 		backgroundMiddleLayerRegion = new TextureRegion(background_middle_layer, 0, 0, 800, 480);
 		
-		background_trees = new Texture(game, "Level1BG 2048x1024.png");
+		background_trees = new Texture(game, "Level1BG.png");
 		
 		/*
 		 * Game Sprites
@@ -472,11 +476,22 @@ public class Assets {
 				flyingSnakeStandardFrame2
 				);
 		
+		cloudPlatformBackLayer = new TextureRegion(game_sprites, 450, 360, 290, 110);
+		cloudPlatformFrontLayer = new TextureRegion(game_sprites, 450, 465, 290, 42);
+		
+		/*
+		 * Controller
+		 */
+		
 		controller_icons = new Texture(game, "Icons.png");
 		arrow_unpressed = new TextureRegion(controller_icons, 0, 0, 240, 200);
 		arrow_pressed = new TextureRegion(controller_icons, 0, 200, 240, 200);
 		attack_unpressed = new TextureRegion(controller_icons, 240, 0, 240, 200);
 		attack_pressed = new TextureRegion(controller_icons, 240, 200, 240, 200);
+		
+		/*
+		 * Music
+		 */
 		
 		test_music = game.getAudio().newMusic("test_music.ogg");
 		test_music.setLooping(true);

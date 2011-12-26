@@ -137,12 +137,14 @@ public class CollisionManager {
 		Iterator<? extends Enemy> iter_enemies = enemies.iterator();
 		while(iter_enemies.hasNext()){
 			Enemy enemy = iter_enemies.next();
-		
+			boolean is_enemy_hit = false;
+			
 			Iterator<HaloAttack> iter_halo_atks = hero.halo_attacks.iterator();
 			while(iter_halo_atks.hasNext()){
 				HaloAttack halo_attack = iter_halo_atks.next();
 				if (OverlapTester.overlapRectangles(halo_attack, enemy)){
 					iter_halo_atks.remove();
+					is_enemy_hit = true;
 				}
 			}	
 			
@@ -151,6 +153,7 @@ public class CollisionManager {
 				SpiralAttack spiral_attack = iter_spiral_atks.next();
 				if (OverlapTester.overlapRectangles(spiral_attack, enemy)){
 					iter_spiral_atks.remove();
+					is_enemy_hit = true;
 				}
 			}
 			
@@ -159,6 +162,14 @@ public class CollisionManager {
 				MusicNote music_note = iter_music_note_atks.next();
 				if (OverlapTester.overlapRectangles(music_note, enemy)){
 					iter_music_note_atks.remove();
+					is_enemy_hit = true;
+				}
+			}
+			
+			if(is_enemy_hit){
+				enemy.health_bar--;
+				if(enemy.health_bar == 0){
+					iter_enemies.remove();
 				}
 			}
 		}

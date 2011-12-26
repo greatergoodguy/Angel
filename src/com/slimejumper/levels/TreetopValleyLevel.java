@@ -47,27 +47,38 @@ public class TreetopValleyLevel extends Level{
 	private void initializeCloudPlatforms() {
 		cloud_platforms = new LinkedList<CloudPlatform>();
 		
-//		CloudPlatform.initializeCloudPlatformGround(this, cloud_platforms);
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 1.1f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(4, 0));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 5.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 2.1f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(6, 1.9f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 0));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(4, 0.2f));
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(7.5f, 0.3f));
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(11f, 0.2f));
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(17, 0.5f));
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(22, 0.9f));
+		
+		cloud_platforms.add(treetop_valley_factory.createOscillateHorizontalCloudPlatform(26, 0.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(33, 1.1f));
+		
+		cloud_platforms.add(treetop_valley_factory.createOscillateVerticalCloudPlatform(36.5f, 2));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(33, 6));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(29, 5.8f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(28, 6.3f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(22, 6.5f));
 	}
 	
 	private void initializeRedWhaleDemons() {
 		red_whale_demons = new LinkedList<RedWhaleDemon>();
 		
 		red_whale_demons.add(treetop_valley_factory.createFloatRedWhaleDemon(8, 2.2f));
-		red_whale_demons.add(treetop_valley_factory.createStillRedWhaleDemon(16, 2.5f));
+		red_whale_demons.add(treetop_valley_factory.createStillRedWhaleDemon(16, 3.0f));
 		
 	}
 
 	private void initializePurpleGhosts() {
 		purple_ghosts = new LinkedList<PurpleGhost>();
 		
-		purple_ghosts.add(treetop_valley_factory.createPurpleGhost(23, 2.2f));
+		purple_ghosts.add(treetop_valley_factory.createPurpleGhost(25, 2.8f));
 		
 	}
 	
@@ -77,9 +88,12 @@ public class TreetopValleyLevel extends Level{
 		 */
 //		super.update(deltaTime);		
 		updateHero(deltaTime);
+		
+		for(CloudPlatform cloud_platform : cloud_platforms)
+			cloud_platform.update(deltaTime);
 		for(RedWhaleDemon red_whale_demon : red_whale_demons)
 			red_whale_demon.update(deltaTime);
-		
+				
 		/*
 		 * Collision
 		 */

@@ -270,7 +270,7 @@ public class Hero extends DynamicGameObject{
 		Random random = new Random();
 		float randomValue = random.nextFloat();
 		// HERO_BASIC_ATTACK_1
-		if(randomValue >= 0 && randomValue < 0.99f){
+		if(randomValue >= 0 && randomValue < 0.3){
 			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
 			basic_attack_type = HERO_BASIC_HALO_ATTACK;
 			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
@@ -349,7 +349,7 @@ public class Hero extends DynamicGameObject{
 		position.y = platform.position.y + platform.height;
 		if(state == Hero.HERO_STATE_BASIC_ATTACK ||
 			state == Hero.HERO_STATE_COLLIDED)
-			velocity.y = HERO_JUMP_VELOCITY / 2;
+			velocity.y = 3 * HERO_JUMP_VELOCITY / 4;
 		else
 			changeToLandState();
 	}
