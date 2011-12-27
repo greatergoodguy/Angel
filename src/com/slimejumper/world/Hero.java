@@ -32,21 +32,26 @@ public class Hero extends DynamicGameObject{
 	public static final int HERO_START_X = 3;
 	public static final int HERO_START_Y = 3;
 	
+	public static enum STATE{
+		HERO_STATE_JUMP,
+		HERO_STATE_FALL,
+		HERO_STATE_LAND,
+		HERO_STATE_COLLIDED,
+		HERO_STATE_BASIC_ATTACK,
+		HERO_STATE_DEATH_BY_FALLING
+	}
 	public static final int HERO_STATE_JUMP = 0;
 	public static final int HERO_STATE_FALL = 1;
 	public static final int HERO_STATE_LAND = 2;
 	public static final int HERO_STATE_COLLIDED = 3;
 	public static final int HERO_STATE_BASIC_ATTACK = 4;
+	public static final int HERO_STATE_DEATH_BY_FALLING = 5;
 	
 	public int basic_attack_type;
 	public static final int HERO_BASIC_HALO_ATTACK = 1;
 	public static final int HERO_BASIC_SPIRAL_ATTACK = 2;
 	public static final int HERO_BASIC_ATTACK_3 = 3;
 	public static final int HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK = 4;
-	
-	public static final int HERO_LEFT = 1;
-	public static final int HERO_NEUTRAL = 0;
-	public static final int HERO_RIGHT = -1;
 	
 	public static final float HERO_MAX_VELY = -15;
 	public static final float HERO_JUMP_VELOCITY = 6.5f;  // 6.5f seems suitable
@@ -93,7 +98,7 @@ public class Hero extends DynamicGameObject{
 		spiral_attacks = new LinkedList<SpiralAttack>();
 		
 		state = HERO_STATE_FALL;
-		facedirection = HERO_LEFT;
+		facedirection = SPRITE_LEFT;
 		accel.set(0, Level.WORLD_GRAVITY);
 		
 		attack_launched = false;
@@ -208,7 +213,7 @@ public class Hero extends DynamicGameObject{
 		if(is_invincible)
 			return;
 		
-		if(facedirection == HERO_RIGHT)
+		if(facedirection == SPRITE_RIGHT)
 			velocity.set(-HERO_HIT_HORIZONTAL_VELOCITY, HERO_HIT_VERTICAL_VELOCITY);
 		else
 			velocity.set(HERO_HIT_HORIZONTAL_VELOCITY, HERO_HIT_VERTICAL_VELOCITY);
@@ -301,9 +306,9 @@ public class Hero extends DynamicGameObject{
 			return;
 			
 		if(velocity.x > 0)
-			facedirection = HERO_RIGHT;
+			facedirection = SPRITE_RIGHT;
 		else if(velocity.x < 0)
-			facedirection = HERO_LEFT;
+			facedirection = SPRITE_LEFT;
 		
 	}
 	

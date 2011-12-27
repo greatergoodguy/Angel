@@ -262,10 +262,10 @@ public abstract class BaseRenderer {
 
 	private void adjustHeroOrientation(Hero hero, TextureRegion region) {
 		switch(hero.facedirection){
-		case Hero.HERO_LEFT:
+		case GameObject.SPRITE_LEFT:
 			batcher.drawSpriteCenterReverse(hero, region);
 			break;
-		case Hero.HERO_RIGHT:
+		case GameObject.SPRITE_RIGHT:
 			batcher.drawSpriteCenter(hero, region);
 			break;
 		}
