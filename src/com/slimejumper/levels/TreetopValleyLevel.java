@@ -17,7 +17,9 @@ import com.slimejumper.world.environment.CloudPlatform;
 public class TreetopValleyLevel extends Level{
 
 	private static final float BACKGROUND_TREES_WIDTH = 25.6f;
+	private static final float BACKGROUND_TREES_HEIGHT = 12.8f;
 	private static final float TREETOP_VALLEY_WIDTH = 40f;
+	private static final float TREETOP_VALLEY_HEIGHT = 20f;
 	
 	TreetopValleyFactory treetop_valley_factory;
 	
@@ -30,11 +32,11 @@ public class TreetopValleyLevel extends Level{
 	Hero hero = Hero.hero_singleton;
 	
 	public TreetopValleyLevel(WorldListener listener, Controller controller){
-		super(listener, controller, TREETOP_VALLEY_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
+		super(listener, controller, TREETOP_VALLEY_WIDTH, TREETOP_VALLEY_HEIGHT);
 		hero.resetPositionCenter(3, 3);
 		
 		treetop_valley_factory = new TreetopValleyFactory();
-		background_trees = new Background(BACKGROUND_TREES_WIDTH, TREETOP_VALLEY_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
+		background_trees = new Background(BACKGROUND_TREES_WIDTH, BACKGROUND_TREES_HEIGHT, TREETOP_VALLEY_WIDTH, TREETOP_VALLEY_HEIGHT);//Level.WORLD_DEFAULT_HEIGHT);
 
 		initializeCloudPlatforms();
 		initializeRedWhaleDemons();
@@ -46,6 +48,18 @@ public class TreetopValleyLevel extends Level{
 
 	private void initializeCloudPlatforms() {
 		cloud_platforms = new LinkedList<CloudPlatform>();
+
+		/*
+		 * Test Platforms
+		 */
+		
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 3.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 6.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 8.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 10.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 12.5f));
+		
+		/////////////////
 		
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 5.5f));
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 2.1f));

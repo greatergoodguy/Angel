@@ -218,6 +218,7 @@ public class SpriteBatcher {
 		
 		numSprites++;
 	}
+	
 	public void drawBackgroundLowerLeft(float lower_left_x, float lower_left_y, Background background, Texture texture){
 /*
 		// Check to make sure Sprite is within the World Bounds
@@ -236,8 +237,73 @@ public class SpriteBatcher {
 		float x2 = lower_left_x + BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH;
 		float y2 = lower_left_y + BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT;		
 		
-		float u1 = Level.METER * (lower_left_x * background.parallax_ratio / texture.width);
-		float v1 = Level.METER * ((BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - lower_left_y) / texture.height); 
+		float u1 = Level.METER * (lower_left_x * background.horizontal_parallax_ratio / texture.width);
+
+//		Old Code	
+		float v1 = Level.METER * ((BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - lower_left_y) / texture.height);
+		
+//		Reverse Scrolling		
+//		float v1 = Level.METER * ((lower_left_y * background.vertical_parallax_ratio / texture.height)); 
+
+//		float new_lower_left_y = level.world_height - y1;
+//		float v1 = Level.METER * ((new_lower_left_y * background.vertical_parallax_ratio / texture.height)); 
+
+		float u2 = u1 + BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH_PX / texture.width;
+		float v2 = v1 + BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT_PX / texture.height;
+
+		
+		verticesBuffer[bufferIndex++] = x1;
+		verticesBuffer[bufferIndex++] = y1;
+		verticesBuffer[bufferIndex++] = u1;
+		verticesBuffer[bufferIndex++] = v2;
+		
+		verticesBuffer[bufferIndex++] = x2;
+		verticesBuffer[bufferIndex++] = y1;
+		verticesBuffer[bufferIndex++] = u2;
+		verticesBuffer[bufferIndex++] = v2;
+		
+		verticesBuffer[bufferIndex++] = x2;
+		verticesBuffer[bufferIndex++] = y2;
+		verticesBuffer[bufferIndex++] = u2;
+		verticesBuffer[bufferIndex++] = v1;
+		
+		verticesBuffer[bufferIndex++] = x1;
+		verticesBuffer[bufferIndex++] = y2;
+		verticesBuffer[bufferIndex++] = u1;
+		verticesBuffer[bufferIndex++] = v1;
+		
+		numSprites++;
+	}
+	
+	public void drawBackgroundLowerLeftGlitch(Level level, Background background, Texture texture){
+/*
+		// Check to make sure Sprite is within the World Bounds
+		
+		if(lower_left_x > Level.WORLD_DEFAULT_WIDTH || 
+				lower_left_x + width < 0 ||
+				lower_left_y > Level.WORLD_DEFAULT_HEIGHT ||
+				lower_left_y + height < 0)
+			return;
+		
+		///////////////////////////////////////////////////////
+*/
+		
+		float x1 = level.position.x;
+		float y1 = level.position.y;
+		float x2 = x1 + BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH;
+		float y2 = x2 + BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT;		
+		
+		float u1 = Level.METER * (x1 * background.horizontal_parallax_ratio / texture.width);
+
+//		Old Code	
+		float v1 = Level.METER * ((BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - y1) / texture.height);
+		
+//		Reverse Scrolling		
+//		float v1 = Level.METER * ((lower_left_y * background.vertical_parallax_ratio / texture.height)); 
+
+//		float new_lower_left_y = level.world_height - y1;
+//		float v1 = Level.METER * ((new_lower_left_y * background.vertical_parallax_ratio / texture.height)); 
+
 		float u2 = u1 + BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH_PX / texture.width;
 		float v2 = v1 + BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT_PX / texture.height;
 

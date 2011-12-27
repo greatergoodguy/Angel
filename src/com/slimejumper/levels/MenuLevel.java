@@ -20,7 +20,7 @@ public class MenuLevel extends Level{
 		 if(Settings.soundEnabled)
 	        	Assets.test_music.play();
 		
-		cloud_background = new Background(BACKGROUND_CLOUDS_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
+		cloud_background = new Background(BACKGROUND_CLOUDS_WIDTH, 0, WORLD_DEFAULT_WIDTH, WORLD_DEFAULT_HEIGHT);
 	}
 	
 	public void update(float deltaTime){		
@@ -38,7 +38,7 @@ public class MenuLevel extends Level{
 	private void updateCloudBackground() {
 		Vector2 new_position = new Vector2();
 		
-		new_position.x = position.x * cloud_background.parallax_ratio;
+		new_position.x = position.x * cloud_background.horizontal_parallax_ratio;
 		new_position.y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - position.y;
 		Assets.backgroundCloudsRegion.adjust(new_position);		
 	}

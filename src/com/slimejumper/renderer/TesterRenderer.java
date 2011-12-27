@@ -60,7 +60,7 @@ public class TesterRenderer extends BaseRenderer{
 	private void renderBackgroundTrees() {
 		Background background = ((TesterLevel) level).background_trees;
 		batcher.beginBatch(Assets.background_trees);
-		batcher.drawBackgroundLowerLeft(level.position.x, level.position.y, 
+		batcher.drawBackgroundLowerLeftGlitch(level, 
 				background, Assets.background_trees);
 		batcher.endBatch();
 		

@@ -27,8 +27,8 @@ public class TesterLevel extends Level{
 	public Background background_trees;
 	
 	public TesterLevel(WorldListener listener, Controller controller){
-		super(listener, controller, TESTER_LEVEL_WIDTH, Level.WORLD_DEFAULT_HEIGHT);		
-		background_trees = new Background(BACKGROUND_TREES_WIDTH, TESTER_LEVEL_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
+		super(listener, controller, TESTER_LEVEL_WIDTH, WORLD_DEFAULT_HEIGHT);		
+		background_trees = new Background(BACKGROUND_TREES_WIDTH, 0, TESTER_LEVEL_WIDTH, WORLD_DEFAULT_HEIGHT);
 		
 		rock_platforms = new LinkedList<RockPlatform>();
 		red_whale_demons = new LinkedList<RedWhaleDemon>();

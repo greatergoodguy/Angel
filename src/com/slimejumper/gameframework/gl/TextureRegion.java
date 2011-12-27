@@ -27,10 +27,13 @@ public class TextureRegion {
 		this.v2 = this.v1 + height / texture.height;
 	}
 
+
 	/*
 	 * This method takes a position and the parallax ratio to adjust
 	 * to the correct TextureRegion area.
 	 */
+
+
 	public void adjust(Vector2 position) {
 		//multiply 80 to convert from meters to pixels
 		adjust(position.x*Level.METER, position.y*Level.METER);

@@ -23,8 +23,8 @@ public class CaveLevel extends Level{
 	public CaveLevel(WorldListener listener, Controller controller) {
 		super(listener, controller);
 	
-		cave_back_layer_background = new Background(BACKGROUND_CAVE_BACK_LAYER_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
-		cave_middle_layer_background = new Background(BACKGROUND_CAVE_MIDDLE_LAYER_WIDTH, Level.WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
+		cave_back_layer_background = new Background(BACKGROUND_CAVE_BACK_LAYER_WIDTH, 0, WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
+		cave_middle_layer_background = new Background(BACKGROUND_CAVE_MIDDLE_LAYER_WIDTH, 0, WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
 		
 		obstacle_generator_manager = new ObstacleGeneratorManager();
 		
@@ -59,12 +59,12 @@ public class CaveLevel extends Level{
 	private void updateCaveBackground() {
 		Vector2 new_position = new Vector2();
 		
-		new_position.x = position.x * cave_back_layer_background.parallax_ratio;
+		new_position.x = position.x * cave_back_layer_background.horizontal_parallax_ratio;
 		new_position.y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - position.y;
 		Assets.backgroundBackLayerRegion.adjust(new_position);
 		Assets.backgroundBackLayer2Region.adjust(new_position);
 
-		new_position.x = position.x * cave_middle_layer_background.parallax_ratio;
+		new_position.x = position.x * cave_middle_layer_background.horizontal_parallax_ratio;
 		new_position.y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - position.y;
 		Assets.backgroundMiddleLayerRegion.adjust(new_position);	
 	}
