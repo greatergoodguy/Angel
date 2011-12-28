@@ -10,9 +10,9 @@ import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.levels.Level;
 import com.slimejumper.levels.TesterLevel;
 import com.slimejumper.world.Background;
-import com.slimejumper.world.Hero;
 import com.slimejumper.world.ShadowHero;
 import com.slimejumper.world.enemies.RedWhaleDemon;
+import com.slimejumper.world.environment.CloudPlatform;
 import com.slimejumper.world.environment.RockPlatform;
 
 public class TesterRenderer extends BaseRenderer{
@@ -49,6 +49,10 @@ public class TesterRenderer extends BaseRenderer{
 		for(RockPlatform rock_platform : rock_platforms)
 			batcher.drawSpriteCenter(rock_platform, Assets.RockPlatform);
 				
+		LinkedList<CloudPlatform> cloud_platforms = ((TesterLevel) level).cloud_platforms;
+		for(CloudPlatform cloud_platform : cloud_platforms)
+			batcher.drawSpriteCenter(cloud_platform, Assets.RockPlatform);
+				
 		LinkedList<RedWhaleDemon> red_whale_demons = ((TesterLevel) level).red_whale_demons;
 		for(RedWhaleDemon red_whale_demon : red_whale_demons)
 			batcher.drawSpriteCenterReverse(red_whale_demon, 
@@ -59,9 +63,9 @@ public class TesterRenderer extends BaseRenderer{
 
 	private void renderBackgroundTrees() {
 		Background background = ((TesterLevel) level).background_trees;
-		batcher.beginBatch(Assets.background_trees);
+		batcher.beginBatch(Assets.background_treetop_valley);
 		batcher.drawBackgroundLowerLeftGlitch(level, 
-				background, Assets.background_trees);
+				background, Assets.background_treetop_valley);
 		batcher.endBatch();
 		
 	}

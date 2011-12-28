@@ -6,6 +6,7 @@ import com.slimejumper.Assets;
 import com.slimejumper.Controller;
 import com.slimejumper.Settings;
 import com.slimejumper.tools.CollisionManager;
+import com.slimejumper.tools.TesterFactory;
 import com.slimejumper.world.Background;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.ShadowHero;
@@ -16,19 +17,24 @@ import com.slimejumper.world.environment.RockPlatform;
 public class TesterLevel extends Level{
 	
 	private static final float BACKGROUND_TREES_WIDTH = 25.6f;
-	
+	private static final float BACKGROUND_TREES_HEIGHT = 12.8f;
 	private static final float TESTER_LEVEL_WIDTH = 40f;
+	private static final float TESTER_LEVEL_HEIGHT = 20f;
+	
+	TesterFactory tester_factory;
 	
 	public LinkedList<RockPlatform> rock_platforms;
+	public LinkedList<CloudPlatform> cloud_platforms;
 	public LinkedList<RedWhaleDemon> red_whale_demons;
-	
-	CloudPlatform cloud_platform;
 	
 	public Background background_trees;
 	
 	public TesterLevel(WorldListener listener, Controller controller){
-		super(listener, controller, TESTER_LEVEL_WIDTH, WORLD_DEFAULT_HEIGHT);		
-		background_trees = new Background(BACKGROUND_TREES_WIDTH, 0, TESTER_LEVEL_WIDTH, WORLD_DEFAULT_HEIGHT);
+		super(listener, controller, TESTER_LEVEL_WIDTH, TESTER_LEVEL_HEIGHT);		
+		background_trees = new Background(BACKGROUND_TREES_WIDTH, BACKGROUND_TREES_HEIGHT, TESTER_LEVEL_WIDTH, TESTER_LEVEL_HEIGHT);
+		
+		tester_factory = new TesterFactory();
+		initializeTestClouds();
 		
 		rock_platforms = new LinkedList<RockPlatform>();
 		red_whale_demons = new LinkedList<RedWhaleDemon>();
@@ -36,13 +42,38 @@ public class TesterLevel extends Level{
 		red_whale_demons.add(new RedWhaleDemon(8, 0.5f));
 		red_whale_demons.add(new RedWhaleDemon(18, 0.5f));
 		
-		cloud_platform = new CloudPlatform(13, 2);
-		
 		RockPlatform.initializeRockPlatformGround(this, rock_platforms);
 		if(Settings.soundEnabled)
         	Assets.test_music.play();
 	}
 	
+	private void initializeTestClouds() {
+		cloud_platforms = new LinkedList<CloudPlatform>();
+		
+
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(0, 1.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(3, 3.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(3, 6.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(0, 8.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(3, 10.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(0, 12.5f));
+		
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(5, 1.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(8, 3.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(7, 6.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(9, 8.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(7, 10.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(10, 12.5f));
+		
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(2, 2.8f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(6, 3.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(10, 3.1f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(14, 2.5f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(18, 3.2f));
+		cloud_platforms.add(tester_factory.createStaticCloudPlatform(22, 4.2f));
+		
+	}
+
 	public void update(float deltaTime){
 		/*
 		 * Update
@@ -61,8 +92,8 @@ public class TesterLevel extends Level{
 		 * Events
 		 */
 				
-		if(Hero.hero_singleton.position.y < 0.0f){
-			Hero.hero_singleton.resetPositionLowerLeft(Hero.hero_singleton.position.x, 11);
+		if(hero.position.y < 0.0f){
+			hero.resetPositionLowerLeft(hero.position.x, 11);
 			
 			// Switch to next level
 		}
@@ -78,11 +109,12 @@ public class TesterLevel extends Level{
 	}
 
 	private void manageCollisions() {
-		CollisionManager.HeroPlatformCollision(Hero.hero_singleton, rock_platforms);
+		CollisionManager.HeroPlatformCollision(hero, rock_platforms);
+		CollisionManager.HeroPlatformCollision(hero, cloud_platforms);
 //		CollisionManager.HeroPlatformCollision(SpriteContainer.shadow_hero, rock_platforms);
 		
-		CollisionManager.HeroAttackEnemyCollision(Hero.hero_singleton, red_whale_demons);
-		CollisionManager.HeroEnemyCollision(Hero.hero_singleton, red_whale_demons);
+		CollisionManager.HeroAttackEnemyCollision(hero, red_whale_demons);
+		CollisionManager.HeroEnemyCollision(hero, red_whale_demons);
 	}
 
 	@Override

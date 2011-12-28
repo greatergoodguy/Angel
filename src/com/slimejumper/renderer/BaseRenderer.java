@@ -206,10 +206,10 @@ public abstract class BaseRenderer {
 		case Hero.HERO_STATE_FALL:
 			adjustHeroOrientation(hero, Assets.hero_fall);
 			break;
-		case Hero.HERO_STATE_LAND:
-			adjustHeroOrientation(hero, Assets.hero_land.getKeyFrame(hero.state_timer, 
-					Animation.ANIMATION_NONLOOPING));
-			break;
+//		case Hero.HERO_STATE_LAND:
+//			adjustHeroOrientation(hero, Assets.hero_land.getKeyFrame(hero.state_timer, 
+//					Animation.ANIMATION_NONLOOPING));
+//			break;
 		case Hero.HERO_STATE_COLLIDED:
 			adjustHeroOrientation(hero, Assets.hero_collided.getKeyFrame(hero.state_timer, 
 					Animation.ANIMATION_LOOPING));

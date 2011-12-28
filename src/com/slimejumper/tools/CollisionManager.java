@@ -12,13 +12,12 @@ import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.Enemy;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
-import com.slimejumper.world.enemies.RedWhaleDemon;
 import com.slimejumper.world.environment.GreekPlatform;
 import com.slimejumper.world.environment.Platform;
 
 public class CollisionManager {
 	
-	public static final float COLLISION_TOLERANCE = 0.25f;
+	public static final float COLLISION_TOLERANCE = 0.09f;
 	
 	public static void manageCollisions(){
 		heroConcentratedCollisions();
@@ -96,7 +95,8 @@ public class CollisionManager {
 				
 			}
 			else
-				ShadowHero.shadow_hero_singleton.changeToLandState();
+				ShadowHero.shadow_hero_singleton.changeToJumpState();
+//				ShadowHero.shadow_hero_singleton.changeToLandState();
 //			world.listener.jump();
 		}
 	}

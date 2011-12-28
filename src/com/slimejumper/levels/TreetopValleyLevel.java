@@ -19,7 +19,7 @@ public class TreetopValleyLevel extends Level{
 	private static final float BACKGROUND_TREES_WIDTH = 25.6f;
 	private static final float BACKGROUND_TREES_HEIGHT = 12.8f;
 	private static final float TREETOP_VALLEY_WIDTH = 40f;
-	private static final float TREETOP_VALLEY_HEIGHT = 20f;
+	private static final float TREETOP_VALLEY_HEIGHT = 30f;
 	
 	TreetopValleyFactory treetop_valley_factory;
 	
@@ -118,7 +118,8 @@ public class TreetopValleyLevel extends Level{
 		 */
 				
 		if(hero.position.y < 0.0f){
-			hero.resetPositionLowerLeft(hero.position.x, 11);
+//			hero.resetPositionLowerLeft(hero.position.x, 11);
+			hero.changeToDeathByFallingState();
 			
 			// Glitch Handler
 		}

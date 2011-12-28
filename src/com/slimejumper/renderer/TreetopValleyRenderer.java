@@ -73,9 +73,12 @@ public class TreetopValleyRenderer extends BaseRenderer{
 
 	private void renderBackgroundTrees() {
 		Background background = ((TreetopValleyLevel) level).background_trees;
-		batcher.beginBatch(Assets.background_trees);
-		batcher.drawBackgroundLowerLeft(level.position.x, level.position.y, 
-				background, Assets.background_trees);
+		batcher.beginBatch(Assets.background_treetop_valley);
+//		batcher.drawBackgroundLowerLeft(level.position.x, level.position.y, 
+//				background, Assets.background_treetop_valley);
+//		batcher.drawBackgroundLowerLeftGlitch(level, background, Assets.background_treetop_valley);
+
+		batcher.drawBackgroundLowerLeft(level, background, Assets.background_treetop_valley);
 		batcher.endBatch();
 		
 	}

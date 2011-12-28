@@ -108,7 +108,7 @@ public class Assets {
 	public static Texture background_middle_layer;
 	public static TextureRegion backgroundMiddleLayerRegion;
 	
-	public static Texture background_trees;
+	public static Texture background_treetop_valley;
 	
 	/*
 	 * Game Sprites Atlas
@@ -338,7 +338,7 @@ public class Assets {
 		background_middle_layer = new Texture(game, "BG_middle_layer.png");
 		backgroundMiddleLayerRegion = new TextureRegion(background_middle_layer, 0, 0, 800, 480);
 		
-		background_trees = new Texture(game, "Level1BG.png");
+		background_treetop_valley = new Texture(game, "Level1BG.png");
 		
 		/*
 		 * Game Sprites
@@ -502,7 +502,7 @@ public class Assets {
 		game_sprites.reload();
 		hero.reload();
 		shadow_hero.reload();
-		background_trees.reload();
+		background_treetop_valley.reload();
 		background_clouds.reload();
 		background_back_layer.reload();
 		background_back_layer_2.reload();

@@ -220,17 +220,6 @@ public class SpriteBatcher {
 	}
 	
 	public void drawBackgroundLowerLeft(float lower_left_x, float lower_left_y, Background background, Texture texture){
-/*
-		// Check to make sure Sprite is within the World Bounds
-		
-		if(lower_left_x > Level.WORLD_DEFAULT_WIDTH || 
-				lower_left_x + width < 0 ||
-				lower_left_y > Level.WORLD_DEFAULT_HEIGHT ||
-				lower_left_y + height < 0)
-			return;
-		
-		///////////////////////////////////////////////////////
-*/
 		
 		float x1 = lower_left_x;
 		float y1 = lower_left_y;
@@ -275,18 +264,54 @@ public class SpriteBatcher {
 		numSprites++;
 	}
 	
+	public void drawBackgroundLowerLeft(Level level, Background background, Texture texture){
+		float BG_VERTICAL_OFFSET = 0.53125f; // (bg_height - frustum_height) / bg_height
+		
+		float x1 = level.position.x;
+		float y1 = level.position.y;
+		float x2 = x1 + BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH;
+		float y2 = y1 + BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT;		
+		
+		float u1 = Level.METER * (x1 * background.horizontal_parallax_ratio / texture.width);
+
+//		Old Code	
+//		float v1 = Level.METER * ((BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - y1) / texture.height);
+		
+//		Reverse Scrolling		
+//		float v1 = Level.METER * ((lower_left_y * background.vertical_parallax_ratio / texture.height)); 
+
+//		float new_lower_left_y = level.world_height - y1;
+		float v1 = Level.METER * ((y1 * background.vertical_parallax_ratio / texture.height)); 
+		v1 = BG_VERTICAL_OFFSET - v1;
+		
+		float u2 = u1 + BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH_PX / texture.width;
+		float v2 = v1 + BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT_PX / texture.height;
+
+		
+		verticesBuffer[bufferIndex++] = x1;
+		verticesBuffer[bufferIndex++] = y1;
+		verticesBuffer[bufferIndex++] = u1;
+		verticesBuffer[bufferIndex++] = v2;
+		
+		verticesBuffer[bufferIndex++] = x2;
+		verticesBuffer[bufferIndex++] = y1;
+		verticesBuffer[bufferIndex++] = u2;
+		verticesBuffer[bufferIndex++] = v2;
+		
+		verticesBuffer[bufferIndex++] = x2;
+		verticesBuffer[bufferIndex++] = y2;
+		verticesBuffer[bufferIndex++] = u2;
+		verticesBuffer[bufferIndex++] = v1;
+		
+		verticesBuffer[bufferIndex++] = x1;
+		verticesBuffer[bufferIndex++] = y2;
+		verticesBuffer[bufferIndex++] = u1;
+		verticesBuffer[bufferIndex++] = v1;
+		
+		numSprites++;
+	}
+	
 	public void drawBackgroundLowerLeftGlitch(Level level, Background background, Texture texture){
-/*
-		// Check to make sure Sprite is within the World Bounds
-		
-		if(lower_left_x > Level.WORLD_DEFAULT_WIDTH || 
-				lower_left_x + width < 0 ||
-				lower_left_y > Level.WORLD_DEFAULT_HEIGHT ||
-				lower_left_y + height < 0)
-			return;
-		
-		///////////////////////////////////////////////////////
-*/
 		
 		float x1 = level.position.x;
 		float y1 = level.position.y;

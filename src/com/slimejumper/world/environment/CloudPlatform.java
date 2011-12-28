@@ -71,7 +71,7 @@ public class CloudPlatform extends Platform{
 			state_timer = 0;
 		}
 	}
-	
+
 	public void changeToOscillateVerticalState(){
 		state = STATE.CLOUD_STATE_OSCILLATE_VERTICAL;
 		velocity.x = 0;

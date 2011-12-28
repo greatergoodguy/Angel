@@ -35,14 +35,12 @@ public class Hero extends DynamicGameObject{
 	public static enum STATE{
 		HERO_STATE_JUMP,
 		HERO_STATE_FALL,
-		HERO_STATE_LAND,
 		HERO_STATE_COLLIDED,
 		HERO_STATE_BASIC_ATTACK,
 		HERO_STATE_DEATH_BY_FALLING
 	}
 	public static final int HERO_STATE_JUMP = 0;
 	public static final int HERO_STATE_FALL = 1;
-	public static final int HERO_STATE_LAND = 2;
 	public static final int HERO_STATE_COLLIDED = 3;
 	public static final int HERO_STATE_BASIC_ATTACK = 4;
 	public static final int HERO_STATE_DEATH_BY_FALLING = 5;
@@ -130,14 +128,14 @@ public class Hero extends DynamicGameObject{
 		case HERO_STATE_FALL:
 			updateFallState(deltaTime);
 			break;
-		case HERO_STATE_LAND:
-			updateLandState(deltaTime);
-			break;
 		case HERO_STATE_COLLIDED:
 			updateCollidedState(deltaTime);
 			break;
 		case HERO_STATE_BASIC_ATTACK:
 			updateBasicAttackState(deltaTime);
+			break;
+		case HERO_STATE_DEATH_BY_FALLING:
+			updateDeathByFallingState(deltaTime);
 			break;
 		}
 	}
@@ -150,15 +148,7 @@ public class Hero extends DynamicGameObject{
 		for(SpiralAttack spiral_attack : spiral_attacks)
 			spiral_attack.update(deltaTime);		
 	}
-/*
-	private void deathLoop() {
-		if(position.y + height < 0){
-			position.y = 9;
-			velocity.y = 0;
-		}
-		
-	}
-*/
+
 	public void checkSideBounds(Level level) {
 		if(position.x < 0)
 			resetPositionLowerLeft(0, position.y);
@@ -183,12 +173,12 @@ public class Hero extends DynamicGameObject{
 		state_timer = 0;
 	}
 
+	
 	private void updateFallState(float deltaTime){
-		if(velocity.y >= 0)
-			changeToLandState();
 	}
 
-	private void changeToJumpState() {
+	public void changeToJumpState() {
+		velocity.y = HERO_JUMP_VELOCITY;
 		state = HERO_STATE_JUMP;
 		state_timer = 0;
 	}
@@ -196,17 +186,6 @@ public class Hero extends DynamicGameObject{
 	private void updateJumpState(float deltaTime){
 		if(velocity.y < 0)
 			changeToFallState();
-	}
-
-	public void changeToLandState(){
-		velocity.y = HERO_JUMP_VELOCITY;
-		state = HERO_STATE_LAND;
-		state_timer = 0;
-	}
-
-	private void updateLandState(float deltaTime){
-		if(state_timer > HERO_LAND_TIMER_LIMIT)
-			changeToJumpOrFallState();
 	}
 
 	public void changeToCollidedState() {
@@ -299,6 +278,25 @@ public class Hero extends DynamicGameObject{
 			basic_attack_timer_limit = HERO_BASIC_LYRE_SPECIAL_ATTACK_TIMER;
 		}
 	}
+	
+	public void changeToDeathByFallingState(){
+		/*
+		 * Remove Gravity 
+		 */
+		accel.set(0, 0);
+		velocity.set(0, 0.2f);
+		
+		resetDimensions(HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
+		state = HERO_STATE_DEATH_BY_FALLING;
+		state_timer = 0;
+	}
+	
+	public void updateDeathByFallingState(float deltaTime){
+		if(state_timer > 2){
+			accel.set(0, Level.WORLD_GRAVITY);
+			changeToJumpOrFallState();			
+		}
+	}
 
 	public void adjustFaceDirection() {
 		if(state == HERO_STATE_COLLIDED ||
@@ -356,7 +354,7 @@ public class Hero extends DynamicGameObject{
 			state == Hero.HERO_STATE_COLLIDED)
 			velocity.y = 3 * HERO_JUMP_VELOCITY / 4;
 		else
-			changeToLandState();
+			changeToJumpState();
 	}
 
 	public void activateHaloAttack(){
