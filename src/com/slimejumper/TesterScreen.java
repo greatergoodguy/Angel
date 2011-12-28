@@ -104,7 +104,6 @@ public class TesterScreen extends GLScreen{
 
 	@Override
 	public void dispose() {
-		Assets.test_music.dispose();
 		tester_level.dispose();
 	}
 }

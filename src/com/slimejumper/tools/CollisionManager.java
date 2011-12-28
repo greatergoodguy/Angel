@@ -21,8 +21,6 @@ public class CollisionManager {
 	
 	public static void manageCollisions(){
 		heroConcentratedCollisions();
-		shadowHeroConcentratedCollisions();
-		jellyfishDemonConcentratedCollisions();
 	}
 
 	private static void heroConcentratedCollisions() {
@@ -62,27 +60,11 @@ public class CollisionManager {
 		for(GreekPlatform platform : SpriteContainer.static_platforms)
 			heroPlatformRebound(platform);
 	}
-	
-	private static void shadowHeroConcentratedCollisions() {
-		checkShadowHeroPlatformCollisions();
-	}
-	
-	private static void checkShadowHeroPlatformCollisions() {
-		if (ShadowHero.shadow_hero_singleton.velocity.y > 0)
-			return;
-	
-		for (GreekPlatform platform : SpriteContainer.volatile_platforms) 
-			shadowHeroPlatformRebound(platform);
-		for(GreekPlatform platform : SpriteContainer.ground_platforms)
-			shadowHeroPlatformRebound(platform);
-		for(GreekPlatform platform : SpriteContainer.static_platforms)
-			shadowHeroPlatformRebound(platform);
-		
-	}
 
 	public static void heroPlatformRebound(GreekPlatform platform){
 		if ((OverlapTester.overlapRectangles(Hero.hero_singleton, platform))
-				&& (platform.position.y	- Hero.hero_singleton.position.y < COLLISION_TOLERANCE)) {
+				&& (platform.position.y	- Hero.hero_singleton.position.y < COLLISION_TOLERANCE)
+				&& true) {
 			Hero.hero_singleton.reboundPlatform(platform);
 		}
 	}
@@ -100,34 +82,13 @@ public class CollisionManager {
 //			world.listener.jump();
 		}
 	}
-	
-	private static void jellyfishDemonConcentratedCollisions() {
-		checkIncomingHaloAttackCollision();	
-	}
-
-	private static void checkIncomingHaloAttackCollision() {
-		if(Hero.hero_singleton.halo_attacks.isEmpty() || SpriteContainer.jellyfish_demons.isEmpty())
-			return;
-		
-		for(HaloAttack halo_attack : Hero.hero_singleton.halo_attacks){
-			for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons){
-				
-				if(jellyfish_demon.state == JellyfishDemon.JELLY_STATE_COLLIDED || 
-						OverlapTester.overlapRectangles(halo_attack, jellyfish_demon)){
-					jellyfish_demon.changeToCollidedState(halo_attack);
-				}
-			}
-		}
-			
-	}
 
 	public static void HeroPlatformCollision(Hero hero, LinkedList<? extends Platform> platforms) {
-		for(Platform platform : platforms){
-		
+		for(Platform platform : platforms){		
 			if ((OverlapTester.overlapRectangles(hero, platform))
-				&& (platform.position.y	- hero.position.y < COLLISION_TOLERANCE))
-				hero.reboundPlatform(platform);
-		
+				&& (platform.position.y	- hero.position.y < COLLISION_TOLERANCE)
+				&& (hero.velocity.y < 0))
+				hero.reboundPlatform(platform);		
 		}
 		
 	}

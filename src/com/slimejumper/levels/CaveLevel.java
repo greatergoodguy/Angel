@@ -9,11 +9,9 @@ import com.slimejumper.world.Background;
 
 public class CaveLevel extends Level{
 
-	public final float BACKGROUND_CAVE_BACK_LAYER_WIDTH = 15;	
-	public final float BACKGROUND_CAVE_MIDDLE_LAYER_WIDTH = 14.9f;	
+	public final float BACKGROUND_CAVE_BACK_LAYER_WIDTH = 15;
 	
-	Background cave_back_layer_background;
-	Background cave_middle_layer_background;
+	public final Background cave_background;
 	
 	ObstacleGeneratorManager obstacle_generator_manager;
 	
@@ -23,8 +21,7 @@ public class CaveLevel extends Level{
 	public CaveLevel(WorldListener listener, Controller controller) {
 		super(listener, controller);
 	
-		cave_back_layer_background = new Background(BACKGROUND_CAVE_BACK_LAYER_WIDTH, 0, WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
-		cave_middle_layer_background = new Background(BACKGROUND_CAVE_MIDDLE_LAYER_WIDTH, 0, WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
+		cave_background = new Background(BACKGROUND_CAVE_BACK_LAYER_WIDTH, 0, WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
 		
 		obstacle_generator_manager = new ObstacleGeneratorManager();
 		
@@ -34,7 +31,6 @@ public class CaveLevel extends Level{
 
 	public void update(float deltaTime) {
 		super.update(deltaTime);
-		updateCaveBackground();
 		
 		updateLevel(deltaTime);
 	}
@@ -54,19 +50,6 @@ public class CaveLevel extends Level{
 			obstacle_generator_manager.generateLevelTwo(deltaTime);
 		else
 			obstacle_generator_manager.generateSampleLevel(deltaTime);		
-	}
-	
-	private void updateCaveBackground() {
-		Vector2 new_position = new Vector2();
-		
-		new_position.x = position.x * cave_back_layer_background.horizontal_parallax_ratio;
-		new_position.y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - position.y;
-		Assets.backgroundBackLayerRegion.adjust(new_position);
-		Assets.backgroundBackLayer2Region.adjust(new_position);
-
-		new_position.x = position.x * cave_middle_layer_background.horizontal_parallax_ratio;
-		new_position.y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - position.y;
-		Assets.backgroundMiddleLayerRegion.adjust(new_position);	
 	}
 
 	@Override

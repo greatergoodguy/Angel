@@ -3,8 +3,8 @@ package com.slimejumper.renderer;
 import com.slimejumper.Assets;
 import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
+import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level;
-import com.slimejumper.world.Hero;
 
 public class CaveRenderer extends BaseRenderer{
 
@@ -15,8 +15,10 @@ public class CaveRenderer extends BaseRenderer{
 	public void render(){
 		renderSetUp();
 		
-		renderBackgroundBackLayer();
-		renderBackgroundMiddleLayer();
+		batcher.beginBatch(Assets.background_caves);
+		batcher.drawBackgroundLowerLeft(level.position.x, level.position.y,
+				((CaveLevel) level).cave_background, Assets.background_caves);
+		batcher.endBatch();
 		
 		renderGameSprites();
 		renderHero(hero);		// Foreground is rendered via a conditional in this function
@@ -24,25 +26,6 @@ public class CaveRenderer extends BaseRenderer{
 		renderForeground();
 		
 		renderTearDown();
-	}
-	
-	private void renderBackgroundBackLayer() {
-		batcher.beginBatch(Assets.background_back_layer);
-		batcher.drawSpriteLowerLeft(level.position.x, level.position.y, 
-				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundBackLayerRegion);
-		batcher.endBatch();		
-		
-		batcher.beginBatch(Assets.background_back_layer_2);
-		batcher.drawSpriteLowerLeft(level.position.x, level.position.y, 
-				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundBackLayer2Region);
-		batcher.endBatch();		
-	}
-	
-	private void renderBackgroundMiddleLayer() {
-		batcher.beginBatch(Assets.background_middle_layer);
-		batcher.drawSpriteLowerLeft(level.position.x, level.position.y, 
-				BaseRenderer.BASE_RENDERER_FRUSTUM_WIDTH, BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT, Assets.backgroundMiddleLayerRegion);
-		batcher.endBatch();		
 	}
 	
 	private void renderForeground(){

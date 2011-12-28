@@ -28,63 +28,6 @@ public class ObstacleGeneratorManager {
 		level_one_timer = 0;
 		level_two_timer = 0;
 	}
-/*	
-	public static void initializePlatformGround(){
-		if(!Platform.ground_platforms.isEmpty()){
-			Log.d("ObstacleGeneratorManager.initializePlatformGround()", "platform_ground already filled");
-			return;
-		}
-		
-		final int ground_platform_length = 5;
-		float x_coord = 0;
-		Platform platform;
-		
-		while(x_coord < World.WORLD_RIGHT_EDGE){
-			// create new Platform and add to list
-			platform = World.poolManager.platformPool.newObject();
-			platform.reset(x_coord, 0, ground_platform_length, Platform.PLATFORM_STATE_STILL);;
-			Platform.ground_platforms.add(platform);
-			
-			// Advance counter and repeat
-			x_coord += 5 * Platform.PLATFORM_UNIT_WIDTH;
-		}
-		Collections.shuffle(Platform.ground_platforms);
-	}
-	
-	public static void initializePlatformMap(){
-		
-		if(!Platform.static_platforms.isEmpty()){
-			Log.d("ObstacleGeneratorManager.initializePlatformMap()", "static_platform already filled");
-			return;
-		}
-
-		
-		// Initial Parameters
-		final int map_platform_length = 3;
-		
-		float x_coord = 4;
-		float y_coord = 2.5f;
-		
-		Platform platform;
-		
-		while(y_coord < World.WORLD_TOP_BOUND){
-			while(x_coord < World.WORLD_RIGHT_EDGE){
-				platform = World.poolManager.platformPool.newObject();
-				platform.reset(x_coord, y_coord, map_platform_length, Platform.PLATFORM_STATE_STILL);
-				Platform.static_platforms.add(platform);
-			
-				x_coord += 8;
-			}
-			if(x_coord % 8 == 0)
-				x_coord = 4;
-			else
-				x_coord = 0;
-			
-			y_coord += 2.5;
-		}
-		Collections.shuffle(Platform.static_platforms);
-	}
-*/
 	
 //---------------------------------------------------------------------//	
 	

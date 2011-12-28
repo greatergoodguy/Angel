@@ -1,51 +1,67 @@
 package com.slimejumper.levels;
 
+import java.util.LinkedList;
+
 import com.slimejumper.Assets;
 import com.slimejumper.Controller;
-import com.slimejumper.Settings;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.BaseRenderer;
+import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.world.Background;
 import com.slimejumper.world.Hero;
+import com.slimejumper.world.enemies.RedWhaleDemon;
+import com.slimejumper.world.environment.GreekPlatform;
 
 public class MenuLevel extends Level{
 	
 	private final int BACKGROUND_CLOUDS_WIDTH = 15;	
 	
-	Background cloud_background;
+	public Background cloud_background;
+	
+	public LinkedList<GreekPlatform> greek_platforms;
 	
 	public MenuLevel(WorldListener listener, Controller controller){
 		super(listener, controller);
 		
-		 if(Settings.soundEnabled)
-	        	Assets.test_music.play();
-		
 		cloud_background = new Background(BACKGROUND_CLOUDS_WIDTH, 0, WORLD_DEFAULT_WIDTH, WORLD_DEFAULT_HEIGHT);
+		
+		initializeGreekPlatforms();
 	}
 	
-	public void update(float deltaTime){		
-		super.update(deltaTime);
+	private void initializeGreekPlatforms() {
+		greek_platforms = new LinkedList<GreekPlatform>();
+		
+		GreekPlatform.initializePlatformGround(this, greek_platforms);
+		GreekPlatform.initializePlatformMap(this, greek_platforms);
+		
+	}
 
-		updateCloudBackground();
+	public void update(float deltaTime){		
+//		super.update(deltaTime);
+		updateHero(deltaTime);
+		
+		manageCollisions();
 		
 		if(Hero.hero_singleton.position.y < 0.0f){
 			Hero.hero_singleton.resetPositionLowerLeft(2, 11);
 			
 			// Switch to next level
 		}
+		
+		updateCenter();
+		updatePosition();	
 	}
 	
-	private void updateCloudBackground() {
-		Vector2 new_position = new Vector2();
-		
-		new_position.x = position.x * cloud_background.horizontal_parallax_ratio;
-		new_position.y = BaseRenderer.BASE_RENDERER_FRUSTUM_HEIGHT - position.y;
-		Assets.backgroundCloudsRegion.adjust(new_position);		
+	private void manageCollisions() {
+		CollisionManager.HeroPlatformCollision(hero, greek_platforms);
 	}
-
-	@Override
+	
+	
 	public void dispose() {
-		// TODO Auto-generated method stub
+		while(!greek_platforms.isEmpty()){
+			GreekPlatform greek_platform = greek_platforms.removeFirst();
+			pool_manager.greek_platform_pool.free(greek_platform);
+		}
 		
 	}
 }

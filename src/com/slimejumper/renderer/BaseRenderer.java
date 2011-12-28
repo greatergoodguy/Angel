@@ -78,19 +78,19 @@ public abstract class BaseRenderer {
 	private void renderPlatforms() {
 		if(!SpriteContainer.volatile_platforms.isEmpty()){		
 			for(GreekPlatform platform : SpriteContainer.volatile_platforms)
-				renderPlatform(platform);
+				renderGreekPlatform(platform);
 		}
 		if(!SpriteContainer.ground_platforms.isEmpty()){		
 			for(GreekPlatform platform : SpriteContainer.ground_platforms)
-				renderPlatform(platform);
+				renderGreekPlatform(platform);
 		}
 		if(!SpriteContainer.static_platforms.isEmpty()){
 			for(GreekPlatform platform : SpriteContainer.static_platforms)
-				renderPlatform(platform);
+				renderGreekPlatform(platform);
 		}
 	}
 	
-	private void renderPlatform(GreekPlatform platform) {
+	protected void renderGreekPlatform(GreekPlatform platform) {
 		float platform_section_x_coord = platform.position.x;
 		
 		batcher.drawSpriteLowerLeft(platform_section_x_coord, platform.position.y,

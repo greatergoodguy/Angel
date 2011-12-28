@@ -1,8 +1,6 @@
 package com.slimejumper.world.environment;
 
-import java.util.Collections;
-
-import android.util.Log;
+import java.util.LinkedList;
 
 import com.slimejumper.levels.Level;
 import com.slimejumper.tools.PoolManager;
@@ -246,61 +244,23 @@ public class GreekPlatform extends Platform{
 	}
 	
 	// Ground is raised 0.75 meter from the bottom edge
-	public static void initializePlatformGround(){
-		if(!SpriteContainer.ground_platforms.isEmpty()){
-			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");
-			return;
-		}
-		
+	public static void initializePlatformGround(){		
 		final int ground_platform_length = 5;
 		float x_coord = 0;
 		float y_coord = 0.75f;
-		GreekPlatform platform;
 		
 		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
 			// create new Platform and add to list
-			platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
-			platform.reset(x_coord, y_coord, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
+			GreekPlatform platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
+			platform.reset(x_coord, y_coord, ground_platform_length, PLATFORM_STATE_STILL);;
 			SpriteContainer.ground_platforms.add(platform);
 			
 			// Advance counter and repeat
 			x_coord += 5 * GreekPlatform.PLATFORM_UNIT_WIDTH;
 		}
-		Collections.shuffle(SpriteContainer.ground_platforms);
-	}
-	
-	// Ground is level with the bottom edge
-	public static void initializePlatformGroundMinusOne(){
-		if(!SpriteContainer.ground_platforms.isEmpty()){
-			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");
-			return;
-		}
-		
-		final int ground_platform_length = 5;
-		float x_coord = 0;
-		GreekPlatform platform;
-		
-		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
-			// create new Platform and add to list
-			platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
-			platform.reset(x_coord, 0, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
-			SpriteContainer.ground_platforms.add(platform);
-			
-			// Advance counter and repeat
-			x_coord += 5 * GreekPlatform.PLATFORM_UNIT_WIDTH;
-		}
-		
-		platform = SpriteContainer.ground_platforms.removeLast();
-		PoolManager.pool_manager_singleton.greek_platform_pool.free(platform);
 	}
 	
 	public static void initializePlatformMap(){
-		
-		if(!SpriteContainer.static_platforms.isEmpty()){
-			Log.d("Platform.initializePlatformMap()", "static_platform already filled");
-			return;
-		}
-
 		
 		// Initial Parameters
 		final int map_platform_length = 3;
@@ -308,12 +268,10 @@ public class GreekPlatform extends Platform{
 		float x_coord = 4;
 		float y_coord = 2.5f;
 		
-		GreekPlatform platform;
-		
 		while(y_coord < 8.0f){
 			while(x_coord < Level.WORLD_DEFAULT_WIDTH){
-				platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
-				platform.reset(x_coord, y_coord, map_platform_length, GreekPlatform.PLATFORM_STATE_STILL);
+				GreekPlatform platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
+				platform.reset(x_coord, y_coord, map_platform_length, PLATFORM_STATE_STILL);
 				SpriteContainer.static_platforms.add(platform);
 			
 				x_coord += 8;
@@ -325,30 +283,47 @@ public class GreekPlatform extends Platform{
 			
 			y_coord += 2.5;
 		}
-		Collections.shuffle(SpriteContainer.static_platforms);
 	}
 
-	public static void initializePlatformGround(Level level) {
-		if(!SpriteContainer.ground_platforms.isEmpty()){
-			Log.d("Platform.initializePlatformGround()", "platform_ground already filled");
-			return;
-		}
-		
+	public static void initializePlatformGround(Level level, LinkedList<GreekPlatform> greek_platforms) {
 		final int ground_platform_length = 5;
 		float x_coord = 0;
 		float y_coord = 0.75f;
-		GreekPlatform platform;
 		
 		while(x_coord < level.world_width){
 			// create new Platform and add to list
-			platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
-			platform.reset(x_coord, y_coord, ground_platform_length, GreekPlatform.PLATFORM_STATE_STILL);;
-			SpriteContainer.ground_platforms.add(platform);
+			GreekPlatform platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
+			platform.reset(x_coord, y_coord, ground_platform_length, PLATFORM_STATE_STILL);;
+			greek_platforms.add(platform);
 			
 			// Advance counter and repeat
 			x_coord += 5 * GreekPlatform.PLATFORM_UNIT_WIDTH;
 		}
-		Collections.shuffle(SpriteContainer.ground_platforms);
 		
 	}
+
+	public static void initializePlatformMap(Level level, LinkedList<GreekPlatform> greek_platforms) {
+		// Initial Parameters
+		final int map_platform_length = 3;
+		
+		float x_coord = 4;
+		float y_coord = 2.5f;
+		
+		while(y_coord < 8.0f){
+			while(x_coord < level.world_width){
+				GreekPlatform platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
+				platform.reset(x_coord, y_coord, map_platform_length, PLATFORM_STATE_STILL);
+				greek_platforms.add(platform);
+			
+				x_coord += 8;
+			}
+			if(x_coord % 8 == 0)
+				x_coord = 4;
+			else
+				x_coord = 0;
+			
+			y_coord += 2.5;
+		}
+		
+	}	
 }
