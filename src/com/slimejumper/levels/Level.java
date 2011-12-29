@@ -6,17 +6,11 @@ import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.BaseRenderer;
-import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.PoolManager;
-import com.slimejumper.tools.Remover;
 import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.ShadowHero;
 import com.slimejumper.world.attacks.Shockball;
-import com.slimejumper.world.enemies.FlyingSnake;
-import com.slimejumper.world.enemies.JellyfishDemon;
-import com.slimejumper.world.enemies.PurpleGhost;
-import com.slimejumper.world.environment.GreekPlatform;
 
 public abstract class Level {
 
@@ -122,39 +116,16 @@ public abstract class Level {
 	
 	public void update(float deltaTime) {
 
-		updateSprites(deltaTime);
-		CollisionManager.manageCollisions();
-		Remover.remove();
+		updateShockBalls(deltaTime);
 
 		updateCenter();
 		updatePosition();		
 	}
 
-	private void updateSprites(float deltaTime) {
-		updatePlatforms(deltaTime);
-		updateEnemies(deltaTime);
+	private void updateShockBalls(float deltaTime) {
 		updateAttacks(deltaTime);
-		
-		updateHero(deltaTime);
-		updateShadowHero(deltaTime);
 	}
 
-	private static void updatePlatforms(float deltaTime) {
-		for(GreekPlatform platform : SpriteContainer.static_platforms)
-			platform.update(deltaTime);
-		for (GreekPlatform platform : SpriteContainer.volatile_platforms)
-			platform.update(deltaTime);
-	}
-
-	private static void updateEnemies(float deltaTime) {
-		for (PurpleGhost purple_ghost : SpriteContainer.purple_ghosts)
-			purple_ghost.update(deltaTime);
-		for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons)
-			jellyfish_demon.update(deltaTime);
-		for(FlyingSnake flying_snake : SpriteContainer.flying_snakes)
-			flying_snake.update(deltaTime);
-	}
-	
 	private void updateAttacks(float deltaTime) {
 				
 		for(Shockball shockball : SpriteContainer.shockballs)

@@ -2,9 +2,11 @@ package com.slimejumper.tools;
 
 import java.util.Random;
 
+import com.slimejumper.levels.CaveLevel;
+
 public class ObstacleGeneratorManager {
 	
-//	Level world;
+	CaveLevel caveLevel;
 	ObstacleGenerator obstacleShooter;
 	Random random;
 	
@@ -16,8 +18,10 @@ public class ObstacleGeneratorManager {
 	float level_one_timer;
 	float level_two_timer;
 	
-	public ObstacleGeneratorManager(){
-		obstacleShooter = new ObstacleGenerator();
+	public ObstacleGeneratorManager(CaveLevel caveLevel){
+		this.caveLevel = caveLevel;
+		
+		obstacleShooter = new ObstacleGenerator(caveLevel);
 		random = new Random();
 		
 		platform_timer = 0;

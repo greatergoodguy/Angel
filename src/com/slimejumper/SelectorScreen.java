@@ -49,7 +49,8 @@ public class SelectorScreen extends GLScreen{
 	            
 	            if(event.type == TouchEvent.TOUCH_UP) {
 	                if(OverlapTester.pointInRectangle(TesterLevelRect, touchPoint)) {
-	                    game.setScreen(new TesterScreen(game));
+	                    //game.setScreen(new TesterScreen(game));
+	                	game.setScreen(new TreetopValleyScreen(game));
 	                    return;
 	                }
 	            }

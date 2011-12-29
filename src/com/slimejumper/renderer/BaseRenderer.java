@@ -22,7 +22,6 @@ import com.slimejumper.world.attacks.Shockball;
 import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
-import com.slimejumper.world.enemies.PurpleGhost;
 import com.slimejumper.world.environment.GreekPlatform;
 
 
@@ -67,14 +66,13 @@ public abstract class BaseRenderer {
 
 	protected void renderGameSprites(){
 		batcher.beginBatch(Assets.game_sprites);
-		renderPlatforms();
-		renderPurpleGhosts();
-		renderJellyfishDemons();
-		renderFlyingSnakes();
+//		renderPlatforms();
+//		renderJellyfishDemons();
+//		renderFlyingSnakes();
 		renderShockBalls();
 		batcher.endBatch();
 	}
-	
+/*	
 	private void renderPlatforms() {
 		if(!SpriteContainer.volatile_platforms.isEmpty()){		
 			for(GreekPlatform platform : SpriteContainer.volatile_platforms)
@@ -84,12 +82,8 @@ public abstract class BaseRenderer {
 			for(GreekPlatform platform : SpriteContainer.ground_platforms)
 				renderGreekPlatform(platform);
 		}
-		if(!SpriteContainer.static_platforms.isEmpty()){
-			for(GreekPlatform platform : SpriteContainer.static_platforms)
-				renderGreekPlatform(platform);
-		}
 	}
-	
+*/	
 	protected void renderGreekPlatform(GreekPlatform platform) {
 		float platform_section_x_coord = platform.position.x;
 		
@@ -107,64 +101,48 @@ public abstract class BaseRenderer {
 				GreekPlatform.PLATFORM_UNIT_WIDTH, GreekPlatform.PLATFORM_HEIGHT, Assets.PlatformRight);
 	}
 	
-
-	private void renderPurpleGhosts() {
-		if(SpriteContainer.purple_ghosts.isEmpty())
-			return;
-		for(PurpleGhost purple_ghost : SpriteContainer.purple_ghosts)
-			batcher.drawSpriteCenterReverse(purple_ghost, Assets.PurpleGhost);
-		
-	}
-	
-	private void renderJellyfishDemons(){
-		if(SpriteContainer.jellyfish_demons.isEmpty())
-			return;
-		for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons){
-			switch(jellyfish_demon.state){
+	protected void renderJellyfishDemon(JellyfishDemon jellyfish_demon){
+		switch(jellyfish_demon.state){
 /*			
-			case JellyfishDemon.JELLY_STATE_STANDARD:
-				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_motion.getKeyFrame(jellyfish_demon.life_timer, 
-						Animation.ANIMATION_LOOPING));
-				break;
+		case JellyfishDemon.JELLY_STATE_STANDARD:
+			adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_motion.getKeyFrame(jellyfish_demon.life_timer, 
+				Animation.ANIMATION_LOOPING));
+			break;
 */				
-			case JellyfishDemon.JELLY_STATE_ATTACK:
-				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_shock_attacking.getKeyFrame(jellyfish_demon.state_timer, 
-						Animation.ANIMATION_LOOPING));
-				break;
-			case JellyfishDemon.JELLY_STATE_COLLIDED:
-				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_collided.getKeyFrame(jellyfish_demon.life_timer, 
-						Animation.ANIMATION_LOOPING));
-				break;
-			case JellyfishDemon.JELLY_STATE_BOOST_UP:
-				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_boost_up.getKeyFrame(jellyfish_demon.state_timer, 
-						Animation.ANIMATION_NONLOOPING));
-				break;
-			case JellyfishDemon.JELLY_STATE_FLOAT_DOWN:
-				adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_float_down.getKeyFrame(jellyfish_demon.state_timer, 
-						Animation.ANIMATION_NONLOOPING));
-				break;
-			}
+		case JellyfishDemon.JELLY_STATE_ATTACK:
+			adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_shock_attacking.getKeyFrame(jellyfish_demon.state_timer, 
+				Animation.ANIMATION_LOOPING));
+			break;
+		case JellyfishDemon.JELLY_STATE_COLLIDED:
+			adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_collided.getKeyFrame(jellyfish_demon.life_timer, 
+				Animation.ANIMATION_LOOPING));
+			break;
+		case JellyfishDemon.JELLY_STATE_BOOST_UP:
+			adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_boost_up.getKeyFrame(jellyfish_demon.state_timer, 
+				Animation.ANIMATION_NONLOOPING));
+			break;
+		case JellyfishDemon.JELLY_STATE_FLOAT_DOWN:
+			adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_float_down.getKeyFrame(jellyfish_demon.state_timer, 
+				Animation.ANIMATION_NONLOOPING));
+			break;
 		}			
 	}
 	
-	private void renderFlyingSnakes(){
-		if(SpriteContainer.flying_snakes.isEmpty())
-			return;
-		for(FlyingSnake flying_snake : SpriteContainer.flying_snakes){
-			switch(flying_snake.state){
-			case FlyingSnake.FLYING_SNAKE_STATE_STANDARD:
-				batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
-				break;
-			case FlyingSnake.FLYING_SNAKE_STATE_ATTACK_CHARGE:
-				batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_attack.getKeyFrame(flying_snake.state_timer, Animation.ANIMATION_NONLOOPING));
-				break;
-			case FlyingSnake.FLYING_SNAKE_STATE_ATTACK:
-				batcher.drawSpriteCenter(flying_snake, Assets.flyingSnakeAttackFrame);
-				break;
-			case FlyingSnake.FLYING_SNAKE_STATE_RELOAD:
-				batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
-				break;
-			}
+	protected void renderFlyingSnake(FlyingSnake flying_snake){
+		switch(flying_snake.state){
+		case FlyingSnake.FLYING_SNAKE_STATE_STANDARD:
+			batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
+			break;
+		case FlyingSnake.FLYING_SNAKE_STATE_ATTACK_CHARGE:
+			batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_attack.getKeyFrame(flying_snake.state_timer, Animation.ANIMATION_NONLOOPING));
+			break;
+		case FlyingSnake.FLYING_SNAKE_STATE_ATTACK:
+			batcher.drawSpriteCenter(flying_snake, Assets.flyingSnakeAttackFrame);
+			break;
+		case FlyingSnake.FLYING_SNAKE_STATE_RELOAD:
+			batcher.drawSpriteCenter(flying_snake, Assets.flying_snake_standard.getKeyFrame(flying_snake.life_timer, Animation.ANIMATION_LOOPING));				
+			break;
+			
 		}
 	}
 	
@@ -201,7 +179,9 @@ public abstract class BaseRenderer {
 	private void renderHeroState(Hero hero) {		
 		switch(hero.state){
 		case Hero.HERO_STATE_JUMP:
-			adjustHeroOrientation(hero, Assets.hero_jump);
+//			adjustHeroOrientation(hero, Assets.hero_jump_old);
+			adjustHeroOrientation(hero, Assets.hero_jump.getKeyFrame(hero.state_timer, 
+					Animation.ANIMATION_NONLOOPING));
 			break;
 		case Hero.HERO_STATE_FALL:
 			adjustHeroOrientation(hero, Assets.hero_fall);
@@ -212,7 +192,7 @@ public abstract class BaseRenderer {
 //			break;
 		case Hero.HERO_STATE_COLLIDED:
 			adjustHeroOrientation(hero, Assets.hero_collided.getKeyFrame(hero.state_timer, 
-					Animation.ANIMATION_LOOPING));
+				Animation.ANIMATION_LOOPING));
 			break;	
 		case Hero.HERO_STATE_BASIC_ATTACK:
 			switch(hero.basic_attack_type){

@@ -146,6 +146,8 @@ public class TreetopValleyLevel extends Level{
 	}
 
 	public void dispose() {		
+		hero.dispose();
+		
 		while(!cloud_platforms.isEmpty()){
 			CloudPlatform cloud_platform = cloud_platforms.removeFirst();
 			pool_manager.cloud_platform_pool.free(cloud_platform);

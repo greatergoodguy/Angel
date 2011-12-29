@@ -2,16 +2,19 @@ package com.slimejumper.tools;
 
 import java.util.Random;
 
+import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.environment.GreekPlatform;
 
 public class ObstacleGenerator {
-		
+	
+	CaveLevel caveLevel;
 	Random random;
 	
-	public ObstacleGenerator(){
+	public ObstacleGenerator(CaveLevel caveLevel){
+		this.caveLevel = caveLevel;
 		random = new Random();
 	}
 	
@@ -24,7 +27,9 @@ public class ObstacleGenerator {
 //		Platform platform = world.platformPool.newObject();
 		GreekPlatform platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
 		platform.reset(Level.WORLD_DEFAULT_WIDTH, spawnPositionY, GreekPlatform.PLATFORM_MEDIUM_LENGTH, GreekPlatform.PLATFORM_STATE_ZOOM);
-		SpriteContainer.volatile_platforms.add(platform);
+		
+		caveLevel.greek_platforms_volatile.isEmpty();
+		caveLevel.greek_platforms_volatile.add(platform);
 	}
 /*	
 	public void generatePurpleGhost(float min, float max){
@@ -40,14 +45,14 @@ public class ObstacleGenerator {
 		
 		FlyingSnake flying_snake = PoolManager.pool_manager_singleton.flying_snake_pool.newObject();
 		flying_snake.reset(spawnPositionY);
-		SpriteContainer.flying_snakes.add(flying_snake);
+		caveLevel.flying_snakes.add(flying_snake);
 	}
 
 	public void generateJellyfishDemon() {
 		JellyfishDemon jellyfish_demon = PoolManager.pool_manager_singleton.jellyfish_demon_pool.newObject();
 		float spawnPositionX = random.nextFloat() * Level.WORLD_DEFAULT_WIDTH/2 + Level.WORLD_DEFAULT_WIDTH/4;
 		jellyfish_demon.reset(spawnPositionX);
-		SpriteContainer.jellyfish_demons.add(jellyfish_demon);
+		caveLevel.jellyfish_demons.add(jellyfish_demon);
 	}
 	
 	public void generateJellyfishDemonPair() {
@@ -58,7 +63,7 @@ public class ObstacleGenerator {
 		JellyfishDemon jellyfish_demon2 = PoolManager.pool_manager_singleton.jellyfish_demon_pool.newObject();
 		jellyfish_demon1.reset(spawnPositionX1);
 		jellyfish_demon2.reset(spawnPositionX2);
-		SpriteContainer.jellyfish_demons.add(jellyfish_demon1);
-		SpriteContainer.jellyfish_demons.add(jellyfish_demon2);		
+		caveLevel.jellyfish_demons.add(jellyfish_demon1);
+		caveLevel.jellyfish_demons.add(jellyfish_demon2);
 	}
 }

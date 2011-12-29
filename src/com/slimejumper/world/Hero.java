@@ -16,6 +16,7 @@ import com.slimejumper.world.environment.Platform;
 public class Hero extends DynamicGameObject{
 
 	public static final Hero hero_singleton = new Hero();
+	final PoolManager pool_manager = PoolManager.pool_manager_singleton;
 	
 	/*
 	 * Hero Attacks
@@ -165,9 +166,9 @@ public class Hero extends DynamicGameObject{
 		if(velocity.y < 0)
 			changeToFallState();		
 		else
-			changeToJumpState();
+			changeToJumpState(velocity.y);
 	}
-	
+
 	private void changeToFallState() {
 		state = HERO_STATE_FALL;
 		state_timer = 0;
@@ -181,6 +182,13 @@ public class Hero extends DynamicGameObject{
 		velocity.y = HERO_JUMP_VELOCITY;
 		state = HERO_STATE_JUMP;
 		state_timer = 0;
+	}
+	
+	private void changeToJumpState(float new_velocity_y) {
+		velocity.y = new_velocity_y;
+		state = HERO_STATE_JUMP;
+		state_timer = 0;
+		
 	}
 	
 	private void updateJumpState(float deltaTime){
@@ -204,7 +212,7 @@ public class Hero extends DynamicGameObject{
 
 	private void updateCollidedState(float deltaTime){
 		if(state_timer > HERO_COLLIDED_TIMER_LIMIT)
-			changeToJumpOrFallState();
+			changeToFallState();
 	}
 
 	public void changeToBasicAttackState() {
@@ -358,13 +366,13 @@ public class Hero extends DynamicGameObject{
 	}
 
 	public void activateHaloAttack(){
-		HaloAttack halo_attack = PoolManager.pool_manager_singleton.halo_attack_pool.newObject();
+		HaloAttack halo_attack = pool_manager.halo_attack_pool.newObject();
 		halo_attack.reset(this);
 		halo_attacks.add(halo_attack);
 	}
 	
 	public void activateSpiralAttack(){
-		SpiralAttack spiral_attack = PoolManager.pool_manager_singleton.spiral_attack_pool.newObject();
+		SpiralAttack spiral_attack = pool_manager.spiral_attack_pool.newObject();
 		spiral_attack.reset(this);
 		hop();
 		spiral_attacks.add(spiral_attack);
@@ -372,7 +380,7 @@ public class Hero extends DynamicGameObject{
 	
 	public void activateMusicalBurst(){
 		for(int frame_counter_starter=0; frame_counter_starter<UnitCircle.UNIT_CIRCLE_SIZE; frame_counter_starter+=3){
-			MusicNote music_note = PoolManager.pool_manager_singleton.music_note_pool.newObject();
+			MusicNote music_note = pool_manager.music_note_pool.newObject();
 			music_note.reset(frame_counter_starter);
 			
 			music_notes.add(music_note);
@@ -384,7 +392,7 @@ public class Hero extends DynamicGameObject{
 			HaloAttack halo_attack = halo_attacks.getFirst();
 			if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
 				halo_attacks.removeFirst();
-				PoolManager.pool_manager_singleton.halo_attack_pool.free(halo_attack);
+				pool_manager.halo_attack_pool.free(halo_attack);
 			}
 		}
 		
@@ -392,7 +400,7 @@ public class Hero extends DynamicGameObject{
 			MusicNote music_note = music_notes.getFirst();
 			if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
 				music_notes.removeFirst();
-				PoolManager.pool_manager_singleton.music_note_pool.free(music_note);
+				pool_manager.music_note_pool.free(music_note);
 			}
 		}
 		
@@ -400,8 +408,26 @@ public class Hero extends DynamicGameObject{
 			SpiralAttack spiral_attack = spiral_attacks.getFirst();
 			if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
 				spiral_attacks.removeFirst();
-				PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
+				pool_manager.spiral_attack_pool.free(spiral_attack);
 			}
 		}
+	}
+
+	public void dispose() {
+		while(!halo_attacks.isEmpty()){
+			HaloAttack halo_attack = halo_attacks.removeFirst();
+			pool_manager.halo_attack_pool.free(halo_attack);
+		}
+		
+		while(!music_notes.isEmpty()){
+			MusicNote music_note = music_notes.removeFirst();
+			pool_manager.music_note_pool.free(music_note);
+		}
+		
+		while(!spiral_attacks.isEmpty()){
+			SpiralAttack spiral_attack = spiral_attacks.getFirst();
+			pool_manager.spiral_attack_pool.free(spiral_attack);
+		}
+		
 	}
 }

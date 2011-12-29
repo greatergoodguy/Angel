@@ -1,10 +1,15 @@
 package com.slimejumper.renderer;
 
+import java.util.LinkedList;
+
 import com.slimejumper.Assets;
 import com.slimejumper.framework.impl.GLGraphics;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level;
+import com.slimejumper.world.enemies.FlyingSnake;
+import com.slimejumper.world.enemies.JellyfishDemon;
+import com.slimejumper.world.environment.GreekPlatform;
 
 public class CaveRenderer extends BaseRenderer{
 
@@ -20,6 +25,23 @@ public class CaveRenderer extends BaseRenderer{
 				((CaveLevel) level).cave_background, Assets.background_caves);
 		batcher.endBatch();
 		
+		batcher.beginBatch(Assets.game_sprites);
+		// Render Greek Platforms
+		LinkedList<GreekPlatform> greek_platforms_volatile = ((CaveLevel) level).greek_platforms_volatile;
+		for(GreekPlatform greek_platform : greek_platforms_volatile)
+			renderGreekPlatform(greek_platform);		
+		
+		// Render Jellyfish Demons
+		LinkedList<JellyfishDemon> jellyfish_demons = ((CaveLevel) level).jellyfish_demons;
+		for(JellyfishDemon jellyfish_demon : jellyfish_demons)
+			renderJellyfishDemon(jellyfish_demon);
+		
+		// Render Flying Snakes
+		LinkedList<FlyingSnake> flying_snakes = ((CaveLevel) level).flying_snakes;
+		for(FlyingSnake flying_snake : flying_snakes)
+			renderFlyingSnake(flying_snake);
+		batcher.endBatch();
+			
 		renderGameSprites();
 		renderHero(hero);		// Foreground is rendered via a conditional in this function
 		

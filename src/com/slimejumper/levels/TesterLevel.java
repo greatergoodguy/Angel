@@ -8,7 +8,6 @@ import com.slimejumper.Settings;
 import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.TesterFactory;
 import com.slimejumper.world.Background;
-import com.slimejumper.world.Hero;
 import com.slimejumper.world.ShadowHero;
 import com.slimejumper.world.enemies.RedWhaleDemon;
 import com.slimejumper.world.environment.CloudPlatform;
@@ -119,7 +118,7 @@ public class TesterLevel extends Level{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		hero.dispose();
 		
 	}
 }

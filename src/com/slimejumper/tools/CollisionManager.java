@@ -5,83 +5,15 @@ import java.util.LinkedList;
 
 import com.slimejumper.gameframework.math.OverlapTester;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.ShadowHero;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.Enemy;
-import com.slimejumper.world.enemies.JellyfishDemon;
-import com.slimejumper.world.enemies.PurpleGhost;
-import com.slimejumper.world.environment.GreekPlatform;
 import com.slimejumper.world.environment.Platform;
 
 public class CollisionManager {
 	
 	public static final float COLLISION_TOLERANCE = 0.09f;
-	
-	public static void manageCollisions(){
-		heroConcentratedCollisions();
-	}
-
-	private static void heroConcentratedCollisions() {
-		checkHeroPlatformCollisions();
-		checkIncomingEnemyCollisions();
-	}
-
-	private static void checkIncomingEnemyCollisions() {
-		if(Hero.hero_singleton.state == Hero.HERO_STATE_COLLIDED)
-			return;
-		
-		for(PurpleGhost purple_ghost : SpriteContainer.purple_ghosts){
-			if(OverlapTester.overlapRectangles(Hero.hero_singleton, purple_ghost)){
-				Hero.hero_singleton.changeToCollidedState();
-//				world.listener.hit();
-			}
-				
-		}
-		
-		for(JellyfishDemon jellyfish_demon : SpriteContainer.jellyfish_demons){
-			if(OverlapTester.overlapRectangles(Hero.hero_singleton, jellyfish_demon)){
-				Hero.hero_singleton.changeToCollidedState();
-//				world.listener.hit();
-			}	
-		}
-		
-	}
-
-	private static void checkHeroPlatformCollisions() {
-		if (Hero.hero_singleton.velocity.y > 0)
-			return;
-	
-		for (GreekPlatform platform : SpriteContainer.volatile_platforms) 
-			heroPlatformRebound(platform);
-		for(GreekPlatform platform : SpriteContainer.ground_platforms)
-			heroPlatformRebound(platform);
-		for(GreekPlatform platform : SpriteContainer.static_platforms)
-			heroPlatformRebound(platform);
-	}
-
-	public static void heroPlatformRebound(GreekPlatform platform){
-		if ((OverlapTester.overlapRectangles(Hero.hero_singleton, platform))
-				&& (platform.position.y	- Hero.hero_singleton.position.y < COLLISION_TOLERANCE)
-				&& true) {
-			Hero.hero_singleton.reboundPlatform(platform);
-		}
-	}
-
-	public static void shadowHeroPlatformRebound(GreekPlatform platform){
-		if ((OverlapTester.overlapRectangles(ShadowHero.shadow_hero_singleton, platform))
-				&& (platform.position.y	- ShadowHero.shadow_hero_singleton.position.y < COLLISION_TOLERANCE)) {
-			ShadowHero.shadow_hero_singleton.reboundPlatform(platform);
-			if(ShadowHero.shadow_hero_singleton.state == Hero.HERO_STATE_BASIC_ATTACK){
-				
-			}
-			else
-				ShadowHero.shadow_hero_singleton.changeToJumpState();
-//				ShadowHero.shadow_hero_singleton.changeToLandState();
-//			world.listener.jump();
-		}
-	}
 
 	public static void HeroPlatformCollision(Hero hero, LinkedList<? extends Platform> platforms) {
 		for(Platform platform : platforms){		

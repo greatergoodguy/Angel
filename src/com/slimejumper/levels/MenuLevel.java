@@ -2,14 +2,10 @@ package com.slimejumper.levels;
 
 import java.util.LinkedList;
 
-import com.slimejumper.Assets;
 import com.slimejumper.Controller;
-import com.slimejumper.gameframework.math.Vector2;
-import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.world.Background;
 import com.slimejumper.world.Hero;
-import com.slimejumper.world.enemies.RedWhaleDemon;
 import com.slimejumper.world.environment.GreekPlatform;
 
 public class MenuLevel extends Level{
@@ -32,8 +28,7 @@ public class MenuLevel extends Level{
 		greek_platforms = new LinkedList<GreekPlatform>();
 		
 		GreekPlatform.initializePlatformGround(this, greek_platforms);
-		GreekPlatform.initializePlatformMap(this, greek_platforms);
-		
+		GreekPlatform.initializePlatformMap(this, greek_platforms);		
 	}
 
 	public void update(float deltaTime){		
@@ -58,6 +53,8 @@ public class MenuLevel extends Level{
 	
 	
 	public void dispose() {
+		hero.dispose();
+		
 		while(!greek_platforms.isEmpty()){
 			GreekPlatform greek_platform = greek_platforms.removeFirst();
 			pool_manager.greek_platform_pool.free(greek_platform);

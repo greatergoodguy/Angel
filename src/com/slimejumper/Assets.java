@@ -8,6 +8,7 @@ import com.slimejumper.gameframework.gl.Texture;
 import com.slimejumper.gameframework.gl.TextureRegion;
 
 public class Assets {
+	public final static float DEFAULT_FRAME_DURATION = 0.08f;
 	
 	public final static float HERO_HALO_ATTACK_1_FRAME_DURATION = 0.07f;
 	public final static float HERO_LYRE_ATTACK_FRAME_DURATION = 0.15f;
@@ -37,7 +38,7 @@ public class Assets {
 	
 	public static Texture hero;
 	public static TextureRegion heroRegion;
-	public static TextureRegion hero_jump;
+	public static TextureRegion hero_jump_old;
 	public static TextureRegion hero_fall;
 	
 	public static Animation hero_land;
@@ -45,6 +46,11 @@ public class Assets {
 	public static TextureRegion heroLandFrame2;
 	public static TextureRegion heroLandFrame3;
 	public static TextureRegion heroLandFrame4;
+	
+	public static Animation hero_jump;
+	public static TextureRegion heroJumpFrame1;
+	public static TextureRegion heroJumpFrame2;
+	public static TextureRegion heroJumpFrame3;
 	
 	public static Animation hero_halo_attack_1;
 	public static TextureRegion heroHaloAttack1Frame1;
@@ -202,7 +208,8 @@ public class Assets {
 		
 		hero = new Texture(game, "Hero.png");
 		heroRegion = new TextureRegion(hero, 0, 0, 80, 80);
-		hero_jump = new TextureRegion(hero, 400, 80, 80, 80);
+		hero_jump_old = new TextureRegion(hero, 400, 80, 80, 80);
+		
 		hero_fall = new TextureRegion(hero, 80, 0, 80, 80);
 		heroLandFrame1 = new TextureRegion(hero, 160, 0, 80, 80);
 		heroLandFrame2 = new TextureRegion(hero, 240, 0, 80, 80);
@@ -214,6 +221,17 @@ public class Assets {
 				heroLandFrame3,
 				heroLandFrame4
 				);
+		
+		heroJumpFrame1 = new TextureRegion(hero, 240, 0, 80, 80);
+		heroJumpFrame2 = new TextureRegion(hero, 320, 0, 80, 80);
+		heroJumpFrame3 = new TextureRegion(hero, 400, 80, 80, 80);
+		
+		hero_jump = new Animation(DEFAULT_FRAME_DURATION,
+				heroJumpFrame1,
+				heroJumpFrame2,
+				heroJumpFrame3
+				);
+		
 		heroHaloAttack1Frame1 = new TextureRegion(hero, 0, 80, 80, 90);
 		heroHaloAttack1Frame2 = new TextureRegion(hero, 80, 80, 80, 90);
 		heroHaloAttack1Frame3 = new TextureRegion(hero, 160, 80, 80, 90);

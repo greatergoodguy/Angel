@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 import com.slimejumper.levels.Level;
 import com.slimejumper.tools.PoolManager;
-import com.slimejumper.tools.SpriteContainer;
 
 public class GreekPlatform extends Platform{
 	
@@ -240,48 +239,6 @@ public class GreekPlatform extends Platform{
 				changeToOscillateDownState();
 				break;
 			}
-		}
-	}
-	
-	// Ground is raised 0.75 meter from the bottom edge
-	public static void initializePlatformGround(){		
-		final int ground_platform_length = 5;
-		float x_coord = 0;
-		float y_coord = 0.75f;
-		
-		while(x_coord < Level.WORLD_DEFAULT_WIDTH){
-			// create new Platform and add to list
-			GreekPlatform platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
-			platform.reset(x_coord, y_coord, ground_platform_length, PLATFORM_STATE_STILL);;
-			SpriteContainer.ground_platforms.add(platform);
-			
-			// Advance counter and repeat
-			x_coord += 5 * GreekPlatform.PLATFORM_UNIT_WIDTH;
-		}
-	}
-	
-	public static void initializePlatformMap(){
-		
-		// Initial Parameters
-		final int map_platform_length = 3;
-		
-		float x_coord = 4;
-		float y_coord = 2.5f;
-		
-		while(y_coord < 8.0f){
-			while(x_coord < Level.WORLD_DEFAULT_WIDTH){
-				GreekPlatform platform = PoolManager.pool_manager_singleton.greek_platform_pool.newObject();
-				platform.reset(x_coord, y_coord, map_platform_length, PLATFORM_STATE_STILL);
-				SpriteContainer.static_platforms.add(platform);
-			
-				x_coord += 8;
-			}
-			if(x_coord % 8 == 0)
-				x_coord = 4;
-			else
-				x_coord = 0;
-			
-			y_coord += 2.5;
 		}
 	}
 
