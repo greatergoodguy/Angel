@@ -13,7 +13,6 @@ import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.CaveLevel;
 import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.renderer.CaveRenderer;
-import com.slimejumper.tools.SpriteContainer;
 
 
 public class CaveScreen extends GLScreen {
@@ -59,12 +58,6 @@ public class CaveScreen extends GLScreen {
 		cave_level = new CaveLevel(worldListener, controller);		
 		cave_renderer = new CaveRenderer(glGraphics, batcher, cave_level);
 		touchPoint = new Vector2();
-		
-		initializeLevel();
-	}
-
-	public static void initializeLevel(){
-		SpriteContainer.initializeLists();
 	}
 	
 	@Override

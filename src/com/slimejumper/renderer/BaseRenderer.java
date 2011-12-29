@@ -12,13 +12,11 @@ import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.gameframework.gl.TextureRegion;
 import com.slimejumper.levels.Level;
-import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.DynamicGameObject;
 import com.slimejumper.world.GameObject;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
-import com.slimejumper.world.attacks.Shockball;
 import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.FlyingSnake;
 import com.slimejumper.world.enemies.JellyfishDemon;
@@ -64,14 +62,6 @@ public abstract class BaseRenderer {
 	
 	public abstract void render();
 
-	protected void renderGameSprites(){
-		batcher.beginBatch(Assets.game_sprites);
-//		renderPlatforms();
-//		renderJellyfishDemons();
-//		renderFlyingSnakes();
-		renderShockBalls();
-		batcher.endBatch();
-	}
 /*	
 	private void renderPlatforms() {
 		if(!SpriteContainer.volatile_platforms.isEmpty()){		
@@ -144,14 +134,6 @@ public abstract class BaseRenderer {
 			break;
 			
 		}
-	}
-	
-	private void renderShockBalls(){
-		if(SpriteContainer.shockballs.isEmpty())
-			return;
-		for(Shockball shockball : SpriteContainer.shockballs)
-			batcher.drawSpriteCenter(shockball, Assets.shockball.getKeyFrame(shockball.life_timer, Animation.ANIMATION_LOOPING));
-		
 	}
 
 	protected void renderHero(Hero hero) {

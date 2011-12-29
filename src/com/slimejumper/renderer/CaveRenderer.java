@@ -40,9 +40,9 @@ public class CaveRenderer extends BaseRenderer{
 		LinkedList<FlyingSnake> flying_snakes = ((CaveLevel) level).flying_snakes;
 		for(FlyingSnake flying_snake : flying_snakes)
 			renderFlyingSnake(flying_snake);
+				
 		batcher.endBatch();
-			
-		renderGameSprites();
+		
 		renderHero(hero);		// Foreground is rendered via a conditional in this function
 		
 		renderForeground();

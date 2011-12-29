@@ -13,7 +13,6 @@ import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.levels.TreetopValleyLevel;
 import com.slimejumper.renderer.TreetopValleyRenderer;
-import com.slimejumper.tools.SpriteContainer;
 
 public class TreetopValleyScreen extends GLScreen{
 	static final int GAME_READY = 0;
@@ -57,8 +56,6 @@ public class TreetopValleyScreen extends GLScreen{
 		treetop_valley_level = new TreetopValleyLevel(worldListener, controller);		
 		treetop_valley_renderer = new TreetopValleyRenderer(glGraphics, batcher, treetop_valley_level);
 		touchPoint = new Vector2();
-		
-		SpriteContainer.initializeLists();
 	}
 	
 	@Override

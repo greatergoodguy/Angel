@@ -51,7 +51,6 @@ public class MenuLevel extends Level{
 		CollisionManager.HeroPlatformCollision(hero, greek_platforms);
 	}
 	
-	
 	public void dispose() {
 		hero.dispose();
 		

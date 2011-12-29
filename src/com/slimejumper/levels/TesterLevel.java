@@ -9,6 +9,7 @@ import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.TesterFactory;
 import com.slimejumper.world.Background;
 import com.slimejumper.world.ShadowHero;
+import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.RedWhaleDemon;
 import com.slimejumper.world.environment.CloudPlatform;
 import com.slimejumper.world.environment.RockPlatform;
@@ -26,11 +27,16 @@ public class TesterLevel extends Level{
 	public LinkedList<CloudPlatform> cloud_platforms;
 	public LinkedList<RedWhaleDemon> red_whale_demons;
 	
+	public JellyfishDemon jellyfish_demon_test;
+	
 	public Background background_trees;
 	
 	public TesterLevel(WorldListener listener, Controller controller){
 		super(listener, controller, TESTER_LEVEL_WIDTH, TESTER_LEVEL_HEIGHT);		
 		background_trees = new Background(BACKGROUND_TREES_WIDTH, BACKGROUND_TREES_HEIGHT, TESTER_LEVEL_WIDTH, TESTER_LEVEL_HEIGHT);
+		
+		jellyfish_demon_test = new JellyfishDemon();
+		jellyfish_demon_test.reset(5);
 		
 		tester_factory = new TesterFactory();
 		initializeTestClouds();
@@ -77,7 +83,8 @@ public class TesterLevel extends Level{
 		/*
 		 * Update
 		 */
-//		super.update(deltaTime);		
+		
+		jellyfish_demon_test.update(deltaTime);
 		updateHero(deltaTime);
 		for(RedWhaleDemon red_whale_demon : red_whale_demons)
 			red_whale_demon.update(deltaTime);
@@ -118,7 +125,7 @@ public class TesterLevel extends Level{
 
 	@Override
 	public void dispose() {
+		Assets.test_music.dispose();
 		hero.dispose();
-		
 	}
 }

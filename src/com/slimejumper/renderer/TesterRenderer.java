@@ -31,7 +31,6 @@ public class TesterRenderer extends BaseRenderer{
 		
 		renderBackgroundTrees();
 		
-		renderGameSprites();
 		renderRockPlatformsAndPurpleGhost();
 		
 		renderShadowHero(ShadowHero.shadow_hero_singleton);
@@ -57,6 +56,9 @@ public class TesterRenderer extends BaseRenderer{
 		for(RedWhaleDemon red_whale_demon : red_whale_demons)
 			batcher.drawSpriteCenterReverse(red_whale_demon, 
 					Assets.RedWhaleDemon.getKeyFrame(red_whale_demon.life_timer, Animation.ANIMATION_LOOPING));
+
+		renderJellyfishDemon(((TesterLevel) level).jellyfish_demon_test);
+				
 		batcher.endBatch();
 		
 	}

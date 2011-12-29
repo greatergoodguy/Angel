@@ -2,7 +2,6 @@ package com.slimejumper.world.enemies;
 
 import com.slimejumper.Assets;
 import com.slimejumper.tools.PoolManager;
-import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.Shockball;
 
@@ -35,6 +34,9 @@ public class JellyfishDemon extends Enemy{
 	public static final float JELLY_BOOST_UP_VERTICAL_VEL = 1.3f;
 	public float JELLY_BOOST_UP_HORIZONTAL_VEL = 1.5f;
 	public static final float JELLY_FLOAT_DOWN_VERTICAL_VEL = -0.6f;
+	
+	Shockball shockball_Left;
+	Shockball shockball_Right;
 	
 	public float state_timer;
 	public int state;
@@ -70,6 +72,8 @@ public class JellyfishDemon extends Enemy{
 	public void update(float deltaTime){
 	
 			super.update(deltaTime);
+			// Update Shockball
+			updateAttackShockballs(deltaTime);
 			
 			state_timer += deltaTime;
 			switch(state){
@@ -93,6 +97,23 @@ public class JellyfishDemon extends Enemy{
 			}
 		}
 
+	private void updateAttackShockballs(float deltaTime) {
+		if(shockball_Left != null){
+			shockball_Left.update(deltaTime);
+			if(shockball_Left.life_timer > Shockball.SHOCKBALL_LIFESPAN){
+				PoolManager.pool_manager_singleton.shockball_pool.free(shockball_Left);
+				shockball_Left = null;
+			}
+		}
+		if(shockball_Right != null){
+			shockball_Right.update(deltaTime);
+			if(shockball_Right.life_timer > Shockball.SHOCKBALL_LIFESPAN){
+				PoolManager.pool_manager_singleton.shockball_pool.free(shockball_Right);
+				shockball_Right = null;
+			}
+		}
+	}
+
 	/*	
 	public void changeToStandardState(){
 		resetDimensions(JELLY_STANDARD_WIDTH, JELLY_STANDARD_HEIGHT);
@@ -109,14 +130,9 @@ public class JellyfishDemon extends Enemy{
 		activateDualShot();
 	}
 	
-	public void activateDualShot(){
-		Shockball shockball1 = PoolManager.pool_manager_singleton.shockball_pool.newObject();
-		shockball1.reset(this);	
-		SpriteContainer.shockballs.add(shockball1);
-			
-		Shockball shockball2 = PoolManager.pool_manager_singleton.shockball_pool.newObject();
-		shockball2.reset(this);
-		SpriteContainer.shockballs.add(shockball2);
+	public void activateDualShot(){			
+		shockball_Left = PoolManager.pool_manager_singleton.shockball_pool.newObject();
+		shockball_Left.reset();
 	}
 
 	public void changeToCollidedState(HaloAttack halo_attack){
@@ -204,6 +220,18 @@ public class JellyfishDemon extends Enemy{
 	private void updateCollidedState(float deltaTime){
 		if(state_timer > JELLY_COLLIDED_STATE_TIMER_BOUND){
 			startFloatDownState();
+		}
+	}
+	
+	public void dispose(){
+		if(shockball_Left != null){
+			PoolManager.pool_manager_singleton.shockball_pool.free(shockball_Left);
+			shockball_Left = null;
+		}
+		
+		if(shockball_Right != null){
+			PoolManager.pool_manager_singleton.shockball_pool.free(shockball_Right);
+			shockball_Right = null;
 		}
 	}
 /*

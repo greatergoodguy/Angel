@@ -13,7 +13,6 @@ import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.levels.Level.WorldListener;
 import com.slimejumper.levels.TesterLevel;
 import com.slimejumper.renderer.TesterRenderer;
-import com.slimejumper.tools.SpriteContainer;
 
 public class TesterScreen extends GLScreen{
 	static final int GAME_READY = 0;
@@ -57,8 +56,6 @@ public class TesterScreen extends GLScreen{
 		tester_level = new TesterLevel(worldListener, controller);		
 		tester_renderer = new TesterRenderer(glGraphics, batcher, tester_level, controller);
 		touchPoint = new Vector2();
-		
-		SpriteContainer.initializeLists();
 	}
 	
 	@Override

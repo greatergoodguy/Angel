@@ -14,7 +14,7 @@ import com.slimejumper.world.environment.Platform;
 public class CollisionManager {
 	
 	public static final float COLLISION_TOLERANCE = 0.09f;
-
+	
 	public static void HeroPlatformCollision(Hero hero, LinkedList<? extends Platform> platforms) {
 		for(Platform platform : platforms){		
 			if ((OverlapTester.overlapRectangles(hero, platform))
@@ -36,6 +36,7 @@ public class CollisionManager {
 			while(iter_halo_atks.hasNext()){
 				HaloAttack halo_attack = iter_halo_atks.next();
 				if (OverlapTester.overlapRectangles(halo_attack, enemy)){
+					PoolManager.pool_manager_singleton.halo_attack_pool.free(halo_attack);
 					iter_halo_atks.remove();
 					is_enemy_hit = true;
 				}
@@ -45,6 +46,7 @@ public class CollisionManager {
 			while(iter_spiral_atks.hasNext()){
 				SpiralAttack spiral_attack = iter_spiral_atks.next();
 				if (OverlapTester.overlapRectangles(spiral_attack, enemy)){
+					PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
 					iter_spiral_atks.remove();
 					is_enemy_hit = true;
 				}
@@ -54,6 +56,7 @@ public class CollisionManager {
 			while(iter_music_note_atks.hasNext()){
 				MusicNote music_note = iter_music_note_atks.next();
 				if (OverlapTester.overlapRectangles(music_note, enemy)){
+					PoolManager.pool_manager_singleton.music_note_pool.free(music_note);
 					iter_music_note_atks.remove();
 					is_enemy_hit = true;
 				}

@@ -7,10 +7,8 @@ import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
 import com.slimejumper.renderer.BaseRenderer;
 import com.slimejumper.tools.PoolManager;
-import com.slimejumper.tools.SpriteContainer;
 import com.slimejumper.world.Hero;
 import com.slimejumper.world.ShadowHero;
-import com.slimejumper.world.attacks.Shockball;
 
 public abstract class Level {
 
@@ -115,22 +113,10 @@ public abstract class Level {
 	}
 	
 	public void update(float deltaTime) {
-
-		updateShockBalls(deltaTime);
-
 		updateCenter();
 		updatePosition();		
 	}
 
-	private void updateShockBalls(float deltaTime) {
-		updateAttacks(deltaTime);
-	}
-
-	private void updateAttacks(float deltaTime) {
-				
-		for(Shockball shockball : SpriteContainer.shockballs)
-			shockball.update(deltaTime);
-	}
 
 	protected void updateHero(float deltaTime) {
 		/*

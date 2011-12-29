@@ -116,7 +116,6 @@ public class Hero extends DynamicGameObject{
 			velocity.y = HERO_MAX_VELY;
 		
 		updateAttacks(deltaTime);
-		removeUnnecessaryAttacks();
 				
 		adjustFaceDirection();
 		checkInvincibility(deltaTime);
@@ -147,7 +146,31 @@ public class Hero extends DynamicGameObject{
 		for(MusicNote music_note : music_notes)
 			music_note.update(this, deltaTime);
 		for(SpiralAttack spiral_attack : spiral_attacks)
-			spiral_attack.update(deltaTime);		
+			spiral_attack.update(deltaTime);
+				
+		if(!halo_attacks.isEmpty()){
+			HaloAttack halo_attack = halo_attacks.getFirst();
+			if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
+				halo_attacks.removeFirst();
+				pool_manager.halo_attack_pool.free(halo_attack);
+			}
+		}
+
+		if(!music_notes.isEmpty()){
+			MusicNote music_note = music_notes.getFirst();
+			if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
+				music_notes.removeFirst();
+				pool_manager.music_note_pool.free(music_note);
+			}
+		}
+
+		if(!spiral_attacks.isEmpty()){
+			SpiralAttack spiral_attack = spiral_attacks.getFirst();
+			if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
+				spiral_attacks.removeFirst();
+				pool_manager.spiral_attack_pool.free(spiral_attack);
+			}
+		}
 	}
 
 	public void checkSideBounds(Level level) {
@@ -384,32 +407,6 @@ public class Hero extends DynamicGameObject{
 			music_note.reset(frame_counter_starter);
 			
 			music_notes.add(music_note);
-		}
-	}
-
-	public void removeUnnecessaryAttacks() {
-		if(!halo_attacks.isEmpty()){
-			HaloAttack halo_attack = halo_attacks.getFirst();
-			if(halo_attack.life_timer > HaloAttack.HaloAttack_LIFESPAN){
-				halo_attacks.removeFirst();
-				pool_manager.halo_attack_pool.free(halo_attack);
-			}
-		}
-		
-		if(!music_notes.isEmpty()){
-			MusicNote music_note = music_notes.getFirst();
-			if(music_note.life_timer > MusicNote.MUSIC_NOTE_LIFESPAN){
-				music_notes.removeFirst();
-				pool_manager.music_note_pool.free(music_note);
-			}
-		}
-		
-		if(!spiral_attacks.isEmpty()){
-			SpiralAttack spiral_attack = spiral_attacks.getFirst();
-			if(spiral_attack.life_timer > SpiralAttack.SpiralAttack_LIFESPAN){
-				spiral_attacks.removeFirst();
-				pool_manager.spiral_attack_pool.free(spiral_attack);
-			}
 		}
 	}
 
