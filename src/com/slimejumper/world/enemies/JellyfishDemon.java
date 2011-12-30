@@ -35,8 +35,8 @@ public class JellyfishDemon extends Enemy{
 	public float JELLY_BOOST_UP_HORIZONTAL_VEL = 1.5f;
 	public static final float JELLY_FLOAT_DOWN_VERTICAL_VEL = -0.6f;
 	
-	Shockball shockball_Left;
-	Shockball shockball_Right;
+	public Shockball shockball_Left;
+	public Shockball shockball_Right;
 	
 	public float state_timer;
 	public int state;
@@ -132,7 +132,10 @@ public class JellyfishDemon extends Enemy{
 	
 	public void activateDualShot(){			
 		shockball_Left = PoolManager.pool_manager_singleton.shockball_pool.newObject();
-		shockball_Left.reset();
+		shockball_Left.reset(this, Shockball.SHOCKBALL_LAUNCH_VELOCITY_LEFT);
+		
+		shockball_Right = PoolManager.pool_manager_singleton.shockball_pool.newObject();
+		shockball_Right.reset(this, Shockball.SHOCKBALL_LAUNCH_VELOCITY_RIGHT);
 	}
 
 	public void changeToCollidedState(HaloAttack halo_attack){
@@ -210,7 +213,7 @@ public class JellyfishDemon extends Enemy{
 			changeToAttackState();
 		}
 	}
-*/
+	 */
 	private void updateAttackState(float deltaTime){
 		if(state_timer > JELLY_ATTACK_STATE_TIMER_BOUND){
 			startFloatDownState();

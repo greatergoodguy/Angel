@@ -8,7 +8,8 @@ public class Shockball extends Attack{
 	
 	public static final float SHOCKBALL_LIFESPAN = 5.0f;
 
-	public static final float SHOCKBALL_LAUNCH_VELOCITY = -3.0f;
+	public static final float SHOCKBALL_LAUNCH_VELOCITY_LEFT = -3.0f;
+	public static final float SHOCKBALL_LAUNCH_VELOCITY_RIGHT = 3.0f;
 	
 	public Shockball() {
 		this(3,3);
@@ -25,7 +26,14 @@ public class Shockball extends Attack{
 	public void reset(GameObject gameObject) {
 		super.reset();
 		resetPositionCenter(gameObject.center);
-		velocity.x = SHOCKBALL_LAUNCH_VELOCITY;		
+		velocity.x = SHOCKBALL_LAUNCH_VELOCITY_LEFT;		
+	}
+
+	public void reset(GameObject gameObject, float launch_vel_x) {
+		super.reset();
+		resetPositionCenter(gameObject.center);
+		velocity.x = launch_vel_x;
+		
 	}
 
 /*

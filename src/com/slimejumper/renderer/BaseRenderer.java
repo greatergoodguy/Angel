@@ -62,18 +62,6 @@ public abstract class BaseRenderer {
 	
 	public abstract void render();
 
-/*	
-	private void renderPlatforms() {
-		if(!SpriteContainer.volatile_platforms.isEmpty()){		
-			for(GreekPlatform platform : SpriteContainer.volatile_platforms)
-				renderGreekPlatform(platform);
-		}
-		if(!SpriteContainer.ground_platforms.isEmpty()){		
-			for(GreekPlatform platform : SpriteContainer.ground_platforms)
-				renderGreekPlatform(platform);
-		}
-	}
-*/	
 	protected void renderGreekPlatform(GreekPlatform platform) {
 		float platform_section_x_coord = platform.position.x;
 		
@@ -115,7 +103,17 @@ public abstract class BaseRenderer {
 			adjustGameSpriteOrientation(jellyfish_demon, Assets.jellyfish_demon_float_down.getKeyFrame(jellyfish_demon.state_timer, 
 				Animation.ANIMATION_NONLOOPING));
 			break;
-		}			
+		}
+		
+		if(jellyfish_demon.shockball_Left != null){
+			batcher.drawSpriteCenter(jellyfish_demon.shockball_Left, 
+				Assets.shockball.getKeyFrame(jellyfish_demon.shockball_Left.life_timer, Animation.ANIMATION_LOOPING));
+		}
+		
+		if(jellyfish_demon.shockball_Right != null){
+			batcher.drawSpriteCenter(jellyfish_demon.shockball_Right, 
+				Assets.shockball.getKeyFrame(jellyfish_demon.shockball_Right.life_timer, Animation.ANIMATION_LOOPING));
+		}
 	}
 	
 	protected void renderFlyingSnake(FlyingSnake flying_snake){
