@@ -33,7 +33,7 @@ public class TreetopValleyLevel extends Level{
 	
 	public TreetopValleyLevel(WorldListener listener, Controller controller){
 		super(listener, controller, TREETOP_VALLEY_WIDTH, TREETOP_VALLEY_HEIGHT);
-		hero.resetPositionCenter(3, 3);
+		hero.reset(3, 3);
 		
 		treetop_valley_factory = new TreetopValleyFactory();
 		background_trees = new Background(BACKGROUND_TREES_WIDTH, BACKGROUND_TREES_HEIGHT, TREETOP_VALLEY_WIDTH, TREETOP_VALLEY_HEIGHT);//Level.WORLD_DEFAULT_HEIGHT);

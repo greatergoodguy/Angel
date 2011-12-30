@@ -32,7 +32,8 @@ public class TesterLevel extends Level{
 	public Background background_trees;
 	
 	public TesterLevel(WorldListener listener, Controller controller){
-		super(listener, controller, TESTER_LEVEL_WIDTH, TESTER_LEVEL_HEIGHT);		
+		super(listener, controller, TESTER_LEVEL_WIDTH, TESTER_LEVEL_HEIGHT);
+		hero.reset(3, 3);
 		background_trees = new Background(BACKGROUND_TREES_WIDTH, BACKGROUND_TREES_HEIGHT, TESTER_LEVEL_WIDTH, TESTER_LEVEL_HEIGHT);
 		
 		jellyfish_demon_test = new JellyfishDemon();

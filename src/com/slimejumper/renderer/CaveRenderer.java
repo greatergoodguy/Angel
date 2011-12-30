@@ -51,7 +51,7 @@ public class CaveRenderer extends BaseRenderer{
 	}
 	
 	private void renderForeground(){
-		batcher.beginBatch(Assets.hero);
+		batcher.beginBatch(Assets.hero_full_HP);
 		
 		float FOREGROUND_WIDTH = 5;
 		float FOREGROUND_HEIGHT = 1.4375f;		

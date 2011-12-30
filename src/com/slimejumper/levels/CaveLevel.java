@@ -32,7 +32,7 @@ public class CaveLevel extends Level{
 
 	public CaveLevel(WorldListener listener, Controller controller) {
 		super(listener, controller);
-	
+		hero.reset(3, 3);
 		obstacle_generator_manager = new ObstacleGeneratorManager(this);
 		cave_background = new Background(BACKGROUND_CAVE_BACK_LAYER_WIDTH, 0, WORLD_DEFAULT_WIDTH, Level.WORLD_DEFAULT_HEIGHT);
 		

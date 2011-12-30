@@ -18,7 +18,7 @@ public class MenuLevel extends Level{
 	
 	public MenuLevel(WorldListener listener, Controller controller){
 		super(listener, controller);
-		
+		hero.reset(3, 3);
 		cloud_background = new Background(BACKGROUND_CLOUDS_WIDTH, 0, WORLD_DEFAULT_WIDTH, WORLD_DEFAULT_HEIGHT);
 		
 		initializeGreekPlatforms();

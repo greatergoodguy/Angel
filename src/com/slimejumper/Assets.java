@@ -36,7 +36,7 @@ public class Assets {
 	 * Hero Atlas
 	 */
 	
-	public static Texture hero;
+	public static Texture hero_full_HP;
 	public static TextureRegion heroRegion;
 	public static TextureRegion hero_jump_old;
 	public static TextureRegion hero_fall;
@@ -206,15 +206,15 @@ public class Assets {
 		 * Hero
 		 */
 		
-		hero = new Texture(game, "Hero.png");
-		heroRegion = new TextureRegion(hero, 0, 0, 80, 80);
-		hero_jump_old = new TextureRegion(hero, 400, 80, 80, 80);
+		hero_full_HP = new Texture(game, "Hero.png");
+		heroRegion = new TextureRegion(hero_full_HP, 0, 0, 80, 80);
+		hero_jump_old = new TextureRegion(hero_full_HP, 400, 80, 80, 80);
 		
-		hero_fall = new TextureRegion(hero, 80, 0, 80, 80);
-		heroLandFrame1 = new TextureRegion(hero, 160, 0, 80, 80);
-		heroLandFrame2 = new TextureRegion(hero, 240, 0, 80, 80);
-		heroLandFrame3 = new TextureRegion(hero, 320, 0, 80, 80);
-		heroLandFrame4 = new TextureRegion(hero, 400, 0, 80, 80);
+		hero_fall = new TextureRegion(hero_full_HP, 80, 0, 80, 80);
+		heroLandFrame1 = new TextureRegion(hero_full_HP, 160, 0, 80, 80);
+		heroLandFrame2 = new TextureRegion(hero_full_HP, 240, 0, 80, 80);
+		heroLandFrame3 = new TextureRegion(hero_full_HP, 320, 0, 80, 80);
+		heroLandFrame4 = new TextureRegion(hero_full_HP, 400, 0, 80, 80);
 		hero_land = new Animation(HERO_LAND_FRAME_DURATION,
 				heroLandFrame1,
 				heroLandFrame2,
@@ -222,9 +222,9 @@ public class Assets {
 				heroLandFrame4
 				);
 		
-		heroJumpFrame1 = new TextureRegion(hero, 240, 0, 80, 80);
-		heroJumpFrame2 = new TextureRegion(hero, 320, 0, 80, 80);
-		heroJumpFrame3 = new TextureRegion(hero, 400, 80, 80, 80);
+		heroJumpFrame1 = new TextureRegion(hero_full_HP, 240, 0, 80, 80);
+		heroJumpFrame2 = new TextureRegion(hero_full_HP, 320, 0, 80, 80);
+		heroJumpFrame3 = new TextureRegion(hero_full_HP, 400, 80, 80, 80);
 		
 		hero_jump = new Animation(DEFAULT_FRAME_DURATION,
 				heroJumpFrame1,
@@ -232,20 +232,20 @@ public class Assets {
 				heroJumpFrame3
 				);
 		
-		heroHaloAttack1Frame1 = new TextureRegion(hero, 0, 80, 80, 90);
-		heroHaloAttack1Frame2 = new TextureRegion(hero, 80, 80, 80, 90);
-		heroHaloAttack1Frame3 = new TextureRegion(hero, 160, 80, 80, 90);
-		heroHaloAttack1Frame4 = new TextureRegion(hero, 240, 80, 80, 90);
-		heroHaloAttack1Frame5 = new TextureRegion(hero, 320, 80, 80, 90);
-		heroHaloAttack1Frame6 = new TextureRegion(hero, 0, 170, 80, 90);
-		heroHaloAttack1Frame7 = new TextureRegion(hero, 80, 170, 80, 90);
-		heroHaloAttack1Frame8 = new TextureRegion(hero, 160, 170, 80, 90);
-		heroHaloAttack1Frame9 = new TextureRegion(hero, 240, 170, 80, 90);
-		heroHaloAttack1Frame10 = new TextureRegion(hero, 320, 170, 80, 90);
-		heroHaloAttack1Frame11 = new TextureRegion(hero, 400, 170, 80, 90);
-		heroHaloAttack1Frame12 = new TextureRegion(hero, 0, 260, 80, 90);
-		heroHaloAttack1Frame13 = new TextureRegion(hero, 80, 260, 80, 90);
-		herohaloattack1frame14 = new TextureRegion(hero, 160, 260, 80, 90);
+		heroHaloAttack1Frame1 = new TextureRegion(hero_full_HP, 0, 80, 80, 90);
+		heroHaloAttack1Frame2 = new TextureRegion(hero_full_HP, 80, 80, 80, 90);
+		heroHaloAttack1Frame3 = new TextureRegion(hero_full_HP, 160, 80, 80, 90);
+		heroHaloAttack1Frame4 = new TextureRegion(hero_full_HP, 240, 80, 80, 90);
+		heroHaloAttack1Frame5 = new TextureRegion(hero_full_HP, 320, 80, 80, 90);
+		heroHaloAttack1Frame6 = new TextureRegion(hero_full_HP, 0, 170, 80, 90);
+		heroHaloAttack1Frame7 = new TextureRegion(hero_full_HP, 80, 170, 80, 90);
+		heroHaloAttack1Frame8 = new TextureRegion(hero_full_HP, 160, 170, 80, 90);
+		heroHaloAttack1Frame9 = new TextureRegion(hero_full_HP, 240, 170, 80, 90);
+		heroHaloAttack1Frame10 = new TextureRegion(hero_full_HP, 320, 170, 80, 90);
+		heroHaloAttack1Frame11 = new TextureRegion(hero_full_HP, 400, 170, 80, 90);
+		heroHaloAttack1Frame12 = new TextureRegion(hero_full_HP, 0, 260, 80, 90);
+		heroHaloAttack1Frame13 = new TextureRegion(hero_full_HP, 80, 260, 80, 90);
+		herohaloattack1frame14 = new TextureRegion(hero_full_HP, 160, 260, 80, 90);
 		hero_halo_attack_1 = new Animation(HERO_HALO_ATTACK_1_FRAME_DURATION,
 				heroHaloAttack1Frame1,
 				heroHaloAttack1Frame2,
@@ -262,19 +262,19 @@ public class Assets {
 				heroHaloAttack1Frame13,
 				herohaloattack1frame14
 				);
-		haloAttackFrame1 = new TextureRegion(hero, 240, 270, 35, 20);
-		haloAttackFrame2 = new TextureRegion(hero, 240, 300, 35, 20);
+		haloAttackFrame1 = new TextureRegion(hero_full_HP, 240, 270, 35, 20);
+		haloAttackFrame2 = new TextureRegion(hero_full_HP, 240, 300, 35, 20);
 		halo_attack = new Animation(HALO_ATTACK_FRAME_DURATION,
 				haloAttackFrame1,
 				haloAttackFrame2
 				);
 		//1 2 3 4 5 6 5 4 5 6 5 4 5 6 5 4 5 6
-		heroLyreAttack1Frame1 = new TextureRegion(hero, 80, 350, 83, 85);
-		heroLyreAttack1Frame2 = new TextureRegion(hero, 163, 350, 83, 85);
-		heroLyreAttack1Frame3 = new TextureRegion(hero, 246, 350, 83, 85);
-		heroLyreAttack1Frame4 = new TextureRegion(hero, 329, 350, 83, 85);
-		heroLyreAttack1Frame5 = new TextureRegion(hero, 412, 350, 83, 85);
-		heroLyreAttack1Frame6 = new TextureRegion(hero, 0, 430, 83, 85);
+		heroLyreAttack1Frame1 = new TextureRegion(hero_full_HP, 80, 350, 83, 85);
+		heroLyreAttack1Frame2 = new TextureRegion(hero_full_HP, 163, 350, 83, 85);
+		heroLyreAttack1Frame3 = new TextureRegion(hero_full_HP, 246, 350, 83, 85);
+		heroLyreAttack1Frame4 = new TextureRegion(hero_full_HP, 329, 350, 83, 85);
+		heroLyreAttack1Frame5 = new TextureRegion(hero_full_HP, 412, 350, 83, 85);
+		heroLyreAttack1Frame6 = new TextureRegion(hero_full_HP, 0, 430, 83, 85);
 		hero_lyre_attack_1 = new Animation(HERO_LYRE_ATTACK_FRAME_DURATION,
 				heroLyreAttack1Frame1,
 				heroLyreAttack1Frame2,
@@ -297,32 +297,32 @@ public class Assets {
 				);
 		
 		// Foreground is on the Hero Atlas
-		foregroundRegion = new TextureRegion(hero, 0, 909, 400, 115);
+		foregroundRegion = new TextureRegion(hero_full_HP, 0, 909, 400, 115);
 		
-		musicNoteFrame1 = new TextureRegion(hero, 472, 304, 13, 34);
+		musicNoteFrame1 = new TextureRegion(hero_full_HP, 472, 304, 13, 34);
 		
-		heroSpiralAttack1Frame1 = new TextureRegion(hero, 90, 440, 91, 80);
-		heroSpiralAttack1Frame2 = new TextureRegion(hero, 185, 440, 91, 80);
-		heroSpiralAttack1Frame3 = new TextureRegion(hero, 280, 440, 91, 80);
-		heroSpiralAttack1Frame4 = new TextureRegion(hero, 375, 440, 91, 80);
+		heroSpiralAttack1Frame1 = new TextureRegion(hero_full_HP, 90, 440, 91, 80);
+		heroSpiralAttack1Frame2 = new TextureRegion(hero_full_HP, 185, 440, 91, 80);
+		heroSpiralAttack1Frame3 = new TextureRegion(hero_full_HP, 280, 440, 91, 80);
+		heroSpiralAttack1Frame4 = new TextureRegion(hero_full_HP, 375, 440, 91, 80);
 		hero_spiral_attack_1 = new Animation(HERO_SPIRAL_ATTACK_1_FRAME_DURATION,
 				heroSpiralAttack1Frame1,
 				heroSpiralAttack1Frame2,
 				heroSpiralAttack1Frame3,
 				heroSpiralAttack1Frame4);
 		
-		spiralAttackFrame1 = new TextureRegion(hero, 470, 440, 28, 28);
-		spiralAttackFrame2 = new TextureRegion(hero, 470, 470, 28, 28);
-		spiralAttackFrame3 = new TextureRegion(hero, 470, 500, 28, 28);
+		spiralAttackFrame1 = new TextureRegion(hero_full_HP, 470, 440, 28, 28);
+		spiralAttackFrame2 = new TextureRegion(hero_full_HP, 470, 470, 28, 28);
+		spiralAttackFrame3 = new TextureRegion(hero_full_HP, 470, 500, 28, 28);
 		spiral_attack = new Animation(SPIRAL_ATTACK_FRAME_DURATION,
 				spiralAttackFrame1,
 				spiralAttackFrame2,
 				spiralAttackFrame3,
 				spiralAttackFrame2);
 		
-		heroCollidedFrame1 = new TextureRegion(hero, 285, 260, 80, 80);
-		heroCollidedFrame2 = new TextureRegion(hero, 365, 260, 80, 80);
-		heroCollidedFrame3 = new TextureRegion(hero, 0, 350, 80, 80);
+		heroCollidedFrame1 = new TextureRegion(hero_full_HP, 285, 260, 80, 80);
+		heroCollidedFrame2 = new TextureRegion(hero_full_HP, 365, 260, 80, 80);
+		heroCollidedFrame3 = new TextureRegion(hero_full_HP, 0, 350, 80, 80);
 		hero_collided = new Animation(HERO_COLLIDED_FRAME_DURATION,
 				heroCollidedFrame1,
 				heroCollidedFrame2,
@@ -503,7 +503,7 @@ public class Assets {
 	
 	public static void reload(){
 		game_sprites.reload();
-		hero.reload();
+		hero_full_HP.reload();
 		shadow_hero.reload();
 		background_treetop_valley.reload();
 		background_clouds.reload();

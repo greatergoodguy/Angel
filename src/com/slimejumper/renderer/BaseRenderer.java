@@ -135,7 +135,7 @@ public abstract class BaseRenderer {
 	}
 
 	protected void renderHero(Hero hero) {
-		batcher.beginBatch(Assets.hero);
+		batcher.beginBatch(Assets.hero_full_HP);
 		
 		renderHeroState(hero);
 		renderHaloAttacks(hero);
