@@ -99,8 +99,7 @@ public class TreetopValleyLevel extends Level{
 	public void update(float deltaTime){
 		/*
 		 * Update
-		 */
-//		super.update(deltaTime);		
+		 */		
 		updateHero(deltaTime);
 		
 		for(CloudPlatform cloud_platform : cloud_platforms)
@@ -130,8 +129,7 @@ public class TreetopValleyLevel extends Level{
 			// Glitch Handler
 		}
 		
-		updateCenter();
-		updatePosition();	
+		super.update();
 	}
 
 	private void manageCollisions() {

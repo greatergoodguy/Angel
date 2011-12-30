@@ -241,6 +241,7 @@ public class Hero extends DynamicGameObject{
 		
 		state = HERO_STATE_COLLIDED;
 		state_timer = 0;
+		health--;
 		activateInvincibility();
 	}
 

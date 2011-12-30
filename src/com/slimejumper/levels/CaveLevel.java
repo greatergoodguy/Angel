@@ -56,12 +56,13 @@ public class CaveLevel extends Level{
 	}
 	
 	public void update(float deltaTime) {
-		super.update(deltaTime);
 		updateHero(deltaTime);
 		updateSprites(deltaTime);
 		manageCollisions();
 		
 		updateLevel(deltaTime);
+		
+		super.update();
 	}
 
 	private void updateLevel(float deltaTime) {

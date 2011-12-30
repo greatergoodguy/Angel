@@ -112,7 +112,7 @@ public abstract class Level {
 		world_top_bound = world_height - WORLD_VERTICAL_BOUND_ADJUSTER;
 	}
 	
-	public void update(float deltaTime) {
+	public void update() {
 		updateCenter();
 		updatePosition();		
 	}

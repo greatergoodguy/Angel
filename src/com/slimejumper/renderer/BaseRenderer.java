@@ -135,7 +135,25 @@ public abstract class BaseRenderer {
 	}
 
 	protected void renderHero(Hero hero) {
-		batcher.beginBatch(Assets.hero_full_HP);
+		
+		switch(hero.health){
+		case 5:
+		case 4:
+			batcher.beginBatch(Assets.heroHealthy);
+			break;
+		case 3:
+			batcher.beginBatch(Assets.heroHalfHP);
+			break;
+		case 2:
+			batcher.beginBatch(Assets.heroLowHP);
+			break;
+		case 1:
+			batcher.beginBatch(Assets.heroLowHP);
+			break;
+		default:
+			batcher.beginBatch(Assets.heroHealthy);
+			break;
+		}
 		
 		renderHeroState(hero);
 		renderHaloAttacks(hero);
@@ -159,12 +177,20 @@ public abstract class BaseRenderer {
 	private void renderHeroState(Hero hero) {		
 		switch(hero.state){
 		case Hero.HERO_STATE_JUMP:
-//			adjustHeroOrientation(hero, Assets.hero_jump_old);
-			adjustHeroOrientation(hero, Assets.hero_jump.getKeyFrame(hero.state_timer, 
+			if(hero.health == 4){
+				adjustHeroOrientation(hero, Assets.hero_jump_minor_damage.getKeyFrame(hero.state_timer, 
+						Animation.ANIMATION_NONLOOPING));
+			}
+			else{
+				adjustHeroOrientation(hero, Assets.hero_jump.getKeyFrame(hero.state_timer, 
 					Animation.ANIMATION_NONLOOPING));
+			}
 			break;
 		case Hero.HERO_STATE_FALL:
-			adjustHeroOrientation(hero, Assets.hero_fall);
+			if(hero.health == 4)
+				adjustHeroOrientation(hero, Assets.hero_fall_minor_damage);
+			else	
+				adjustHeroOrientation(hero, Assets.hero_fall);
 			break;
 //		case Hero.HERO_STATE_LAND:
 //			adjustHeroOrientation(hero, Assets.hero_land.getKeyFrame(hero.state_timer, 
