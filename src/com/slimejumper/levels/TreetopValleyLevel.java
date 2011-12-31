@@ -53,23 +53,25 @@ public class TreetopValleyLevel extends Level{
 		 * Test Platforms
 		 */
 		
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 3.5f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 6.5f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 8.5f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 10.5f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 12.5f));
+//		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 3.5f));
+//		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 6.5f));
+//		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 8.5f));
+//		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3, 10.5f));
+//		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 12.5f));
 		
 		/////////////////
 		
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 5.5f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 2.1f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(6, 1.9f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0.4f, 5.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(-1.1f, 2.1f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(4.3f, 1.9f));
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 0));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(4, 0.2f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(4, -0.2f));
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(7.5f, 0.3f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(11f, 0.2f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(17, 0.5f));
-		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(22, 0.9f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(11f, 0.0f));
+		
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(17, -0.2f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(22, 0.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(20, 3.3f));
 		
 		cloud_platforms.add(treetop_valley_factory.createOscillateHorizontalCloudPlatform(26, 0.5f));
 		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(33, 1.1f));
@@ -84,15 +86,15 @@ public class TreetopValleyLevel extends Level{
 	private void initializeRedWhaleDemons() {
 		red_whale_demons = new LinkedList<RedWhaleDemon>();
 		
-		red_whale_demons.add(treetop_valley_factory.createFloatRedWhaleDemon(8, 2.2f));
-		red_whale_demons.add(treetop_valley_factory.createStillRedWhaleDemon(16, 3.0f));
+		red_whale_demons.add(treetop_valley_factory.createFloatRedWhaleDemon(10.7f, 3.5f));
+		red_whale_demons.add(treetop_valley_factory.createFloatRedWhaleDemon(15.5f, 1.5f));
 		
 	}
 
 	private void initializePurpleGhosts() {
 		purple_ghosts = new LinkedList<PurpleGhost>();
 		
-		purple_ghosts.add(treetop_valley_factory.createPurpleGhost(25, 2.8f));
+		purple_ghosts.add(treetop_valley_factory.createPurpleGhost(25, 4.9f));
 		
 	}
 	
@@ -106,6 +108,8 @@ public class TreetopValleyLevel extends Level{
 			cloud_platform.update(deltaTime);
 		for(RedWhaleDemon red_whale_demon : red_whale_demons)
 			red_whale_demon.update(deltaTime);
+		for(PurpleGhost purple_ghost : purple_ghosts)
+			purple_ghost.update(deltaTime);
 				
 		/*
 		 * Collision
@@ -116,9 +120,10 @@ public class TreetopValleyLevel extends Level{
 		 * Events
 		 */
 				
-		if(hero.position.y < 0.0f){
+		if(hero.position.y < -1.0f){
 //			hero.resetPositionLowerLeft(hero.position.x, 11);
 			hero.changeToDeathByFallingState();
+			hero.resetPositionLowerLeft(hero.position.x, -1.0f);
 			
 			// Glitch Handler
 		}
@@ -133,14 +138,29 @@ public class TreetopValleyLevel extends Level{
 	}
 
 	private void manageCollisions() {
-		CollisionManager.HeroPlatformCollision(hero, cloud_platforms);
+		/*
+		 * Hero against Platform
+		 */
+		CollisionManager.HeroPlatformPlatformListCollision(hero, cloud_platforms);
 //		CollisionManager.HeroPlatformCollision(SpriteContainer.shadow_hero, rock_platforms);
 		
-		CollisionManager.HeroAttackEnemyCollision(hero, red_whale_demons);
-		CollisionManager.HeroAttackEnemyCollision(hero, purple_ghosts);
+		/*
+		 * Hero Attacks against Enemy
+		 */
+		CollisionManager.HeroAttackEnemyListCollision(hero, red_whale_demons);
+		CollisionManager.HeroAttackEnemyListCollision(hero, purple_ghosts);
 		
-		CollisionManager.HeroEnemyCollision(hero, red_whale_demons);
-		CollisionManager.HeroEnemyCollision(hero, purple_ghosts);
+		/*
+		 * Hero against Enemy
+		 */
+		CollisionManager.HeroEnemyListCollision(hero, red_whale_demons);
+		CollisionManager.HeroEnemyListCollision(hero, purple_ghosts);
+		
+		/*
+		 * Enemy Attack against Hero
+		 */
+		for(PurpleGhost purple_ghost : purple_ghosts)
+			CollisionManager.EnemyAttackHeroCollision(purple_ghost.purple_flame, hero);
 	}
 
 	public void dispose() {		

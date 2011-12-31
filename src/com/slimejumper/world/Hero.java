@@ -58,7 +58,7 @@ public class Hero extends DynamicGameObject{
 	public static final float HERO_HOP_VELOCITY = 2.5f;
 	
 	public static final float HERO_HIT_VERTICAL_VELOCITY = 1.5f;
-	public static final float HERO_HIT_HORIZONTAL_VELOCITY = 1;
+	public static final float HERO_HIT_HORIZONTAL_VELOCITY =1.8f;
 	
 	public static final float HERO_STANDARD_WIDTH = 1.0f;
 	public static final float HERO_STANDARD_HEIGHT = 1.0f;
@@ -74,7 +74,7 @@ public class Hero extends DynamicGameObject{
 	public static final float HERO_COLLIDED_TIMER_LIMIT = 0.8f;
 	
 	public float basic_attack_timer_limit;
-	public static final float HERO_BASIC_HALO_ATTACK_TIMER = Assets.HERO_HALO_ATTACK_1_FRAME_DURATION * 14;
+	public static final float HERO_BASIC_HALO_ATTACK_TIMER = Assets.HERO_HALO_ATTACK_1_FRAME_DURATION * 11;
 	public static final float HERO_BASIC_LYRE_SPECIAL_ATTACK_TIMER = Assets.HERO_LYRE_ATTACK_FRAME_DURATION * 12;
 	public static final float HERO_BASIC_SPIRAL_ATTACK_TIMER = Assets.HERO_SPIRAL_ATTACK_1_FRAME_DURATION * 5;
 	
@@ -84,7 +84,7 @@ public class Hero extends DynamicGameObject{
 
 	public boolean attack_launched;
 	
-	public static final float HERO_DEFAULT_INVINCIBILITY_TIMER_LIMIT = 1.0f;
+	public static final float HERO_DEFAULT_INVINCIBILITY_TIMER_LIMIT = 1.8f;
 	public static final float HERO_LYRE_INVINCIBILITY_TIMER_LIMIT = 4.0f;
 	public float invincibility_timer;
 	public float invincibility_timer_limit;	
@@ -296,6 +296,7 @@ public class Hero extends DynamicGameObject{
 	private void setBasicAttackType() {
 		Random random = new Random();
 		float randomValue = random.nextFloat();
+		
 		// HERO_BASIC_ATTACK_1
 		if(randomValue >= 0 && randomValue < 0.3){
 			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
@@ -327,15 +328,16 @@ public class Hero extends DynamicGameObject{
 		 * Remove Gravity 
 		 */
 		accel.set(0, 0);
-		velocity.set(0, 0.2f);
+		velocity.set(0, 0.8f);
 		
 		resetDimensions(HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
 		state = HERO_STATE_DEATH_BY_FALLING;
 		state_timer = 0;
+		health--;
 	}
 	
 	public void updateDeathByFallingState(float deltaTime){
-		if(state_timer > 2){
+		if(state_timer > 3.3f){
 			accel.set(0, Level.WORLD_GRAVITY);
 			changeToJumpOrFallState();			
 		}

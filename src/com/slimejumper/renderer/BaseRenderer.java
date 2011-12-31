@@ -135,6 +135,7 @@ public abstract class BaseRenderer {
 	}
 
 	protected void renderHero(Hero hero) {
+		boolean is_critical_hp = false;
 		
 		switch(hero.health){
 		case 5:
@@ -148,14 +149,22 @@ public abstract class BaseRenderer {
 			batcher.beginBatch(Assets.heroLowHP);
 			break;
 		case 1:
-			batcher.beginBatch(Assets.heroLowHP);
-			break;
 		default:
-			batcher.beginBatch(Assets.heroHealthy);
+			if(hero.facedirection == GameObject.SPRITE_LEFT)
+				batcher.beginBatch(Assets.heroCriticalHPLeft);
+			else
+				batcher.beginBatch(Assets.heroCriticalHPRight);
+			is_critical_hp = true;
 			break;
 		}
 		
-		renderHeroState(hero);
+		if(!is_critical_hp){
+			renderHeroState(hero);
+		}
+		else{
+			renderHeroStateCritical(hero);
+		}
+		
 		renderHaloAttacks(hero);
 		renderMusicNotes(hero);
 		renderSpiralAttacks(hero);
@@ -219,9 +228,52 @@ public abstract class BaseRenderer {
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			}
+			break;
+		case Hero.HERO_STATE_DEATH_BY_FALLING:
+			adjustHeroOrientation(hero, Assets.heroRegion);
+			break;
 		}			
 	}
 
+	private void renderHeroStateCritical(Hero hero) {		
+		switch(hero.state){
+		case Hero.HERO_STATE_JUMP:
+			batcher.drawSpriteCenter(hero, Assets.hero_jump.getKeyFrame(hero.state_timer, 
+				Animation.ANIMATION_NONLOOPING));
+			break;
+		case Hero.HERO_STATE_FALL:
+			batcher.drawSpriteCenter(hero, Assets.hero_fall);
+			break;
+		case Hero.HERO_STATE_COLLIDED:
+			batcher.drawSpriteCenter(hero, Assets.hero_collided.getKeyFrame(hero.state_timer, 
+				Animation.ANIMATION_LOOPING));
+			break;	
+		case Hero.HERO_STATE_BASIC_ATTACK:
+			switch(hero.basic_attack_type){
+			case Hero.HERO_BASIC_HALO_ATTACK:
+				batcher.drawSpriteCenter(hero, Assets.hero_halo_attack_1.getKeyFrame(hero.state_timer,
+					Animation.ANIMATION_NONLOOPING));
+				break;
+			case Hero.HERO_BASIC_SPIRAL_ATTACK:
+				batcher.drawSpriteCenter(hero, Assets.hero_spiral_attack_1.getKeyFrame(hero.state_timer,
+					Animation.ANIMATION_NONLOOPING));
+				break;
+			case Hero.HERO_BASIC_ATTACK_3:
+				batcher.drawSpriteCenter(hero, Assets.hero_halo_attack_1.getKeyFrame(hero.state_timer,
+					Animation.ANIMATION_NONLOOPING));
+				break;
+			case Hero.HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
+				batcher.drawSpriteCenter(hero, Assets.hero_lyre_attack_1.getKeyFrame(hero.state_timer,
+					Animation.ANIMATION_NONLOOPING));
+				break;
+			}
+			break;
+		case Hero.HERO_STATE_DEATH_BY_FALLING:
+			batcher.drawSpriteCenter(hero, Assets.heroRegion);
+			break;
+		}			
+	}
+	
 	private void renderHaloAttacks(Hero hero){
 		if(hero.halo_attacks.isEmpty())
 			return;

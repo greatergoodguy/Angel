@@ -116,12 +116,12 @@ public class TesterLevel extends Level{
 	}
 
 	private void manageCollisions() {
-		CollisionManager.HeroPlatformCollision(hero, rock_platforms);
-		CollisionManager.HeroPlatformCollision(hero, cloud_platforms);
+		CollisionManager.HeroPlatformPlatformListCollision(hero, rock_platforms);
+		CollisionManager.HeroPlatformPlatformListCollision(hero, cloud_platforms);
 //		CollisionManager.HeroPlatformCollision(SpriteContainer.shadow_hero, rock_platforms);
 		
-		CollisionManager.HeroAttackEnemyCollision(hero, red_whale_demons);
-		CollisionManager.HeroEnemyCollision(hero, red_whale_demons);
+		CollisionManager.HeroAttackEnemyListCollision(hero, red_whale_demons);
+		CollisionManager.HeroEnemyListCollision(hero, red_whale_demons);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ public class RedWhaleDemon extends Enemy{
 	public static final float RedWhaleDemon_HEIGHT = 1.00f;
 	public static final int RedWhaleDemon_HEALTH = 2;
 	
-	public static final float RedWhaleDemon_VERTICAL_VEL = 0.2f;
+	public static final float RedWhaleDemon_VERTICAL_VEL = 0.6f;
 	
 	private float switch_motion_timer;
 	
@@ -39,6 +39,12 @@ public class RedWhaleDemon extends Enemy{
 		velocity.y = RedWhaleDemon_VERTICAL_VEL;
 	}
 	
+	public void changeToFloatState(float switch_motion_timer_offset) {
+		velocity.x = 0;
+		velocity.y = RedWhaleDemon_VERTICAL_VEL;
+		switch_motion_timer = switch_motion_timer_offset;
+	}
+	
 	public void update(float deltaTime){
 		super.update(deltaTime);
 		updateState(deltaTime);
@@ -47,7 +53,7 @@ public class RedWhaleDemon extends Enemy{
 	private void updateState(float deltaTime) {
 		switch_motion_timer += deltaTime;
 		
-		if(switch_motion_timer > 3){
+		if(switch_motion_timer > 2.0f){
 			velocity.y = -velocity.y;
 			switch_motion_timer = 0;
 		}		

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import com.slimejumper.gameframework.math.OverlapTester;
 import com.slimejumper.world.Hero;
+import com.slimejumper.world.attacks.Attack;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.SpiralAttack;
@@ -15,7 +16,7 @@ public class CollisionManager {
 	
 	public static final float COLLISION_TOLERANCE = 0.09f;
 	
-	public static void HeroPlatformCollision(Hero hero, LinkedList<? extends Platform> platforms) {
+	public static void HeroPlatformPlatformListCollision(Hero hero, LinkedList<? extends Platform> platforms) {
 		for(Platform platform : platforms){		
 			if ((OverlapTester.overlapRectangles(hero, platform))
 				&& (platform.position.y	- hero.position.y < COLLISION_TOLERANCE)
@@ -25,7 +26,7 @@ public class CollisionManager {
 		
 	}
 
-	public static void HeroAttackEnemyCollision(Hero hero, LinkedList<? extends Enemy> enemies) {
+	public static void HeroAttackEnemyListCollision(Hero hero, LinkedList<? extends Enemy> enemies) {
 		
 		Iterator<? extends Enemy> iter_enemies = enemies.iterator();
 		while(iter_enemies.hasNext()){
@@ -71,12 +72,17 @@ public class CollisionManager {
 		}
 	}
 
-	public static void HeroEnemyCollision(Hero hero, LinkedList<? extends Enemy> enemies) {
+	public static void HeroEnemyListCollision(Hero hero, LinkedList<? extends Enemy> enemies) {
 		for(Enemy enemy : enemies){
 			if(OverlapTester.overlapRectangles(hero, enemy)){
 				hero.changeToCollidedState();
 			}	
+		}		
+	}
+	
+	public static void EnemyAttackHeroCollision(Attack enemy_attack, Hero hero){
+		if(enemy_attack != null && OverlapTester.overlapRectangles(enemy_attack, hero)){
+			hero.changeToCollidedState();
 		}
-		
 	}
 }

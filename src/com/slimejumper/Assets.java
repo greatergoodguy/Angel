@@ -38,7 +38,9 @@ public class Assets {
 	
 	public static Texture heroHealthy;
 	public static Texture heroHalfHP;
-	public static Texture heroLowHP;	
+	public static Texture heroLowHP;
+	public static Texture heroCriticalHPLeft;
+	public static Texture heroCriticalHPRight;
 	
 	public static TextureRegion heroRegion;
 	public static TextureRegion hero_jump_old;
@@ -224,6 +226,8 @@ public class Assets {
 		heroHealthy = new Texture(game, "Hero.png");
 		heroHalfHP = new Texture(game, "HeroHalfHP.png");
 		heroLowHP = new Texture(game, "HeroLowHP.png");
+		heroCriticalHPLeft = new Texture(game, "HeroCriticalHPLeft.png");
+		heroCriticalHPRight = new Texture(game, "HeroCriticalHPRight.png");
 		
 		/*
 		 * When Hero is at 4/5 HP
@@ -291,10 +295,10 @@ public class Assets {
 				heroHaloAttack1Frame8,
 				heroHaloAttack1Frame9,
 				heroHaloAttack1Frame10,
-				heroHaloAttack1Frame11,
-				heroHaloAttack1Frame12,
-				heroHaloAttack1Frame13,
-				herohaloattack1frame14
+				heroHaloAttack1Frame11
+//				,heroHaloAttack1Frame12,
+//				heroHaloAttack1Frame13,
+//				herohaloattack1frame14
 				);
 		haloAttackFrame1 = new TextureRegion(heroHealthy, 240, 270, 35, 20);
 		haloAttackFrame2 = new TextureRegion(heroHealthy, 240, 300, 35, 20);

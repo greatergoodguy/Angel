@@ -2,6 +2,7 @@ package com.slimejumper.world.attacks;
 
 
 import com.slimejumper.world.DynamicGameObject;
+import com.slimejumper.world.GameObject;
 
 public class Attack extends DynamicGameObject {
 	
@@ -15,6 +16,11 @@ public class Attack extends DynamicGameObject {
 	
 	public void reset(){
 		super.reset();
+	}
+	
+	public void reset(GameObject gameObject){
+		super.reset();
+		resetPositionCenter(gameObject.center);
 	}
 	
 }

@@ -4,6 +4,7 @@ import com.slimejumper.gameframework.Pool;
 import com.slimejumper.gameframework.Pool.PoolObjectFactory;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
+import com.slimejumper.world.attacks.PurpleFlame;
 import com.slimejumper.world.attacks.Shockball;
 import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.FlyingSnake;
@@ -24,9 +25,10 @@ public class PoolManager {
 	
 	
 	public Pool<HaloAttack> halo_attack_pool;
-	public Pool<Shockball> shockball_pool;
 	public Pool<MusicNote> music_note_pool;
 	public Pool<SpiralAttack> spiral_attack_pool;
+	public Pool<Shockball> shockball_pool;
+	public Pool<PurpleFlame> purple_flame_pool;
 	
 	public Pool<GreekPlatform> greek_platform_pool;
 	public Pool<RockPlatform> rock_platform_pool;
@@ -99,15 +101,22 @@ public class PoolManager {
 			}
 		};
 		
+		PoolObjectFactory<PurpleFlame> purple_flame_factory = new PoolObjectFactory<PurpleFlame>(){
+			public PurpleFlame createObject(){
+				return new PurpleFlame();
+			}
+		};
+		
 		purple_ghost_pool = new Pool<PurpleGhost>(purple_ghost_factory, 35);
 		jellyfish_demon_pool = new Pool<JellyfishDemon>(jellyfish_demon_factory, 35);
 		flying_snake_pool = new Pool<FlyingSnake>(flying_snake_factory, 20);
 		red_whale_demon_pool = new Pool<RedWhaleDemon>(red_whale_demon_factory, 20);
 		
 		halo_attack_pool = new Pool<HaloAttack>(halo_attack_factory, 10);
-		shockball_pool = new Pool<Shockball>(shockball_factory, 10);
 		music_note_pool = new Pool<MusicNote>(music_note_factory, 35);
 		spiral_attack_pool = new Pool<SpiralAttack>(spiral_attack_factory, 10);
+		shockball_pool = new Pool<Shockball>(shockball_factory, 10);
+		purple_flame_pool = new Pool<PurpleFlame>(purple_flame_factory, 10);
 
 		greek_platform_pool = new Pool<GreekPlatform>(platform_factory, 35);
 		rock_platform_pool = new Pool<RockPlatform>(rock_platform_factory, 20);

@@ -48,7 +48,7 @@ public class MenuLevel extends Level{
 	}
 	
 	private void manageCollisions() {
-		CollisionManager.HeroPlatformCollision(hero, greek_platforms);
+		CollisionManager.HeroPlatformPlatformListCollision(hero, greek_platforms);
 	}
 	
 	public void dispose() {

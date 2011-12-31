@@ -8,7 +8,7 @@ public class HaloAttack extends Attack{
 	
 	public static final float HaloAttack_LAUNCH_VELOCITY = -6.0f;
 	
-	public static final float HaloAttack_LIFESPAN = 3.0f;
+	public static final float HaloAttack_LIFESPAN = 2.0f;
 	
 	public HaloAttack() {
 		this(3,3);

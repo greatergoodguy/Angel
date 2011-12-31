@@ -65,9 +65,11 @@ public class TreetopValleyRenderer extends BaseRenderer{
 					Assets.RedWhaleDemon.getKeyFrame(red_whale_demon.life_timer, Animation.ANIMATION_LOOPING));
 				
 		LinkedList<PurpleGhost> purple_ghosts = ((TreetopValleyLevel) level).purple_ghosts;
-		for(PurpleGhost purple_ghost : purple_ghosts)
-			batcher.drawSpriteCenterReverse(purple_ghost, Assets.PurpleGhost);			
-				
+		for(PurpleGhost purple_ghost : purple_ghosts){
+			batcher.drawSpriteCenterReverse(purple_ghost, Assets.PurpleGhost);
+			if(purple_ghost.purple_flame != null)
+				batcher.drawSpriteCenter(purple_ghost.purple_flame, Assets.shockballFrame3);
+		}		
 		batcher.endBatch();
 	}
 

@@ -42,8 +42,10 @@ public class TreetopValleyFactory {
 	
 	public RedWhaleDemon createFloatRedWhaleDemon(float x_coord, float y_coord){
 		RedWhaleDemon red_whale_demon = pool_manager.red_whale_demon_pool.newObject();
+		float state_timer_offset = (float) Math.random();
+		
 		red_whale_demon.reset(x_coord, y_coord);
-		red_whale_demon.changeToFloatState();
+		red_whale_demon.changeToFloatState(state_timer_offset);
 		return red_whale_demon;
 	}
 	
