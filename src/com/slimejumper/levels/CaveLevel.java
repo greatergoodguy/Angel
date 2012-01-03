@@ -94,7 +94,7 @@ public class CaveLevel extends Level{
 	}
 	
 	private void manageCollisions() {
-		CollisionManager.HeroPlatformPlatformListCollision(hero, greek_platforms_ground);	
+		CollisionManager.HeroPlatformListCollision(hero, greek_platforms_ground);	
 	}
 	
 	@Override

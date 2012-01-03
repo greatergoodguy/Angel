@@ -42,7 +42,7 @@ public class TesterRenderer extends BaseRenderer{
 	}
 
 	private void renderRockPlatformsAndPurpleGhost() {
-		batcher.beginBatch(Assets.game_sprites);
+		batcher.beginBatch(Assets.game_sprites_1);
 		
 		LinkedList<RockPlatform> rock_platforms = ((TesterLevel) level).rock_platforms;
 		for(RockPlatform rock_platform : rock_platforms)

@@ -41,7 +41,7 @@ public class MenuRenderer extends BaseRenderer{
 	}
 	
 	private void renderGreekPlatforms() {
-		batcher.beginBatch(Assets.game_sprites);
+		batcher.beginBatch(Assets.game_sprites_1);
 		
 		LinkedList<GreekPlatform> greek_platforms = ((MenuLevel) level).greek_platforms;
 		for(GreekPlatform greek_platform : greek_platforms)

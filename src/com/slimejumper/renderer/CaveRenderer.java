@@ -25,7 +25,7 @@ public class CaveRenderer extends BaseRenderer{
 				((CaveLevel) level).cave_background, Assets.background_caves);
 		batcher.endBatch();
 		
-		batcher.beginBatch(Assets.game_sprites);
+		batcher.beginBatch(Assets.game_sprites_1);
 		// Render Greek Platforms
 		LinkedList<GreekPlatform> greek_platforms_volatile = ((CaveLevel) level).greek_platforms_volatile;
 		for(GreekPlatform greek_platform : greek_platforms_volatile)

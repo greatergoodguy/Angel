@@ -20,6 +20,7 @@ public class Attack extends DynamicGameObject {
 	
 	public void reset(GameObject gameObject){
 		super.reset();
+		facedirection = gameObject.facedirection;
 		resetPositionCenter(gameObject.center);
 	}
 	

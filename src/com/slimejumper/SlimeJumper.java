@@ -10,7 +10,6 @@ public class SlimeJumper extends GLGame {
 	boolean firstTimeCreate = true;
 
 	public Screen getStartScreen() {
-		
 		return new SelectorScreen(this);
 	}
 	

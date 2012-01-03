@@ -84,7 +84,7 @@ public class SelectorScreen extends GLScreen{
         gl.glEnable(GL10.GL_BLEND);
         gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
         
-        batcher.beginBatch(Assets.game_sprites);          
+        batcher.beginBatch(Assets.game_sprites_1);          
         batcher.drawSpriteLowerLeft(TesterLevelRect.lowerLeft.x, TesterLevelRect.lowerLeft.y, 
         		TesterLevelRect.width, TesterLevelRect.height, Assets.jellyfishDemonShockAttackFrame2);
         batcher.drawSpriteLowerLeft(MenuLevelRect.lowerLeft.x, MenuLevelRect.lowerLeft.y, 

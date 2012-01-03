@@ -7,6 +7,8 @@ public class CloudPlatform extends Platform{
 	
 	public static final float CLOUD_PLATFORM_OSCILLATE_HORIZONTAL_DEFAULT_VEL = 1.0f;
 	public static final float CLOUD_PLATFORM_OSCILLATE_VERTICAL_DEFAULT_VEL = 1.0f;
+	
+	public static final float CLOUD_PLATFORM_OSCILLATE_VERTICAL_STATE_TIMER = 3.0f;
 
 	public static enum STATE{
 		CLOUD_STATE_STILL, CLOUD_STATE_OSCILLATE_HORIZONTAL, CLOUD_STATE_OSCILLATE_VERTICAL
@@ -78,14 +80,21 @@ public class CloudPlatform extends Platform{
 		velocity.y = CLOUD_PLATFORM_OSCILLATE_VERTICAL_DEFAULT_VEL;
 	}
 	
-	public void changeToOscillateVerticalState(float horizontal_vel){
-		state = STATE.CLOUD_STATE_OSCILLATE_HORIZONTAL;
+	public void changeToOscillateVerticalState(float vertical_vel){
+		state = STATE.CLOUD_STATE_OSCILLATE_VERTICAL;
 		velocity.x = 0;
-		velocity.y = horizontal_vel;
+		velocity.y = vertical_vel;
+	}
+	
+	public void changeToOscillateVerticalStateCentered(float vertical_vel){
+		state_timer = CLOUD_PLATFORM_OSCILLATE_VERTICAL_STATE_TIMER/2;
+		state = STATE.CLOUD_STATE_OSCILLATE_VERTICAL;
+		velocity.x = 0;
+		velocity.y = vertical_vel;
 	}
 
 	private void updateOscillateVerticalState(float deltaTime) {
-		if(state_timer > 3){
+		if(state_timer > CLOUD_PLATFORM_OSCILLATE_VERTICAL_STATE_TIMER){
 			velocity.y = -velocity.y;
 			state_timer = 0;
 		}

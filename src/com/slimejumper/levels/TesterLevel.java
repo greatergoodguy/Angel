@@ -45,8 +45,8 @@ public class TesterLevel extends Level{
 		rock_platforms = new LinkedList<RockPlatform>();
 		red_whale_demons = new LinkedList<RedWhaleDemon>();
 		
-		red_whale_demons.add(new RedWhaleDemon(8, 0.5f));
-		red_whale_demons.add(new RedWhaleDemon(18, 0.5f));
+		//red_whale_demons.add(new RedWhaleDemon(8, 0.5f));
+		//red_whale_demons.add(new RedWhaleDemon(18, 0.5f));
 		
 		RockPlatform.initializeRockPlatformGround(this, rock_platforms);
 		if(Settings.soundEnabled)
@@ -116,11 +116,11 @@ public class TesterLevel extends Level{
 	}
 
 	private void manageCollisions() {
-		CollisionManager.HeroPlatformPlatformListCollision(hero, rock_platforms);
-		CollisionManager.HeroPlatformPlatformListCollision(hero, cloud_platforms);
+		CollisionManager.HeroPlatformListCollision(hero, rock_platforms);
+		CollisionManager.HeroPlatformListCollision(hero, cloud_platforms);
 //		CollisionManager.HeroPlatformCollision(SpriteContainer.shadow_hero, rock_platforms);
 		
-		CollisionManager.HeroAttackEnemyListCollision(hero, red_whale_demons);
+		CollisionManager.HeroAttacksEnemyListCollision(hero, red_whale_demons);
 		CollisionManager.HeroEnemyListCollision(hero, red_whale_demons);
 	}
 

@@ -11,7 +11,7 @@ public class SpiralAttack extends Attack{
 		
 	public static final float SpiralAttack_LAUNCH_VELOCITY = -6.0f;
 		
-	public static final float SpiralAttack_LIFESPAN = 2.0f;
+	public static final float SpiralAttack_LIFESPAN = 1.5f;
 	
 	public float angle;
 		

@@ -53,7 +53,7 @@ public class Hero extends DynamicGameObject{
 	public static final int HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK = 4;
 	
 	public static final float HERO_MAX_VELY = -15;
-	public static final float HERO_JUMP_VELOCITY = 6.5f;  // 6.5f seems suitable
+	public static final float HERO_JUMP_VELOCITY = 6.0f;  // 6.5f seems suitable, Trying 6.0
 	public static final float HERO_MOVE_VELOCITY = 5;
 	public static final float HERO_HOP_VELOCITY = 2.5f;
 	
@@ -68,6 +68,9 @@ public class Hero extends DynamicGameObject{
 	public static final float HERO_LYRE_ATTACK_HEIGHT = 1.0625f;
 	public static final float HERO_SPIRAL_ATTACK_WIDTH = 1.1375f;
 	public static final float HERO_SPIRAL_ATTACK_HEIGHT = 1.0f;
+	public static final float HERO_COLLIDED_WIDTH = 0.8875f;
+	public static final float HERO_COLLIDED_HEIGHT = 1.125f;
+	
 	
 	public float state_timer;
 	public static final float HERO_LAND_TIMER_LIMIT = 0.16f;
@@ -79,13 +82,13 @@ public class Hero extends DynamicGameObject{
 	public static final float HERO_BASIC_SPIRAL_ATTACK_TIMER = Assets.HERO_SPIRAL_ATTACK_1_FRAME_DURATION * 5;
 	
 	public static final float HERO_ATTACK_LAUNCH_TIMER = Assets.HERO_HALO_ATTACK_1_FRAME_DURATION * 3;
+	public static final float HERO_DEATH_BY_FALLING_TIMER = 3.3f;
 	
 	public int state;
 
 	public boolean attack_launched;
 	
 	public static final float HERO_DEFAULT_INVINCIBILITY_TIMER_LIMIT = 1.8f;
-	public static final float HERO_LYRE_INVINCIBILITY_TIMER_LIMIT = 4.0f;
 	public float invincibility_timer;
 	public float invincibility_timer_limit;	
 	
@@ -99,7 +102,7 @@ public class Hero extends DynamicGameObject{
 		spiral_attacks = new LinkedList<SpiralAttack>();
 		
 		state = HERO_STATE_FALL;
-		facedirection = SPRITE_LEFT;
+		facedirection = SPRITE_RIGHT;
 		accel.set(0, Level.WORLD_GRAVITY);
 		
 		attack_launched = false;
@@ -115,6 +118,8 @@ public class Hero extends DynamicGameObject{
 	
 	public void reset(float x_coord, float y_coord){
 		position.set(x_coord, y_coord);
+		facedirection = SPRITE_RIGHT;
+		velocity.y = 0;
 		changeToJumpOrFallState();
 		health = 5;
 		
@@ -204,6 +209,7 @@ public class Hero extends DynamicGameObject{
 	}
 
 	private void changeToFallState() {
+		resetDimensions(HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
 		state = HERO_STATE_FALL;
 		state_timer = 0;
 	}
@@ -230,9 +236,27 @@ public class Hero extends DynamicGameObject{
 			changeToFallState();
 	}
 
+	public void changeToCollidedStateFromRight() {
+		if(is_invincible)
+			return;
+		
+		facedirection = SPRITE_RIGHT;
+		changeToCollidedState();
+	}
+
+	public void changeToCollidedStateFromLeft() {
+		if(is_invincible)
+			return;
+		
+		facedirection = SPRITE_LEFT;
+		changeToCollidedState();
+	}
+	
 	public void changeToCollidedState() {
 		if(is_invincible)
 			return;
+		
+		resetDimensions(HERO_COLLIDED_WIDTH, HERO_COLLIDED_HEIGHT);
 		
 		if(facedirection == SPRITE_RIGHT)
 			velocity.set(-HERO_HIT_HORIZONTAL_VELOCITY, HERO_HIT_VERTICAL_VELOCITY);
@@ -241,13 +265,14 @@ public class Hero extends DynamicGameObject{
 		
 		state = HERO_STATE_COLLIDED;
 		state_timer = 0;
-		health--;
 		activateInvincibility();
 	}
 
 	private void updateCollidedState(float deltaTime){
-		if(state_timer > HERO_COLLIDED_TIMER_LIMIT)
+		if(state_timer > HERO_COLLIDED_TIMER_LIMIT){
+			health--;
 			changeToFallState();
+		}
 	}
 
 	public void changeToBasicAttackState() {
@@ -256,7 +281,7 @@ public class Hero extends DynamicGameObject{
 		setBasicAttackType();
 		
 		if(basic_attack_type == HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK)
-			activateInvincibility(HERO_LYRE_INVINCIBILITY_TIMER_LIMIT);
+			activateInvincibility(HERO_BASIC_LYRE_SPECIAL_ATTACK_TIMER);
 		
 		state_timer = 0;
 		attack_launched = false;
@@ -298,13 +323,13 @@ public class Hero extends DynamicGameObject{
 		float randomValue = random.nextFloat();
 		
 		// HERO_BASIC_ATTACK_1
-		if(randomValue >= 0 && randomValue < 0.3){
+		if(randomValue >= 0 && randomValue < 0.5){
 			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
 			basic_attack_type = HERO_BASIC_HALO_ATTACK;
 			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
 		}
 		// HERO_BASIC_ATTACK_2
-		else if(randomValue >= 0.3f && randomValue < 0.6f){
+		else if(randomValue >= 0.5f && randomValue < 1.0f){
 			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
 			basic_attack_type = HERO_BASIC_SPIRAL_ATTACK;
 			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
@@ -334,10 +359,11 @@ public class Hero extends DynamicGameObject{
 		state = HERO_STATE_DEATH_BY_FALLING;
 		state_timer = 0;
 		health--;
+		activateInvincibility(HERO_DEATH_BY_FALLING_TIMER + 0.1f);
 	}
 	
 	public void updateDeathByFallingState(float deltaTime){
-		if(state_timer > 3.3f){
+		if(state_timer > HERO_DEATH_BY_FALLING_TIMER){
 			accel.set(0, Level.WORLD_GRAVITY);
 			changeToJumpOrFallState();			
 		}

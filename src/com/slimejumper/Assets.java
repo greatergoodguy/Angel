@@ -15,7 +15,7 @@ public class Assets {
 	public final static float HERO_SPIRAL_ATTACK_1_FRAME_DURATION = 0.10f;
 	
 	public final static float HERO_LAND_FRAME_DURATION = 0.04f;
-	public final static float HERO_COLLIDED_FRAME_DURATION = 0.20f;
+	public final static float HERO_COLLIDED_FRAME_DURATION = 0.1f;
 	
 	public final static float RED_WHALE_DEMON_FRAME_DURATION = 0.20f;
 	
@@ -27,6 +27,9 @@ public class Assets {
 	
 	public final static float FLYING_SNAKE_STANDARD_FRAME_DURATION = 0.15f;
 	public final static float FLYING_SNAKE_ATTACK_FRAME_DURATION = 0.20f;
+	
+	public final static float PURPLE_GHOST_STANDARD_FRAME_DURATION = 0.20f;
+	public final static float PURPLE_GHOST_ATTACK_FRAME_DURATION = 0.15f;
 	
 	public final static float SHOCKBALL_FRAME_DURATION = 0.14f;
 	public final static float HALO_ATTACK_FRAME_DURATION = 0.12f;
@@ -81,9 +84,6 @@ public class Assets {
 	public static TextureRegion heroHaloAttack1Frame9;
 	public static TextureRegion heroHaloAttack1Frame10;
 	public static TextureRegion heroHaloAttack1Frame11;
-	public static TextureRegion heroHaloAttack1Frame12;
-	public static TextureRegion heroHaloAttack1Frame13;
-	public static TextureRegion herohaloattack1frame14;
 	
 	public static Animation halo_attack;
 	public static TextureRegion haloAttackFrame1;
@@ -115,6 +115,7 @@ public class Assets {
 	public static TextureRegion heroCollidedFrame2;
 	public static TextureRegion heroCollidedFrame3;
 
+
 	// Foreground is on the Hero Atlas
 	public static TextureRegion foregroundRegion;
 	
@@ -127,10 +128,10 @@ public class Assets {
 	public static Texture background_treetop_valley;
 	
 	/*
-	 * Game Sprites Atlas
+	 * Game Sprites 1
 	 */
 	
-	public static Texture game_sprites;
+	public static Texture game_sprites_1;
 	public static TextureRegion PlatformLeft;
 	public static TextureRegion PlatformRight;
 	public static TextureRegion PlatformMiddle;
@@ -195,6 +196,30 @@ public class Assets {
 	public static TextureRegion cloudPlatformFrontLayer;
 	
 	/*
+	 * Game Sprites 2
+	 */
+	
+	public static Texture game_sprites_2;
+	
+	public static Animation purple_ghost_attack;
+	public static TextureRegion purpleGhostAttackFrame1;
+	public static TextureRegion purpleGhostAttackFrame2;
+	public static TextureRegion purpleGhostAttackFrame3;
+	public static TextureRegion purpleGhostAttackFrame4;
+	public static TextureRegion purpleGhostAttackFrame5;
+	
+	public static Animation purple_ghost_standard;
+	public static TextureRegion purpleGhostStandardFrame1;
+	public static TextureRegion purpleGhostStandardFrame2;
+	public static TextureRegion purpleGhostStandardFrame3;	
+	
+	public static Animation purple_flame_attack;
+	public static TextureRegion FlameAttackFrame1;
+	public static TextureRegion FlameAttackFrame2;
+	public static TextureRegion FlameAttackFrame3;
+	
+	
+	/*
 	 * Controller Icon Atlas
 	 */
 	
@@ -240,8 +265,8 @@ public class Assets {
 		heroJumpMinorDamageFrame3 = new TextureRegion(heroHealthy, 240, 530, 80, 80);
 		hero_jump_minor_damage = new Animation(DEFAULT_FRAME_DURATION,
 				heroJumpMinorDamageFrame1,
-				heroJumpMinorDamageFrame2,
-				heroJumpMinorDamageFrame3
+				heroJumpMinorDamageFrame3,
+				heroJumpMinorDamageFrame2
 				); 
 		//////////////////////////
 		
@@ -281,9 +306,6 @@ public class Assets {
 		heroHaloAttack1Frame9 = new TextureRegion(heroHealthy, 240, 170, 80, 90);
 		heroHaloAttack1Frame10 = new TextureRegion(heroHealthy, 320, 170, 80, 90);
 		heroHaloAttack1Frame11 = new TextureRegion(heroHealthy, 400, 170, 80, 90);
-		heroHaloAttack1Frame12 = new TextureRegion(heroHealthy, 0, 260, 80, 90);
-		heroHaloAttack1Frame13 = new TextureRegion(heroHealthy, 80, 260, 80, 90);
-		herohaloattack1frame14 = new TextureRegion(heroHealthy, 160, 260, 80, 90);
 		hero_halo_attack_1 = new Animation(HERO_HALO_ATTACK_1_FRAME_DURATION,
 				heroHaloAttack1Frame1,
 				heroHaloAttack1Frame2,
@@ -358,9 +380,13 @@ public class Assets {
 				spiralAttackFrame3,
 				spiralAttackFrame2);
 		
-		heroCollidedFrame1 = new TextureRegion(heroHealthy, 285, 260, 80, 80);
-		heroCollidedFrame2 = new TextureRegion(heroHealthy, 365, 260, 80, 80);
-		heroCollidedFrame3 = new TextureRegion(heroHealthy, 0, 350, 80, 80);
+		//heroCollidedFrame1 = new TextureRegion(heroHealthy, 285, 260, 80, 80);
+		//heroCollidedFrame2 = new TextureRegion(heroHealthy, 365, 260, 80, 80);
+		//heroCollidedFrame3 = new TextureRegion(heroHealthy, 0, 350, 80, 80);
+		
+		heroCollidedFrame1 = new TextureRegion(heroHealthy, 0, 260, 71, 90);
+		heroCollidedFrame2 = new TextureRegion(heroHealthy, 75, 260, 71, 90);
+		heroCollidedFrame3 = new TextureRegion(heroHealthy, 150, 260, 71, 90);
 		hero_collided = new Animation(HERO_COLLIDED_FRAME_DURATION,
 				heroCollidedFrame1,
 				heroCollidedFrame2,
@@ -382,143 +408,191 @@ public class Assets {
 		background_treetop_valley = new Texture(game, "Level1BG.png");
 		
 		/*
-		 * Game Sprites
+		 * Game Sprites 1
 		 */
 		
-		game_sprites = new Texture(game, "GameSpritesALL.png");
-		PlatformLeft = new TextureRegion(game_sprites, 0, 0, 40, 20);
-		PlatformRight = new TextureRegion(game_sprites, 0, 32, 40, 20);
-		PlatformMiddle = new TextureRegion(game_sprites, 0, 64, 40, 20);
+		game_sprites_1 = new Texture(game, "GameSprites1.png");
+		PlatformLeft = new TextureRegion(game_sprites_1, 0, 0, 40, 20);
+		PlatformRight = new TextureRegion(game_sprites_1, 0, 32, 40, 20);
+		PlatformMiddle = new TextureRegion(game_sprites_1, 0, 64, 40, 20);
 		
-		RockPlatform = new TextureRegion(game_sprites, 50, 90, 160, 30);
+		RockPlatform = new TextureRegion(game_sprites_1, 50, 90, 160, 30);
 
-		JellyfishDemon = new TextureRegion(game_sprites, 50, 0, 64, 64);
-		PurpleGhost = new TextureRegion(game_sprites, 940, 220, 64, 64);
+		JellyfishDemon = new TextureRegion(game_sprites_1, 50, 0, 64, 64);
+		PurpleGhost = new TextureRegion(game_sprites_1, 940, 220, 64, 64);
 		
-		RedWhaleDemonFrame1 = new TextureRegion(game_sprites, 0, 140, 100, 80);
-		RedWhaleDemonFrame2 = new TextureRegion(game_sprites, 100, 140, 100, 80);
-		RedWhaleDemonFrame3 = new TextureRegion(game_sprites, 200, 140, 100, 80);
-		RedWhaleDemonFrame4 = new TextureRegion(game_sprites, 300, 140, 100, 80);
-		RedWhaleDemonFrame5 = new TextureRegion(game_sprites, 400, 140, 100, 80);
+		RedWhaleDemonFrame1 = new TextureRegion(game_sprites_1, 0, 140, 100, 80);
+		RedWhaleDemonFrame2 = new TextureRegion(game_sprites_1, 100, 140, 100, 80);
+		RedWhaleDemonFrame3 = new TextureRegion(game_sprites_1, 200, 140, 100, 80);
+		RedWhaleDemonFrame4 = new TextureRegion(game_sprites_1, 300, 140, 100, 80);
+		RedWhaleDemonFrame5 = new TextureRegion(game_sprites_1, 400, 140, 100, 80);
 		RedWhaleDemon = new Animation(RED_WHALE_DEMON_FRAME_DURATION,
-				RedWhaleDemonFrame1,
-				RedWhaleDemonFrame2,
-				RedWhaleDemonFrame3,
-				RedWhaleDemonFrame4,
-				RedWhaleDemonFrame5,
-				RedWhaleDemonFrame4,
-				RedWhaleDemonFrame3,
-				RedWhaleDemonFrame2,
-				RedWhaleDemonFrame1
-				);
+			RedWhaleDemonFrame1,
+			RedWhaleDemonFrame2,
+			RedWhaleDemonFrame3,
+			RedWhaleDemonFrame4,
+			RedWhaleDemonFrame5,
+			RedWhaleDemonFrame4,
+			RedWhaleDemonFrame3,
+			RedWhaleDemonFrame2,
+			RedWhaleDemonFrame1
+			);
 		
-		jellyfishDemonMotionFrame1 = new TextureRegion(game_sprites, 50, 0, 64, 83);
-		jellyfishDemonMotionFrame2 = new TextureRegion(game_sprites, 114, 0, 64, 83);
-		jellyfishDemonMotionFrame3 = new TextureRegion(game_sprites, 178, 0, 64, 83);
-		jellyfishDemonMotionFrame4 = new TextureRegion(game_sprites, 242, 0, 64, 83);
-		jellyfishDemonMotionFrame5 = new TextureRegion(game_sprites, 306, 0, 64, 83);
-		jellyfishDemonMotionFrame6 = new TextureRegion(game_sprites, 370, 0, 64, 83);
+		jellyfishDemonMotionFrame1 = new TextureRegion(game_sprites_1, 50, 0, 64, 83);
+		jellyfishDemonMotionFrame2 = new TextureRegion(game_sprites_1, 114, 0, 64, 83);
+		jellyfishDemonMotionFrame3 = new TextureRegion(game_sprites_1, 178, 0, 64, 83);
+		jellyfishDemonMotionFrame4 = new TextureRegion(game_sprites_1, 242, 0, 64, 83);
+		jellyfishDemonMotionFrame5 = new TextureRegion(game_sprites_1, 306, 0, 64, 83);
+		jellyfishDemonMotionFrame6 = new TextureRegion(game_sprites_1, 370, 0, 64, 83);
 		jellyfish_demon_motion = new Animation(JELLYFISH_DEMON_MOTION_FRAME_DURATION,
-				jellyfishDemonMotionFrame1,
-				jellyfishDemonMotionFrame2,
-				jellyfishDemonMotionFrame3,
-				jellyfishDemonMotionFrame4,
-				jellyfishDemonMotionFrame5,
-				jellyfishDemonMotionFrame6,
-				jellyfishDemonMotionFrame6,
-				jellyfishDemonMotionFrame5,
-				jellyfishDemonMotionFrame4,
-				jellyfishDemonMotionFrame3,
-				jellyfishDemonMotionFrame2,
-				jellyfishDemonMotionFrame1
-				);
+			jellyfishDemonMotionFrame1,
+			jellyfishDemonMotionFrame2,
+			jellyfishDemonMotionFrame3,
+			jellyfishDemonMotionFrame4,
+			jellyfishDemonMotionFrame5,
+			jellyfishDemonMotionFrame6,
+			jellyfishDemonMotionFrame6,
+			jellyfishDemonMotionFrame5,
+			jellyfishDemonMotionFrame4,
+			jellyfishDemonMotionFrame3,
+			jellyfishDemonMotionFrame2,
+			jellyfishDemonMotionFrame1
+			);
+		
 		jellyfish_demon_boost_up = new Animation(JELLYFISH_DEMON_MOTION_FRAME_DURATION,
-				jellyfishDemonMotionFrame2,
-				jellyfishDemonMotionFrame3,
-				jellyfishDemonMotionFrame4,
-				jellyfishDemonMotionFrame5,
-				jellyfishDemonMotionFrame6,
-				jellyfishDemonMotionFrame6,
-				jellyfishDemonMotionFrame5
-				);
+			jellyfishDemonMotionFrame2,
+			jellyfishDemonMotionFrame3,
+			jellyfishDemonMotionFrame4,
+			jellyfishDemonMotionFrame5,
+			jellyfishDemonMotionFrame6,
+			jellyfishDemonMotionFrame6,
+			jellyfishDemonMotionFrame5
+			);
+		
 		 jellyfish_demon_float_down= new Animation(JELLYFISH_DEMON_MOTION_FRAME_DURATION,
-					jellyfishDemonMotionFrame4,
-					jellyfishDemonMotionFrame3,
-					jellyfishDemonMotionFrame2,
-					jellyfishDemonMotionFrame1,
-					jellyfishDemonMotionFrame1					
-					);
+			jellyfishDemonMotionFrame4,
+			jellyfishDemonMotionFrame3,
+			jellyfishDemonMotionFrame2,
+			jellyfishDemonMotionFrame1,
+			jellyfishDemonMotionFrame1					
+			);
 		
 		
-		jellyfishDemonShockAttackFrame1 = new TextureRegion(game_sprites, 434, 0, 70, 87);
-		jellyfishDemonShockAttackFrame2 = new TextureRegion(game_sprites, 504, 0, 70, 87);
-		jellyfishDemonShockAttackFrame3 = new TextureRegion(game_sprites, 574, 0, 70, 87);
+		jellyfishDemonShockAttackFrame1 = new TextureRegion(game_sprites_1, 434, 0, 70, 87);
+		jellyfishDemonShockAttackFrame2 = new TextureRegion(game_sprites_1, 504, 0, 70, 87);
+		jellyfishDemonShockAttackFrame3 = new TextureRegion(game_sprites_1, 574, 0, 70, 87);
 		jellyfish_demon_shock_attacking = new Animation(JELLYFISH_DEMON_SHOCK_ATTACK_FRAME_DURATION,
-				jellyfishDemonShockAttackFrame1,
-				jellyfishDemonShockAttackFrame2,
-				jellyfishDemonShockAttackFrame3
-				);
+			jellyfishDemonShockAttackFrame1,
+			jellyfishDemonShockAttackFrame2,
+			jellyfishDemonShockAttackFrame3
+			);
 		
-		jellyfishDemonCollidedFrame1 = new TextureRegion(game_sprites, 740, 130, 64, 70);
-		jellyfishDemonCollidedFrame2 = new TextureRegion(game_sprites, 804, 130, 64, 70);
-		jellyfishDemonCollidedFrame3 = new TextureRegion(game_sprites, 868, 130, 64, 70);
-		jellyfishDemonCollidedFrame4 = new TextureRegion(game_sprites, 932, 130, 64, 70);
+		jellyfishDemonCollidedFrame1 = new TextureRegion(game_sprites_1, 740, 130, 64, 70);
+		jellyfishDemonCollidedFrame2 = new TextureRegion(game_sprites_1, 804, 130, 64, 70);
+		jellyfishDemonCollidedFrame3 = new TextureRegion(game_sprites_1, 868, 130, 64, 70);
+		jellyfishDemonCollidedFrame4 = new TextureRegion(game_sprites_1, 932, 130, 64, 70);
 		jellyfish_demon_collided = new Animation(JELLYFISH_DEMON_COLLIDED_FRAME_DURATION,
-				jellyfishDemonCollidedFrame1,
-				jellyfishDemonCollidedFrame2,
-				jellyfishDemonCollidedFrame3,
-				jellyfishDemonCollidedFrame4
-				);
+			jellyfishDemonCollidedFrame1,
+			jellyfishDemonCollidedFrame2,
+			jellyfishDemonCollidedFrame3,
+			jellyfishDemonCollidedFrame4
+			);
 		
-		shockballFrame1 = new TextureRegion(game_sprites, 644, 0, 120, 130);
-		shockballFrame2 = new TextureRegion(game_sprites, 764, 0, 120, 130);
-		shockballFrame3 = new TextureRegion(game_sprites, 884, 0, 120, 130);
-		shockballFrame4 = new TextureRegion(game_sprites, 500, 130, 120, 130);
-		shockballFrame5 = new TextureRegion(game_sprites, 620, 130, 120, 130);
+		shockballFrame1 = new TextureRegion(game_sprites_1, 644, 0, 120, 130);
+		shockballFrame2 = new TextureRegion(game_sprites_1, 764, 0, 120, 130);
+		shockballFrame3 = new TextureRegion(game_sprites_1, 884, 0, 120, 130);
+		shockballFrame4 = new TextureRegion(game_sprites_1, 500, 130, 120, 130);
+		shockballFrame5 = new TextureRegion(game_sprites_1, 620, 130, 120, 130);
 		shockball = new Animation(SHOCKBALL_FRAME_DURATION,
-				shockballFrame1,
-				shockballFrame2,
-				shockballFrame3,
-				shockballFrame4,
-				shockballFrame5,
-				shockballFrame4,
-				shockballFrame3,
-				shockballFrame2
-				);
+			shockballFrame1,
+			shockballFrame2,
+			shockballFrame3,
+			shockballFrame4,
+			shockballFrame5,
+			shockballFrame4,
+			shockballFrame3,
+			shockballFrame2
+			);
 		
-		flyingSnakeStandardFrame1 = new TextureRegion(game_sprites, 0, 260, 180, 86);
-		flyingSnakeStandardFrame2 = new TextureRegion(game_sprites, 180, 260, 180, 86);
-		flyingSnakeStandardFrame3 = new TextureRegion(game_sprites, 360, 260, 180, 86);
-		flyingSnakeStandardFrame4 = new TextureRegion(game_sprites, 540, 260, 180, 86);
-		flyingSnakeStandardFrame5 = new TextureRegion(game_sprites, 720, 260, 180, 86);
+		flyingSnakeStandardFrame1 = new TextureRegion(game_sprites_1, 0, 260, 180, 86);
+		flyingSnakeStandardFrame2 = new TextureRegion(game_sprites_1, 180, 260, 180, 86);
+		flyingSnakeStandardFrame3 = new TextureRegion(game_sprites_1, 360, 260, 180, 86);
+		flyingSnakeStandardFrame4 = new TextureRegion(game_sprites_1, 540, 260, 180, 86);
+		flyingSnakeStandardFrame5 = new TextureRegion(game_sprites_1, 720, 260, 180, 86);
 		flying_snake_standard = new Animation(FLYING_SNAKE_STANDARD_FRAME_DURATION,
-				flyingSnakeStandardFrame1,
-				flyingSnakeStandardFrame2,
-				flyingSnakeStandardFrame3,
-				flyingSnakeStandardFrame2,
-				flyingSnakeStandardFrame1,
-				flyingSnakeStandardFrame4,
-				flyingSnakeStandardFrame5,
-				flyingSnakeStandardFrame4
-				);
+			flyingSnakeStandardFrame1,
+			flyingSnakeStandardFrame2,
+			flyingSnakeStandardFrame3,
+			flyingSnakeStandardFrame2,
+			flyingSnakeStandardFrame1,
+			flyingSnakeStandardFrame4,
+			flyingSnakeStandardFrame5,
+			flyingSnakeStandardFrame4
+			);
 		
-		flyingSnakeAttackChargeFrame1 = new TextureRegion(game_sprites, 0, 350, 141, 129);
-		flyingSnakeChargeAttackFrame2 = new TextureRegion(game_sprites, 141, 350, 141, 129);
-		flyingSnakeAttackFrame = new TextureRegion(game_sprites, 282, 350, 141, 129);
+		flyingSnakeAttackChargeFrame1 = new TextureRegion(game_sprites_1, 0, 350, 141, 129);
+		flyingSnakeChargeAttackFrame2 = new TextureRegion(game_sprites_1, 141, 350, 141, 129);
+		flyingSnakeAttackFrame = new TextureRegion(game_sprites_1, 282, 350, 141, 129);
 		flying_snake_attack = new Animation(FLYING_SNAKE_ATTACK_FRAME_DURATION,
-				flyingSnakeAttackChargeFrame1,
-				flyingSnakeChargeAttackFrame2
-				);
+			flyingSnakeAttackChargeFrame1,
+			flyingSnakeChargeAttackFrame2
+			);
 		
 		flying_snake_reload = new Animation(FLYING_SNAKE_STANDARD_FRAME_DURATION,
-				flyingSnakeStandardFrame1,
-				flyingSnakeStandardFrame2,
-				flyingSnakeStandardFrame3,
-				flyingSnakeStandardFrame2
+			flyingSnakeStandardFrame1,
+			flyingSnakeStandardFrame2,
+			flyingSnakeStandardFrame3,
+			flyingSnakeStandardFrame2
+			);
+		
+		cloudPlatformBackLayer = new TextureRegion(game_sprites_1, 450, 360, 290, 110);
+		cloudPlatformFrontLayer = new TextureRegion(game_sprites_1, 450, 469, 290, 42);
+		
+		/*
+		 * Game Sprites 2
+		 */
+		
+		game_sprites_2 = new Texture(game, "GameSprites2.png");
+		
+		purpleGhostAttackFrame1 = new TextureRegion(game_sprites_2, 90, 0, 116, 95);
+		purpleGhostAttackFrame2 = new TextureRegion(game_sprites_2, 206, 0, 116, 95);
+		purpleGhostAttackFrame3 = new TextureRegion(game_sprites_2, 322, 0, 116, 95);
+		purpleGhostAttackFrame4 = new TextureRegion(game_sprites_2, 438, 0, 116, 95);
+		purpleGhostAttackFrame5 = new TextureRegion(game_sprites_2, 554, 0, 116, 95);
+		purple_ghost_attack = new Animation(PURPLE_GHOST_ATTACK_FRAME_DURATION,
+			purpleGhostAttackFrame1,
+			purpleGhostAttackFrame2,
+			purpleGhostAttackFrame3,
+			purpleGhostAttackFrame4,
+			purpleGhostAttackFrame5
+			);
+		
+		purpleGhostStandardFrame1 = new TextureRegion(game_sprites_2, 0, 0, 89, 90);
+		purpleGhostStandardFrame2 = new TextureRegion(game_sprites_2, 760, 0, 89, 90);
+		purpleGhostStandardFrame3 = new TextureRegion(game_sprites_2, 850, 0, 89, 90);
+		/*
+		purple_ghost_standard = new Animation(PURPLE_GHOST_STANDARD_FRAME_DURATION,
+			purpleGhostStandardFrame1,
+			purpleGhostStandardFrame2,
+			purpleGhostStandardFrame1,
+			purpleGhostStandardFrame3
+			);
+		*/	
+		purple_ghost_standard = new Animation(PURPLE_GHOST_STANDARD_FRAME_DURATION,
+				purpleGhostStandardFrame1,
+				purpleGhostStandardFrame2,
+				purpleGhostStandardFrame1,
+				purpleGhostStandardFrame3
 				);
 		
-		cloudPlatformBackLayer = new TextureRegion(game_sprites, 450, 360, 290, 110);
-		cloudPlatformFrontLayer = new TextureRegion(game_sprites, 450, 465, 290, 42);
+		FlameAttackFrame1 = new TextureRegion(game_sprites_2, 670, 0, 84, 30);
+		FlameAttackFrame2 = new TextureRegion(game_sprites_2, 670, 30, 84, 30);
+		FlameAttackFrame3 = new TextureRegion(game_sprites_2, 670, 60, 84, 30);
+		purple_flame_attack = new Animation(DEFAULT_FRAME_DURATION,
+			FlameAttackFrame1,
+			FlameAttackFrame2,
+			FlameAttackFrame3
+			);
 		
 		/*
 		 * Controller
@@ -540,7 +614,7 @@ public class Assets {
 	}
 	
 	public static void reload(){
-		game_sprites.reload();
+		game_sprites_1.reload();
 		heroHealthy.reload();
 		shadow_hero.reload();
 		background_treetop_valley.reload();

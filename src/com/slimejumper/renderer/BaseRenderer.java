@@ -309,7 +309,7 @@ public abstract class BaseRenderer {
 		}
 	}
 	
-	private void adjustGameSpriteOrientation(DynamicGameObject object,
+	protected void adjustGameSpriteOrientation(DynamicGameObject object,
 			TextureRegion region) {
 		switch(object.facedirection){
 		case GameObject.SPRITE_LEFT:

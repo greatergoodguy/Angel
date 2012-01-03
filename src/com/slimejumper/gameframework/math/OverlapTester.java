@@ -13,6 +13,10 @@ public class OverlapTester {
 		return overlapRectangles(object1.getBounds(), object2.getBounds());
 	}
 	
+	public static boolean overlapRectangles(GameObject object1, GameObject object2,	float collision_offset) {
+		return overlapRectangles(object1.getBounds(), object2.getBounds(), collision_offset);
+	}
+
 	public static boolean overlapRectangles(Rectangle r1, Rectangle r2){
 		if(	r1.lowerLeft.x <= r2.lowerLeft.x + r2.width  &&
 			r1.lowerLeft.x + r1.width >= r2.lowerLeft.x 	&&
@@ -21,6 +25,16 @@ public class OverlapTester {
 			return true;
 		else
 			return false;
+	}
+	
+	private static boolean overlapRectangles(Rectangle r1, Rectangle r2, float collision_offset) {
+		if(	r1.lowerLeft.x <= r2.lowerLeft.x + r2.width - collision_offset &&
+				r1.lowerLeft.x + r1.width >= r2.lowerLeft.x + collision_offset &&
+				r1.lowerLeft.y <= r2.lowerLeft.y + r2.height - collision_offset &&
+				r1.lowerLeft.y + r1.height >= r2.lowerLeft.y + collision_offset)
+				return true;
+			else
+				return false;
 	}
 	
 	public static boolean overlapCircleRectangle(Circle c, Rectangle r){

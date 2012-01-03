@@ -52,7 +52,7 @@ public abstract class Level {
 	public static final float WORLD_DEFAULT_TOP_BOUND = 9.0f;
 */
 	
-	private static final float WORLD_VERTICAL_POSITIONING_ADJUSTER = 1.5f;
+	protected static final float WORLD_VERTICAL_POSITIONING_ADJUSTER = 1.5f;
 
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
@@ -122,15 +122,15 @@ public abstract class Level {
 		/*
 		 * Controller Input
 		 */
-		
-		if(controller.fireAttack){
-			if(hero.state != Hero.HERO_STATE_BASIC_ATTACK)
-				hero.changeToBasicAttackState();
-			
-			controller.fireAttack = ShadowHero.shadow_hero_singleton.controller_sync_on;
-		}
 
 		if(hero.state != Hero.HERO_STATE_COLLIDED){
+			if(controller.fireAttack){
+				if(hero.state != Hero.HERO_STATE_BASIC_ATTACK)
+					hero.changeToBasicAttackState();
+				
+				controller.fireAttack = ShadowHero.shadow_hero_singleton.controller_sync_on;
+			}
+			
 			switch(Controller.processMoveDirection(controller)){
 			case Controller.CONTROLLER_LEFT:
 				hero.moveLeft();
