@@ -53,7 +53,7 @@ public class Hero extends DynamicGameObject{
 	public static final int HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK = 4;
 	
 	public static final float HERO_MAX_VELY = -15;
-	public static final float HERO_JUMP_VELOCITY = 6.0f;  // 6.5f seems suitable, Trying 6.0
+	public static final float HERO_JUMP_VELOCITY = 6.5f;  // 6.5f seems suitable, Trying 6.0
 	public static final float HERO_MOVE_VELOCITY = 5;
 	public static final float HERO_HOP_VELOCITY = 2.5f;
 	
@@ -120,6 +120,7 @@ public class Hero extends DynamicGameObject{
 		position.set(x_coord, y_coord);
 		facedirection = SPRITE_RIGHT;
 		velocity.y = 0;
+		accel.set(0, Level.WORLD_GRAVITY);
 		changeToJumpOrFallState();
 		health = 5;
 		
@@ -421,9 +422,10 @@ public class Hero extends DynamicGameObject{
 	
 	public void reboundPlatform(Platform platform){
 		position.y = platform.position.y + platform.height;
-		if(state == Hero.HERO_STATE_BASIC_ATTACK ||
-			state == Hero.HERO_STATE_COLLIDED)
+		if(state == Hero.HERO_STATE_COLLIDED)
 			velocity.y = 3 * HERO_JUMP_VELOCITY / 4;
+		else if(state == Hero.HERO_STATE_BASIC_ATTACK)
+			velocity.y = HERO_JUMP_VELOCITY;
 		else
 			changeToJumpState();
 	}

@@ -3,16 +3,18 @@ package com.slimejumper.world.enemies;
 
 public class RedWhaleDemon extends Enemy{
 
-	public static final float RedWhaleDemon_WIDTH = 1.25f;
-	public static final float RedWhaleDemon_HEIGHT = 1.00f;
+	public static final float RedWhaleDemon_FLOAT_WIDTH = 1.9375f;
+	public static final float RedWhaleDemon_FLOAT_HEIGHT = 1.25f;
+	public static final float RedWhaleDemon_CHARGE_WIDTH = 1.975f;
+	public static final float RedWhaleDemon_CHARGE_HEIGHT = 1.3125f;
 	public static final int RedWhaleDemon_HEALTH = 2;
 	
-	public static final float RedWhaleDemon_VERTICAL_VEL = 0.6f;
+	public static final float RedWhaleDemon_VERTICAL_VEL = 0.8f;
 	public static final float RedWhaleDemon_TACKLE_VEL = 5.0f;
 	public static final float RedWhaleDemon_TACKLE_ACCEL = 2.0f;
 	
 	public STATE state;
-	private float state_timer;
+	public float state_timer;
 	
 	public enum STATE{
 		STATE_FLOAT_VERTICAL,
@@ -21,11 +23,11 @@ public class RedWhaleDemon extends Enemy{
 	}
 	
 	public RedWhaleDemon() {
-		super(0, 0, RedWhaleDemon_WIDTH, RedWhaleDemon_HEIGHT);
+		super(0, 0, RedWhaleDemon_CHARGE_WIDTH, RedWhaleDemon_CHARGE_HEIGHT);
 	}
 	
 	public RedWhaleDemon(float x, float y){
-		super(x, y, RedWhaleDemon_WIDTH, RedWhaleDemon_HEIGHT);
+		super(x, y, RedWhaleDemon_CHARGE_WIDTH, RedWhaleDemon_CHARGE_HEIGHT);
 		state_timer = 0;
 		velocity.y = RedWhaleDemon_VERTICAL_VEL;		
 	}
@@ -66,6 +68,7 @@ public class RedWhaleDemon extends Enemy{
 	}
 	
 	public void changeToStillState(){
+		resetDimensions(RedWhaleDemon_FLOAT_WIDTH, RedWhaleDemon_FLOAT_HEIGHT);
 		state = STATE.STATE_FLOAT_VERTICAL;
 		state_timer = 0;
 		velocity.x = 0;
@@ -73,6 +76,7 @@ public class RedWhaleDemon extends Enemy{
 	}
 	
 	public void changeToFloatState(){
+		resetDimensions(RedWhaleDemon_FLOAT_WIDTH, RedWhaleDemon_FLOAT_HEIGHT);
 		state = STATE.STATE_FLOAT_VERTICAL;
 		velocity.x = 0;
 		velocity.y = RedWhaleDemon_VERTICAL_VEL;
@@ -83,15 +87,25 @@ public class RedWhaleDemon extends Enemy{
 		changeToFloatState();
 		state_timer = state_timer_offset;
 	}
+	
+	public void changeToFloatStateLarge(float state_timer_offset) {
+		resetDimensions(RedWhaleDemon_FLOAT_WIDTH, RedWhaleDemon_FLOAT_HEIGHT);
+		state = STATE.STATE_FLOAT_VERTICAL;
+		velocity.x = 0;
+		velocity.y = 2 * RedWhaleDemon_VERTICAL_VEL;
+		facedirection = SPRITE_LEFT;
+		state_timer = state_timer_offset;
+	}
 
 	private void updateFloatVerticalState(float deltaTime) {		
-		if(state_timer > 2.0f){
+		if(state_timer > 3.2f){
 			velocity.y = -velocity.y;
 			state_timer = 0;
 		}		
 	}
 	
 	public void changeToTackleStateLeft(){
+		resetDimensions(RedWhaleDemon_CHARGE_WIDTH, RedWhaleDemon_CHARGE_HEIGHT);
 		facedirection = SPRITE_LEFT;
 		velocity.x = -RedWhaleDemon_TACKLE_VEL;
 		accel.x = RedWhaleDemon_TACKLE_ACCEL;
@@ -101,6 +115,7 @@ public class RedWhaleDemon extends Enemy{
 	}
 	
 	public void changeToTackleStateRight(){
+		resetDimensions(RedWhaleDemon_CHARGE_WIDTH, RedWhaleDemon_CHARGE_HEIGHT);
 		facedirection = SPRITE_RIGHT;
 		velocity.x = RedWhaleDemon_TACKLE_VEL;
 		accel.x = -RedWhaleDemon_TACKLE_ACCEL;
@@ -110,6 +125,7 @@ public class RedWhaleDemon extends Enemy{
 	}
 	
 	public void changeToTackleStateRightFAST(){
+		resetDimensions(RedWhaleDemon_CHARGE_WIDTH, RedWhaleDemon_CHARGE_HEIGHT);
 		facedirection = SPRITE_RIGHT;
 		velocity.x = RedWhaleDemon_TACKLE_VEL;
 		accel.x = -RedWhaleDemon_TACKLE_ACCEL;
@@ -122,7 +138,6 @@ public class RedWhaleDemon extends Enemy{
 		state = STATE.STATE_TACKLE;
 		state_timer = 0;
 		
-		facedirection = -facedirection;
 		velocity.x = (-facedirection) * RedWhaleDemon_TACKLE_VEL;
 		accel.x = facedirection * RedWhaleDemon_TACKLE_ACCEL;		
 	}
@@ -135,6 +150,7 @@ public class RedWhaleDemon extends Enemy{
 	private void changeToPauseState(){
 		state = STATE.STATE_PAUSE;
 		state_timer = 0;
+		facedirection = -facedirection;
 		
 		velocity.x = 0;
 		accel.x = 0;

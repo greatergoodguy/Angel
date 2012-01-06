@@ -1,0 +1,90 @@
+	/*
+	private void initializeCloudPlatforms() {
+		cloud_platforms = new LinkedList<CloudPlatform>();
+		
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0.4f, 5.5f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(-1.9f, 1.9f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(4.8f, 2.1f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0, 0));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(4, -0.2f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(7.5f, 0.3f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(11f, 0.0f));
+		
+		
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(17, -0.2f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(20, 0.3f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(22.3f, 0.2f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(21.6f, 2.6f));
+		
+		cloud_platforms.add(treetop_valley_factory.createOscillateHorizontalCloudPlatform(26, 0.2f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(33, 0.6f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(35, 0.5f));
+		cloud_platforms.add(treetop_valley_factory.createOscillateVerticalCloudPlatformCentered(36.5f, 5.5f, 2.4f));
+		
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(33, 9.2f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(30.8f, 9.2f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(27, 7.3f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(25, 7.5f));
+		
+		cloud_platforms.add(treetop_valley_factory.createOscillateVerticalCloudPlatformCentered(20.5f, 9.1f, -CloudPlatform.CLOUD_PLATFORM_OSCILLATE_VERTICAL_DEFAULT_VEL));
+		cloud_platforms.add(treetop_valley_factory.createOscillateVerticalCloudPlatformCentered(15.0f, 9.1f, CloudPlatform.CLOUD_PLATFORM_OSCILLATE_VERTICAL_DEFAULT_VEL));
+		
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0.4f, 7.1f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3.5f, 7.3f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(6.5f, 7.3f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(9.5f, 7.3f));
+		
+		cloud_platforms.add(treetop_valley_factory.createOscillateVerticalCloudPlatformCentered(0.5f, 12f, 2.4f));
+		
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(3.5f, 17f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(7.0f, 16f));
+		cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(10.5f, 15f));
+	}
+	
+	private void initializeRedWhaleDemons() {
+		red_whale_demons = new LinkedList<RedWhaleDemon>();
+		
+		red_whale_demons.add(treetop_valley_factory.createStillRedWhaleDemonLeft(9.6f, 4.3f));
+		red_whale_demons.add(treetop_valley_factory.createFloatRedWhaleDemon(16.5f, 2.3f, 1.0f));
+		
+		red_whale_demons.add(treetop_valley_factory.createFloatRedWhaleDemon(38.0f, 2.5f, 0f));
+		
+		red_whale_demons.add(treetop_valley_factory.createTackleRedWhaleDemonRight(23.7f, 9.3f));
+		
+		red_whale_demons.add(treetop_valley_factory.createStillRedWhaleDemonRight(18.8f, 9.9f));
+		
+		red_whale_demons.add(treetop_valley_factory.createTackleRedWhaleDemonRight(0.7f, 8.5f));
+	}
+
+	private void initializePurpleGhostsAndPurpleFlames() {
+		purple_ghosts = new LinkedList<PurpleGhost>();
+		
+		purple_ghosts.add(treetop_valley_factory.createPurpleGhostStandardPatternLeft(25.5f, 4.2f));
+		purple_ghosts.add(treetop_valley_factory.createPurpleGhostStandardPatternRight(18.8f, 11.1f));
+		
+		purple_ghosts.add(treetop_valley_factory.createPurpleGhostWalkPatternRight(7.1f, 8.5f));
+		
+		purple_ghosts.add(treetop_valley_factory.createPurpleGhostFloatVerticalPatternLeft(9f, 15.5f));
+		
+		purple_flames = new LinkedList<PurpleFlame>();
+		PurpleGhost.registerPurpleFlames(purple_flames);
+	}
+	*/
+
+// Second Level
+		if(!level_one_activate && hero.center.y > 11.6f){
+			world_bottom_edge = 7.1f;
+			world_bottom_bound = world_bottom_edge + 3.0f;
+
+			cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(36.5f, 9.1f));
+			level_one_activate = true;
+		}
+		
+		// Third Level
+		if(!level_two_activate && hero.center.y > 19f){
+			world_bottom_edge = 14.5f;
+			world_bottom_bound = world_bottom_edge + 3.0f;
+			
+			cloud_platforms.add(treetop_valley_factory.createStaticCloudPlatform(0.2f, 16.6f));
+			level_two_activate = true;
+		}

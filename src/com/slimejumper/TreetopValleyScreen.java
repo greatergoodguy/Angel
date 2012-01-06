@@ -91,12 +91,12 @@ public class TreetopValleyScreen extends GLScreen{
 
 	@Override
 	public void pause() {
-
+		Assets.test_music.pause();
 	}
 
 	@Override
 	public void resume() {
-
+		Assets.test_music.play();
 	}
 
 	@Override

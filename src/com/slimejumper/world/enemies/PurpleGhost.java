@@ -12,6 +12,9 @@ public class PurpleGhost extends Enemy{
 	public static final float PurpleGhost_STANDARD_STATE_HEIGHT = 1.125f;
 	public static final float PurpleGhost_ATTACK_STATE_WIDTH = 1.45f;
 	public static final float PurpleGhost_ATTACK_STATE_HEIGHT = 1.1875f;
+	public static final float PurpleGhost_DANCE_STATE_WIDTH = 1.1f;
+	public static final float PurpleGhost_DANCE_STATE_HEIGHT = 1.05f;
+	
 	
 	public static final int PurpleGhost_HEALTH = 2;
 		
@@ -25,6 +28,10 @@ public class PurpleGhost extends Enemy{
 	
 	public STATE state;
 	public float state_timer;
+	
+	public boolean is_dancing;
+	public float dance_timer;
+	public boolean dance_type_toggler;
 	
 	public float future_vel;
 	private boolean attack_launched;
@@ -50,6 +57,10 @@ public class PurpleGhost extends Enemy{
 	
 	public static void registerPurpleFlames(LinkedList<PurpleFlame> registered_purple_flames){
 		purple_flames = registered_purple_flames;
+	}
+	
+	public static void deregisterPurpleFlames(){
+		purple_flames = null;
 	}
 	
 	public void reset(float x_coord, float y_coord){
@@ -79,7 +90,7 @@ public class PurpleGhost extends Enemy{
 			updateShootThenVerticalState();
 			break;
 		case STATE_WALK:
-			updateWalkState();
+			updateWalkState(deltaTime);
 			break;
 		}
 	}
@@ -134,12 +145,14 @@ public class PurpleGhost extends Enemy{
 	}
 	
 	public void changeToFloatVerticalState(){
+		resetDimensions(PurpleGhost_STANDARD_STATE_WIDTH, PurpleGhost_STANDARD_STATE_HEIGHT);
 		state_timer = 0;
 		velocity.y = PurpleGhost_VERTICAL_VEL;
 		state = STATE.STATE_FLOAT_VERTICAL;
 	}
 	
 	public void changeToFloatVerticalState(float vertical_vel){
+		resetDimensions(PurpleGhost_STANDARD_STATE_WIDTH, PurpleGhost_STANDARD_STATE_HEIGHT);
 		state_timer = 0;
 		velocity.y = vertical_vel;
 		state = STATE.STATE_FLOAT_VERTICAL;
@@ -152,6 +165,7 @@ public class PurpleGhost extends Enemy{
 	}
 
 	public void changeToShootThenVerticalState(float future_vertical_vel){
+		resetDimensions(PurpleGhost_ATTACK_STATE_WIDTH, PurpleGhost_ATTACK_STATE_HEIGHT);
 		state_timer = 0;
 		state = STATE.STATE_SHOOT_THEN_FLOAT_VERTICAL;
 		
@@ -159,7 +173,7 @@ public class PurpleGhost extends Enemy{
 		velocity.x = 0;
 		velocity.y = 0;
 		
-		activatePurpleFlame();
+		attack_launched = false;
 	}
 	
 	private void updateShootThenVerticalState(){
@@ -176,17 +190,28 @@ public class PurpleGhost extends Enemy{
 		resetDimensions(PurpleGhost_STANDARD_STATE_WIDTH, PurpleGhost_STANDARD_STATE_HEIGHT);
 		facedirection = SPRITE_LEFT;
 		velocity.x = -PurpleGhost_WALK_VEL;
-		changeToWalkState();
+		
+		state = STATE.STATE_WALK;
+		state_timer = 0;
+		
+		is_dancing = false;
+		dance_timer = 0;
 	}
 	
 	public void changeToWalkStateRight(){
 		resetDimensions(PurpleGhost_STANDARD_STATE_WIDTH, PurpleGhost_STANDARD_STATE_HEIGHT);
 		facedirection = SPRITE_RIGHT;
 		velocity.x = PurpleGhost_WALK_VEL;
-		changeToWalkState();
+		
+		state = STATE.STATE_WALK;
+		state_timer = 0;
+		
+		is_dancing = false;
+		dance_timer = 0;
 	}
 	
 	private void changeToWalkState(){
+		resetDimensions(PurpleGhost_STANDARD_STATE_WIDTH, PurpleGhost_STANDARD_STATE_HEIGHT);
 		state = STATE.STATE_WALK;
 		state_timer = 0;
 		
@@ -194,8 +219,23 @@ public class PurpleGhost extends Enemy{
 		velocity.x = -velocity.x;
 	}
 	
-	public void updateWalkState(){
-		if(state_timer >= 2.5f){
+	public void updateWalkState(float deltaTime){
+		dance_timer += deltaTime;
+		
+		if(dance_timer > 2.4f){
+			if(is_dancing){
+				resetDimensions(PurpleGhost_STANDARD_STATE_WIDTH, PurpleGhost_STANDARD_STATE_HEIGHT);
+			}
+			else{
+				resetDimensions(PurpleGhost_DANCE_STATE_WIDTH, PurpleGhost_DANCE_STATE_HEIGHT);
+				dance_type_toggler = !dance_type_toggler;
+			}
+			
+			dance_timer = 0;
+			is_dancing = !is_dancing;
+		}
+		
+		if(state_timer >= 3.7f){
 			changeToWalkState();
 		}	
 	}

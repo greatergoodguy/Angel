@@ -8,7 +8,7 @@ public class CloudPlatform extends Platform{
 	public static final float CLOUD_PLATFORM_OSCILLATE_HORIZONTAL_DEFAULT_VEL = 1.0f;
 	public static final float CLOUD_PLATFORM_OSCILLATE_VERTICAL_DEFAULT_VEL = 1.0f;
 	
-	public static final float CLOUD_PLATFORM_OSCILLATE_VERTICAL_STATE_TIMER = 3.0f;
+	public static final float CLOUD_PLATFORM_OSCILLATE_VERTICAL_STATE_TIMER = 4.0f;
 
 	public static enum STATE{
 		CLOUD_STATE_STILL, CLOUD_STATE_OSCILLATE_HORIZONTAL, CLOUD_STATE_OSCILLATE_VERTICAL

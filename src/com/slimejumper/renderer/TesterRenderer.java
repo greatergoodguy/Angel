@@ -5,13 +5,11 @@ import java.util.LinkedList;
 import com.slimejumper.Assets;
 import com.slimejumper.Controller;
 import com.slimejumper.framework.impl.GLGraphics;
-import com.slimejumper.gameframework.gl.Animation;
 import com.slimejumper.gameframework.gl.SpriteBatcher;
 import com.slimejumper.levels.Level;
 import com.slimejumper.levels.TesterLevel;
 import com.slimejumper.world.Background;
 import com.slimejumper.world.ShadowHero;
-import com.slimejumper.world.enemies.RedWhaleDemon;
 import com.slimejumper.world.environment.CloudPlatform;
 import com.slimejumper.world.environment.RockPlatform;
 
@@ -52,11 +50,6 @@ public class TesterRenderer extends BaseRenderer{
 		for(CloudPlatform cloud_platform : cloud_platforms)
 			batcher.drawSpriteCenter(cloud_platform, Assets.RockPlatform);
 				
-		LinkedList<RedWhaleDemon> red_whale_demons = ((TesterLevel) level).red_whale_demons;
-		for(RedWhaleDemon red_whale_demon : red_whale_demons)
-			batcher.drawSpriteCenterReverse(red_whale_demon, 
-					Assets.RedWhaleDemon.getKeyFrame(red_whale_demon.life_timer, Animation.ANIMATION_LOOPING));
-
 		renderJellyfishDemon(((TesterLevel) level).jellyfish_demon_test);
 				
 		batcher.endBatch();

@@ -12,6 +12,7 @@ import com.slimejumper.world.enemies.JellyfishDemon;
 import com.slimejumper.world.enemies.PurpleGhost;
 import com.slimejumper.world.enemies.RedWhaleDemon;
 import com.slimejumper.world.environment.CloudPlatform;
+import com.slimejumper.world.environment.CloudPlatformShort;
 import com.slimejumper.world.environment.GreekPlatform;
 import com.slimejumper.world.environment.RockPlatform;
 
@@ -33,6 +34,7 @@ public class PoolManager {
 	public Pool<GreekPlatform> greek_platform_pool;
 	public Pool<RockPlatform> rock_platform_pool;
 	public Pool<CloudPlatform> cloud_platform_pool;
+	public Pool<CloudPlatformShort> cloud_platform_short_pool;
 	
 	private PoolManager(){		
 		PoolObjectFactory<PurpleGhost> purple_ghost_factory = new PoolObjectFactory<PurpleGhost>(){
@@ -107,6 +109,12 @@ public class PoolManager {
 			}
 		};
 		
+		PoolObjectFactory<CloudPlatformShort> cloud_platform_short_factory = new PoolObjectFactory<CloudPlatformShort>(){
+			public CloudPlatformShort createObject(){
+				return new CloudPlatformShort();
+			}
+		};
+		
 		purple_ghost_pool = new Pool<PurpleGhost>(purple_ghost_factory, 35);
 		jellyfish_demon_pool = new Pool<JellyfishDemon>(jellyfish_demon_factory, 35);
 		flying_snake_pool = new Pool<FlyingSnake>(flying_snake_factory, 20);
@@ -121,5 +129,6 @@ public class PoolManager {
 		greek_platform_pool = new Pool<GreekPlatform>(platform_factory, 35);
 		rock_platform_pool = new Pool<RockPlatform>(rock_platform_factory, 20);
 		cloud_platform_pool = new Pool<CloudPlatform>(cloud_platform_factory, 35);
+		cloud_platform_short_pool = new Pool<CloudPlatformShort>(cloud_platform_short_factory, 35);
 	}
 }

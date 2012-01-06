@@ -6,7 +6,7 @@ public class PurpleFlame extends Attack{
 	public static final float PURPLE_FLAME_WIDTH = 1.05f;
 	public static final float PURPLE_FLAME_HEIGHT = 0.375f;
 	
-	public static final float PURPLE_FLAME_LIFESPAN = 1.5f;
+	public static final float PURPLE_FLAME_LIFESPAN = 2.3f;
 
 	public static final float PURPLE_FLAME_LAUNCH_VELOCITY = -2.5f;
 	

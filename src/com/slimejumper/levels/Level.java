@@ -52,7 +52,7 @@ public abstract class Level {
 	public static final float WORLD_DEFAULT_TOP_BOUND = 9.0f;
 */
 	
-	protected static final float WORLD_VERTICAL_POSITIONING_ADJUSTER = 1.5f;
+	protected static final float WORLD_VERTICAL_POSITIONING_ADJUSTER = 2.0f; //Originally 1.5f
 
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
@@ -71,6 +71,11 @@ public abstract class Level {
 	public float world_bottom_bound;
 	public float world_top_bound;
 
+	public float world_left_edge;
+	public float world_right_edge;
+	public float world_bottom_edge;
+	public float world_top_edge;
+	
 	public final WorldListener listener;
 	public final Controller controller;
 	
@@ -110,6 +115,11 @@ public abstract class Level {
 		world_right_bound = world_width - WORLD_HORIZONTAL_BOUND_ADJUSTER;
 		world_bottom_bound = WORLD_VERTICAL_BOUND_ADJUSTER;
 		world_top_bound = world_height - WORLD_VERTICAL_BOUND_ADJUSTER;
+		
+		world_left_edge = 0;
+		world_right_edge = world_width;
+		world_bottom_edge = 0;
+		world_top_edge = world_height;
 	}
 	
 	public void update() {

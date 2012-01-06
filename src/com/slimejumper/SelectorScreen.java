@@ -90,7 +90,7 @@ public class SelectorScreen extends GLScreen{
         batcher.drawSpriteLowerLeft(MenuLevelRect.lowerLeft.x, MenuLevelRect.lowerLeft.y, 
         		MenuLevelRect.width, MenuLevelRect.height, Assets.flyingSnakeStandardFrame3);
         batcher.drawSpriteLowerLeft(CaveLevelRect.lowerLeft.x, CaveLevelRect.lowerLeft.y, 
-        		CaveLevelRect.width, CaveLevelRect.height, Assets.RedWhaleDemonFrame3);
+        		CaveLevelRect.width, CaveLevelRect.height, Assets.shockballFrame5);
         batcher.endBatch();
         
         gl.glDisable(GL10.GL_BLEND);

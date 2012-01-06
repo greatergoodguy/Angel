@@ -8,7 +8,8 @@ import com.slimejumper.gameframework.gl.Texture;
 import com.slimejumper.gameframework.gl.TextureRegion;
 
 public class Assets {
-	public final static float DEFAULT_FRAME_DURATION = 0.08f;
+	public final static float FAST_FRAME_DURATION = 0.08f;
+	public final static float DEFAULT_FRAME_DURATION = 0.15f;
 	
 	public final static float HERO_HALO_ATTACK_1_FRAME_DURATION = 0.07f;
 	public final static float HERO_LYRE_ATTACK_FRAME_DURATION = 0.15f;
@@ -141,13 +142,6 @@ public class Assets {
 	public static TextureRegion JellyfishDemon;
 	public static TextureRegion PurpleGhost;
 	
-	public static Animation RedWhaleDemon;
-	public static TextureRegion RedWhaleDemonFrame1;
-	public static TextureRegion RedWhaleDemonFrame2;
-	public static TextureRegion RedWhaleDemonFrame3;
-	public static TextureRegion RedWhaleDemonFrame4;
-	public static TextureRegion RedWhaleDemonFrame5;
-	
 	public static Animation jellyfish_demon_motion;
 	public static Animation jellyfish_demon_boost_up;
 	public static Animation jellyfish_demon_float_down;
@@ -194,6 +188,7 @@ public class Assets {
 
 	public static TextureRegion cloudPlatformBackLayer;
 	public static TextureRegion cloudPlatformFrontLayer;
+	public static TextureRegion cloudPlatformShort;
 	
 	/*
 	 * Game Sprites 2
@@ -217,6 +212,25 @@ public class Assets {
 	public static TextureRegion FlameAttackFrame1;
 	public static TextureRegion FlameAttackFrame2;
 	public static TextureRegion FlameAttackFrame3;
+	
+	public static Animation purple_ghost_dancing_1;
+	public static Animation purple_ghost_dancing_2;
+	public static TextureRegion purpleGhostDanceFrame1;
+	public static TextureRegion purpleGhostDanceFrame2;
+	public static TextureRegion purpleGhostDanceFrame3;
+		
+	public static Animation red_whale_demon_float;
+	public static TextureRegion redWhaleDemonFloatFrame1;
+	public static TextureRegion redWhaleDemonFloatFrame2;
+	public static TextureRegion redWhaleDemonFloatFrame3;
+	
+	public static Animation red_whale_demon_charge_up;
+	public static TextureRegion redWhaleDemonChargeUpFrame1;
+	public static TextureRegion redWhaleDemonChargeUpFrame2;
+	
+	public static Animation red_whale_demon_charge_attack;
+	public static TextureRegion redWhaleDemonChargeAttackFrame1;
+	public static TextureRegion redWhaleDemonChargeAttackFrame2;
 	
 	
 	/*
@@ -263,7 +277,7 @@ public class Assets {
 		heroJumpMinorDamageFrame1 = new TextureRegion(heroHealthy, 80, 530, 80, 80);
 		heroJumpMinorDamageFrame2 = new TextureRegion(heroHealthy, 160, 530, 80, 80);
 		heroJumpMinorDamageFrame3 = new TextureRegion(heroHealthy, 240, 530, 80, 80);
-		hero_jump_minor_damage = new Animation(DEFAULT_FRAME_DURATION,
+		hero_jump_minor_damage = new Animation(FAST_FRAME_DURATION,
 				heroJumpMinorDamageFrame1,
 				heroJumpMinorDamageFrame3,
 				heroJumpMinorDamageFrame2
@@ -278,7 +292,7 @@ public class Assets {
 		heroJumpFrame1 = new TextureRegion(heroHealthy, 240, 0, 80, 80);
 		heroJumpFrame2 = new TextureRegion(heroHealthy, 320, 0, 80, 80);
 		heroJumpFrame3 = new TextureRegion(heroHealthy, 400, 80, 80, 80);
-		hero_jump = new Animation(DEFAULT_FRAME_DURATION,
+		hero_jump = new Animation(FAST_FRAME_DURATION,
 				heroJumpFrame1,
 				heroJumpFrame2,
 				heroJumpFrame3
@@ -421,23 +435,6 @@ public class Assets {
 		JellyfishDemon = new TextureRegion(game_sprites_1, 50, 0, 64, 64);
 		PurpleGhost = new TextureRegion(game_sprites_1, 940, 220, 64, 64);
 		
-		RedWhaleDemonFrame1 = new TextureRegion(game_sprites_1, 0, 140, 100, 80);
-		RedWhaleDemonFrame2 = new TextureRegion(game_sprites_1, 100, 140, 100, 80);
-		RedWhaleDemonFrame3 = new TextureRegion(game_sprites_1, 200, 140, 100, 80);
-		RedWhaleDemonFrame4 = new TextureRegion(game_sprites_1, 300, 140, 100, 80);
-		RedWhaleDemonFrame5 = new TextureRegion(game_sprites_1, 400, 140, 100, 80);
-		RedWhaleDemon = new Animation(RED_WHALE_DEMON_FRAME_DURATION,
-			RedWhaleDemonFrame1,
-			RedWhaleDemonFrame2,
-			RedWhaleDemonFrame3,
-			RedWhaleDemonFrame4,
-			RedWhaleDemonFrame5,
-			RedWhaleDemonFrame4,
-			RedWhaleDemonFrame3,
-			RedWhaleDemonFrame2,
-			RedWhaleDemonFrame1
-			);
-		
 		jellyfishDemonMotionFrame1 = new TextureRegion(game_sprites_1, 50, 0, 64, 83);
 		jellyfishDemonMotionFrame2 = new TextureRegion(game_sprites_1, 114, 0, 64, 83);
 		jellyfishDemonMotionFrame3 = new TextureRegion(game_sprites_1, 178, 0, 64, 83);
@@ -547,6 +544,7 @@ public class Assets {
 		
 		cloudPlatformBackLayer = new TextureRegion(game_sprites_1, 450, 360, 290, 110);
 		cloudPlatformFrontLayer = new TextureRegion(game_sprites_1, 450, 469, 290, 42);
+		cloudPlatformShort = new TextureRegion(game_sprites_1, 740, 360, 100, 38);
 		
 		/*
 		 * Game Sprites 2
@@ -570,30 +568,65 @@ public class Assets {
 		purpleGhostStandardFrame1 = new TextureRegion(game_sprites_2, 0, 0, 89, 90);
 		purpleGhostStandardFrame2 = new TextureRegion(game_sprites_2, 760, 0, 89, 90);
 		purpleGhostStandardFrame3 = new TextureRegion(game_sprites_2, 850, 0, 89, 90);
-		/*
+
 		purple_ghost_standard = new Animation(PURPLE_GHOST_STANDARD_FRAME_DURATION,
 			purpleGhostStandardFrame1,
 			purpleGhostStandardFrame2,
 			purpleGhostStandardFrame1,
 			purpleGhostStandardFrame3
-			);
-		*/	
-		purple_ghost_standard = new Animation(PURPLE_GHOST_STANDARD_FRAME_DURATION,
-				purpleGhostStandardFrame1,
-				purpleGhostStandardFrame2,
-				purpleGhostStandardFrame1,
-				purpleGhostStandardFrame3
 				);
 		
 		FlameAttackFrame1 = new TextureRegion(game_sprites_2, 670, 0, 84, 30);
 		FlameAttackFrame2 = new TextureRegion(game_sprites_2, 670, 30, 84, 30);
 		FlameAttackFrame3 = new TextureRegion(game_sprites_2, 670, 60, 84, 30);
-		purple_flame_attack = new Animation(DEFAULT_FRAME_DURATION,
+		purple_flame_attack = new Animation(FAST_FRAME_DURATION,
 			FlameAttackFrame1,
 			FlameAttackFrame2,
 			FlameAttackFrame3
 			);
 		
+		purpleGhostDanceFrame1 = new TextureRegion(game_sprites_2, 0, 95, 88, 84);
+		purpleGhostDanceFrame2 = new TextureRegion(game_sprites_2, 90, 95, 88, 84);
+		purpleGhostDanceFrame3 = new TextureRegion(game_sprites_2, 180, 95, 88, 84);
+		purple_ghost_dancing_1 = new Animation(PURPLE_GHOST_STANDARD_FRAME_DURATION,
+			purpleGhostDanceFrame1,
+			purpleGhostDanceFrame2,
+			purpleGhostDanceFrame1,
+			purpleGhostDanceFrame3
+			);
+		purple_ghost_dancing_2 = new Animation(PURPLE_GHOST_STANDARD_FRAME_DURATION,
+			purpleGhostDanceFrame1,
+			purpleGhostDanceFrame2,
+			purpleGhostDanceFrame1,
+			purpleGhostDanceFrame2,
+			purpleGhostDanceFrame1,
+			purpleGhostDanceFrame3,
+			purpleGhostDanceFrame1,
+			purpleGhostDanceFrame3	
+			);
+	
+		redWhaleDemonFloatFrame1 = new TextureRegion(game_sprites_2, 0, 200, 155, 100);
+		redWhaleDemonFloatFrame2 = new TextureRegion(game_sprites_2, 155, 200, 155, 100);
+		redWhaleDemonFloatFrame3 = new TextureRegion(game_sprites_2, 310, 200, 155, 100);
+		red_whale_demon_float = new Animation(DEFAULT_FRAME_DURATION,
+			redWhaleDemonFloatFrame1,
+			redWhaleDemonFloatFrame2,
+			redWhaleDemonFloatFrame3
+			);
+		
+		redWhaleDemonChargeUpFrame1 = new TextureRegion(game_sprites_2, 270, 95, 158, 105);
+		redWhaleDemonChargeUpFrame2 = new TextureRegion(game_sprites_2, 428, 95, 158, 105);
+		red_whale_demon_charge_up = new Animation(DEFAULT_FRAME_DURATION,
+			redWhaleDemonChargeUpFrame1,
+			redWhaleDemonChargeUpFrame2
+			);
+		
+		redWhaleDemonChargeAttackFrame1 = new TextureRegion(game_sprites_2, 586, 95, 158, 105);
+		redWhaleDemonChargeAttackFrame2 = new TextureRegion(game_sprites_2, 744, 95, 158, 105);
+		red_whale_demon_charge_attack = new Animation(DEFAULT_FRAME_DURATION,
+			redWhaleDemonChargeAttackFrame1,
+			redWhaleDemonChargeAttackFrame2
+			);
 		/*
 		 * Controller
 		 */
@@ -615,6 +648,7 @@ public class Assets {
 	
 	public static void reload(){
 		game_sprites_1.reload();
+		game_sprites_2.reload();
 		heroHealthy.reload();
 		shadow_hero.reload();
 		background_treetop_valley.reload();
