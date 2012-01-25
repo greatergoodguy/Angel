@@ -8,10 +8,10 @@ import com.slimejumper.world.Hero;
 import com.slimejumper.world.attacks.Attack;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
-import com.slimejumper.world.attacks.PurpleFlame;
 import com.slimejumper.world.attacks.SpiralAttack;
 import com.slimejumper.world.enemies.Enemy;
 import com.slimejumper.world.enemies.PurpleGhost;
+import com.slimejumper.world.enemies.RedWhaleDemon;
 import com.slimejumper.world.environment.Platform;
 
 public class CollisionManager {
@@ -113,6 +113,15 @@ public class CollisionManager {
 			
 			if(is_enemy_hit){
 				enemy.health_bar--;
+				
+				if(enemy instanceof PurpleGhost){
+					((PurpleGhost) enemy).changeToCollidedState();
+				}
+				else if(enemy instanceof RedWhaleDemon){
+					((RedWhaleDemon) enemy).changeToCollidedState();
+				}
+				
+				
 				if(enemy.health_bar == 0){
 					iter_enemies.remove();
 				}

@@ -15,6 +15,7 @@ import com.slimejumper.levels.Level;
 import com.slimejumper.world.DynamicGameObject;
 import com.slimejumper.world.GameObject;
 import com.slimejumper.world.Hero;
+import com.slimejumper.world.attacks.AngelicFlame;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.SpiralAttack;
@@ -168,6 +169,7 @@ public abstract class BaseRenderer {
 		renderHaloAttacks(hero);
 		renderMusicNotes(hero);
 		renderSpiralAttacks(hero);
+		renderAngelicFlames(hero);
 		
 		batcher.endBatch();
 	}
@@ -219,8 +221,8 @@ public abstract class BaseRenderer {
 				adjustHeroOrientation(hero, Assets.hero_spiral_attack_1.getKeyFrame(hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
-			case Hero.HERO_BASIC_ATTACK_3:
-				adjustHeroOrientation(hero, Assets.hero_halo_attack_1.getKeyFrame(hero.state_timer,
+			case Hero.HERO_BASIC_ATTACK_ANGELIC_FLAME:
+				adjustHeroOrientation(hero, Assets.hero_spiral_attack_1.getKeyFrame(hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
@@ -258,9 +260,9 @@ public abstract class BaseRenderer {
 				batcher.drawSpriteCenter(hero, Assets.hero_spiral_attack_1.getKeyFrame(hero.state_timer,
 					Animation.ANIMATION_NONLOOPING));
 				break;
-			case Hero.HERO_BASIC_ATTACK_3:
-				batcher.drawSpriteCenter(hero, Assets.hero_halo_attack_1.getKeyFrame(hero.state_timer,
-					Animation.ANIMATION_NONLOOPING));
+			case Hero.HERO_BASIC_ATTACK_ANGELIC_FLAME:
+				batcher.drawSpriteCenter(hero, Assets.hero_lyre_attack_1.getKeyFrame(hero.state_timer,
+						Animation.ANIMATION_NONLOOPING));
 				break;
 			case Hero.HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
 				batcher.drawSpriteCenter(hero, Assets.hero_lyre_attack_1.getKeyFrame(hero.state_timer,
@@ -297,7 +299,24 @@ public abstract class BaseRenderer {
 						Animation.ANIMATION_LOOPING), spiral_attack.angle);
 	}
 	
-
+	private void renderAngelicFlames(Hero hero){
+		if(hero.angelic_flames.isEmpty())
+			return;
+		for(AngelicFlame angelic_flame : hero.angelic_flames){
+			switch(angelic_flame.state){
+			case STATE_CHARGE:
+				adjustGameSpriteOrientation(angelic_flame, Assets.angelic_flame_charge.getKeyFrame(angelic_flame.state_timer,
+						Animation.ANIMATION_NONLOOPING));
+				break;
+			case STATE_BLAST:
+				adjustGameSpriteOrientation(angelic_flame, Assets.angelic_flame_blast.getKeyFrame(angelic_flame.state_timer,
+						Animation.ANIMATION_LOOPING));
+				break;
+			}
+		}
+			
+	}
+	
 	private void adjustHeroOrientation(Hero hero, TextureRegion region) {
 		switch(hero.facedirection){
 		case GameObject.SPRITE_LEFT:

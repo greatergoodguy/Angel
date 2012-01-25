@@ -50,5 +50,8 @@ public class DynamicGameObject extends GameObject{
 		is_invincible = false;
 		position.set(0, 0);
 		center.set(position.x + width/2, position.y + height/2);
+		
+		velocity.set(0, 0);
+		accel.set(0, 0);
 	}
 }

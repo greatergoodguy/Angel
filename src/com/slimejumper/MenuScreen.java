@@ -74,8 +74,8 @@ public class MenuScreen extends GLScreen{
 		// Get Controller Input
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
-		
-		menuLevel.processController(controller, touchEvents);
+		float accelY = game.getInput().getAccelY();		
+		menuLevel.processController(controller, touchEvents, accelY);
 	
 		// Update World
 		menuLevel.update(deltaTime);

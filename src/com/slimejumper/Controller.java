@@ -5,6 +5,8 @@ import com.slimejumper.gameframework.gl.Camera2D;
 import com.slimejumper.gameframework.math.Vector2;
 
 public class Controller {
+	private boolean touchEnabled = Settings.touchEnabled;
+	
 	public static final float CONTROLLER_ICON_WIDTH = 2.5f;
 	public static final float CONTROLLER_ICON_HEIGHT = 3;
 	
@@ -13,9 +15,11 @@ public class Controller {
 	public static final int CONTROLLER_NEUTRAL = 2;
 	
 	private static int pointerIdDefault = -30;
-	public static int leftPointerId = pointerIdDefault;
-	public static int rightPointerId = pointerIdDefault;
-	public static int attackPointerId = pointerIdDefault;
+	public int leftPointerId = pointerIdDefault;
+	public int rightPointerId = pointerIdDefault;
+	public int attackPointerId = pointerIdDefault;
+	public int attackLeftPointerId = pointerIdDefault;
+	public int attackRightPointerId = pointerIdDefault;
 
 	public boolean LeftButtonDown = false;
 	public boolean RightButtonDown = false;
@@ -23,7 +27,15 @@ public class Controller {
 	
 	public boolean fireAttack = false;
 	public boolean fireAttackDown = false;
+	public boolean fireAttackLeftDown = false;
+	public boolean fireAttackRightDown = false;
 
+	
+	
+	
+	
+	public float controller_accel;
+	
 	static Vector2 touchPoint;
 
 	private static Camera2D guiCam;
@@ -38,70 +50,116 @@ public class Controller {
 	public void input(TouchEvent event) {
 		touchPoint.set(event.x, event.y);
 		guiCam.touchToWorld(touchPoint);
-
-		if (event.type == TouchEvent.TOUCH_DOWN) {
-			if (touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 &&
-				touchPoint.y < guiCam.center.y ) {
-				
-				rightPointerId = event.pointer;
-				RightButtonDown = true;
-				active_control = CONTROLLER_RIGHT;
-			} else if (touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 &&
-				touchPoint.y < guiCam.center.y) {
-				
-				leftPointerId = event.pointer;
-				LeftButtonDown = true;
-				active_control = CONTROLLER_LEFT;
-			} else if((touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y) || 
-						(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y)){
-				attackPointerId = event.pointer;
-				fireAttack = true;
-				fireAttackDown = true;
-				
-			}
-		}
-
-		else if (event.type == TouchEvent.TOUCH_DRAGGED) {
-			if (event.pointer == rightPointerId) {
+		if(touchEnabled){
+			if (event.type == TouchEvent.TOUCH_DOWN) {
 				if (touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 &&
-					touchPoint.y < guiCam.center.y) {
+						touchPoint.y < guiCam.center.y ) {
+				
+					rightPointerId = event.pointer;
 					RightButtonDown = true;
-				} else {
-					RightButtonDown = false;
-				}
-
-			} else if (event.pointer == leftPointerId) {
-				if (touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 &&
-					touchPoint.y < guiCam.center.y) {
+					active_control = CONTROLLER_RIGHT;
+				} else if (touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 &&
+						touchPoint.y < guiCam.center.y) {
+				
+					leftPointerId = event.pointer;
 					LeftButtonDown = true;
-				} else {
-					LeftButtonDown = false;
-				}
-
-			} else if (event.pointer == attackPointerId) {
-				if((touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y) || 
+					active_control = CONTROLLER_LEFT;
+				} else if((touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y) || 
 						(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y)){
+					attackPointerId = event.pointer;
+					fireAttack = true;
 					fireAttackDown = true;
-				} else {
+				}
+			}
+
+			else if (event.type == TouchEvent.TOUCH_DRAGGED) {
+				if (event.pointer == rightPointerId) {
+					if (touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 &&
+							touchPoint.y < guiCam.center.y) {
+						RightButtonDown = true;
+					} else {
+						RightButtonDown = false;
+					}
+
+				} else if (event.pointer == leftPointerId) {
+					if (touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 &&
+							touchPoint.y < guiCam.center.y) {
+						LeftButtonDown = true;
+					} else {
+						LeftButtonDown = false;
+					}
+
+				} else if (event.pointer == attackPointerId) {
+					if((touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y) || 
+							(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y)){
+						fireAttackDown = true;
+					} else {
+						fireAttackDown = false;
+					}
+				}
+			}
+		
+
+			else if (event.type == TouchEvent.TOUCH_UP) {
+				if (event.pointer == rightPointerId){
+					RightButtonDown = false;
+					rightPointerId = pointerIdDefault;
+				}
+				else if (event.pointer == leftPointerId){
+					LeftButtonDown = false;
+					leftPointerId = pointerIdDefault;
+				}
+				else if (event.pointer == attackPointerId){
 					fireAttackDown = false;
+					attackPointerId = pointerIdDefault;
 				}
 			}
 		}
-
-		else if (event.type == TouchEvent.TOUCH_UP) {
-			if (event.pointer == rightPointerId){
-				RightButtonDown = false;
-				rightPointerId = pointerIdDefault;
+		
+		else{
+			if (event.type == TouchEvent.TOUCH_DOWN) {
+				if(touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4){
+					fireAttack = true;
+					attackRightPointerId = event.pointer;
+					fireAttackRightDown = true;
+				}
+				else if(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 ){
+					fireAttack = true;
+					attackLeftPointerId = event.pointer;
+					fireAttackLeftDown = true;
+				}
+			}		
+			else if (event.type == TouchEvent.TOUCH_DRAGGED) {				
+				if (event.pointer == attackRightPointerId) {
+					if(touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y){
+						fireAttackRightDown = true;
+					} else {
+						fireAttackRightDown = false;
+					}
+				}
+				
+				else if (event.pointer == attackLeftPointerId) {
+					if(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y){
+						fireAttackLeftDown = true;
+					} else {
+						fireAttackLeftDown = false;
+					}
+				}
 			}
-			else if (event.pointer == leftPointerId){
-				LeftButtonDown = false;
-				leftPointerId = pointerIdDefault;
-			}
-			else if (event.pointer == attackPointerId){
-				fireAttackDown = false;
-				attackPointerId = pointerIdDefault;
+		
+			else if (event.type == TouchEvent.TOUCH_UP) {
+				if (event.pointer == attackRightPointerId){
+					fireAttackRightDown = false;
+					attackRightPointerId = pointerIdDefault;
+				}
+				
+				else if (event.pointer == attackLeftPointerId){
+					fireAttackLeftDown = false;
+					attackLeftPointerId = pointerIdDefault;
+				}
 			}
 		}
+		
 	}
 
 /*
@@ -138,5 +196,9 @@ public class Controller {
 			return CONTROLLER_LEFT;
 		else
 			return CONTROLLER_NEUTRAL;
+	}
+
+	public void setAccel(float accelX) {
+		controller_accel = accelX;
 	}
 }

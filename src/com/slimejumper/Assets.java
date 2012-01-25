@@ -111,6 +111,13 @@ public class Assets {
 	public static TextureRegion spiralAttackFrame2;
 	public static TextureRegion spiralAttackFrame3;
 	
+	public static Animation angelic_flame_charge;
+	public static Animation angelic_flame_blast;
+	public static TextureRegion angelicFlameFrame1;
+	public static TextureRegion angelicFlameFrame2;
+	public static TextureRegion angelicFlameFrame3;
+	public static TextureRegion angelicFlameFrame4;
+	
 	public static Animation hero_collided;
 	public static TextureRegion heroCollidedFrame1;
 	public static TextureRegion heroCollidedFrame2;
@@ -232,6 +239,19 @@ public class Assets {
 	public static TextureRegion redWhaleDemonChargeAttackFrame1;
 	public static TextureRegion redWhaleDemonChargeAttackFrame2;
 	
+	public static Animation purple_ghost_collision;
+	public static TextureRegion purpleGhostCollisionFrame1;
+	public static TextureRegion purpleGhostCollisionFrame2;
+	public static TextureRegion purpleGhostCollisionFrame3;
+	public static TextureRegion purpleGhostCollisionFrame4;
+	public static TextureRegion purpleGhostCollisionFrame5;
+	
+	public static Animation red_whale_demon_collision;
+	public static TextureRegion redWhaleDemonCollisionFrame1;
+	public static TextureRegion redWhaleDemonCollisionFrame2;
+	public static TextureRegion redWhaleDemonCollisionFrame3;
+	public static TextureRegion redWhaleDemonCollisionFrame4;
+	public static TextureRegion redWhaleDemonCollisionFrame5;
 	
 	/*
 	 * Controller Icon Atlas
@@ -393,6 +413,19 @@ public class Assets {
 				spiralAttackFrame2,
 				spiralAttackFrame3,
 				spiralAttackFrame2);
+		
+		angelicFlameFrame1 = new TextureRegion(heroHealthy, 290, 270, 52, 26);
+		angelicFlameFrame2 = new TextureRegion(heroHealthy, 290, 296, 52, 26);
+		angelicFlameFrame3 = new TextureRegion(heroHealthy, 342, 270, 52, 26);
+		angelicFlameFrame4 = new TextureRegion(heroHealthy, 342, 296, 52, 26);
+		angelic_flame_charge = new Animation(0.1f,
+				angelicFlameFrame1,
+				angelicFlameFrame2
+				);
+		angelic_flame_blast = new Animation(DEFAULT_FRAME_DURATION,
+				angelicFlameFrame3,
+				angelicFlameFrame4
+				);
 		
 		//heroCollidedFrame1 = new TextureRegion(heroHealthy, 285, 260, 80, 80);
 		//heroCollidedFrame2 = new TextureRegion(heroHealthy, 365, 260, 80, 80);
@@ -605,6 +638,19 @@ public class Assets {
 			purpleGhostDanceFrame3	
 			);
 	
+		purpleGhostCollisionFrame1 = new TextureRegion(game_sprites_2, 920, 90, 86, 100);
+		purpleGhostCollisionFrame2 = new TextureRegion(game_sprites_2, 920, 190, 86, 100);
+		purpleGhostCollisionFrame3 = new TextureRegion(game_sprites_2, 292, 317, 86, 100);
+		purpleGhostCollisionFrame4 = new TextureRegion(game_sprites_2, 378, 317, 86, 100);
+		purpleGhostCollisionFrame5 = new TextureRegion(game_sprites_2, 464, 317, 86, 100);
+		purple_ghost_collision = new Animation(PURPLE_GHOST_STANDARD_FRAME_DURATION,
+			purpleGhostCollisionFrame1,
+			purpleGhostCollisionFrame2,
+			purpleGhostCollisionFrame3,
+			purpleGhostCollisionFrame4,
+			purpleGhostCollisionFrame5
+			);
+		
 		redWhaleDemonFloatFrame1 = new TextureRegion(game_sprites_2, 0, 200, 155, 100);
 		redWhaleDemonFloatFrame2 = new TextureRegion(game_sprites_2, 155, 200, 155, 100);
 		redWhaleDemonFloatFrame3 = new TextureRegion(game_sprites_2, 310, 200, 155, 100);
@@ -627,6 +673,20 @@ public class Assets {
 			redWhaleDemonChargeAttackFrame1,
 			redWhaleDemonChargeAttackFrame2
 			);
+		
+		redWhaleDemonCollisionFrame1 = new TextureRegion(game_sprites_2, 465, 200, 146, 117);
+		redWhaleDemonCollisionFrame2 = new TextureRegion(game_sprites_2, 611, 200, 146, 117);
+		redWhaleDemonCollisionFrame3 = new TextureRegion(game_sprites_2, 757, 200, 146, 117);
+		redWhaleDemonCollisionFrame4 = new TextureRegion(game_sprites_2, 0, 300, 146, 117);
+		redWhaleDemonCollisionFrame5 = new TextureRegion(game_sprites_2, 146, 300, 146, 117);
+		red_whale_demon_collision = new Animation(DEFAULT_FRAME_DURATION,
+			redWhaleDemonCollisionFrame1,
+			redWhaleDemonCollisionFrame2,
+			redWhaleDemonCollisionFrame3,
+			redWhaleDemonCollisionFrame4,
+			redWhaleDemonCollisionFrame5
+			);
+		
 		/*
 		 * Controller
 		 */

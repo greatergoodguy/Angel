@@ -72,8 +72,8 @@ public class TesterScreen extends GLScreen{
 		// Get Controller Input
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
-		
-		tester_level.processController(controller, touchEvents);
+		float accelY = game.getInput().getAccelY();		
+		tester_level.processController(controller, touchEvents, accelY);
 	
 		// Update World
 		tester_level.update(deltaTime);

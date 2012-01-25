@@ -113,7 +113,10 @@ public class TreetopValleyRenderer extends BaseRenderer{
 				adjustGameSpriteOrientation(purple_ghost, Assets.purple_ghost_dancing_1.getKeyFrame(purple_ghost.state_timer, Animation.ANIMATION_LOOPING));
 			else
 				adjustGameSpriteOrientation(purple_ghost, Assets.purple_ghost_dancing_2.getKeyFrame(purple_ghost.state_timer, Animation.ANIMATION_LOOPING));
-			break;		
+			break;
+		case STATE_COLLIDED:
+			adjustGameSpriteOrientation(purple_ghost, Assets.purple_ghost_collision.getKeyFrame(purple_ghost.collided_timer, Animation.ANIMATION_LOOPING));
+			break;
 		}
 		
 	}
@@ -132,6 +135,10 @@ public class TreetopValleyRenderer extends BaseRenderer{
 		case STATE_PAUSE:
 			adjustGameSpriteOrientation(red_whale_demon, 
 					Assets.red_whale_demon_charge_up.getKeyFrame(red_whale_demon.state_timer, Animation.ANIMATION_NONLOOPING));
+			break;
+		case STATE_COLLIDED:
+			adjustGameSpriteOrientation(red_whale_demon, 
+					Assets.red_whale_demon_collision.getKeyFrame(red_whale_demon.collided_timer, Animation.ANIMATION_LOOPING));
 			break;
 		}
 		

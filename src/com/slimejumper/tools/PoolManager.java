@@ -2,6 +2,7 @@ package com.slimejumper.tools;
 
 import com.slimejumper.gameframework.Pool;
 import com.slimejumper.gameframework.Pool.PoolObjectFactory;
+import com.slimejumper.world.attacks.AngelicFlame;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.PurpleFlame;
@@ -29,6 +30,7 @@ public class PoolManager {
 	public Pool<MusicNote> music_note_pool;
 	public Pool<SpiralAttack> spiral_attack_pool;
 	public Pool<Shockball> shockball_pool;
+	public Pool<AngelicFlame> angelic_flame_pool;
 	public Pool<PurpleFlame> purple_flame_pool;
 	
 	public Pool<GreekPlatform> greek_platform_pool;
@@ -85,6 +87,12 @@ public class PoolManager {
 			}
 		};
 		
+		PoolObjectFactory<AngelicFlame> angelic_flame_factory = new PoolObjectFactory<AngelicFlame>(){
+			public AngelicFlame createObject(){
+				return new AngelicFlame();
+			}
+		};
+		
 		PoolObjectFactory<GreekPlatform> platform_factory = new PoolObjectFactory<GreekPlatform>() {
 			public GreekPlatform createObject() {
 				return new GreekPlatform();
@@ -124,6 +132,7 @@ public class PoolManager {
 		music_note_pool = new Pool<MusicNote>(music_note_factory, 35);
 		spiral_attack_pool = new Pool<SpiralAttack>(spiral_attack_factory, 10);
 		shockball_pool = new Pool<Shockball>(shockball_factory, 10);
+		angelic_flame_pool = new Pool<AngelicFlame>(angelic_flame_factory, 10);
 		purple_flame_pool = new Pool<PurpleFlame>(purple_flame_factory, 10);
 
 		greek_platform_pool = new Pool<GreekPlatform>(platform_factory, 35);

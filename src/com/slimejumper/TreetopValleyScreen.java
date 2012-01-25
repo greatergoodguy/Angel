@@ -72,8 +72,8 @@ public class TreetopValleyScreen extends GLScreen{
 		// Get Controller Input
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
-		
-		treetop_valley_level.processController(controller, touchEvents);
+		float accelY = game.getInput().getAccelY();		
+		treetop_valley_level.processController(controller, touchEvents, accelY);
 	
 		// Update World
 		treetop_valley_level.update(deltaTime);

@@ -2,6 +2,7 @@ package com.slimejumper.levels;
 import java.util.List;
 
 import com.slimejumper.Controller;
+import com.slimejumper.Settings;
 import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.gameframework.math.Vector2;
@@ -52,7 +53,7 @@ public abstract class Level {
 	public static final float WORLD_DEFAULT_TOP_BOUND = 9.0f;
 */
 	
-	protected static final float WORLD_VERTICAL_POSITIONING_ADJUSTER = 2.0f; //Originally 1.5f
+	protected static final float WORLD_VERTICAL_POSITIONING_ADJUSTER = 1.6f; //Originally 1.5f
 
 	public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
@@ -134,24 +135,44 @@ public abstract class Level {
 		 */
 
 		if(hero.state != Hero.HERO_STATE_COLLIDED){
-			if(controller.fireAttack){
-				if(hero.state != Hero.HERO_STATE_BASIC_ATTACK)
-					hero.changeToBasicAttackState();
+			if(Settings.touchEnabled){
 				
-				controller.fireAttack = ShadowHero.shadow_hero_singleton.controller_sync_on;
+				if(controller.fireAttack){
+					if(hero.state != Hero.HERO_STATE_BASIC_ATTACK)
+						hero.changeToBasicAttackState();
+					
+					controller.fireAttack = false;
+				}
+				
+				switch(Controller.processMoveDirection(controller)){
+				case Controller.CONTROLLER_LEFT:
+					hero.moveLeft();
+					break;
+				case Controller.CONTROLLER_RIGHT:
+					hero.moveRight();
+					break;
+				case Controller.CONTROLLER_NEUTRAL:
+					hero.moveCancel();
+					break;
+				}
 			}
-			
-			switch(Controller.processMoveDirection(controller)){
-			case Controller.CONTROLLER_LEFT:
-				hero.moveLeft();
-				break;
-			case Controller.CONTROLLER_RIGHT:
-				hero.moveRight();
-				break;
-			case Controller.CONTROLLER_NEUTRAL:
-				hero.moveCancel();
-				break;
+			else{
+				if(controller.fireAttack){
+					if(hero.state != Hero.HERO_STATE_BASIC_ATTACK && hero.state != Hero.HERO_STATE_DEATH_BY_FALLING){
+						if(controller.fireAttackLeftDown){
+							hero.changeToBasicAttackStateLeft();
+						}
+						else{
+							hero.changeToBasicAttackStateRight();
+						}
+					}						
+					
+					controller.fireAttack = false;
+				}
+				
+				hero.moveByAccel(controller.controller_accel);
 			}
+				
 		}
 		
 		/*
@@ -235,19 +256,17 @@ public abstract class Level {
 		int len = touchEvents.size();
 		for(int i=0; i<len; i++){
 			TouchEvent event = touchEvents.get(i);
-			controller.input(event);
-/*			
-			if(controller.fireAttack){
-				if(SpriteContainer.hero.state != Hero.HERO_STATE_BASIC_ATTACK)
-					SpriteContainer.hero.changeToBasicAttackState();
-				controller.fireAttack = false;
-			}
-*/
-
-/*			
-			SpriteContainer.hero.moveDirection = Controller.processMoveDirection(controller);
-*/			
-		}	
+			controller.input(event);	
+		}
+	}
+	
+	public void processController(Controller controller, List<TouchEvent> touchEvents, float accel) {
+		controller.setAccel(accel);
+		int len = touchEvents.size();
+		for(int i=0; i<len; i++){
+			TouchEvent event = touchEvents.get(i);
+			controller.input(event);	
+		}
 	}
 	
 	public abstract void dispose();

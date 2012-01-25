@@ -1,10 +1,12 @@
 package com.slimejumper.levels;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import com.slimejumper.Assets;
 import com.slimejumper.Controller;
 import com.slimejumper.Settings;
+import com.slimejumper.gameframework.Input.TouchEvent;
 import com.slimejumper.tools.CollisionManager;
 import com.slimejumper.tools.TreetopValleyFactory;
 import com.slimejumper.world.Background;
@@ -41,8 +43,8 @@ public class TreetopValleyLevel extends Level{
 	public TreetopValleyLevel(WorldListener listener, Controller controller){
 		super(listener, controller, TREETOP_VALLEY_WIDTH, TREETOP_VALLEY_HEIGHT);
 		//hero.reset(9, 12);
-		//hero.reset(15, 12);
-		hero.reset(27, 3);
+		hero.reset(2.4f, 3);
+		//hero.reset(27, 3);
 		
 		background_trees = new Background(BACKGROUND_TREES_WIDTH, BACKGROUND_TREES_HEIGHT, TREETOP_VALLEY_WIDTH, TREETOP_VALLEY_HEIGHT);//Level.WORLD_DEFAULT_HEIGHT);
 		
@@ -71,6 +73,7 @@ public class TreetopValleyLevel extends Level{
 		treetop_valley_factory.initializePart1();
 		treetop_valley_factory.initializePart2();
 		treetop_valley_factory.initializePart3();
+		treetop_valley_factory.initializePart4();
 	}
 	
 	private void initializeCloudPlatformsShort() {				
@@ -114,9 +117,9 @@ public class TreetopValleyLevel extends Level{
 	
 	private void initializeRedWhaleDemons() {		
 		treetop_valley_factory.createStillRedWhaleDemonLeft(9.6f, 4.3f);
-		treetop_valley_factory.createFloatRedWhaleDemon(16.5f, 2.3f, 1.0f);
+		//treetop_valley_factory.createFloatRedWhaleDemon(16.5f, 2.3f, 1.0f);
 		
-		treetop_valley_factory.createFloatRedWhaleDemon(38.0f, 2.5f, 0f);
+		//treetop_valley_factory.createFloatRedWhaleDemon(38.0f, 2.5f, 0f);
 		
 		treetop_valley_factory.createTackleRedWhaleDemonRight(23.7f, 7.9f);
 		
@@ -181,16 +184,16 @@ public class TreetopValleyLevel extends Level{
 			// Glitch Handler
 		}
 		
-		/*
+		
 		// Second Level
-		if(!level_one_activate && hero.center.y > 11.6f){
-			world_bottom_edge = 7.1f;
+		if(!level_one_activate && hero.center.y > 19.6f){
+			world_bottom_edge = 15f;
 			world_bottom_bound = world_bottom_edge + 3.0f;
 
-			treetop_valley_factory.createStaticCloudPlatform(36.5f, 9.1f);
+			treetop_valley_factory.activateLevelTwo();
 			level_one_activate = true;
 		}
-		
+		/*
 		// Third Level
 		if(!level_two_activate && hero.center.y > 19f){
 			world_bottom_edge = 14.5f;

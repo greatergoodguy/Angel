@@ -74,8 +74,8 @@ public class CaveScreen extends GLScreen {
 		// Get Controller Input
 		List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
 		game.getInput().getKeyEvents();
-		
-		cave_level.processController(controller, touchEvents);
+		float accelY = game.getInput().getAccelY();		
+		cave_level.processController(controller, touchEvents, accelY);
 	
 		// Update World
 		cave_level.update(deltaTime);

@@ -7,6 +7,7 @@ import com.slimejumper.Assets;
 import com.slimejumper.gameframework.math.UnitCircle;
 import com.slimejumper.levels.Level;
 import com.slimejumper.tools.PoolManager;
+import com.slimejumper.world.attacks.AngelicFlame;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
 import com.slimejumper.world.attacks.SpiralAttack;
@@ -25,6 +26,7 @@ public class Hero extends DynamicGameObject{
 	public LinkedList<MusicNote> music_notes;
 	public LinkedList<SpiralAttack> spiral_attacks;
 	public LinkedList<HaloAttack> halo_attacks;
+	public LinkedList<AngelicFlame> angelic_flames;
 	
 	/*
 	 * Constants
@@ -49,13 +51,13 @@ public class Hero extends DynamicGameObject{
 	public int basic_attack_type;
 	public static final int HERO_BASIC_HALO_ATTACK = 1;
 	public static final int HERO_BASIC_SPIRAL_ATTACK = 2;
-	public static final int HERO_BASIC_ATTACK_3 = 3;
+	public static final int HERO_BASIC_ATTACK_ANGELIC_FLAME = 3;
 	public static final int HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK = 4;
 	
 	public static final float HERO_MAX_VELY = -15;
 	public static final float HERO_JUMP_VELOCITY = 6.5f;  // 6.5f seems suitable, Trying 6.0
 	public static final float HERO_MOVE_VELOCITY = 5;
-	public static final float HERO_HOP_VELOCITY = 2.5f;
+	public static final float HERO_HOP_VELOCITY = 1.5f;
 	
 	public static final float HERO_HIT_VERTICAL_VELOCITY = 1.5f;
 	public static final float HERO_HIT_HORIZONTAL_VELOCITY =1.8f;
@@ -100,6 +102,7 @@ public class Hero extends DynamicGameObject{
 		halo_attacks = new LinkedList<HaloAttack>();
 		music_notes = new LinkedList<MusicNote>();
 		spiral_attacks = new LinkedList<SpiralAttack>();
+		angelic_flames = new LinkedList<AngelicFlame>();
 		
 		state = HERO_STATE_FALL;
 		facedirection = SPRITE_RIGHT;
@@ -143,7 +146,7 @@ public class Hero extends DynamicGameObject{
 			updateJumpState(deltaTime);
 			break;
 		case HERO_STATE_FALL:
-			updateFallState(deltaTime);
+			//updateFallState(deltaTime);
 			break;
 		case HERO_STATE_COLLIDED:
 			updateCollidedState(deltaTime);
@@ -164,6 +167,8 @@ public class Hero extends DynamicGameObject{
 			music_note.update(this, deltaTime);
 		for(SpiralAttack spiral_attack : spiral_attacks)
 			spiral_attack.update(deltaTime);
+		for(AngelicFlame angelic_flame : angelic_flames)
+			angelic_flame.update(deltaTime);
 				
 		if(!halo_attacks.isEmpty()){
 			HaloAttack halo_attack = halo_attacks.getFirst();
@@ -188,6 +193,10 @@ public class Hero extends DynamicGameObject{
 				pool_manager.spiral_attack_pool.free(spiral_attack);
 			}
 		}
+		
+		if(!angelic_flames.isEmpty()){
+			
+		}
 	}
 
 	public void checkSideBounds(Level level) {
@@ -202,6 +211,7 @@ public class Hero extends DynamicGameObject{
 		float old_y = position.y;
 		resetDimensions(HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
 		resetPositionLowerLeft(old_x, old_y);
+		accel.set(0, Level.WORLD_GRAVITY);
 		
 		if(velocity.y < 0)
 			changeToFallState();		
@@ -210,7 +220,12 @@ public class Hero extends DynamicGameObject{
 	}
 
 	private void changeToFallState() {
+		float old_x = position.x;
+		float old_y = position.y;
 		resetDimensions(HERO_STANDARD_WIDTH, HERO_STANDARD_HEIGHT);
+		resetPositionLowerLeft(old_x, old_y);
+		accel.set(0, Level.WORLD_GRAVITY);
+		
 		state = HERO_STATE_FALL;
 		state_timer = 0;
 	}
@@ -223,6 +238,8 @@ public class Hero extends DynamicGameObject{
 		velocity.y = HERO_JUMP_VELOCITY;
 		state = HERO_STATE_JUMP;
 		state_timer = 0;
+
+		accel.set(0, Level.WORLD_GRAVITY);
 	}
 	
 	private void changeToJumpState(float new_velocity_y) {
@@ -275,6 +292,16 @@ public class Hero extends DynamicGameObject{
 			changeToFallState();
 		}
 	}
+	
+	public void changeToBasicAttackStateLeft() {
+		changeToBasicAttackState();
+		facedirection = SPRITE_LEFT;
+	}
+	
+	public void changeToBasicAttackStateRight() {
+		changeToBasicAttackState();
+		facedirection = SPRITE_RIGHT;
+	}
 
 	public void changeToBasicAttackState() {
 		state = HERO_STATE_BASIC_ATTACK;
@@ -305,7 +332,11 @@ public class Hero extends DynamicGameObject{
 				activateSpiralAttack();
 			}
 			break;
-		case HERO_BASIC_ATTACK_3:
+		case HERO_BASIC_ATTACK_ANGELIC_FLAME:
+			if(state_timer > HERO_ATTACK_LAUNCH_TIMER && !attack_launched){
+				attack_launched = true;
+				activateAngelicFlame();
+			}
 			break;
 		case HERO_BASIC_ATTACK_SPECIAL_LYRE_ATTACK:
 			if(state_timer > HERO_ATTACK_LAUNCH_TIMER && !attack_launched){
@@ -324,23 +355,26 @@ public class Hero extends DynamicGameObject{
 		float randomValue = random.nextFloat();
 		
 		// HERO_BASIC_ATTACK_1
-		if(randomValue >= 0 && randomValue < 0.5){
+		if(randomValue >= 0 && randomValue < 0.33){
 			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
 			basic_attack_type = HERO_BASIC_HALO_ATTACK;
 			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
 		}
+		
 		// HERO_BASIC_ATTACK_2
-		else if(randomValue >= 0.5f && randomValue < 1.0f){
+		else if(randomValue >= 0.33f && randomValue < 0.66f){
 			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
 			basic_attack_type = HERO_BASIC_SPIRAL_ATTACK;
 			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
 		}
+		
 		// HERO_BASIC_ATTACK_3
-		else if(randomValue >= 0.6f && randomValue < 0.85f){
-			resetDimensions(HERO_HALO_ATTACK_WIDTH, HERO_HALO_ATTACK_HEIGHT);
-			basic_attack_type = HERO_BASIC_HALO_ATTACK;
-			basic_attack_timer_limit = HERO_BASIC_HALO_ATTACK_TIMER;
+		else if(randomValue >= 0.66f && randomValue < 1.00f){
+			resetDimensions(HERO_SPIRAL_ATTACK_WIDTH, HERO_SPIRAL_ATTACK_HEIGHT);
+			basic_attack_type = HERO_BASIC_ATTACK_ANGELIC_FLAME;
+			basic_attack_timer_limit = HERO_BASIC_SPIRAL_ATTACK_TIMER;
 		}
+		
 		// HERO_BASIC_ATTACK_SPECIAL
 		else{
 			resetDimensions(HERO_LYRE_ATTACK_WIDTH, HERO_LYRE_ATTACK_HEIGHT);
@@ -372,7 +406,7 @@ public class Hero extends DynamicGameObject{
 
 	public void adjustFaceDirection() {
 		if(state == HERO_STATE_COLLIDED ||
-			(state == HERO_STATE_BASIC_ATTACK && (basic_attack_type == HERO_BASIC_HALO_ATTACK || basic_attack_type == HERO_BASIC_SPIRAL_ATTACK)))
+			state == HERO_STATE_BASIC_ATTACK)
 			return;
 			
 		if(velocity.x > 0)
@@ -420,6 +454,16 @@ public class Hero extends DynamicGameObject{
 		velocity.x = 0;
 	}
 	
+	public void moveByAccel(float controller_accel) {
+		velocity.x = controller_accel / 10 * HERO_MOVE_VELOCITY * 3;
+		
+		if(velocity.x > 6.0f)
+			velocity.x = 6.0f;
+		if(velocity.x < -6.0f)
+			velocity.x = -6.0f;
+		
+	}
+	
 	public void reboundPlatform(Platform platform){
 		position.y = platform.position.y + platform.height;
 		if(state == Hero.HERO_STATE_COLLIDED)
@@ -433,7 +477,15 @@ public class Hero extends DynamicGameObject{
 	public void activateHaloAttack(){
 		HaloAttack halo_attack = pool_manager.halo_attack_pool.newObject();
 		halo_attack.reset(this);
+		hop();
 		halo_attacks.add(halo_attack);
+	}
+	
+	public void activateAngelicFlame(){
+		AngelicFlame angelic_flame = pool_manager.angelic_flame_pool.newObject();
+		angelic_flame.reset(this);
+		hop();
+		angelic_flames.add(angelic_flame);
 	}
 	
 	public void activateSpiralAttack(){
@@ -466,7 +518,6 @@ public class Hero extends DynamicGameObject{
 		while(!spiral_attacks.isEmpty()){
 			SpiralAttack spiral_attack = spiral_attacks.getFirst();
 			pool_manager.spiral_attack_pool.free(spiral_attack);
-		}
-		
+		}	
 	}
 }
