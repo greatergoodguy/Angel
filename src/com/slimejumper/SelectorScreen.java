@@ -21,6 +21,7 @@ public class SelectorScreen extends GLScreen{
 	Rectangle TesterLevelRect;
 	Rectangle MenuLevelRect;
 	Rectangle CaveLevelRect;
+	Rectangle TreetopValleyLevelRect;
 	Vector2 touchPoint;
 	
 	public SelectorScreen(Game game){
@@ -29,9 +30,10 @@ public class SelectorScreen extends GLScreen{
 		guiCam = new Camera2D(glGraphics, 800, 480);
 		batcher = new SpriteBatcher(glGraphics, 10);
 		
-		TesterLevelRect = new Rectangle(0, 0, 300, 480);
-		MenuLevelRect = new Rectangle(300, 0, 300, 480);
-		CaveLevelRect = new Rectangle(600, 0, 200, 480);
+		TesterLevelRect = new Rectangle(0, 0, 400, 240);
+		MenuLevelRect = new Rectangle(0, 240, 400, 240);
+		CaveLevelRect = new Rectangle(400, 0, 400, 240);
+		TreetopValleyLevelRect = new Rectangle(400, 240, 400, 240);
 		
 		touchPoint = new Vector2();
 		
@@ -48,26 +50,29 @@ public class SelectorScreen extends GLScreen{
 	            guiCam.touchToWorld(touchPoint);
 	            
 	            if(event.type == TouchEvent.TOUCH_UP) {
-	                if(OverlapTester.pointInRectangle(TesterLevelRect, touchPoint)) {
+	            	if(OverlapTester.pointInRectangle(TesterLevelRect, touchPoint)) {
 	                    game.setScreen(new TesterScreen(game));
 	                	//game.setScreen(new TreetopValleyScreen(game));
 	                    return;
 	                }
-	            }
-	            
-	            if(event.type == TouchEvent.TOUCH_UP) {
-	                if(OverlapTester.pointInRectangle(MenuLevelRect, touchPoint)) {
-	                    game.setScreen(new MenuScreen(game));
-	                    return;
-	                }
-	            }
-	            
-	            if(event.type == TouchEvent.TOUCH_UP) {
-	                if(OverlapTester.pointInRectangle(CaveLevelRect, touchPoint)) {
+	            	
+	            	if(OverlapTester.pointInRectangle(MenuLevelRect, touchPoint)) {
+		                    game.setScreen(new MenuScreen(game));
+		                    return;
+		            }
+	            	
+	                if(OverlapTester.pointInRectangle(TreetopValleyLevelRect, touchPoint)) {
 	                    game.setScreen(new TreetopValleyScreen(game));
 	                    //game.setScreen(new CaveScreen(game));
 	                    return;
 	                }
+	                
+	                if(OverlapTester.pointInRectangle(CaveLevelRect, touchPoint)) {
+	                    game.setScreen(new CaveScreen(game));
+	                    //game.setScreen(new CaveScreen(game));
+	                    return;
+	                }
+	                
 	            }
 	        }
 		
@@ -86,11 +91,16 @@ public class SelectorScreen extends GLScreen{
         
         batcher.beginBatch(Assets.game_sprites_1);          
         batcher.drawSpriteLowerLeft(TesterLevelRect.lowerLeft.x, TesterLevelRect.lowerLeft.y, 
-        		TesterLevelRect.width, TesterLevelRect.height, Assets.jellyfishDemonShockAttackFrame2);
+        		TesterLevelRect.width, TesterLevelRect.height, Assets.shockballFrame4);
         batcher.drawSpriteLowerLeft(MenuLevelRect.lowerLeft.x, MenuLevelRect.lowerLeft.y, 
-        		MenuLevelRect.width, MenuLevelRect.height, Assets.flyingSnakeStandardFrame3);
+        		MenuLevelRect.width, MenuLevelRect.height, Assets.cloudPlatformBackLayer);
         batcher.drawSpriteLowerLeft(CaveLevelRect.lowerLeft.x, CaveLevelRect.lowerLeft.y, 
-        		CaveLevelRect.width, CaveLevelRect.height, Assets.shockballFrame5);
+        		CaveLevelRect.width, CaveLevelRect.height, Assets.flyingSnakeStandardFrame3);
+        batcher.endBatch();
+        
+        batcher.beginBatch(Assets.game_sprites_2);
+        batcher.drawSpriteLowerLeft(TreetopValleyLevelRect.lowerLeft.x, TreetopValleyLevelRect.lowerLeft.y, 
+        		TreetopValleyLevelRect.width, TreetopValleyLevelRect.height, Assets.redWhaleDemonFloatFrame1);
         batcher.endBatch();
         
         gl.glDisable(GL10.GL_BLEND);

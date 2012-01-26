@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import com.slimejumper.gameframework.math.OverlapTester;
 import com.slimejumper.world.Hero;
+import com.slimejumper.world.attacks.AngelicFlame;
 import com.slimejumper.world.attacks.Attack;
 import com.slimejumper.world.attacks.HaloAttack;
 import com.slimejumper.world.attacks.MusicNote;
@@ -55,6 +56,16 @@ public class CollisionManager {
 				}
 			}
 			
+			Iterator<AngelicFlame> iter_angel_flame_atks = hero.angelic_flames.iterator();
+			while(iter_angel_flame_atks.hasNext()){
+				AngelicFlame angelic_flame = iter_angel_flame_atks.next();
+				if (OverlapTester.overlapRectangles(angelic_flame, enemy)){
+					PoolManager.pool_manager_singleton.angelic_flame_pool.free(angelic_flame);
+					iter_angel_flame_atks.remove();
+					is_enemy_hit = true;
+				}
+			}
+			
 			Iterator<MusicNote> iter_music_note_atks = hero.music_notes.iterator();
 			while(iter_music_note_atks.hasNext()){
 				MusicNote music_note = iter_music_note_atks.next();
@@ -97,6 +108,16 @@ public class CollisionManager {
 				if (OverlapTester.overlapRectangles(spiral_attack, enemy, collision_offset)){
 					PoolManager.pool_manager_singleton.spiral_attack_pool.free(spiral_attack);
 					iter_spiral_atks.remove();
+					is_enemy_hit = true;
+				}
+			}
+			
+			Iterator<AngelicFlame> iter_angel_flame_atks = hero.angelic_flames.iterator();
+			while(iter_angel_flame_atks.hasNext()){
+				AngelicFlame angelic_flame = iter_angel_flame_atks.next();
+				if (OverlapTester.overlapRectangles(angelic_flame, enemy, collision_offset)){
+					PoolManager.pool_manager_singleton.angelic_flame_pool.free(angelic_flame);
+					iter_angel_flame_atks.remove();
 					is_enemy_hit = true;
 				}
 			}

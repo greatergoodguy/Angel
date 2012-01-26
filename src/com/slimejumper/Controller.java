@@ -118,12 +118,12 @@ public class Controller {
 		
 		else{
 			if (event.type == TouchEvent.TOUCH_DOWN) {
-				if(touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4){
+				if(touchPoint.x > guiCam.center.x){
 					fireAttack = true;
 					attackRightPointerId = event.pointer;
 					fireAttackRightDown = true;
 				}
-				else if(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 ){
+				else if(touchPoint.x < guiCam.center.x){
 					fireAttack = true;
 					attackLeftPointerId = event.pointer;
 					fireAttackLeftDown = true;
@@ -131,7 +131,7 @@ public class Controller {
 			}		
 			else if (event.type == TouchEvent.TOUCH_DRAGGED) {				
 				if (event.pointer == attackRightPointerId) {
-					if(touchPoint.x > guiCam.center.x + guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y){
+					if(touchPoint.x > guiCam.center.x){
 						fireAttackRightDown = true;
 					} else {
 						fireAttackRightDown = false;
@@ -139,7 +139,7 @@ public class Controller {
 				}
 				
 				else if (event.pointer == attackLeftPointerId) {
-					if(touchPoint.x < guiCam.center.x - guiCam.frustumWidth / 4 && touchPoint.y > guiCam.center.y){
+					if(touchPoint.x < guiCam.center.x){
 						fireAttackLeftDown = true;
 					} else {
 						fireAttackLeftDown = false;

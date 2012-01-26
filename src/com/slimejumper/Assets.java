@@ -709,13 +709,18 @@ public class Assets {
 	public static void reload(){
 		game_sprites_1.reload();
 		game_sprites_2.reload();
-		heroHealthy.reload();
 		shadow_hero.reload();
 		background_treetop_valley.reload();
 		background_clouds.reload();
 		background_caves.reload();
 		controller_icons.reload();
 	
+		heroHealthy.reload();
+		heroHalfHP.reload();
+		heroLowHP.reload();
+		heroCriticalHPLeft.reload();
+		heroCriticalHPRight.reload();
+		
 	}
 	
 	public static void playSound(Sound sound){

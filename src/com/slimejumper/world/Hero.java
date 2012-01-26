@@ -195,7 +195,11 @@ public class Hero extends DynamicGameObject{
 		}
 		
 		if(!angelic_flames.isEmpty()){
-			
+			AngelicFlame angelic_flame = angelic_flames.getFirst();
+			if(angelic_flame.life_timer > AngelicFlame.ANGELIC_FLAME_LIFESPAN){
+				angelic_flames.removeFirst();
+				pool_manager.angelic_flame_pool.free(angelic_flame);
+			}
 		}
 	}
 
@@ -518,6 +522,11 @@ public class Hero extends DynamicGameObject{
 		while(!spiral_attacks.isEmpty()){
 			SpiralAttack spiral_attack = spiral_attacks.getFirst();
 			pool_manager.spiral_attack_pool.free(spiral_attack);
-		}	
+		}
+		
+		while(!angelic_flames.isEmpty()){
+			AngelicFlame angelic_flame = angelic_flames.getFirst();
+			pool_manager.angelic_flame_pool.free(angelic_flame);
+		}
 	}
 }
